@@ -137,7 +137,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
                             <c:if test="${sessionScope.user == null}">
-                                <a href="${pageContext.request.getContextPath()}/views/login">登陆</a>
+                                <a href="${pageContext.request.getContextPath()}/views/login">登录</a>
                             </c:if>
                             <c:if test="${sessionScope.user != null}">
                                 <a href="${pageContext.request.getContextPath()}/views/managecenter">${sessionScope.user.username}</a>

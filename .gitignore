@@ -11,3 +11,13 @@ mvnw.cmd
 
 ### VS Code ###
 .vscode/
+.history/
+
+### VS Code ###
+.vscode/
+.history/
+
+### Navicate ###
+sql/id_cache.db
+sql/id_cache.db-shm
+sql/id_cache.db-wal
