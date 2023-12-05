@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 获取配置文件 -->
-    <context:property-placeholder location="classpath:/config/init.properties" />
+    <context:property-placeholder location="classpath:config/init.properties" />
 
     <!--自动扫描控制器-->
     <context:component-scan base-package="cn.edu.nwpu.fleamarket.dao"/>

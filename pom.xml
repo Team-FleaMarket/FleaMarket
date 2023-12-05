@@ -17,6 +17,7 @@
         <spring.version>6.1.1</spring.version>
         <junit.version>5.10.1</junit.version>
         <log4j.version>2.22.0</log4j.version>
+        <mybatis.generator.version>1.4.2</mybatis.generator.version>
 
     </properties>
 
@@ -164,8 +165,8 @@
         </dependency>
         <dependency>
             <groupId>org.mybatis.generator</groupId>
-            <artifactId>mybatis-generator-maven-plugin</artifactId>
-            <version>1.4.2</version>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>${mybatis.generator.version}</version>
         </dependency>
         <!-- mybatis end -->
 
@@ -250,7 +251,7 @@
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.4.2</version>
+                <version>${mybatis.generator.version}</version>
                 <configuration>
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
