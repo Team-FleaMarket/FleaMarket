@@ -177,7 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 <input type="text" id="phone" name="phone" placeholder="请输入手机号..."  >
                 <input type="text" id="wechat" name="wechat" placeholder="请输入微信号..."  >
-                <input type="email" id="email"  name="email" placeholder="请输入邮箱" >
+                <input type="email" id="email" name="email" placeholder="请输入邮箱" >
 
                 <input type="password" id="password" name="password" placeholder="请设置密码" >
                 <input type="password" id="repassword" name="repassword" placeholder="再次确认密码" >
