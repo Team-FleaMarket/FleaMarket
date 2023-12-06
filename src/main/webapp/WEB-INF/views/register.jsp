@@ -141,7 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <a href="${pageContext.request.contextPath}/views/login">登陆</a>
                             </c:if>
                             <c:if test="${sessionScope.user != null}">
-                                <a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.username}</a>
+                                <a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.userName}</a>
                             </c:if>
                         </li>
                     </a>
@@ -173,10 +173,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <h5 class="animated wow slideInUp" data-wow-delay=".5s">基本信息</h5>
             <form action="${pageContext.request.getContextPath()}/user/registeruser" id="form" class="animated wow slideInUp" data-wow-delay=".5s">
                 <input type="text" id="studentNo" name="studentNo" placeholder="请输入学号..."  >
-                <input type="text" id="username" name="username" placeholder="请输入昵称..." >
+                <input type="text" id="userName" name="userName" placeholder="请输入昵称..." >
 
                 <input type="text" id="phone" name="phone" placeholder="请输入手机号..."  >
-                <input type="text" id="weixin" name="weixin" placeholder="请输入微信号..."  >
+                <input type="text" id="wechat" name="wechat" placeholder="请输入微信号..."  >
                 <input type="email" id="email"  name="email" placeholder="请输入邮箱" >
 
                 <input type="password" id="password" name="password" placeholder="请设置密码" >

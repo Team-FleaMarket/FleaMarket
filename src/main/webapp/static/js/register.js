@@ -8,14 +8,13 @@ function registerCheck() {
         });
         return false;
     }
-    if($("input[name=username]").val() == null || $("input[name=username]").val() == ""){
-        layer.tips('用户名不能为空！', '#username', {
+    if($("input[name=userName]").val() == null || $("input[name=userName]").val() == ""){
+        layer.tips('用户名不能为空！', '#userName', {
             tips: [2, '#FF3030'],
             time: 2000
         });
         return false;
     }
-
     if($("input[name=phone]").val() == null || $("input[name=phone]").val() == ""){
         layer.tips('手机号不能为空！', '#phone', {
             tips: [2, '#FF3030'],
@@ -23,9 +22,8 @@ function registerCheck() {
         });
         return false;
     }
-
-    if($("input[name=weixin]").val() == null || $("input[name=weixin]").val() == ""){
-        layer.tips('微信号不能为空！', '#weixin', {
+    if($("input[name=wechat]").val() == null || $("input[name=wechat]").val() == ""){
+        layer.tips('微信号不能为空！', '#wechat', {
             tips: [2, '#FF3030'],
             time: 2000
         });
@@ -38,7 +36,6 @@ function registerCheck() {
         });
         return false;
     }
-
     if($("input[name=password]").val() != null && $("input[name=repassword]").val() != ""){
         if($("input[name=password]").val() != $("input[name=repassword]").val()) {
             layer.tips('两次密码不一致！', '#repassword', {
@@ -48,7 +45,6 @@ function registerCheck() {
             return false;
         }
     }
-
     //判断密码
     if($("input[name=password]").val() == null || $("input[name=password]").val() == ""){
         layer.tips('密码不能为空！', '#password', {
@@ -57,7 +53,6 @@ function registerCheck() {
         });
         return false;
     }
-
     if($("input[name=repassword]").val() == null || $("input[name=repassword]").val() == ""){
         layer.tips('确认密码不能为空！', '#repassword', {
             tips: [2, '#FF3030'],
@@ -72,7 +67,5 @@ function registerCheck() {
         });
         return false;
     }
-
     $("#form").submit();
-
 }

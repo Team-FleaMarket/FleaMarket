@@ -33,8 +33,8 @@ public class User {
     private String phone;
     private String wechat;
 
-    public void setUsername(String username) {
-        this.userName = username == null ? null : username.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public void setSex(String sex) {
