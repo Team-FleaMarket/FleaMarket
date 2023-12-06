@@ -18,7 +18,6 @@
         <junit.version>5.10.1</junit.version>
         <log4j.version>2.22.0</log4j.version>
         <mybatis.generator.version>1.4.2</mybatis.generator.version>
-
     </properties>
 
     <dependencies>

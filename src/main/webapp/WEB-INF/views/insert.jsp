@@ -133,7 +133,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <a href="${pageContext.request.contextPath}/views/login">登陆</a>
                             </c:if>
                             <c:if test="${sessionScope.user != null}">
-                                <a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.username}</a>
+                                <a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.userName}</a>
                             </c:if>
                         </li>
 

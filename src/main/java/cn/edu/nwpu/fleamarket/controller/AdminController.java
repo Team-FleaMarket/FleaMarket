@@ -39,12 +39,12 @@ public class AdminController {
     public String manager(HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", "");
-        String username = request.getParameter("studentNo");
+        String userName = request.getParameter("studentNo");
         String password = request.getParameter("pwd");
-        boolean succ = userService.findManager(username, password);
+        boolean succ = userService.findManager(userName, password);
         if(succ){
             User user = new User();
-            user.setUsername(username);
+            user.setUserName(userName);
             user.setPassword(password);
             request.getSession().setAttribute("admin", user);
             jsonObject.put("result", "admin");

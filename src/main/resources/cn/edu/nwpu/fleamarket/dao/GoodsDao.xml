@@ -5,14 +5,14 @@
 
     <resultMap id="BaseResultMap" type="cn.edu.nwpu.fleamarket.pojo.Goods">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="studentNo" jdbcType="VARCHAR" property="studentNo"></result>
-        <result column="goodsName" jdbcType="VARCHAR" property="goodsName" ></result>
+        <result column="student_no" jdbcType="VARCHAR" property="studentNo"></result>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName" ></result>
         <result column="description" jdbcType="VARCHAR" property="description" ></result>
         <result column="price" jdbcType="DOUBLE" property="price" ></result>
         <result column="status" jdbcType="INTEGER" property="status" ></result>
         <result column="cate" jdbcType="VARCHAR" property="cate" ></result>
-        <result column="imagepath" jdbcType="VARCHAR" property="imagepath" ></result>
-        <result column="goodsStatus" jdbcType="INTEGER" property="goodsStatus" ></result>
+        <result column="image_path" jdbcType="VARCHAR" property="imagePath" ></result>
+        <result column="goods_status" jdbcType="INTEGER" property="goodsStatus" ></result>
         <result column="degree" jdbcType="INTEGER" property="degree" ></result>
     </resultMap>
 
@@ -21,7 +21,7 @@
     </select>
 
     <select id="selectByStudentNo" parameterType="string" resultMap="BaseResultMap">
-        SELECT * FROM goods WHERE studentNo=#{studentNo}
+        SELECT * FROM goods WHERE student_no=#{studentNo}
     </select>
 
     <select id="selectById" parameterType="int" resultMap="BaseResultMap">
@@ -33,16 +33,16 @@
     </select>
 
     <insert id="insertGoods" parameterType="cn.edu.nwpu.fleamarket.pojo.Goods">
-        INSERT INTO goods (`studentNo`,`goodsName`,`description`,`price`,`status`, `cate`, `imagepath`, `goodsStatus`,`degree`)
-        VALUES (#{studentNo}, #{goodsName}, #{description}, #{price}, #{status},#{cate}, #{imagepath}, #{goodsStatus}, #{degree});
+        INSERT INTO goods (`student_no`,`goods_name`,`description`,`price`,`status`, `cate`, `image_path`, `goods_status`,`degree`)
+        VALUES (#{studentNo}, #{goodsName}, #{description}, #{price}, #{status},#{cate}, #{imagePath}, #{goodsStatus}, #{degree});
     </insert>
 
     <update id="updateGoods" parameterType="cn.edu.nwpu.fleamarket.pojo.Goods">
-        UPDATE goods set goodsStatus=#{goodsStatus} WHERE id = #{id}
+        UPDATE goods set goods_status=#{goodsStatus} WHERE id = #{id}
     </update>
 
     <select id="selectByStatusAndStudentNo" parameterType="cn.edu.nwpu.fleamarket.pojo.Goods" resultMap="BaseResultMap">
-        SELECT * FROM goods WHERE studentNo=#{studentNo} AND status=#{status}
+        SELECT * FROM goods WHERE student_no=#{studentNo} AND status=#{status}
     </select>
 
     <update id="updateGoodsStatus" parameterType="cn.edu.nwpu.fleamarket.pojo.Goods">
@@ -50,7 +50,7 @@
     </update>
 
     <select id="selectByStatusAndGoodsStatus" resultMap="BaseResultMap">
-        SELECT * FROM goods WHERE goodsStatus = 0 AND status = 1
+        SELECT * FROM goods WHERE goods_status = 0 AND status = 1
     </select>
 
 </mapper>
