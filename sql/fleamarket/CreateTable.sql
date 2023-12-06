@@ -1,3 +1,5 @@
+CREATE DATABASE fleamarket;
+USE fleamarket;
 CREATE TABLE users (
 	id INTEGER AUTO_INCREMENT,
 	studentNo VARCHAR(100),
