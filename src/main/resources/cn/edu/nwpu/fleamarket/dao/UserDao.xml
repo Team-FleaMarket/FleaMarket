@@ -5,25 +5,25 @@
 
     <resultMap id="BaseResultMap" type="cn.edu.nwpu.fleamarket.pojo.User">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="studentNo" jdbcType="VARCHAR" property="studentNo"></result>
+        <result column="student_no" jdbcType="VARCHAR" property="student_no"></result>
         <result column="password" jdbcType="VARCHAR" property="password" ></result>
         <result column="email" jdbcType="VARCHAR" property="email" ></result>
         <result column="phone" jdbcType="VARCHAR" property="phone" ></result>
-        <result column="username" jdbcType="VARCHAR" property="username" ></result>
-        <result column="weixin" jdbcType="VARCHAR" property="weixin" ></result>
+        <result column="user_name" jdbcType="VARCHAR" property="user_name" ></result>
+        <result column="wechat" jdbcType="VARCHAR" property="wechat" ></result>
     </resultMap>
 
     <select id="selectByStudentNo" parameterType="string" resultMap="BaseResultMap">
-        SELECT * FROM users WHERE studentNo=#{studentNo}
+        SELECT * FROM users WHERE student_no=#{student_no}
     </select>
 
     <insert id="addStudent" parameterType="cn.edu.nwpu.fleamarket.pojo.User">
-        INSERT INTO users (`studentNo`,`username`,`phone`,`email`,`weixin`, `password`)
-        VALUES (#{studentNo}, #{username}, #{phone}, #{email}, #{weixin},#{password});
+        INSERT INTO users (`student_no`,`user_name`,`phone`,`email`,`wechat`, `password`)
+        VALUES (#{student_no}, #{user_name}, #{phone}, #{email}, #{wechat},#{password});
     </insert>
 
     <select id="findManager" parameterType="cn.edu.nwpu.fleamarket.pojo.User" resultMap="BaseResultMap">
-        SELECT * FROM users where studentNo=#{studentNo} and password = #{password}
+        SELECT * FROM users where student_no=#{student_no} and password = #{password}
     </select>
 
 

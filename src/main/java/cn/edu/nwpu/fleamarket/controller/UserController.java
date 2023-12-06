@@ -258,7 +258,7 @@ public class UserController {
     @RequestMapping("/registeruser")
     public ModelAndView registeruser(HttpServletRequest request, User user) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        user.setUsername(new String(user.getUsername().getBytes("iso-8859-1"),"utf-8"));
+        user.setUsername(new String(user.getUserName().getBytes("iso-8859-1"),"utf-8"));
         if(user != null) {
             userService.addStudent(user);
         }
