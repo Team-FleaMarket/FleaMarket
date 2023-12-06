@@ -169,7 +169,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <a href="${pageContext.request.contextPath}/views/login">登陆</a>
                             </c:if>
                             <c:if test="${sessionScope.user != null}">
-                                <a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.username}</a>
+                                <a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.userName}</a>
                             </c:if>
                         </li>
                     </a>
@@ -193,7 +193,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //breadcrumbs -->
 
-<!-->
+<!--  -->
 <div class="single">
     <div class="container">
         <div class="col-md-4 products-left">
@@ -213,8 +213,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="color-quality">
                     <div class="color-quality-left">
                         <p>学号：${sessionScope.user.studentNo}</p><h5></h5>
-                        <p>昵称：${sessionScope.user.username}</p><h5></h5>
-                        <p>微信号：${sessionScope.user.weixin}</p><h5></h5>
+                        <p>昵称：${sessionScope.user.userName}</p><h5></h5>
+                        <p>微信号：${sessionScope.user.wechat}</p><h5></h5>
                         <p>手机号：${sessionScope.user.phone}</p><h5></h5>
                         <p>邮箱：${sessionScope.user.email}</p><h5></h5>
                     </div>
@@ -233,7 +233,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"> </div>
     </div>
 </div>
-<!-->
+<!-- -->
 
 <!-- checkout -->
 <div class="checkout">

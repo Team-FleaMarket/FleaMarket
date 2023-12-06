@@ -140,7 +140,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <a href="${pageContext.request.getContextPath()}/views/login">登录</a>
                             </c:if>
                             <c:if test="${sessionScope.user != null}">
-                                <a href="${pageContext.request.getContextPath()}/views/managecenter">${sessionScope.user.username}</a>
+                                <a href="${pageContext.request.getContextPath()}/views/managecenter">${sessionScope.user.userName}</a>
                             </c:if>
                         </li>
                     </a>
@@ -282,7 +282,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="col-md-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagepath}" alt=" " class="img-responsive" height="400"/></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" alt=" " class="img-responsive" height="400"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">Quick View</a>
                             </div>
@@ -515,7 +515,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="col-md-3 new-collections-grid">
                 <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                     <div class="new-collections-grid1-image">
-                        <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagepath}" alt=" " class="img-responsive" /></a>
+                        <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" alt=" " class="img-responsive" /></a>
                         <div class="new-collections-grid1-image-pos">
                             <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">Quick View</a>
                         </div>
@@ -672,7 +672,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="col-md-3 new-collections-grid">
                 <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                     <div class="new-collections-grid1-image">
-                        <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagepath}" alt=" " class="img-responsive" /></a>
+                        <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" alt=" " class="img-responsive" /></a>
                         <div class="new-collections-grid1-image-pos">
                             <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">Quick View</a>
                         </div>

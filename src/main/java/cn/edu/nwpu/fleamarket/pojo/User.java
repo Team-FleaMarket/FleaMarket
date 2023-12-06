@@ -14,7 +14,7 @@ import java.util.Date;
 public class User {
     private Integer id;
     private String studentNo;
-    private String username;
+    private String userName;
     private String password;
     private Date birthday;
     private String sex;
@@ -28,13 +28,13 @@ public class User {
     private String introduce;
     private String researchResult;
     private String skills;
-    private int isFinish;
+    private int finish;
     private String manager;
     private String phone;
-    private String weixin;
+    private String wechat;
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public void setSex(String sex) {

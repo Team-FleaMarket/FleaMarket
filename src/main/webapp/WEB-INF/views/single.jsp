@@ -130,7 +130,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<a href="${pageContext.request.contextPath}/views/login">登陆</a>
 							</c:if>
 							<c:if test="${sessionScope.user != null}">
-								<a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.username}</a>
+								<a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.userName}</a>
 							</c:if>
 						</li>
 					</a>
@@ -219,14 +219,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-5 single-right-left animated wow slideInUp" data-wow-delay=".5s">
 					<div class="flexslider">
 						<ul class="slides">
-							<li data-thumb="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagepath}">
-								<div class="thumb-image"> <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagepath}" data-imagezoom="true" class="img-responsive"> </div>
+							<li data-thumb="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}">
+								<div class="thumb-image"> <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" data-imagezoom="true" class="img-responsive"> </div>
 							</li>
-							<li data-thumb="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagepath}">
-								<div class="thumb-image"> <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagepath}" data-imagezoom="true" class="img-responsive"> </div>
+							<li data-thumb="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}">
+								<div class="thumb-image"> <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" data-imagezoom="true" class="img-responsive"> </div>
 							</li>
-							<li data-thumb="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagepath}">
-								<div class="thumb-image"> <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagepath}" data-imagezoom="true" class="img-responsive"> </div>
+							<li data-thumb="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}">
+								<div class="thumb-image"> <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" data-imagezoom="true" class="img-responsive"> </div>
 							</li>
 						</ul>
 					</div>
