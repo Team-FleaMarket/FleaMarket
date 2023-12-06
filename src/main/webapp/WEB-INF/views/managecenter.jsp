@@ -193,7 +193,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //breadcrumbs -->
 
-<!-->
+<!--  -->
 <div class="single">
     <div class="container">
         <div class="col-md-4 products-left">
@@ -233,7 +233,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"> </div>
     </div>
 </div>
-<!-->
+<!-- -->
 
 <!-- checkout -->
 <div class="checkout">

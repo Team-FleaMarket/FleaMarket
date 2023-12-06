@@ -5,11 +5,11 @@
 
     <resultMap id="BaseResultMap" type="cn.edu.nwpu.fleamarket.pojo.User">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="student_no" jdbcType="VARCHAR" property="student_no"></result>
+        <result column="student_no" jdbcType="VARCHAR" property="studentNo"></result>
         <result column="password" jdbcType="VARCHAR" property="password" ></result>
         <result column="email" jdbcType="VARCHAR" property="email" ></result>
         <result column="phone" jdbcType="VARCHAR" property="phone" ></result>
-        <result column="user_name" jdbcType="VARCHAR" property="user_name" ></result>
+        <result column="user_name" jdbcType="VARCHAR" property="userName" ></result>
         <result column="wechat" jdbcType="VARCHAR" property="wechat" ></result>
     </resultMap>
 

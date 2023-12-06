@@ -5,14 +5,14 @@
 
     <resultMap id="BaseResultMap" type="cn.edu.nwpu.fleamarket.pojo.Goods">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="student_no" jdbcType="VARCHAR" property="student_no"></result>
-        <result column="goods_name" jdbcType="VARCHAR" property="goods_name" ></result>
+        <result column="student_no" jdbcType="VARCHAR" property="studentNo"></result>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName" ></result>
         <result column="description" jdbcType="VARCHAR" property="description" ></result>
         <result column="price" jdbcType="DOUBLE" property="price" ></result>
         <result column="status" jdbcType="INTEGER" property="status" ></result>
         <result column="cate" jdbcType="VARCHAR" property="cate" ></result>
-        <result column="image_path" jdbcType="VARCHAR" property="image_path" ></result>
-        <result column="goods_status" jdbcType="INTEGER" property="goods_status" ></result>
+        <result column="image_path" jdbcType="VARCHAR" property="imagePath" ></result>
+        <result column="goods_status" jdbcType="INTEGER" property="goodsStatus" ></result>
         <result column="degree" jdbcType="INTEGER" property="degree" ></result>
     </resultMap>
 
