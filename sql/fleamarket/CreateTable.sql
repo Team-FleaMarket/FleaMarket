@@ -24,5 +24,4 @@ CREATE TABLE goods (
 	degree INTEGER,
 	PRIMARY KEY(id)
 ) CHARACTER SET utf8mb4;
-insert into users (id, student_no, password, email, phone, user_name, wechat)
-    values('1','2021','lsy','lsy@qq.com','17531050970','shenyu','ls');
+

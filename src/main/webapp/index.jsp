@@ -65,7 +65,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="${pageContext.request.contextPath}/views/index" class="act">主页</a></li>
+                            <li class="active">
+                                <c:if test="${sessionScope.user == null}">
+                                <a href="${pageContext.request.contextPath}/" class="act">主页</a>
+                                </c:if>
+                                <c:if test="${sessionScope.user != null}">
+                                    <a href="${pageContext.request.contextPath}/views/index" class="act">主页</a>
+                                    </c:if>
+
+                            </li>
                             <!-- Mega Menu -->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">商品分类 <b class="caret"></b></a>
