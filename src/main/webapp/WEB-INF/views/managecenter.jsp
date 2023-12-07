@@ -196,40 +196,190 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--  -->
 <div class="single">
     <div class="container">
-        <div class="col-md-4 products-left">
-            <div class="categories animated wow slideInUp" data-wow-delay=".5s">
-                <h3>管理中心</h3>
-                <ul class="cate">
-                    <li><a href="#">基本信息</a> <span></span></li>
-                    <li><a href="insert">添加商品</a> <span></span></li>
-                    <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=0">待审核</a> <span></span></li>
-                    <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=1">已审核</a> <span></span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-7 single-right">
-            <div class="col-md-10 single-right-left simpleCart_shelfItem animated wow slideInRight" data-wow-delay=".5s">
-                <h4><span class="item_price">基本信息</span></h4>
-                <div class="color-quality">
-                    <div class="color-quality-left">
-                        <p>学号：${sessionScope.user.studentNo}</p><h5></h5>
-                        <p>昵称：${sessionScope.user.userName}</p><h5></h5>
-                        <p>微信号：${sessionScope.user.wechat}</p><h5></h5>
-                        <p>手机号：${sessionScope.user.phone}</p><h5></h5>
-                        <p>邮箱：${sessionScope.user.email}</p><h5></h5>
-                    </div>
+<%--        <div class="col-md-4 products-left">--%>
+<%--            <div class="categories animated wow slideInUp" data-wow-delay=".5s">--%>
+<%--                <h3>管理中心</h3>--%>
+<%--                <ul class="cate">--%>
+<%--                    <li><a href="#">基本信息</a> <span></span></li>--%>
+<%--                    <li><a href="insert">添加商品</a> <span></span></li>--%>
+<%--                    <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=0">待审核</a> <span></span></li>--%>
+<%--                    <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=1">已审核</a> <span></span></li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    <div class="col-md-4 footer-grid ">--%>
+<%--        <div class="container">--%>
+<%--            <h3 class="animated wow zoomIn" data-wow-delay=".5s">个人信息</h3>--%>
+<%--            <h4 class="est animated wow zoomIn" data-wow-delay=".5s"> Hi~西瓜子</h4>--%>
+<%--            <div class=" animated wow slideInUp" data-wow-delay=".5s">--%>
+<%--                <form >--%>
+<%--                    <div>--%>
+<%--                        <p>学号：${sessionScope.user.studentNo}</p><h5></h5>--%>
+<%--                        <p>昵称：${sessionScope.user.userName}</p><h5></h5>--%>
+<%--                        <p>微信号：${sessionScope.user.wechat}</p><h5></h5>--%>
+<%--                        <p>手机号：${sessionScope.user.phone}</p><h5></h5>--%>
+<%--                        <p>邮箱：${sessionScope.user.email}</p><h5></h5>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+
+<%--        </div>--%>
+<%--    </div>--%>
+    <div class="">
+        <div class="container">
+            <div class="footer-grids">
+                <!--banner-bottom-grid-left-->
+                <div class="col-md-2 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
+                    <form >
+                        <div>
+                            <p>学号：${sessionScope.user.studentNo}</p><h5></h5>
+                            <p>昵称：${sessionScope.user.userName}</p><h5></h5>
+                            <p>微信号：${sessionScope.user.wechat}</p><h5></h5>
+                            <p>手机号：${sessionScope.user.phone}</p><h5></h5>
+                            <p>邮箱：${sessionScope.user.email}</p><h5></h5>
+                            <li><a href="insert">添加商品</a> <span></span></li>
+                            <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=0">待审核</a> <span></span></li>
+                            <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=1">已审核</a> <span></span></li>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
+                        <div class="">
+                            <div class="container">
+<%--                                <p class="animated wow slideInLeft" data-wow-delay=".5s">--%>
+                                    <c:if test="${status == 1}">已审核: </c:if>
+                                    <c:if test="${status == 0}">待审核: </c:if>
+                                    <span>${goodsList.size()} 件商品</span>
+<%--                                 </p>--%>
+                                <div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
+                                    <table class="timetable_sub">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>商品名称</th>
+                                            <!--<th>速度快放假</th>-->
+                                            <th>商品分类</th>
+                                            <th>价格</th>
+                                            <th>状态</th>
+                                            <th>商品状态</th>
+                                            <!--<th>Remove</th>-->
+                                        </tr>
+                                        </thead>
+
+                                        <c:forEach items="${goodsList}" var="goods" varStatus="vs">
+                                            <tr class="rem1">
+                                                <td class="invert">${vs.index + 1}</td>
+                                                <td class="invert-image"><a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">${goods.goodsName}</a></td>
+                                                <td class="invert">
+                                                    <c:if test="${goods.cate == '1'}">图书书籍</c:if>
+                                                    <c:if test="${goods.cate == '2'}">日用百货</c:if>
+                                                    <c:if test="${goods.cate == '3'}">娱乐</c:if>
+                                                </td>
+                                                <td class="invert">&yen${goods.price}</td>
+                                                <td class="invert">
+                                                    <c:if test="${goods.status == 0}">待审核</c:if>
+                                                    <c:if test="${goods.status == 1}">已审核</c:if>
+                                                </td>
+                                                <td class="invert">
+                                                    <select <c:if test="${goods.status == 0}">disabled</c:if> id="checkGoodsStatus${vs.index+1}" name="checkGoodsStatus${vs.index+1}" onchange="SelectChange('checkGoodsStatus${vs.index+1}')">
+                                                        <option value="0.${goods.id}" <c:if test="${goods.goodsStatus == 0}">selected</c:if>>未出售</option>
+                                                        <option value="1.${goods.id}" <c:if test="${goods.goodsStatus == 1}">selected</c:if>>已出售</option>
+                                                    </select>
+
+
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+
+
+                                        <%--<tr class="rem1">--%>
+                                        <%--<td class="invert">1</td>--%>
+                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                        <%--<td class="invert">图书书籍</td>--%>
+                                        <%--<td class="invert">&yen168.00</td>--%>
+                                        <%--<td class="invert">已审核</td>--%>
+                                        <%--</tr>--%>
+                                        <%--<tr class="rem2">--%>
+                                        <%--<td class="invert">2</td>--%>
+                                        <%--<td class="invert-image"><a href="single.html">羽毛球拍</a></td>--%>
+                                        <%--<td class="invert">日用百货：运动类</td>--%>
+                                        <%--<td class="invert">&yen128.00</td>--%>
+                                        <%--<td class="invert">已审核</td>--%>
+                                        <%--</tr>--%>
+                                        <%--<tr class="rem3">--%>
+                                        <%--<td class="invert">3</td>--%>
+                                        <%--<td class="invert-image"><a href="single.html">小米头戴式耳机</a></td>--%>
+                                        <%--<td class="invert">娱乐：电子产品</td>--%>
+                                        <%--<td class="invert">&yen499.00</td>--%>
+                                        <%--<td class="invert">已审核 </td>--%>
+                                        <%--</tr>--%>
+                                        <%--<tr class="rem1">--%>
+                                        <%--<td class="invert">4</td>--%>
+                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                        <%--<td class="invert">图书书籍</td>--%>
+                                        <%--<td class="invert">&yen168.00</td>--%>
+                                        <%--<td class="invert">已审核</td>--%>
+                                        <%--</tr>--%>
+                                        <%--<tr class="rem1">--%>
+                                        <%--<td class="invert">5</td>--%>
+                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                        <%--<td class="invert">图书书籍</td>--%>
+                                        <%--<td class="invert">&yen168.00</td>--%>
+                                        <%--<td class="invert">已审核</td>--%>
+                                        <%--</tr>--%>
+                                        <%--<tr class="rem1">--%>
+                                        <%--<td class="invert">6</td>--%>
+                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                        <%--<td class="invert">图书书籍</td>--%>
+                                        <%--<td class="invert">&yen168.00</td>--%>
+                                        <%--<td class="invert">已审核</td>--%>
+                                        <%--</tr>--%>
+                                        <%--<tr class="rem1">--%>
+                                        <%--<td class="invert">7</td>--%>
+                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                        <%--<td class="invert">图书书籍</td>--%>
+                                        <%--<td class="invert">&yen168.00</td>--%>
+                                        <%--<td class="invert">已审核</td>--%>
+                                        <%--</tr>--%>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                </div>
                     <div class="clearfix"> </div>
                 </div>
 
-                <div class="occasional">
-                    <div class="clearfix"> </div>
-                </div>
-                <%--<div class="occasion-cart">--%>
-                    <%--<a class="correct" href="register.html">修改 </a>--%>
-                <%--</div>--%>
+                <div class="clearfix"> </div>
             </div>
-            <div class="clearfix"> </div>
         </div>
+    </div>
+<%--        <div class="col-md-7  products-left">--%>
+<%--            <div class="col-md-10 categories animated wow slideInUp single-right-left simpleCart_shelfItem animated wow slideInRight" data-wow-delay=".5s">--%>
+<%--                <h4><span class="item_price">基本信息</span></h4>--%>
+<%--                <div class="color-quality">--%>
+<%--                    <div class="color-quality-left">--%>
+<%--                        <p>学号：${sessionScope.user.studentNo}</p><h5></h5>--%>
+<%--                        <p>昵称：${sessionScope.user.userName}</p><h5></h5>--%>
+<%--                        <p>微信号：${sessionScope.user.wechat}</p><h5></h5>--%>
+<%--                        <p>手机号：${sessionScope.user.phone}</p><h5></h5>--%>
+<%--                        <p>邮箱：${sessionScope.user.email}</p><h5></h5>--%>
+<%--                        <li><a href="insert">添加商品</a> <span></span></li>--%>
+<%--                        <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=0">待审核</a> <span></span></li>--%>
+<%--                        <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=1">已审核</a> <span></span></li>--%>
+<%--                    </div>--%>
+<%--                    <div class="clearfix"> </div>--%>
+<%--                </div>--%>
+
+<%--                <div class="occasional">--%>
+<%--                    <div class="clearfix"> </div>--%>
+<%--                </div>--%>
+<%--                &lt;%&ndash;<div class="occasion-cart">&ndash;%&gt;--%>
+<%--                    &lt;%&ndash;<a class="correct" href="register.html">修改 </a>&ndash;%&gt;--%>
+<%--                &lt;%&ndash;</div>&ndash;%&gt;--%>
+<%--            </div>--%>
+<%--            <div class="clearfix"> </div>--%>
+<%--        </div>--%>
         <div class="clearfix"> </div>
     </div>
 </div>

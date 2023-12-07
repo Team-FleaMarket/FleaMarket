@@ -43,6 +43,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <!-- //animation-effect -->
 </head>
+
 <body>
 <!-- header -->
 <div class="header">
@@ -152,6 +153,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!-- //header -->
+
 <!-- banner -->
 <div class="banner">
     <div class="container">
@@ -263,6 +265,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //banner-bottom -->
 <!-- collections -->
+
 <div class="new-collections">
     <div class="container">
         <h3 class="animated wow zoomIn" data-wow-delay=".5s">商品</h3>
@@ -819,6 +822,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     </div>
 </div>
+
+
+
+
+
 <!-- //new-timer -->
 <!-- collections-bottom -->
 <div class="collections-bottom">

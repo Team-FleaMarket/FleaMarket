@@ -154,115 +154,115 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //header -->
 
-<!-- banner -->
-<div class="banner">
-    <div class="container">
-        <div class="banner-info animated wow zoomIn" data-wow-delay=".5s">
-            <h3>Free Online Shopping</h3>
-            <h4>Up to <span>50% <i>Off/-</i></span></h4>
-            <div class="wmuSlider example1">
-                <div class="wmuSliderWrapper">
-                    <article style="position: absolute; width: 100%; opacity: 0;">
-                        <div class="banner-wrap">
-                            <div class="banner-info1">
-                                <p>T-Shirts + Formal Pants + Jewellery + Cosmetics</p>
-                            </div>
-                        </div>
-                    </article>
-                    <article style="position: absolute; width: 100%; opacity: 0;">
-                        <div class="banner-wrap">
-                            <div class="banner-info1">
-                                <p>Toys + Furniture + Lighting + Watches</p>
-                            </div>
-                        </div>
-                    </article>
-                    <article style="position: absolute; width: 100%; opacity: 0;">
-                        <div class="banner-wrap">
-                            <div class="banner-info1">
-                                <p>Tops + Books & Media + Sports</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-            <script src="${pageContext.request.getContextPath()}/static/js/jquery.wmuSlider.js"></script>
-            <script>
-                $('.example1').wmuSlider();
-            </script>
-        </div>
-    </div>
-</div>
-<!-- //banner -->
-<!--&lt;!&ndash; banner-bottom &ndash;&gt;-->
-<div class="banner-bottom">
-    <div class="container">
-        <h3 class="animated wow zoomIn" data-wow-delay=".5s">热门商品</h3>
-        <div class="banner-bottom-grids">
-            <div class="banner-bottom-grid-left animated wow slideInLeft" data-wow-delay=".5s">
-                <div class="grid">
-                    <figure class="effect-julia">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp1.jpg" alt=" " class="img-responsive" />
-                    </figure>
-                    <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
-                        <div class="banner-bottom-grid-left-grid1">
-                            <img src="${pageContext.request.getContextPath()}/static/images/rmsp2.jpg" alt=" " class="img-responsive" />
-                        </div>
-                        <div class="banner-bottom-grid-left1-position">
-                            <div class="banner-bottom-grid-left1-pos1">
-                                <p>Latest New Collections</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--<!-- banner -->--%>
+<%--<div class="banner">--%>
+<%--    <div class="container">--%>
+<%--        <div class="banner-info animated wow zoomIn" data-wow-delay=".5s">--%>
+<%--            <h3>Free Online Shopping</h3>--%>
+<%--            <h4>Up to <span>50% <i>Off/-</i></span></h4>--%>
+<%--            <div class="wmuSlider example1">--%>
+<%--                <div class="wmuSliderWrapper">--%>
+<%--                    <article style="position: absolute; width: 100%; opacity: 0;">--%>
+<%--                        <div class="banner-wrap">--%>
+<%--                            <div class="banner-info1">--%>
+<%--                                <p>T-Shirts + Formal Pants + Jewellery + Cosmetics</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </article>--%>
+<%--                    <article style="position: absolute; width: 100%; opacity: 0;">--%>
+<%--                        <div class="banner-wrap">--%>
+<%--                            <div class="banner-info1">--%>
+<%--                                <p>Toys + Furniture + Lighting + Watches</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </article>--%>
+<%--                    <article style="position: absolute; width: 100%; opacity: 0;">--%>
+<%--                        <div class="banner-wrap">--%>
+<%--                            <div class="banner-info1">--%>
+<%--                                <p>Tops + Books & Media + Sports</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </article>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <script src="${pageContext.request.getContextPath()}/static/js/jquery.wmuSlider.js"></script>--%>
+<%--            <script>--%>
+<%--                $('.example1').wmuSlider();--%>
+<%--            </script>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<!-- //banner -->--%>
+<%--<!--&lt;!&ndash; banner-bottom &ndash;&gt;-->--%>
+<%--<div class="banner-bottom">--%>
+<%--    <div class="container">--%>
+<%--        <h3 class="animated wow zoomIn" data-wow-delay=".5s">热门商品</h3>--%>
+<%--        <div class="banner-bottom-grids">--%>
+<%--            <div class="banner-bottom-grid-left animated wow slideInLeft" data-wow-delay=".5s">--%>
+<%--                <div class="grid">--%>
+<%--                    <figure class="effect-julia">--%>
+<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp1.jpg" alt=" " class="img-responsive" />--%>
+<%--                    </figure>--%>
+<%--                    <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">--%>
+<%--                        <div class="banner-bottom-grid-left-grid1">--%>
+<%--                            <img src="${pageContext.request.getContextPath()}/static/images/rmsp2.jpg" alt=" " class="img-responsive" />--%>
+<%--                        </div>--%>
+<%--                        <div class="banner-bottom-grid-left1-position">--%>
+<%--                            <div class="banner-bottom-grid-left1-pos1">--%>
+<%--                                <p>Latest New Collections</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-            <div class="banner-bottom-grid-left1 animated wow slideInUp" data-wow-delay=".5s">
-                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
-                    <div class="banner-bottom-grid-left-grid1">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp3.jpg" alt=" " class="img-responsive" />
-                    </div>
-                    <div class="banner-bottom-grid-left1-pos">
-                        <p>Discount 45%</p>
-                    </div>
-                </div>
-                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
-                    <div class="banner-bottom-grid-left-grid1">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp4.jpg" alt=" " class="img-responsive" />
-                    </div>
-                    <div class="banner-bottom-grid-left1-position">
-                        <div class="banner-bottom-grid-left1-pos1">
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="banner-bottom-grid-left1 animated wow slideInUp" data-wow-delay=".5s">--%>
+<%--                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">--%>
+<%--                    <div class="banner-bottom-grid-left-grid1">--%>
+<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp3.jpg" alt=" " class="img-responsive" />--%>
+<%--                    </div>--%>
+<%--                    <div class="banner-bottom-grid-left1-pos">--%>
+<%--                        <p>Discount 45%</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">--%>
+<%--                    <div class="banner-bottom-grid-left-grid1">--%>
+<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp4.jpg" alt=" " class="img-responsive" />--%>
+<%--                    </div>--%>
+<%--                    <div class="banner-bottom-grid-left1-position">--%>
+<%--                        <div class="banner-bottom-grid-left1-pos1">--%>
+<%--                            <p></p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-            <div class="banner-bottom-grid-right animated wow slideInRight" data-wow-delay=".5s">
-                <div class="banner-bottom-grid-left-grid grid-left-grid1">
-                    <div class="banner-bottom-grid-left-grid1">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp5.jpg" alt=" " class="img-responsive" />
-                        <!--<img src="images/3.jpg" alt=" " class="img-responsive" />-->
-                    </div>
-                    <div class="grid-left-grid1-pos">
-                        <p>top and classic designs </p>
-                    </div>
-                </div>
-                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
-                    <div class="banner-bottom-grid-left-grid1">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp6.jpg" alt=" " class="img-responsive" />
-                    </div>
-                    <div class="banner-bottom-grid-left1-position">
-                        <div class="banner-bottom-grid-left1-pos1">
-                            <p>2018 Collection</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="banner-bottom-grid-right animated wow slideInRight" data-wow-delay=".5s">--%>
+<%--                <div class="banner-bottom-grid-left-grid grid-left-grid1">--%>
+<%--                    <div class="banner-bottom-grid-left-grid1">--%>
+<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp5.jpg" alt=" " class="img-responsive" />--%>
+<%--                        <!--<img src="images/3.jpg" alt=" " class="img-responsive" />-->--%>
+<%--                    </div>--%>
+<%--                    <div class="grid-left-grid1-pos">--%>
+<%--                        <p>top and classic designs </p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">--%>
+<%--                    <div class="banner-bottom-grid-left-grid1">--%>
+<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp6.jpg" alt=" " class="img-responsive" />--%>
+<%--                    </div>--%>
+<%--                    <div class="banner-bottom-grid-left1-position">--%>
+<%--                        <div class="banner-bottom-grid-left1-pos1">--%>
+<%--                            <p>2018 Collection</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-</div>
+<%--            <div class="clearfix"> </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <!-- //banner-bottom -->
 <!-- collections -->
 
@@ -894,24 +894,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- //new-timer -->
 <!-- collections-bottom -->
-<div class="collections-bottom">
-    <div class="container">
-        <div class="collections-bottom-grids">
-            <div class="collections-bottom-grid animated wow slideInLeft" data-wow-delay=".5s">
-                <h3>45% Offer For <span>Women & Children's</span></h3>
-            </div>
-        </div>
-        <div class="newsletter animated wow slideInUp" data-wow-delay=".5s">
-            <h3>Newsletter</h3>
-            <p>Join us now to get all news and special offers.</p>
-            <form>
-                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                <input type="email" value="Enter your email address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your email address';}" required="">
-                <input type="submit" value="Join Us" >
-            </form>
-        </div>
-    </div>
-</div>
+<%--<div class="collections-bottom">--%>
+<%--    <div class="container">--%>
+<%--        <div class="collections-bottom-grids">--%>
+<%--            <div class="collections-bottom-grid animated wow slideInLeft" data-wow-delay=".5s">--%>
+<%--                <h3>45% Offer For <span>Women & Children's</span></h3>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="newsletter animated wow slideInUp" data-wow-delay=".5s">--%>
+<%--            <h3>Newsletter</h3>--%>
+<%--            <p>Join us now to get all news and special offers.</p>--%>
+<%--            <form>--%>
+<%--                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>--%>
+<%--                <input type="email" value="Enter your email address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your email address';}" required="">--%>
+<%--                <input type="submit" value="Join Us" >--%>
+<%--            </form>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <!-- //collections-bottom -->
 <!-- footer -->
 <div class="footer">
