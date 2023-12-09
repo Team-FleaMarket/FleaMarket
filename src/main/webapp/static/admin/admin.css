@@ -22,7 +22,9 @@ body,html,.el-container,#app{
     color: #000;
     text-align: center;
     line-height: 60px;
-
+    /*position: fixed;*/
+    bottom: 0;
+    width: 100%;
 }
 
 /*    输入框样式*/
