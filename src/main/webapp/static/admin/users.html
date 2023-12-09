@@ -48,25 +48,25 @@
                     width="30%">
                 <el-form>
                     <el-form-item label="id">
-                        {{user.id}}
+                        {{tempUser.id}}
                     </el-form-item>
                     <el-form-item label="学号">
-                        {{user.studentNo}}
+                        {{tempUser.studentNo}}
                     </el-form-item>
                     <el-form-item label="用户名">
-                        <el-input v-model="user.userName"></el-input>
+                        <el-input v-model="tempUser.userName"></el-input>
                     </el-form-item>
                     <el-form-item label="密码">
-                        <el-input type="password" v-model="user.password"></el-input>
+                        <el-input type="password" v-model="tempUser.password"></el-input>
                     </el-form-item>
                     <el-form-item label="邮箱">
-                        <el-input v-model="user.email"></el-input>
+                        <el-input v-model="tempUser.email"></el-input>
                     </el-form-item>
                     <el-form-item label="手机号">
-                        <el-input v-model="user.phone"></el-input>
+                        <el-input v-model="tempUser.phone"></el-input>
                     </el-form-item>
                     <el-form-item label="微信">
-                        <el-input v-model="user.wechat"></el-input>
+                        <el-input v-model="tempUser.wechat"></el-input>
                     </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
@@ -94,6 +94,15 @@
                     wechat: ''
                 },
                 users: [],
+                tempUser: {
+                    id: 0,
+                    userName: '',
+                    password: '',
+                    studentNo: '',
+                    email: '',
+                    phone: '',
+                    wechat: ''
+                },
                 activeIndex: '2',
                 total: 0, //总用户数
                 currentPage: 1,
@@ -102,8 +111,19 @@
         },
         methods: {
             update() {
-                axios.put("/user", this.user).then((res => {
+                console.log(this.tempUser)
+                axios.put("/user", this.tempUser).then((res => {
                     if (res.data === "ok") {
+                        this.user = this.tempUser;
+                        console.log(this.user);
+                        this.users = this.users.map(user => {
+                            if (user.id === this.user.id) {
+                                return this.user;
+                            } else {
+                                return user;
+                            }
+                        });
+                        console.log(this.users.find(user => user.id === this.user.id));
                         this.dialogVisible = false;
                         this.$message({
                             message: '修改成功',
@@ -119,6 +139,7 @@
             },
             showInfo(id) {
                 this.user = this.users.find(user => user.id === id);
+                this.tempUser = Object.assign({}, this.user);
                 this.dialogVisible = true;
             },
             handleSelect(key, keyPath) {

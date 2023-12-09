@@ -3,8 +3,21 @@
     margin: 0;
     padding: 0;
 }
-body,html,.el-container,#app{
+html,.el-container,#app{
     height: 100%;
+}
+
+body {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+body::after {
+    height: 60px;
+    display: block;
+    content: '';
 }
 
 /*布局容器样式 main header fotter*/
@@ -22,7 +35,7 @@ body,html,.el-container,#app{
     color: #000;
     text-align: center;
     line-height: 60px;
-    /*position: fixed;*/
+    position: absolute;
     bottom: 0;
     width: 100%;
 }
