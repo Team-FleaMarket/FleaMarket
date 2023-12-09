@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <script src="../js/admin/element/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="container">
+        <el-container>
+            <el-header>GoodsWill</el-header>
+            <el-main>
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                    <el-menu-item index="1">主页</el-menu-item>
+                    <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
+                    <el-menu-item index="3" disabled @click="to_review">审核商品</el-menu-item>
+                    <el-menu-item index="4" disabled>查询商品</el-menu-item>
+                    <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
+                </el-menu>
+
+                <h3> 欢迎，{{username}}</h3>
+            </el-main>
+            <el-footer>NPU @2023</el-footer>
+
+        </el-container>
+
+    </div>
+
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                username: '',
+                activeIndex: '1'
+            };
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            to_user: function () {
+                window.location.href = "users.html";
+            },
+            to_review: function () {
+                window.location.href = "review.html";
+            },
+            getName: function () {
+                axios.get("/admin").then((res => {
+                    if (res.data === "Invalid") {
+                        this.$message.error('登录失效，请重新登录');
+                        setTimeout(() => {
+                            window.location.href = "login.html";
+                        }, 500);
+                    } else {
+                        this.username = res.data;
+                    }
+                })).catch(err => {
+                    console.log(err);
+                })
+            },
+        },
+        created() {
+            this.getName();
+        }
+    });
+</script>
+
+</body>
+
+
+</html>
+
+<style>
+    body {
+        background-image: url('images/Allamar-Design.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .el-footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>

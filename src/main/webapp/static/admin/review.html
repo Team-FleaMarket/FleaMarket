@@ -2,9 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>商品审核</title>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/admin/element/index.js"></script>
+    <link rel="stylesheet" href="../css/admin.css">
+
 </head>
 <body>
-<h2>check</h2>
+<div id="app">
+    <div id="container">
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="1" @click="to_home">主页</el-menu-item>
+            <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
+            <el-menu-item index="3">审核商品</el-menu-item>
+            <el-menu-item index="4" disabled>查询商品</el-menu-item>
+            <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
+        </el-menu>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                admin: {
+                    username: '',
+                    password: '',
+                },
+                activeIndex: '3'
+            };
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            to_user: function () {
+                window.location.href = "users.html";
+            },
+            to_home: function () {
+                window.location.href = "home.html";
+            },
+        }
+    });
+</script>
+
 </body>
 </html>

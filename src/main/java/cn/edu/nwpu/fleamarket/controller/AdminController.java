@@ -31,15 +31,21 @@ public class AdminController {
     @PostMapping("/login")
     public String adminLogin(@RequestBody Admin admin, HttpSession session) {
         if(adminService.login(admin)) {
-            session.setAttribute("admin", admin);
+            session.setAttribute("admin", admin.getUsername());
             return "ok";
         }
         return "err";
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "123";
+    @GetMapping
+    public String getUsername(HttpSession session) {
+        String name = (String) session.getAttribute("admin");
+        if(name == null) {
+            return "Invalid";
+        }
+
+        return name;
     }
+
 
 }

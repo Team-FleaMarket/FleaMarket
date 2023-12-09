@@ -1,7 +1,7 @@
 package cn.edu.nwpu.fleamarket.dao;
 
 import cn.edu.nwpu.fleamarket.pojo.User;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -22,6 +22,30 @@ public interface UserDao {
     public User findAllUser(int id);       //根据id获取用户信息
     public void addStudent(User student);   //添加并保存用户
     public boolean login(User student);     //进行登陆
+
+    @Select("SELECT count(*) FROM users")
+    int countAll();
+
+
+    /**
+     * 分页
+     * @param start 起始id
+     * @return
+     */
+    @Select("SELECT * from users LIMIT #{start}, 6")
+    @Results({
+            @Result(column = "user_name", property = "userName"),
+            @Result(column = "student_no", property = "studentNo"),
+    })
+    List<User> getUsersByPage(int start);
+
+    /**
+     * 更新用户信息
+     * @param user
+     */
+    @Update("UPDATE users set user_name = #{userName}, password = #{password}, email = #{email}, " +
+            "phone = #{phone}, wechat = #{wechat} where id = #{id}")
+    void update(User user);
 }
 
 

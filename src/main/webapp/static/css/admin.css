@@ -1,0 +1,31 @@
+/*整体样式*/
+*{
+    margin: 0;
+    padding: 0;
+}
+body,html,.el-container,#app{
+    height: 100%;
+}
+
+/*布局容器样式 main header fotter*/
+.el-header {
+    background-color:deepskyblue;
+    color: #fff;
+    text-align: center;
+    line-height: 60px;
+    font-size: xx-large;
+    font-weight: bolder;
+
+}
+.el-footer{
+    background-color: #bbb;
+    color: #000;
+    text-align: center;
+    line-height: 60px;
+
+}
+
+/*    输入框样式*/
+.el-input{
+    width: 50%;
+}

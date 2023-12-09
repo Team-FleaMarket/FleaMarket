@@ -35,6 +35,22 @@ public class UserServiceImpl implements UserService {
         userDao.deleteStudent(id);
     }
 
+    @Override
+    public int countAll() {
+        return userDao.countAll();
+    }
+
+    @Override
+    public List<User> getUserByPage(int page) {
+        return userDao.getUsersByPage((page - 1) * 6);
+    }
+
+    @Override
+    public boolean update(User user) {
+        userDao.update(user);
+        return true;
+    }
+
     public void updatePwd(User user){
         userDao.updateStudent(user);
     }

@@ -11,22 +11,15 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
-/**
- * @Author: Hanwen
- * @Date: 2018/4/5 下午1:08
- */
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -327,8 +320,41 @@ public class UserController {
     }
 
 
+    /**
+     * 返回用户总数
+     * @return 用户总数
+     */
+    @ResponseBody
+    @GetMapping("/count")
+    public int count() {
+        return userService.countAll();
+    }
 
+    /**
+     * 获取某页面数据 一页展示6个用户
+     * @param page 页面
+     * @return 用户集合
+     */
+    @ResponseBody
+    @GetMapping("/page/{page}")
+    public List<User> getByPage(@PathVariable("page") int page) {
+        if(page <= 0) {
+            return null;
+        }
+        return userService.getUserByPage(page);
+    }
 
-
-
+    /**
+     * 更新user
+     * @param user 更新内容
+     * @return 结果
+     */
+    @ResponseBody
+    @PutMapping
+    public String update(@RequestBody User user) {
+        if(userService.update(user)) {
+            return "ok";
+        }
+        return "err";
+    }
 }

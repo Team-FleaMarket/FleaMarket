@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/admin/element/index.js"></script>
+    <link rel="stylesheet" href="../css/admin.css">
+
+</head>
+<body>
+<div id="app">
+    <div id="container">
+        <el-container>
+            <el-header>GoodsWill</el-header>
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="1" @click="to_home">主页</el-menu-item>
+            <el-menu-item index="2">用户管理</el-menu-item>
+            <el-menu-item index="3" disabled @click="to_review">审核商品</el-menu-item>
+            <el-menu-item index="4" disabled>查询商品</el-menu-item>
+            <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
+        </el-menu>
+        <h2>用户列表</h2>
+        <div v-for="user in users">
+            用户 {{user.userName}}
+            <el-button type="primary" @click="showInfo(user.id)" block>详情</el-button>
+            <hr>
+        </div>
+
+        <!--   分页     -->
+        <div class="block">
+            <el-pagination
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    background
+                    layout="prev, pager, next"
+                    :total="total"
+                    :page-size="6">
+            </el-pagination>
+        </div>
+
+        <el-dialog
+                title="用户详细信息"
+                :visible.sync="dialogVisible"
+                width="30%">
+            <el-form>
+                <el-form-item label="id">
+                    {{user.id}}
+                </el-form-item>
+                <el-form-item label="学号">
+                    {{user.studentNo}}
+                </el-form-item>
+                <el-form-item label="用户名">
+                    <el-input v-model="user.userName"></el-input>
+                </el-form-item>
+                <el-form-item label="密码">
+                    <el-input type="password" v-model="user.password"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱">
+                    <el-input v-model="user.email"></el-input>
+                </el-form-item>
+                <el-form-item label="手机号">
+                    <el-input v-model="user.phone"></el-input>
+                </el-form-item>
+                <el-form-item label="微信">
+                    <el-input v-model="user.wechat"></el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="update">修 改</el-button>
+            </span>
+        </el-dialog>
+            <el-footer>NPU  @2023</el-footer>
+        </el-container>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                user: {
+                    id: 0,
+                    userName: '',
+                    password: '',
+                    studentNo: '',
+                    email: '',
+                    phone: '',
+                    wechat: ''
+                },
+                users: [],
+                activeIndex: '2',
+                total: 0, //总用户数
+                currentPage: 1,
+                dialogVisible: false
+            };
+        },
+        methods: {
+            update() {
+                axios.put("/user", this.user).then((res=>{
+                    if(res.data === "ok") {
+                        this.dialogVisible = false;
+                        this.$message({
+                            message: '修改成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message.error('修改失败');
+                    }
+                })).catch(err=>{
+                    console.log(err);
+                })
+
+            },
+            showInfo(id) {
+                this.user = this.users.find(user => user.id === id);
+                this.dialogVisible = true;
+            },
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleCurrentChange: function (page) {
+                this.currentPage = page;
+                axios.get("/user/page/" + this.currentPage).then((res => {
+                    this.users = res.data;
+                    // console.log(res.data)
+                })).catch(err => {
+                    console.log(err);
+                })
+            },
+            getPagenum: function () {
+                axios.get("/user/count").then((res => {
+                    this.total = res.data;
+                })).catch(err => {
+                    console.log(err);
+                })
+            },
+            to_review: function () {
+                window.location.href = "review.html";
+            },
+            to_home: function () {
+                window.location.href = "home.html";
+            },
+        },
+        created() {
+            this.getPagenum();
+            this.handleCurrentChange(1);
+        }
+    });
+</script>
+
+</body>
+</html>

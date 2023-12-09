@@ -18,7 +18,9 @@ public interface UserService {
     void updateStudent(User student);
     void updatePwd(User user);
     void deleteStudent(Integer integer);
-
+    int countAll();
+    List<User> getUserByPage(int page);
+    boolean update(User user);
 }
 
 

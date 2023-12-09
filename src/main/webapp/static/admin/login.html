@@ -5,42 +5,40 @@
     <title>管理员登录</title>
     <script src="../js/admin/vue.js"></script>
     <script src="../js/admin/axios.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
     <script src="../js/admin/element/index.js"></script>
 
 </head>
 <body>
 <div id="app">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="el-col el-col-7">
-                <h3 class="text-center">管理员登录</h3>
-                <hr>
-                <el-form :label-position="right" label-width="80px" :model="admin">
-                    <el-form-item label="用户名">
-                        <el-input v-model="admin.username" placeholder="输入用户名"></el-input>
-                    </el-form-item>
-                    <el-form-item label="密码">
-                        <el-input type="password" v-model="admin.password" placeholder="输入密码"></el-input>
-                    </el-form-item>
-                </el-form>
-                <div style="text-align: center">
-                    <el-button type="primary" @click="login" block>登录</el-button>
-                </div>
+    <div id="container">
+        <el-container>
+            <el-header>GoodsWill</el-header>
+            <el-main>
+                <el-row>
+                    <el-col :span="8" :offset="8">
+                        <div id="loginBox">
+                            管理员登录<br>
+                            账号：<el-input v-model="admin.username" placeholder="账号"></el-input>
+                            <br>
+                            密码：<el-input type="password" v-model="admin.password" placeholder="密码"></el-input>
+                            <br>
 
-<!--            </div>-->
-
-        </div>
-
+                            <el-button type="primary" @click="login">登录</el-button>
+                        </div>
+                    </el-col>
+                </el-row>
+            </el-main>
+            <el-footer>NPU  @2023</el-footer>
+        </el-container>
     </div>
-</div>
 </div>
 <script>
     var app = new Vue({
         el: '#app',
         data() {
             return {
+                type: 'right',
                 admin: {
                     username: '',
                     password: '',
@@ -57,7 +55,7 @@
                             type: 'success'
                         });
                         setTimeout(() => {
-                            window.location.href = "review.html";
+                            window.location.href = "home.html";
                         }, 700);
                     } else {
                         this.$message.error('用户名或密码错误');
@@ -73,3 +71,55 @@
 </body>
 
 </html>
+
+
+<style>
+    /*整体样式*/
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body,html,.el-container,#app{
+        height: 100%;
+    }
+
+    /*放账号密码input的div*/
+    #loginBox{
+        background-color: #eee;
+        border-radius: 15px;
+        margin-top: 15%;
+    }
+
+    /*布局容器样式 main header fotter*/
+    .el-header {
+        background-color:deepskyblue;
+        color: #fff;
+        text-align: center;
+        line-height: 60px;
+        font-size: xx-large;
+        font-weight: bolder;
+
+    }
+    .el-footer{
+        background-color: #bbb;
+        color: #000;
+        text-align: center;
+        line-height: 60px;
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+    }
+    .el-main {
+        background-color: #fff;
+        color: #333;
+        text-align: center;
+        line-height: 80px;
+
+    }
+
+    /*    输入框样式*/
+    .el-input{
+        width: 50%;
+    }
+
+</style>
