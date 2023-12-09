@@ -1,24 +1,22 @@
 package cn.edu.nwpu.fleamarket.controller;
 
+import cn.edu.nwpu.fleamarket.pojo.Admin;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.User;
+import cn.edu.nwpu.fleamarket.service.AdminService;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-/**
- * @Author: Hanwen
- * @Date: 2018/6/8 上午9:00
- */
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -26,88 +24,22 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private AdminService adminService;
 
-    @RequestMapping("/login")
-    public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/admin/login");
-        return modelAndView;
-    }
 
-    @ResponseBody
-    @RequestMapping("manager")
-    public String manager(HttpServletRequest request) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", "");
-        String userName = request.getParameter("studentNo");
-        String password = request.getParameter("pwd");
-        boolean succ = userService.findManager(userName, password);
-        if(succ){
-            User user = new User();
-            user.setUserName(userName);
-            user.setPassword(password);
-            request.getSession().setAttribute("admin", user);
-            jsonObject.put("result", "admin");
-            return jsonObject.toString();
-        }else{
-            jsonObject.put("result", "nameAndPwd");
+    @PostMapping("/login")
+    public String adminLogin(@RequestBody Admin admin, HttpSession session) {
+        if(adminService.login(admin)) {
+            session.setAttribute("admin", admin);
+            return "ok";
         }
-        return jsonObject.toString();
+        return "err";
     }
 
-    @RequestMapping("bWFuYWdlcjEyMw==")
-    public ModelAndView hello(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-        List<Goods> goodsList = goodsService.selectByStatus(0);
-        modelAndView.addObject("goodsList", goodsList);
-        modelAndView.setViewName("admin/manager");
-        return modelAndView;
+    @GetMapping("/test")
+    public String test() {
+        return "123";
     }
-
-    @RequestMapping("logout")
-    public ModelAndView logout(HttpServletRequest request){
-        ModelAndView modelAndView = new ModelAndView();
-        // 设置session为空
-        request.getSession().setAttribute("admin", null);
-        // 页面跳转
-        modelAndView.setViewName("/admin/login");
-        return modelAndView;
-    }
-
-    @RequestMapping("status")
-    public ModelAndView status(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-        String status = request.getParameter("status");
-        if("".equals(status) || status == null) {
-            status = "0";
-
-        }
-        if("0".equals(status)) {
-            request.getSession().setAttribute("active", "0");
-        }else {
-            request.getSession().setAttribute("active", "1");
-        }
-        List<Goods> goodsList = goodsService.selectByStatus(Integer.valueOf(status));
-        modelAndView.addObject("goodsList", goodsList);
-        modelAndView.setViewName("admin/manager");
-        return modelAndView;
-    }
-
-    @ResponseBody
-    @RequestMapping("/changeGoodsStatus")
-    public ModelAndView changeGoodsStatus(HttpServletRequest request)throws Exception{
-        ModelAndView modelAndView = new ModelAndView();
-        String status = request.getParameter("status");
-        String goodsId = request.getParameter("goodsId");
-
-        Goods goods = new Goods();
-        goods.setId(Integer.valueOf(goodsId));
-        goods.setStatus(Integer.valueOf(status));
-        goodsService.updateGoodsStatus(goods);
-
-        modelAndView.setViewName("redirect:/admin/status");
-        return modelAndView;
-    }
-
 
 }
