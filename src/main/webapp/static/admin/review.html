@@ -14,13 +14,43 @@
 <body>
 <div id="app">
     <div id="container">
+        <el-container>
+            <el-header>GoodsWill</el-header>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1" @click="to_home">主页</el-menu-item>
             <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
             <el-menu-item index="3">审核商品</el-menu-item>
             <el-menu-item index="4" disabled>查询商品</el-menu-item>
-            <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
         </el-menu>
+            <el-main>
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column prop="date" label="商品类别" width="180"></el-table-column>
+                    <el-table-column prop="date" label="商品名称" width="180"></el-table-column>
+                    <el-table-column prop="name" label="商品图片" width="180"></el-table-column>
+                    <el-table-column prop="address" label="商品描述"></el-table-column>
+                    <el-table-column
+                            fixed="right"
+                            label="操作"
+                            width="120">
+                        <template slot-scope="scope">
+
+                            <el-button
+                                    type="primary"
+                                    size="mini"
+                                    @click="pass()">通过
+                            </el-button>
+
+                            <el-button
+                                    type="info"
+                                    size="mini"
+                                    @click="reject">拒绝
+                            </el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-main>
+            <el-footer>NPU @2023</el-footer>
+        </el-container>
     </div>
 </div>
 
@@ -33,7 +63,11 @@
                     username: '',
                     password: '',
                 },
-                activeIndex: '3'
+                activeIndex: '3',
+                goods: {
+
+                },
+                goodsList: []
             };
         },
         methods: {

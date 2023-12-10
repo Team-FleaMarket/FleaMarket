@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan({"cn.edu.nwpu.fleamarket.service"})
 @PropertySource("classpath:application.properties")
-@Import({JdbcConfig.class,MyBatisConfig.class})
+@Import({JdbcConfig.class,MyBatisConfig.class, RedissonConfig.class})
 @EnableTransactionManagement
 public class SpringConfig {
 }

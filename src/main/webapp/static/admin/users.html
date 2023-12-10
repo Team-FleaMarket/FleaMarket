@@ -19,16 +19,38 @@
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <el-menu-item index="1" @click="to_home">主页</el-menu-item>
                 <el-menu-item index="2">用户管理</el-menu-item>
-                <el-menu-item index="3" disabled @click="to_review">审核商品</el-menu-item>
+                <el-menu-item index="3" @click="to_review">审核商品</el-menu-item>
                 <el-menu-item index="4" disabled>查询商品</el-menu-item>
                 <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
             </el-menu>
-            <h2>用户列表</h2>
-            <div v-for="user in users">
-                用户 {{user.userName}}
-                <el-button type="primary" @click="showInfo(user.id)" block>详情</el-button>
-                <hr>
-            </div>
+            <h3>用户列表</h3>
+            <el-table :data="users" style="width: 100%">
+                <el-table-column prop="id" label="id" width="180"></el-table-column>
+                <el-table-column prop="studentNo" label="学号" width="180"></el-table-column>
+                <el-table-column prop="userName" label="用户名" width="180"></el-table-column>
+                <el-table-column prop="phone" label="手机号"></el-table-column>
+                <el-table-column
+                        fixed="right"
+                        label="操作"
+                        width="120">
+                    <template slot-scope="scope">
+
+                        <el-button
+                                type="primary"
+                                size="mini"
+                                @click="showInfo(scope.row.id)">修改
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+<!--            <el-card class="box-card" v-for="user in users" :key="user.id" style="margin-bottom: 20px; padding: 10px;">-->
+<!--                <div slot="header" class="clearfix" style="font-size: 14px;">-->
+<!--                    <span style="line-height: 36px;">用户 {{user.userName}}</span>-->
+<!--                </div>-->
+<!--                <div class="text item">-->
+<!--                    <el-button type="primary" @click="showInfo(user.id)" block size="small">查看详情</el-button>-->
+<!--                </div>-->
+<!--            </el-card>-->
 
             <!--   分页     -->
             <div class="block">
@@ -177,3 +199,9 @@
 
 </body>
 </html>
+
+<style>
+    .el-pagination {
+        text-align: center;
+    }
+</style>

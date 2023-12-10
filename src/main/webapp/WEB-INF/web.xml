@@ -58,4 +58,13 @@
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/static/admin/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>ResponseFilter</filter-name>
+        <filter-class>cn.edu.nwpu.fleamarket.filter.ResponseFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ResponseFilter</filter-name>
+        <url-pattern>/static/admin/login.html</url-pattern>
+    </filter-mapping>
 </web-app>

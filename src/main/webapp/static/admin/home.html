@@ -19,12 +19,41 @@
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="1">主页</el-menu-item>
                     <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
-                    <el-menu-item index="3" disabled @click="to_review">审核商品</el-menu-item>
+                    <el-menu-item index="3" @click="to_review">审核商品</el-menu-item>
                     <el-menu-item index="4" disabled>查询商品</el-menu-item>
                     <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
                 </el-menu>
 
-                <h3> 欢迎，{{username}}</h3>
+                <el-row :gutter="20">
+                    <el-col :span="6">
+                        <el-card>
+                            <div slot="header" class="clearfix">
+                                <span>欢迎，{{username}}</span>
+                            </div>
+<!--                            <el-avatar src="images/default.jpg"></el-avatar>-->
+                            <img src="images/default.jpg" width="100px" height="100px">
+                            <div style="padding: 14px;">
+<!--                                <el-button type="text">个人信息</el-button>-->
+<!--                                <el-button type="text">设置</el-button>-->
+                            </div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="18">
+                        <el-card>
+                            <div slot="header" class="clearfix">
+                                <span>公告</span>
+                            </div>
+                            <div v-for="announcement in announcements" :key="announcement.id">
+                                <el-alert
+                                        :title="announcement.title"
+                                        type="info"
+                                        :description="announcement.content"
+                                        show-icon>
+                                </el-alert>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </el-row>
             </el-main>
             <el-footer>NPU @2023</el-footer>
 
@@ -40,7 +69,12 @@
         data() {
             return {
                 username: '',
-                activeIndex: '1'
+                activeIndex: '1',
+                announcement: {
+                    title: '',
+                    content: ''
+                },
+                announcements: []
             };
         },
         methods: {
@@ -67,9 +101,28 @@
                     console.log(err);
                 })
             },
+            addAnnouncements() {
+                const announcementList = [
+                    {
+                        title: '商品发布规则',
+                        content: '为了保证商品质量，所有发布的商品都需要经过管理员审核才能上架。'
+                    },
+                    {
+                        title: '商品审核规则',
+                        content: '任何违反校规或法律法规的商品都不能通过审核。'
+                    },
+                    {
+                        title: '管理员行为规范',
+                        content: '请所有管理员公正、公平地执行他们的职责，尊重所有用户，及时处理用户的请求和投诉。'
+                    }
+
+                ];
+                this.announcements = announcementList;
+            }
         },
         created() {
             this.getName();
+            this.addAnnouncements();
         }
     });
 </script>
@@ -81,7 +134,7 @@
 
 <style>
     body {
-        background-image: url('images/Allamar-Design.png');
+        background-image: url('images/w.png');
         background-repeat: no-repeat;
         background-size: cover;
     }

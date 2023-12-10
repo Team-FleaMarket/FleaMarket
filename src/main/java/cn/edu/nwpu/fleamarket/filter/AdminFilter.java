@@ -6,6 +6,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+
+/**
+ * 请求过滤器 拦截非管理员访问管理员界面
+ */
 public class AdminFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
