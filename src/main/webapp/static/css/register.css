@@ -1,0 +1,54 @@
+.register .container {
+    width: 75%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.register h3:before {
+    left: 20%;
+}
+
+.register h3:after {
+    right: 20%;
+}
+
+/*.register-check-box label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+    margin: 1.5em 0 0 0em;
+}*/
+.register .form-check {
+    padding-left: 2em;
+}
+
+.register .form-grids {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.register p {
+    font-size: 14px;
+    color: #999;
+    line-height: 1.8em;
+    margin: 0;
+    text-align: center;
+}
+
+.register p a {
+    color: #d8703f;
+    text-decoration: none;
+    padding: 0 0 0 0.3em;
+}
+
+.register p a:hover {
+    color: #212121;
+}
+
+.register p a span {
+    top: 0.1em;
+    font-size: .7em;
+    left: 0.3em;
+}
