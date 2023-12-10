@@ -357,4 +357,27 @@ public class UserController {
         }
         return "err";
     }
+
+    /**
+     * 用户查询 根据用户名
+     * GET /user/username?query=
+     */
+    @ResponseBody
+    @GetMapping("/query/username")
+    public List<User> queryByUsername(@RequestParam("query") String query) {
+        System.out.println(query);
+        String trueQuery = "%" + query + "%";
+        return userService.queryByUserName(trueQuery);
+    }
+
+    /**
+     * 用户查询 根据用户名
+     * GET /user/username?query=
+     */
+    @ResponseBody
+    @GetMapping("/query/studentno")
+    public List<User> queryByStudentNo(@RequestParam("query") String query) {
+        String trueQuery = "%" + query + "%";
+        return userService.queryByStudentNo(trueQuery);
+    }
 }

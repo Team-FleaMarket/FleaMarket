@@ -21,6 +21,8 @@ public interface UserService {
     int countAll();
     List<User> getUserByPage(int page);
     boolean update(User user);
+    List<User> queryByUserName(String query);
+    List<User> queryByStudentNo(String query);
 }
 
 

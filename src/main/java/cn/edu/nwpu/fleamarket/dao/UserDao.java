@@ -9,6 +9,7 @@ import java.util.List;
  * @Author: Hanwen
  * @Date: 2018/4/5 下午3:08
  */
+
 public interface UserDao {
 
     User selectByStudentNo(@Param("studentNo") String studentNo);
@@ -46,6 +47,30 @@ public interface UserDao {
     @Update("UPDATE users set user_name = #{userName}, password = #{password}, email = #{email}, " +
             "phone = #{phone}, wechat = #{wechat} where id = #{id}")
     void update(User user);
+
+    /**
+     * 按用户名查找
+     * @param query 查询语句
+     */
+    @Select("SELECT * from users where user_name like #{query}")
+    @Results({
+            @Result(column = "user_name", property = "userName"),
+            @Result(column = "student_no", property = "studentNo"),
+    })
+    List<User> queryByUsername(String query);
+
+
+    /**
+     * 按学号查找
+     * @param query
+     * @return
+     */
+    @Select("SELECT * from users where student_no like #{query}")
+    @Results({
+            @Result(column = "user_name", property = "userName"),
+            @Result(column = "student_no", property = "studentNo"),
+    })
+    List<User> queryByStudentNo(String query);
 }
 
 

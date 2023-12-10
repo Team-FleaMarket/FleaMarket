@@ -23,7 +23,23 @@
                 <el-menu-item index="4" disabled>查询商品</el-menu-item>
                 <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
             </el-menu>
-            <h3>用户列表</h3>
+
+            <h3 style="margin: 20px 0; color: #34495e; font-size: 24px; background-color: #ecf0f1; padding: 10px; border-radius: 5px;">用户列表</h3>
+            <div style="display: flex; justify-content: center;">
+                <el-select v-model="selected" placeholder="请选择">
+                    <el-option label="用户名" value="userName"></el-option>
+                    <el-option label="学号" value="studentNo"></el-option>
+                </el-select>
+                <el-input
+                        :placeholder="placeholderText"
+                        v-model="query"
+                        clearable
+                        style="width: 300px;">
+                    <template slot="append">
+                        <el-button icon="el-icon-search" circle @click="search"></el-button>
+                    </template>
+                </el-input>
+            </div>
             <el-table :data="users" style="width: 100%">
                 <el-table-column prop="id" label="id" width="180"></el-table-column>
                 <el-table-column prop="studentNo" label="学号" width="180"></el-table-column>
@@ -128,10 +144,32 @@
                 activeIndex: '2',
                 total: 0, //总用户数
                 currentPage: 1,
-                dialogVisible: false
+                dialogVisible: false,
+                selected: 'userName',
+                query: '',
+                placeholderMap: {
+                    userName: '按用户名搜索',
+                    studentNo: '按学号搜索'
+                }
             };
         },
         methods: {
+            search() {
+                let url = '/user/query';
+                if(this.selected === 'userName') {
+                    url += '/username?query=' + this.query;
+                } else if(this.selected === 'studentNo') {
+                    url += '/studentno?query=' + this.query;
+                } else {
+                    this.$message.error('请先选择查询方式');
+                    return;
+                }
+                axios.get(url).then((res)=>{
+                    this.users = res.data;
+                }).catch(err=>{
+                   console.log(err);
+                });
+            },
             update() {
                 console.log(this.tempUser)
                 axios.put("/user", this.tempUser).then((res => {
@@ -193,7 +231,13 @@
         created() {
             this.getPagenum();
             this.handleCurrentChange(1);
-        }
+        },
+        computed: {
+            placeholderText() {
+                return this.placeholderMap[this.selected];
+            }
+        },
+
     });
 </script>
 

@@ -51,6 +51,16 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public List<User> queryByUserName(String query) {
+        return userDao.queryByUsername(query);
+    }
+
+    @Override
+    public List<User> queryByStudentNo(String query) {
+        return userDao.queryByStudentNo(query);
+    }
+
     public void updatePwd(User user){
         userDao.updateStudent(user);
     }
