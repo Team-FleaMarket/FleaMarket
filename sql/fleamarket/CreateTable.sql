@@ -24,3 +24,4 @@ CREATE TABLE goods (
 	degree INTEGER,
 	PRIMARY KEY(id)
 ) CHARACTER SET utf8mb4;
+
