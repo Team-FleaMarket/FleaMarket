@@ -105,6 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <a href="${pageContext.request.getContextPath()}/views/managecenter?status=1" >待出售</a> |
                                     <a href="${pageContext.request.getContextPath()}/views/managecenter?status=2" >已出售</a> |
                                     <a href="${pageContext.request.getContextPath()}/views/managecenter?status=3">我的购买</a> |
+                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=-1" >审核未通过</a> |
                                     <a href="insert">添加商品</a> <span></span>
                                 </div>
                                 <br>
@@ -112,6 +113,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
                                     <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
                                     <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
+                                    <c:if test="${status == 3}"><h4>欲购买: ${goodsList.size()} 件商品</h4></c:if>
+                                    <c:if test="${status == -1}"><h4>审核未通过: ${goodsList.size()} 件商品</h4></c:if>
 
                                 <br>
                                 <c:if test="${status == 0}">
@@ -257,7 +260,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
                             <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">1</td>--%>
+<%--                                      <td class="invert">1</td>--%>
                                         <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
                                         <%--<td class="invert">图书书籍</td>--%>
                                         <%--<td class="invert">&yen168.00</td>--%>

@@ -53,6 +53,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <h3 class="animated wow zoomIn" data-wow-delay=".2s">商品</h3>
         <p class="est animated wow zoomIn" data-wow-delay=".2s">你想要的商品都在这里，你喜欢的商品在这里都能找到。</p>
+
+
+
         <div class="new-collections-grids">
             <h2 class="animated wow zoomIn" data-wow-delay=".5s">
                 <em>图书书籍</em>

@@ -64,7 +64,6 @@ public class UserController {
     @RequestMapping("/login")
     public String login(HttpServletRequest request,HttpServletResponse response,String studentNo,String pwd)throws Exception {
 
-        System.out.println("ssssssssssssss");
         JSONObject jsonObject = new JSONObject();
 
         Map<String, String> msg = new HashMap<String, String>();
