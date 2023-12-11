@@ -118,11 +118,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="login">
                         <a href="${pageContext.request.contextPath}/views/checkout">
                             <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
-                            <c:if test="${sessionScope.user == null}">
-                                <a href="${pageContext.request.contextPath}/views/login">登陆</a>
+                            <c:if test="${sessionScope.student == null}">
+                                <a href="${pageContext.request.contextPath}/login">登陆</a>
                             </c:if>
-                            <c:if test="${sessionScope.user != null}">
-                                <a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.username}</a>
+                            <c:if test="${sessionScope.student != null}">
+                                <a href="${pageContext.request.contextPath}/home">${sessionScope.student.name}</a>
                             </c:if>
                         </a>
                     </div>

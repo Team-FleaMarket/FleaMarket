@@ -902,11 +902,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"> </div>
         </div>
         <div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
-            <h2><a href="index.jsp">GoodsWill <span>shop anywhere</span></a></h2>
+            <h2><a href="home.jsp">GoodsWill <span>shop anywhere</span></a></h2>
         </div>
         <div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
             <p>Copyright &copy; 2017.Company name All rights reserved.
-                <a href="index.jsp" target="_blank" title="GoodsPass">GoodsWill</a>
+                <a href="home.jsp" target="_blank" title="GoodsPass">GoodsWill</a>
         </div>
     </div>
 </div>

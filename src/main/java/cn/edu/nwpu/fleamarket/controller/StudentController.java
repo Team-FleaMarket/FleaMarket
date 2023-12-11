@@ -1,38 +1,30 @@
 package cn.edu.nwpu.fleamarket.controller;
 
-import cn.edu.nwpu.fleamarket.pojo.User;
-import cn.edu.nwpu.fleamarket.service.UserService;
-import jakarta.servlet.http.Cookie;
+import cn.edu.nwpu.fleamarket.pojo.Student;
+import cn.edu.nwpu.fleamarket.service.StudentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 /**
  * @Author: Hanwen
  * @Date: 2018/4/5 下午1:08
  */
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/student")
+public class StudentController {
 
     @Autowired
-    private UserService userService;
+    private StudentService userService;
 
 
     @RequestMapping("/loginPage")
@@ -46,7 +38,7 @@ public class UserController {
     @RequestMapping("/home")
     public void home(HttpServletRequest request, HttpServletResponse response)throws Exception{
         request.getSession().setAttribute("active","home");
-        request.getRequestDispatcher("/index.jsp").forward(request,response);
+        request.getRequestDispatcher("/home.jsp").forward(request,response);
     }
 
     public static boolean isJson(String value) {
@@ -61,7 +53,7 @@ public class UserController {
 
 
     //@ResponseBody
-    @RequestMapping("/login")
+   /* @RequestMapping("/login")
     public String login(HttpServletRequest request,HttpServletResponse response,String studentNo,String pwd)throws Exception {
 
         System.out.println("ssssssssssssss");
@@ -99,9 +91,25 @@ public class UserController {
         }
 
         return jsonObject.toString();
+    }*/
+
+    @PostMapping("/login")
+    public String login(HttpServletRequest request, @ModelAttribute Student student, Model model) throws Exception{
+        boolean loginSuccess = userService.loginStudent(student);
+        System.out.println("studentlogin");
+
+        if (!loginSuccess) {
+            model.addAttribute("error", "用户名或密码错误！");
+            return "login";
+        }
+        request.getSession().setAttribute("student",student);
+        return "redirect:/home";
     }
+
+
+
     public boolean adminLogin(String username,String pwd) {
-        return userService.findManager(username,pwd);
+        return false;
     }
 
 
@@ -115,8 +123,10 @@ public class UserController {
         return modelAndView;
     }
 
+/*
 
-    @RequestMapping("/profile")
+  */
+/*  @RequestMapping("/profile")
     public ModelAndView profile(HttpServletRequest request) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         String studentNo = request.getParameter("studentNo");
@@ -141,7 +151,8 @@ public class UserController {
             }
         }
         return modelAndView;
-    }
+    }*//*
+
 
     @RequestMapping("uploadImagePage")
     public ModelAndView uploadImagePage(){
@@ -257,9 +268,9 @@ public class UserController {
 
 
 
-    @RequestMapping("/registeruser")
+   */
+/* @RequestMapping("/registeruser")
     public ModelAndView registeruser(HttpServletRequest request, User user) throws Exception{
-        System.out.println("--------------------------------11");
         ModelAndView modelAndView=new ModelAndView();
         user.setUserName(new String(user.getUserName().getBytes("iso-8859-1"),"utf-8"));
         if(user != null) {
@@ -268,7 +279,8 @@ public class UserController {
         request.getSession().setAttribute("user",user);
         modelAndView.setViewName("index");
         return modelAndView;
-    }
+    }*//*
+
 
     @RequestMapping("/register")
     public ModelAndView register() throws Exception{
@@ -328,6 +340,7 @@ public class UserController {
         return jsonObject.toString();
     }
 
+*/
 
 
 

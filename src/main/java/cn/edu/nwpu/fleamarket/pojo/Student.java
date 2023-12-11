@@ -11,10 +11,10 @@ import java.util.Date;
 
 @Setter
 @Getter
-public class User {
+public class Student {
     private Integer id;
     private String studentNo;
-    private String userName;
+    private String name;
     private String password;
     private Date birthday;
     private String sex;
@@ -29,20 +29,7 @@ public class User {
     private String researchResult;
     private String skills;
     private int finish;
-    private String manager;
     private String phone;
     private String wechat;
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
 }
 

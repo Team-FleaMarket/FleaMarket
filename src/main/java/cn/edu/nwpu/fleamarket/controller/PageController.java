@@ -1,9 +1,9 @@
 package cn.edu.nwpu.fleamarket.controller;
 
 import cn.edu.nwpu.fleamarket.pojo.Goods;
-import cn.edu.nwpu.fleamarket.pojo.User;
+import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
-import cn.edu.nwpu.fleamarket.service.UserService;
+import cn.edu.nwpu.fleamarket.service.StudentService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,21 +13,18 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Author: Hanwen
- * @Date: 2018/6/7 上午9:07
- */
 @Controller
-@RequestMapping("/views")
+@RequestMapping("")
 public class PageController {
 
     @Autowired
     private GoodsService goodsService;
     @Autowired
-    private UserService userService;
+    private StudentService userService;
 
-    @RequestMapping("/index")
-    public ModelAndView index(HttpServletRequest request)throws Exception{
+    @RequestMapping("/home")
+    public ModelAndView home(HttpServletRequest request)throws Exception{
+        System.out.println(1231312);
         ModelAndView modelAndView = new ModelAndView();
         List<Goods> goodsList = goodsService.selectByStatusAndGoodsStatus();
         List<Goods> bookList = new ArrayList<Goods>();
@@ -39,7 +36,7 @@ public class PageController {
         modelAndView.addObject("bookList", bookList);
         modelAndView.addObject("storeList", storeList);
         modelAndView.addObject("amazeList", amazeList);
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("home");
         return modelAndView;
     }
 
@@ -154,20 +151,18 @@ public class PageController {
     }
 
     @RequestMapping("/login")
-    public ModelAndView loginPage(HttpServletRequest request)throws Exception{
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
-        return modelAndView;
+    public String login() {
+        return "login";
     }
     @RequestMapping("/managecenter")
     public ModelAndView managecenter(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
-        User user = (User) request.getSession().getAttribute("user");
+        Student student = (Student) request.getSession().getAttribute("student");
         if("".equals(status) || status == null) {
             status = "0";
         }
-        List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), user.getStudentNo());
+        List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
         modelAndView.addObject("status", status);
         modelAndView.addObject("goodsList", list);
         modelAndView.setViewName("managecenter");
@@ -238,7 +233,7 @@ public class PageController {
         return modelAndView;
     }
 
-    @RequestMapping("/single")
+/*    @RequestMapping("/single")
     public ModelAndView single(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         String goodsId = request.getParameter("goodsId");
@@ -256,10 +251,10 @@ public class PageController {
         modelAndView.addObject("storeList", storeList);
         modelAndView.addObject("amazeList", amazeList);
 
-        modelAndView.addObject("user", user);
+        modelAndView.addObject("user", student);
         modelAndView.addObject("goods", goods);
         modelAndView.setViewName("single");
         return modelAndView;
-    }
+    }*/
 
 }

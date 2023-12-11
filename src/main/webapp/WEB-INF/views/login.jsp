@@ -104,14 +104,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <h3 class="animated wow zoomIn" data-wow-delay=".5s">登陆</h3>
         <p class="est animated wow zoomIn" data-wow-delay=".5s"> login to your account..</p>
         <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-            <form action="${pageContext.request.getContextPath()}/user/login" id="form" class="animated wow slideInUp" data-wow-delay=".5s">
+            <form action="/student/login" method="post" id="form" class="animated wow slideInUp" data-wow-delay=".5s">
                 <input type="text" id="studentNo" name="studentNo" placeholder="输入学号" onkeyup="value=value.replace(/[^\d]/g,'')">
                 <input type="password" id="password" name="password" placeholder="密码">
                 <div class="forgot">
                     <a href="#">忘记密码 ?</a>
                 </div>
-                <input type="submit" id="chk" name="chk" value="登陆" onclick="return loginCheck()">
-                <a href="<c:url value="http://localhost:8080/FleaMarket/user/login" />">登录</a>
+<%--                <input type="submit" id="chk" name="chk" value="登陆" onclick="return loginCheck()">--%>
+                <input type="submit" id="chk" name="chk" value="登陆"/>
+                <c:if test="${not empty error}">
+                    <p style="color: red;"><c:out value="${error}" /></p>
+                </c:if>
                 <%--
 <input class="btn btn-lg btn-primary btn-block" type="button" onclick="return loginCheck()" value="登陆">--%>
             </form>

@@ -16,41 +16,43 @@ function loginCheck() {
         });
         return false;
     }
-    var studentNo = $("input[name='inputStudentNo']").val();
-    var pwd = $("#inputPassword").val();      //密码
-    var flag = $("input[type='checkbox']").is(':checked')?"1":"0";
-    var datas = new Object();                  //返回来的结果
-    $.ajax({
-        type: "post",
-        contentType:"application/string",
-        dataType:"json",
-        async:false,
-        url : "login?studentNo="+studentNo+"&pwd="+pwd+"&flag="+flag,
-        success: function (data) {
-            datas = data;
-        }
-    });
-    if(datas.result == "studentNoFalse"){                 //学号不正确
-        layer.tips('学号不存在！', '#inputStudentNo', {
-            tips: [2, '#FF3030'],
-            time: 2000
-        });
-        return false;
-    }else if(datas.result == "pwdFalse"){            //密码不正确
+    $("#form").submit();
 
-        layer.tips('密码不正确！', '#inputPassword', {
-            tips: [2, '#FF3030'],
-            time: 2000
-        });
-        return false;
-    }
-    var str = getRootPath_web();
-    if(datas.result == "admin") {
-        window.location.href=str+"/admin/manager";
-        return false;
-    }
-    window.location.href=str;
-    return false;
+    /* var studentNo = $("input[name='inputStudentNo']").val();
+     var pwd = $("#inputPassword").val();      //密码
+     var flag = $("input[type='checkbox']").is(':checked')?"1":"0";
+     var datas = new Object();                  //返回来的结果
+     $.ajax({
+         type: "post",
+         contentType:"application/string",
+         dataType:"json",
+         async:false,
+         url : "login?studentNo="+studentNo+"&pwd="+pwd+"&flag="+flag,
+         success: function (data) {
+             datas = data;
+         }
+     });
+     if(datas.result == "studentNoFalse"){                 //学号不正确
+         layer.tips('学号不存在！', '#inputStudentNo', {
+             tips: [2, '#FF3030'],
+             time: 2000
+         });
+         return false;
+     }else if(datas.result == "pwdFalse"){            //密码不正确
+
+         layer.tips('密码不正确！', '#inputPassword', {
+             tips: [2, '#FF3030'],
+             time: 2000
+         });
+         return false;
+     }
+     var str = getRootPath_web();
+     if(datas.result == "admin") {
+         window.location.href=str+"/admin/manager";
+         return false;
+     }
+     window.location.href=str;
+     return false;*/
 }
 
 

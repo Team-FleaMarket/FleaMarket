@@ -764,7 +764,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             <!--
             <h2 class="animated wow zoomIn" data-wow-delay=".5s">
-                <a class="header-grid-right" href="${pageContext.request.contextPath}/index.jsp">更多 > ></a>
+                <a class="header-grid-right" href="${pageContext.request.contextPath}/home.jsp">更多 > ></a>
             </h2>-->
         </div>
         <div class="clearfix"> </div>
