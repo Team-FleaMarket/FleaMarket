@@ -31,7 +31,7 @@ public class User {
     private int finish;
     private String manager;
     private String phone;
-    private String wechat;
+    private String department;
 
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();

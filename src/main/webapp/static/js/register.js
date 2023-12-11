@@ -22,27 +22,27 @@ function registerCheck() {
         });
         return false;
     }
-    if($("input[name=wechat]").val() == null || $("input[name=wechat]").val() == ""){
-        layer.tips('微信号不能为空！', '#wechat', {
-            tips: [2, '#FF3030'],
-            time: 2000
-        });
-        return false;
-    }
-    if($("input[name=email]").val() == null || $("input[name=email]").val() == ""){
-        layer.tips('email不能为空！', '#email', {
-            tips: [2, '#FF3030'],
-            time: 2000
-        });
-        return false;
-    }
-    if ($("input[name=email]").val().indexOf("@")<1 || $("input[name=email]").val().lastIndexOf(".")<$("input[name=email]").val().indexOf("@")+2 || $("input[name=email]").val().lastIndexOf(".")+2>= $("input[name=email]").val().length){
-        layer.tips('不是一个有效的 e-mail 地址', '#email', {
-            tips: [2, '#FF3030'],
-            time: 2000
-        });
-        return false;
-    }
+    // if($("input[name=wechat]").val() == null || $("input[name=wechat]").val() == ""){
+    //     layer.tips('微信号不能为空！', '#wechat', {
+    //         tips: [2, '#FF3030'],
+    //         time: 2000
+    //     });
+    //     return false;
+    // }
+    // if($("input[name=email]").val() == null || $("input[name=email]").val() == ""){
+    //     layer.tips('email不能为空！', '#email', {
+    //         tips: [2, '#FF3030'],
+    //         time: 2000
+    //     });
+    //     return false;
+    // }
+    // if ($("input[name=email]").val().indexOf("@")<1 || $("input[name=email]").val().lastIndexOf(".")<$("input[name=email]").val().indexOf("@")+2 || $("input[name=email]").val().lastIndexOf(".")+2>= $("input[name=email]").val().length){
+    //     layer.tips('不是一个有效的 e-mail 地址', '#email', {
+    //         tips: [2, '#FF3030'],
+    //         time: 2000
+    //     });
+    //     return false;
+    // }
     if($("input[name=password]").val() != null && $("input[name=repassword]").val() != ""){
         if($("input[name=password]").val() != $("input[name=repassword]").val()) {
             layer.tips('两次密码不一致！', '#repassword', {

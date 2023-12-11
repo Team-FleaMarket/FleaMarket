@@ -7,10 +7,10 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="student_no" jdbcType="VARCHAR" property="studentNo"></result>
         <result column="password" jdbcType="VARCHAR" property="password" ></result>
-        <result column="email" jdbcType="VARCHAR" property="email" ></result>
+<!--        <result column="email" jdbcType="VARCHAR" property="email" ></result>-->
         <result column="phone" jdbcType="VARCHAR" property="phone" ></result>
         <result column="user_name" jdbcType="VARCHAR" property="userName" ></result>
-        <result column="wechat" jdbcType="VARCHAR" property="wechat" ></result>
+        <result column="department" jdbcType="VARCHAR" property="department" ></result>
     </resultMap>
 
     <select id="selectByStudentNo" parameterType="string" resultMap="BaseResultMap">
@@ -18,8 +18,8 @@
     </select>
 
     <insert id="addStudent" parameterType="cn.edu.nwpu.fleamarket.pojo.User">
-        INSERT INTO users (`student_no`,`user_name`,`phone`,`email`,`wechat`, `password`)
-        VALUES (#{studentNo}, #{userName}, #{phone}, #{email}, #{wechat},#{password});
+        INSERT INTO users (`student_no`,`user_name`,`phone`,`department`, `password`)
+        VALUES (#{studentNo}, #{userName}, #{phone}, #{department},#{password});
     </insert>
 
     <select id="findManager" parameterType="cn.edu.nwpu.fleamarket.pojo.User" resultMap="BaseResultMap">

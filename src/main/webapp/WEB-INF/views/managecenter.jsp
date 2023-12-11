@@ -133,11 +133,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <br>
                                 <h4>昵称：${sessionScope.user.userName}</h4><h2></h2>
                                 <br>
-                                <h4>微信号：${sessionScope.user.wechat}</h4><h4></h4>
-                                <br>
                                 <h4>手机号：${sessionScope.user.phone}</h4><h4></h4>
                                 <br>
-                                <h4>邮箱：${sessionScope.user.email}</h4><h4></h4>
+                                <h4>学院：${sessionScope.user.department}</h4><h4></h4>
                             </form>
                         </div>
                         <div class="col-9 " data-wow-delay=".6s">
