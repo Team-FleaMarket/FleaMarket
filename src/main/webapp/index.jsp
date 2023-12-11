@@ -630,6 +630,7 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 <!-- //new-timer -->
 <!-- collections-bottom -->
 <div class="collections-bottom">

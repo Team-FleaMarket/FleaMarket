@@ -15,14 +15,17 @@
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/components/header.jsp"%>
+<!-- header -->
 
+<%@ include file="/WEB-INF/views/components/header.jsp" %>
+<!-- //header -->
 <!-- breadcrumbs -->
 <div class="breadcrumbs">
     <div class="container">
         <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-            <li><a href="${pageContext.request.contextPath}/views/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页 / </a></li>
-            <li class="active"> 注册页面</li>
+            <li><a href="${pageContext.request.contextPath}/views/index"><span class="glyphicon glyphicon-home"
+                                                                               aria-hidden="true"></span>主页</a></li>
+            <li class="active">注册页面</li>
         </ol>
     </div>
 </div>
@@ -38,22 +41,21 @@
                 <input type="text" id="studentNo" name="studentNo" placeholder="请输入学号..."  >
                 <input type="text" id="name" name="name" placeholder="请输入昵称..." >
 
-                <input type="text" id="phone" name="phone" placeholder="请输入手机号..."  >
-                <input type="text" id="wechat" name="wechat" placeholder="请输入微信号..."  >
-                <input type="email" id="email" name="email" placeholder="请输入邮箱" >
+                <input type="text" id="phone" name="phone" placeholder="请输入手机号...">
+                <input type="text" id="department" name="department" placeholder="请输入学院...">
+                <%--<input type="email" id="email" name="email" placeholder="请输入邮箱">--%>
 
-                <input type="password" id="password" name="password" placeholder="请设置密码" >
-                <input type="password" id="repassword" name="repassword" placeholder="再次确认密码" >
-                <div class="register-check-box">
-                    <div class="check">
-                        <label class="checkbox"><input type="checkbox" name="checkbox" id="checkbox"><i> </i>接受相关条款和协议</label>
-                    </div>
+                <input type="password" id="password" name="password" placeholder="请设置密码">
+                <input type="password" id="repassword" name="repassword" placeholder="再次确认密码">
+                <div class="form-check mt-3">
+                    <input type="checkbox" class="form-check-input" name="checkbox" id="checkbox">
+                    <label class="form-check-label" for="checkbox">接受相关条款和协议</label>
                 </div>
                 <%--<input type="submit" id="chk" name="chk" value="注册" onclick="return registerCheck()">--%>
                 <button type="button" class="btn btn-primary" id="liveToastBtn" >注册</button>
             </form>
-        </div>
-
+            <p class="animated wow slideInUp">已有账号？请点击<a
+                    href="${pageContext.request.contextPath}/views/login">登录</a></p>
         <div class="register-home animated wow slideInUp" data-wow-delay=".5s">
             <a href="${pageContext.request.contextPath}/">Home</a>
         </div>
@@ -99,69 +101,89 @@
         <%-- 登录失败消息提示 end--%>
 
     </div>
+    <!-- //register -->
 </div>
-<!-- //register -->
 <!-- footer -->
-<div class="footer">
-    <div class="container">
-        <div class="footer-grids">
-            <!--banner-bottom-grid-left-->
-            <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
-                <h3>关于我们</h3>
-                <p>足不出户获得最全的商品信息，</p>
-                <p>在这里找寻你急需要的商品，</p>
-                <p>在这里找寻你最喜欢的商品，</p>
-                <p>这里有你想要的，这里有你喜欢的，</p>
-                <p>还在等什么，赶快行动起来吧！</p>
-            </div>
+<%-- <div class="footer">
+     <div class="container">
+         <div class="footer-grids">
+             <!--banner-bottom-grid-left-->
+             <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
+                 <h3>关于我们</h3>
+                 <p>足不出户获得最全的商品信息，</p>
+                 <p>在这里找寻你急需要的商品，</p>
+                 <p>在这里找寻你最喜欢的商品，</p>
+                 <p>这里有你想要的，这里有你喜欢的，</p>
+                 <p>还在等什么，赶快行动起来吧！</p>
+             </div>
 
-            <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
-                <h3>联系我们</h3>
-                <ul>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">张旱文 123456789@qq.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">徐孟达 dxxmda@126.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">许多 13817717084@163.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">熊凯丽 65356789011@qq.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">张乐乐 lelesunshine614@gmail.com</a></li>
-                </ul>
-            </div>
+             <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
+                 <h3>联系我们</h3>
+                 <ul>
+                     <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                             href="mailto:info@example.com">张旱文 123456789@qq.com</a></li>
+                     <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                             href="mailto:info@example.com">徐孟达 dxxmda@126.com</a></li>
+                     <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                             href="mailto:info@example.com">许多 13817717084@163.com</a></li>
+                     <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                             href="mailto:info@example.com">熊凯丽 65356789011@qq.com</a></li>
+                     <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                             href="mailto:info@example.com">张乐乐 lelesunshine614@gmail.com</a></li>
+                 </ul>
+             </div>
 
-            <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".7s">
-                <h3>Partners</h3>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
+             <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".7s">
+                 <h3>Partners</h3>
+                 <div class="footer-grid-left">
+                     <a href="http://www.shnu.edu.cn/"><img
+                             src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                             class="img-responsive"/></a>
+                 </div>
+                 <div class="footer-grid-left">
+                     <a href="http://www.shnu.edu.cn/"><img
+                             src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                             class="img-responsive"/></a>
+                 </div>
+                 <div class="footer-grid-left">
+                     <a href="http://www.shnu.edu.cn/"><img
+                             src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                             class="img-responsive"/></a>
+                 </div>
+                 <div class="footer-grid-left">
+                     <a href="http://www.shnu.edu.cn/"><img
+                             src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                             class="img-responsive"/></a>
+                 </div>
+                 <div class="footer-grid-left">
+                     <a href="http://www.shnu.edu.cn/"><img
+                             src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                             class="img-responsive"/></a>
+                 </div>
+                 <div class="footer-grid-left">
+                     <a href="http://www.shnu.edu.cn/"><img
+                             src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                             class="img-responsive"/></a>
+                 </div>
 
 
-
-                <div class="clearfix"> </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        <div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
-            <h2><a href="${pageContext.request.contextPath}/views/index">GoodsWill <span>shop anywhere</span></a></h2>
-        </div>
-        <div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
-            <p>Copyright &copy; 2018.Company name All rights reserved.
-                <a href="${pageContext.request.contextPath}/views/index" target="_blank" title="GoodsPass">GoodsWill</a>
-        </div>
-    </div>
-</div>
+                 <div class="clearfix"></div>
+             </div>
+             <div class="clearfix"></div>
+         </div>
+         <div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
+             <h2><a href="${pageContext.request.contextPath}/views/index">GoodsWill <span>shop anywhere</span></a>
+             </h2>
+         </div>
+         <div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
+             <p>Copyright &copy; 2018.Company name All rights reserved.
+                 <a href="${pageContext.request.contextPath}/views/index" target="_blank"
+                    title="GoodsPass">GoodsWill</a>
+         </div>
+     </div>
+ </div>--%>
+<%@include file="components/footer.jsp" %>
 <!-- //footer -->
+
 </body>
 </html>

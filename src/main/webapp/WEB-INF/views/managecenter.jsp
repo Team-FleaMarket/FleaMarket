@@ -21,17 +21,17 @@
 
         function SelectChange(selectId) {
             //获取下拉框选中项的value属性值
-            var selectValue = $("#"+selectId).val();
+            var selectValue = $("#" + selectId).val();
 
             var twoText = selectValue.split(".");
             var status = twoText[0];
             var goodsId = twoText[1];
             $.ajax({
                 type: "post",
-                contentType:"application/string",
-                dataType:"json",
-                async:false,
-                url : "/goodswill/goods/changeGoodsStatus?status="+status+"&goodsId="+goodsId,
+                contentType: "application/string",
+                dataType: "json",
+                async: false,
+                url: "/goodswill/goods/changeGoodsStatus?status=" + status + "&goodsId=" + goodsId,
                 success: function (data) {
                     datas = data;
                 },
@@ -52,7 +52,7 @@
                 <div class="footer-grids">
                     <!--banner-bottom-grid-left-->
                     <div class="information col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
-                        <form >
+                        <form>
                             <div class="self_information">
                                 <img src="${pageContext.request.contextPath}/static/images/${sessionScope.student.studentNo}.jpg" alt=" " class="img_self img-circle center-block" >
                             </div>
@@ -68,7 +68,7 @@
                             <h4>邮箱：${sessionScope.student.email}</h4><h4></h4>
                         </form>
                     </div>
-                <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
+                    <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
                         <div class="goods">
                             <div class="container">
                                 <div class="status">
@@ -88,10 +88,13 @@
                                     <div class="user-goods  ">
                                         <div class="col-md-3">
                                             <div class="user-goods-image">
-                                                <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg"
+                                                     alt=" " class="img-rounded" width="125px" height="125px"/>
                                             </div>
                                             <br>
-                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
+                                            <h4><a class="item_add"
+                                                   href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a>
+                                            </h4>
                                         </div>
                                         <div class="col-md-9">
                                             <h3>于2023年5月3299购入的电脑</h3>
@@ -100,9 +103,12 @@
                                             <h3 class="money display-3">￥ 2899</h3>
                                             <br>
                                             <h4 class="date">2023年12月</h4>
-                                            <button type="button " class="btn btn-outline-light pull-right  ">删除</button>
-                                            <button type="button " class="btn btn-outline-light pull-right ">编辑</button>
-                                            <button type="button " class="btn btn-outline-light pull-right  ">降价</button>
+                                            <button type="button " class="btn btn-outline-light pull-right  ">删除
+                                            </button>
+                                            <button type="button " class="btn btn-outline-light pull-right ">编辑
+                                            </button>
+                                            <button type="button " class="btn btn-outline-light pull-right  ">降价
+                                            </button>
 
                                         </div>
                                     </div>
@@ -111,10 +117,13 @@
                                             <div class="user-goods  ">
                                                 <div class="col-md-3">
                                                     <div class="user-goods-image">
-                                                        <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                        <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg"
+                                                             alt=" " class="img-rounded" width="125px" height="125px"/>
                                                     </div>
                                                     <br>
-                                                    <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
+                                                    <h4><a class="item_add"
+                                                           href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a>
+                                                    </h4>
                                                 </div>
                                                 <div class="col-md-9">
                                                     <h3>${goods.goodsName}</h3>
@@ -123,9 +132,15 @@
                                                     <h3 class="money display-3">${goods.price}</h3>
                                                     <br>
                                                     <h4 class="date">${goods.description}</h4>
-                                                    <button type="button " class="btn btn-outline-light pull-right  ">删除</button>
-                                                    <button type="button " class="btn btn-outline-light pull-right ">编辑</button>
-                                                    <button type="button " class="btn btn-outline-light pull-right  ">降价</button>
+                                                    <button type="button " class="btn btn-outline-light pull-right  ">
+                                                        删除
+                                                    </button>
+                                                    <button type="button " class="btn btn-outline-light pull-right ">
+                                                        编辑
+                                                    </button>
+                                                    <button type="button " class="btn btn-outline-light pull-right  ">
+                                                        降价
+                                                    </button>
                                                 </div>
                                             </div>
                                         </c:if>
@@ -135,10 +150,13 @@
                                     <div class="user-goods  ">
                                         <div class="col-md-3">
                                             <div class="user-goods-image">
-                                                <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg"
+                                                     alt=" " class="img-rounded" width="125px" height="125px"/>
                                             </div>
                                             <br>
-                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
+                                            <h4><a class="item_add"
+                                                   href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a>
+                                            </h4>
                                         </div>
                                         <div class="col-md-9">
                                             <h3>于2023年5月3299购入的电脑</h3>
@@ -147,9 +165,12 @@
                                             <h3 class="money display-3">￥ 2899</h3>
                                             <br>
                                             <h4 class="date">2023年12月</h4>
-                                            <button type="button " class="btn btn-outline-light pull-right  ">删除</button>
-                                            <button type="button " class="btn btn-outline-light pull-right ">编辑</button>
-                                            <button type="button " class="btn btn-outline-light pull-right  ">降价</button>
+                                            <button type="button " class="btn btn-outline-light pull-right  ">删除
+                                            </button>
+                                            <button type="button " class="btn btn-outline-light pull-right ">编辑
+                                            </button>
+                                            <button type="button " class="btn btn-outline-light pull-right  ">降价
+                                            </button>
 
                                         </div>
                                     </div>
@@ -158,10 +179,13 @@
                                             <div class="user-goods  ">
                                                 <div class="col-md-3">
                                                     <div class="user-goods-image">
-                                                        <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                        <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg"
+                                                             alt=" " class="img-rounded" width="125px" height="125px"/>
                                                     </div>
                                                     <br>
-                                                    <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
+                                                    <h4><a class="item_add"
+                                                           href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a>
+                                                    </h4>
                                                 </div>
                                                 <div class="col-md-9">
                                                     <h3>${goods.goodsName}</h3>
@@ -170,9 +194,15 @@
                                                     <h3 class="money display-3">${goods.price}</h3>
                                                     <br>
                                                     <h4 class="date">${goods.description}</h4>
-                                                    <button type="button " class="btn btn-outline-light pull-right  ">删除</button>
-                                                    <button type="button " class="btn btn-outline-light pull-right ">编辑</button>
-                                                    <button type="button " class="btn btn-outline-light pull-right  ">降价</button>
+                                                    <button type="button " class="btn btn-outline-light pull-right  ">
+                                                        删除
+                                                    </button>
+                                                    <button type="button " class="btn btn-outline-light pull-right ">
+                                                        编辑
+                                                    </button>
+                                                    <button type="button " class="btn btn-outline-light pull-right  ">
+                                                        降价
+                                                    </button>
                                                 </div>
                                             </div>
                                         </c:if>
@@ -182,10 +212,13 @@
                                     <div class="user-goods  ">
                                         <div class="col-md-3">
                                             <div class="user-goods-image">
-                                                <img src="${pageContext.request.getContextPath()}/static/images/2021301455.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                <img src="${pageContext.request.getContextPath()}/static/images/2021301455.jpg"
+                                                     alt=" " class="img-rounded" width="125px" height="125px"/>
                                             </div>
                                             <br>
-                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
+                                            <h4><a class="item_add"
+                                                   href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a>
+                                            </h4>
                                         </div>
                                         <div class="col-md-9">
                                             <h3>于2023年5月3299购入的电脑</h3>
@@ -202,10 +235,13 @@
                                             <div class="user-goods  ">
                                                 <div class="col-md-3">
                                                     <div class="user-goods-image">
-                                                        <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                        <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg"
+                                                             alt=" " class="img-rounded" width="125px" height="125px"/>
                                                     </div>
                                                     <br>
-                                                    <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
+                                                    <h4><a class="item_add"
+                                                           href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a>
+                                                    </h4>
                                                 </div>
                                                 <div class="col-md-9">
                                                     <h3>${goods.goodsName}</h3>
@@ -223,70 +259,67 @@
                                 </c:if>
 
 
-
-
-
-                            <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">1</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem2">--%>
-                                        <%--<td class="invert">2</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">羽毛球拍</a></td>--%>
-                                        <%--<td class="invert">日用百货：运动类</td>--%>
-                                        <%--<td class="invert">&yen128.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem3">--%>
-                                        <%--<td class="invert">3</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">小米头戴式耳机</a></td>--%>
-                                        <%--<td class="invert">娱乐：电子产品</td>--%>
-                                        <%--<td class="invert">&yen499.00</td>--%>
-                                        <%--<td class="invert">已审核 </td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">4</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">5</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">6</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">7</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                    </table>
-                                </div>
+                                <%--<tr class="rem1">--%>
+                                <%--<td class="invert">1</td>--%>
+                                <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                <%--<td class="invert">图书书籍</td>--%>
+                                <%--<td class="invert">&yen168.00</td>--%>
+                                <%--<td class="invert">已审核</td>--%>
+                                <%--</tr>--%>
+                                <%--<tr class="rem2">--%>
+                                <%--<td class="invert">2</td>--%>
+                                <%--<td class="invert-image"><a href="single.html">羽毛球拍</a></td>--%>
+                                <%--<td class="invert">日用百货：运动类</td>--%>
+                                <%--<td class="invert">&yen128.00</td>--%>
+                                <%--<td class="invert">已审核</td>--%>
+                                <%--</tr>--%>
+                                <%--<tr class="rem3">--%>
+                                <%--<td class="invert">3</td>--%>
+                                <%--<td class="invert-image"><a href="single.html">小米头戴式耳机</a></td>--%>
+                                <%--<td class="invert">娱乐：电子产品</td>--%>
+                                <%--<td class="invert">&yen499.00</td>--%>
+                                <%--<td class="invert">已审核 </td>--%>
+                                <%--</tr>--%>
+                                <%--<tr class="rem1">--%>
+                                <%--<td class="invert">4</td>--%>
+                                <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                <%--<td class="invert">图书书籍</td>--%>
+                                <%--<td class="invert">&yen168.00</td>--%>
+                                <%--<td class="invert">已审核</td>--%>
+                                <%--</tr>--%>
+                                <%--<tr class="rem1">--%>
+                                <%--<td class="invert">5</td>--%>
+                                <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                <%--<td class="invert">图书书籍</td>--%>
+                                <%--<td class="invert">&yen168.00</td>--%>
+                                <%--<td class="invert">已审核</td>--%>
+                                <%--</tr>--%>
+                                <%--<tr class="rem1">--%>
+                                <%--<td class="invert">6</td>--%>
+                                <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                <%--<td class="invert">图书书籍</td>--%>
+                                <%--<td class="invert">&yen168.00</td>--%>
+                                <%--<td class="invert">已审核</td>--%>
+                                <%--</tr>--%>
+                                <%--<tr class="rem1">--%>
+                                <%--<td class="invert">7</td>--%>
+                                <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
+                                <%--<td class="invert">图书书籍</td>--%>
+                                <%--<td class="invert">&yen168.00</td>--%>
+                                <%--<td class="invert">已审核</td>--%>
+                                <%--</tr>--%>
+                                </table>
                             </div>
                         </div>
+                    </div>
                 </div>
-                    <div class="clearfix"> </div>
-                </div>
-
-                <div class="clearfix"> </div>
+                <div class="clearfix"></div>
             </div>
+
+            <div class="clearfix"></div>
         </div>
     </div>
+</div>
 <%--        <div class="col-md-7  products-left">--%>
 <%--            <div class="col-md-10 categories animated wow slideInUp single-right-left simpleCart_shelfItem animated wow slideInRight" data-wow-delay=".5s">--%>
 <%--                <h4><span class="item_price">基本信息</span></h4>--%>
@@ -313,113 +346,11 @@
 <%--            </div>--%>
 <%--            <div class="clearfix"> </div>--%>
 <%--        </div>--%>
-        <div class="clearfix"> </div>
-    </div>
+<div class="clearfix"></div>
+</div>
 </div>
 <!-- -->
 
-<!-- checkout -->
-<%--<div class="checkout">--%>
-<%--    <div class="container">--%>
-<%--        <h3 class="animated wow slideInLeft" data-wow-delay=".5s">--%>
-<%--            <c:if test="${status == 1}">已审核: </c:if>--%>
-<%--            <c:if test="${status == 0}">待审核: </c:if>--%>
-<%--            <span>${goodsList.size()} 件商品</span></h3>--%>
-<%--        <div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">--%>
-<%--            <table class="timetable_sub">--%>
-<%--                <thead>--%>
-<%--                <tr>--%>
-<%--                    <th>序号</th>--%>
-<%--                    <th>商品名称</th>--%>
-<%--                    <!--<th>速度快放假</th>-->--%>
-<%--                    <th>商品分类</th>--%>
-<%--                    <th>价格</th>--%>
-<%--                    <th>状态</th>--%>
-<%--                    <th>商品状态</th>--%>
-<%--                    <!--<th>Remove</th>-->--%>
-<%--                </tr>--%>
-<%--                </thead>--%>
-
-<%--                <c:forEach items="${goodsList}" var="goods" varStatus="vs">--%>
-<%--                    <tr class="rem1">--%>
-<%--                        <td class="invert">${vs.index + 1}</td>--%>
-<%--                        <td class="invert-image"><a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">${goods.goodsName}</a></td>--%>
-<%--                        <td class="invert">--%>
-<%--                            <c:if test="${goods.cate == '1'}">图书书籍</c:if>--%>
-<%--                            <c:if test="${goods.cate == '2'}">日用百货</c:if>--%>
-<%--                            <c:if test="${goods.cate == '3'}">娱乐</c:if>--%>
-<%--                        </td>--%>
-<%--                        <td class="invert">&yen${goods.price}</td>--%>
-<%--                        <td class="invert">--%>
-<%--                            <c:if test="${goods.status == 0}">待审核</c:if>--%>
-<%--                            <c:if test="${goods.status == 1}">已审核</c:if>--%>
-<%--                        </td>--%>
-<%--                        <td class="invert">--%>
-<%--                            <select <c:if test="${goods.status == 0}">disabled</c:if> id="checkGoodsStatus${vs.index+1}" name="checkGoodsStatus${vs.index+1}" onchange="SelectChange('checkGoodsStatus${vs.index+1}')">--%>
-<%--                                <option value="0.${goods.id}" <c:if test="${goods.goodsStatus == 0}">selected</c:if>>未出售</option>--%>
-<%--                                <option value="1.${goods.id}" <c:if test="${goods.goodsStatus == 1}">selected</c:if>>已出售</option>--%>
-<%--                            </select>--%>
-
-
-<%--                        </td>--%>
-<%--                    </tr>--%>
-<%--                </c:forEach>--%>
-
-
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">1</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem2">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">2</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">羽毛球拍</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">日用百货：运动类</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen128.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem3">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">3</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">小米头戴式耳机</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">娱乐：电子产品</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen499.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核 </td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">4</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">5</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">6</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">7</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--            </table>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<!-- //checkout -->
 
 <!--&lt;!&ndash; banner-bottom &ndash;&gt;-->
 <div class="banner-bottom">
@@ -429,11 +360,13 @@
             <div class="banner-bottom-grid-left animated wow slideInLeft" data-wow-delay=".5s">
                 <div class="grid">
                     <figure class="effect-julia">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp1.jpg" alt=" " class="img-responsive" />
+                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp1.jpg" alt=" "
+                             class="img-responsive"/>
                     </figure>
                     <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
                         <div class="banner-bottom-grid-left-grid1">
-                            <img src="${pageContext.request.getContextPath()}/static/images/rmsp2.jpg" alt=" " class="img-responsive" />
+                            <img src="${pageContext.request.getContextPath()}/static/images/rmsp2.jpg" alt=" "
+                                 class="img-responsive"/>
                         </div>
                         <div class="banner-bottom-grid-left1-position">
                             <div class="banner-bottom-grid-left1-pos1">
@@ -447,7 +380,8 @@
             <div class="banner-bottom-grid-left1 animated wow slideInUp" data-wow-delay=".5s">
                 <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
                     <div class="banner-bottom-grid-left-grid1">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp3.jpg" alt=" " class="img-responsive" />
+                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp3.jpg" alt=" "
+                             class="img-responsive"/>
                     </div>
                     <div class="banner-bottom-grid-left1-pos">
                         <p>Discount 45%</p>
@@ -455,7 +389,8 @@
                 </div>
                 <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
                     <div class="banner-bottom-grid-left-grid1">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp4.jpg" alt=" " class="img-responsive" />
+                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp4.jpg" alt=" "
+                             class="img-responsive"/>
                     </div>
                     <div class="banner-bottom-grid-left1-position">
                         <div class="banner-bottom-grid-left1-pos1">
@@ -468,7 +403,8 @@
             <div class="banner-bottom-grid-right animated wow slideInRight" data-wow-delay=".5s">
                 <div class="banner-bottom-grid-left-grid grid-left-grid1">
                     <div class="banner-bottom-grid-left-grid1">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp5.jpg" alt=" " class="img-responsive" />
+                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp5.jpg" alt=" "
+                             class="img-responsive"/>
                         <!--<img src="images/3.jpg" alt=" " class="img-responsive" />-->
                     </div>
                     <div class="grid-left-grid1-pos">
@@ -477,7 +413,8 @@
                 </div>
                 <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
                     <div class="banner-bottom-grid-left-grid1">
-                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp6.jpg" alt=" " class="img-responsive" />
+                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp6.jpg" alt=" "
+                             class="img-responsive"/>
                     </div>
                     <div class="banner-bottom-grid-left1-position">
                         <div class="banner-bottom-grid-left1-pos1">
@@ -487,7 +424,7 @@
                 </div>
             </div>
 
-            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>
