@@ -287,41 +287,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="header-grid-right" href="${pageContext.request.contextPath}/views/sports">更多 >></a>
             </h2>
             <c:forEach items="${storeList}" var="goods">
-            <div class="col-md-3 new-collections-grid">
-                <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
-                    <div class="new-collections-grid1-image">
-                        <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" alt=" " class="img-responsive" /></a>
-                        <div class="new-collections-grid1-image-pos">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">Quick View</a>
-                        </div>
-                        <div class="new-collections-grid1-right">
-                            <div class="rating">
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                <div class="col-md-3 new-collections-grid">
+                    <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                        <div class="new-collections-grid1-image">
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" alt=" " class="img-responsive" /></a>
+                            <div class="new-collections-grid1-image-pos">
+                                <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">Quick View</a>
+                            </div>
+                            <div class="new-collections-grid1-right">
+                                <div class="rating">
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="clearfix"> </div>
                                 </div>
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
-                                </div>
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
-                                </div>
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
-                                </div>
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
-                                </div>
-                                <div class="clearfix"> </div>
                             </div>
                         </div>
-                    </div>
-                    <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">${goods.goodsName}</a></h4>
-                    <p>生活类</p>
-                    <div class="new-collections-grid1-left simpleCart_shelfItem">
-                        <p><span class="item_price">￥${goods.price}</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">立即查看 </a></p>
+                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">${goods.goodsName}</a></h4>
+                        <p>生活类</p>
+                        <div class="new-collections-grid1-left simpleCart_shelfItem">
+                            <p><span class="item_price">￥${goods.price}</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">立即查看 </a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
             </c:forEach>
             <div class="col-md-3 new-collections-grid">
@@ -444,41 +444,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="header-grid-right" href="${pageContext.request.contextPath}/views/beautymakeup.jsp">更多 >></a>
             </h2>
             <c:forEach items="${amazeList}" var="goods">
-            <div class="col-md-3 new-collections-grid">
-                <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
-                    <div class="new-collections-grid1-image">
-                        <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" alt=" " class="img-responsive" /></a>
-                        <div class="new-collections-grid1-image-pos">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">Quick View</a>
-                        </div>
-                        <div class="new-collections-grid1-right">
-                            <div class="rating">
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                <div class="col-md-3 new-collections-grid">
+                    <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                        <div class="new-collections-grid1-image">
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}" class="product-image"><img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}" alt=" " class="img-responsive" /></a>
+                            <div class="new-collections-grid1-image-pos">
+                                <a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">Quick View</a>
+                            </div>
+                            <div class="new-collections-grid1-right">
+                                <div class="rating">
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="clearfix"> </div>
                                 </div>
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
-                                </div>
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
-                                </div>
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
-                                </div>
-                                <div class="rating-left">
-                                    <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
-                                </div>
-                                <div class="clearfix"> </div>
                             </div>
                         </div>
-                    </div>
-                    <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">${goods.goodsName}</a></h4>
-                    <p>运动类</p>
-                    <div class="new-collections-grid1-left simpleCart_shelfItem">
-                        <p><span class="item_price">￥${goods.price}</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">立即查看 </a></p>
+                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">${goods.goodsName}</a></h4>
+                        <p>运动类</p>
+                        <div class="new-collections-grid1-left simpleCart_shelfItem">
+                            <p><span class="item_price">￥${goods.price}</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">立即查看 </a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
             </c:forEach>
 
             <div class="col-md-3 new-collections-grid">
