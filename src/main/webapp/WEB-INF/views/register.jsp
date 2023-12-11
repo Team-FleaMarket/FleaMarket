@@ -26,10 +26,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //for-mobile-apps -->
     <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.css" rel="stylesheet" type="text/css"
           media="all"/>
-    <%-- <link href="${pageContext.request.getContextPath()}/static/css/style.css" rel="stylesheet" type="text/css"
-           media="all"/>--%>
     <link href="${pageContext.request.contextPath}/static/css/register.css" rel="stylesheet" type="text/css"
-          media="all">
+          media="all"/>
     <!-- js -->
     <script src="${pageContext.request.getContextPath()}/static/js/jquery.min.js"></script>
     <!-- //js -->
@@ -78,7 +76,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <h3 class="animated wow zoomIn" data-wow-delay=".5s">注册</h3>
         <p class="est animated wow zoomIn" data-wow-delay=".5s">Sign up for your special account...</p>
-        <div class="login-form-grids form-grids">
+        <div class="form-grids">
             <%-- <h5 class="animated wow slideInUp" data-wow-delay=".5s">基本信息</h5>--%>
             <form action="${pageContext.request.contextPath}/user/registeruser" id="form"
                   class="animated wow slideInUp" data-wow-delay=".5s">

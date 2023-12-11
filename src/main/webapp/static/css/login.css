@@ -59,7 +59,7 @@
     color: #222;
     margin: 0;
     position: relative;
-    font-size: 2.6em;
+    font-size: 1.5em;
 }
 
 .login h3:before, .login h3:after {
@@ -79,14 +79,14 @@
     right: 22%;
 }
 
-.login form-grids {
+.login .form-grids {
     /*width: 45%;*/
     /* padding-bottom: 2em;*/
     padding-top: 1em;
     /*margin: 3em auto 0;*/
 }
 
-.login form-grids input[type="email"], .login form-grids input[type="password"], .login form-grids input[type="text"] {
+.login .form-grids input[type="email"], .login .form-grids input[type="password"], .login .form-grids input[type="text"] {
     outline: none;
     border: 1px solid #DBDBDB;
     padding: 10px 10px 10px 45px;
@@ -97,20 +97,20 @@
     margin: 1.5em auto 0;
 }
 
-.login form-grids input[type="email"] {
+.login .form-grids input[type="email"] {
     background: url(../images/img-sp.png) no-repeat 5px -182px #fff;
 }
 
-.login form-grids input[type="password"] {
+.login .form-grids input[type="password"] {
     background: url(../images/img-sp.png) no-repeat 5px -220px #fff;
     /*margin: 1.5em 0 0;*/
 }
 
-.login form-grids input[type="submit"] {
+.login .form-grids input[type="submit"] {
     outline: none;
     border: none;
-    padding: 10px 0;
-    font-size: 1em;
+    padding: 0.5em 0;
+    font-size: 0.8em;
     color: #fff;
     display: block;
     width: 40%;
@@ -119,26 +119,26 @@
     border-radius: 3em;
 }
 
-.login form-grids input[type="submit"]:hover {
+.login .form-grids input[type="submit"]:hover {
     background: #d8703f;
 }
 
-.login form-grids ::-webkit-input-placeholder {
+.login .form-grids ::-webkit-input-placeholder {
     color: #999;
 }
 
-.login form-grids h5, .login form-grids h6 {
+.login .form-grids h5, .login .form-grids h6 {
     font-size: 1em;
     color: #212121;
     text-transform: uppercase;
     margin: 0 0 2em;
 }
 
-.login form-grids input[type="text"] {
+.login .form-grids input[type="text"] {
     background: url(../images/img-sp.png) no-repeat 5px -259px #fff;
 }
 
-.login form-grids input[type="text"]:nth-child(2) {
+.login .form-grids input[type="text"]:nth-child(2) {
     background: url(../images/img-sp.png) no-repeat 0px -298px #fff;
     /*margin: 1em 0;*/
 }
@@ -149,7 +149,7 @@
     color: #999;
 }
 
-.login form-grids h6 {
+.login .form-grids h6 {
     margin: 3em 0 2em !important;
 }
 
@@ -187,9 +187,6 @@
         padding: 4em 0;
     }
 
-    .login h3 {
-        font-size: 1.2em;
-    }
 
 }
 
@@ -198,15 +195,12 @@
 
 @media (max-width: 991px) {
 
-    .login h3 {
-        font-size: 2em;
-    }
 
     .login {
         padding: 3em 0;
     }
 
-    .login-form-grids {
+    .login .form-grids {
         width: 75%;
     }
 
@@ -255,10 +249,6 @@
 
 @media (max-width: 480px) {
 
-    .login h3 {
-        font-size: 1.8em;
-    }
-
     .login h3:before, .login h3:after {
         width: 20%;
     }
@@ -275,7 +265,7 @@
         right: 8%;
     }
 
-    .login-form-grids {
+    .login .form-grids {
         width: 95%;
         margin: 2em auto 0;
         padding: 2em;
@@ -290,10 +280,6 @@
 
 @media (max-width: 414px) {
 
-    .login h3 {
-        font-size: 1.6em;
-    }
-
 }
 
 @media (max-width: 384px) {
@@ -302,11 +288,7 @@
 
 @media (max-width: 375px) {
 
-    .login h3 {
-        font-size: 1.5em;
-    }
-
-    .login-form-grids {
+    .login .form-grids {
         width: 100%;
         padding: 1em;
     }
@@ -319,24 +301,24 @@
         font-size: 1.3em;
     }
 
-    .login-form-grids h5, .login-form-grids h6 {
+    .login .form-grids h5, .login .form-grids h6 {
         margin: 0 0 1.5em;
     }
 
-    .login-form-grids {
+    .login .form-grids {
         margin: 1.5em auto 0;
 
     }
 
-    .login-form-grids input[type="email"], .login-form-grids input[type="password"], .login-form-grids input[type="text"] {
+    .login .form-grids input[type="email"], .login .form-grids input[type="password"], .login .form-grids input[type="text"] {
         font-size: 13px;
     }
 
-    .login-form-grids h6 {
+    .login .form-grids h6 {
         margin: 2em 0 1.5em !important;
     }
 
-    .login-form-grids input[type="submit"] {
+    .login .form-grids input[type="submit"] {
         font-size: 14px;
     }
 

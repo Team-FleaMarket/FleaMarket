@@ -249,7 +249,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="col-lg-6 col-md-6 login-area">
             <h3 class="animated wow zoomIn" data-wow-delay=".5s">登录</h3>
             <p class="est animated wow zoomIn" data-wow-delay=".5s">Login to your account...</p>
-            <div class="login-form-grids form-grids animated wow slideInUp" data-wow-delay=".5s">
+            <div class="form-grids animated wow slideInUp" data-wow-delay=".5s">
                 <form action="${pageContext.request.getContextPath()}/user/login" id="form"
                       class="animated wow slideInUp"
                       data-wow-delay=".5s">

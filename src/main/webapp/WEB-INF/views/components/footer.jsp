@@ -11,14 +11,20 @@
     <title>footer</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Best Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-    function hideURLbar(){ window.scrollTo(0,1); } </script>
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
     <!-- //for-mobile-apps -->
-    <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${pageContext.request.getContextPath()}/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.css" rel="stylesheet" type="text/css"
+          media="all"/>
+    <%--    <link href="${pageContext.request.getContextPath()}/static/css/style.css" rel="stylesheet" type="text/css" media="all" />--%>
     <!-- js -->
     <script src="${pageContext.request.getContextPath()}/static/js/jquery.min.js"></script>
     <!-- //js -->
@@ -26,12 +32,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="${pageContext.request.getContextPath()}/static/js/simpleCart.min.js"></script>
     <!-- cart -->
     <!-- for bootstrap working -->
-    <script type="text/javascript" src="${pageContext.request.getContextPath()}/static/js/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.getContextPath()}/static/js/bootstrap-3.1.1.min.js"></script>
     <!-- //for bootstrap working -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+          rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
     <!-- timer -->
-    <link rel="stylesheet" href="${pageContext.request.getContextPath()}/static/css/jquery.countdown.css" />
+    <link rel="stylesheet" href="${pageContext.request.getContextPath()}/static/css/jquery.countdown.css"/>
     <!-- //timer -->
     <!-- animation-effect -->
     <link href="${pageContext.request.getContextPath()}/static/css/animate.min.css" rel="stylesheet">
@@ -58,41 +67,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
                 <h3>联系我们</h3>
                 <ul>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">张旱文 12345678900@example.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">徐孟达 dxxmda@126.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">许多 13817717084@163.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">熊凯丽 65356789011@example.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">张乐乐 lelesunshine614@gmail.com</a></li>
+                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                            href="mailto:info@example.com">张旱文 12345678900@example.com</a></li>
+                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                            href="mailto:info@example.com">徐孟达 dxxmda@126.com</a></li>
+                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                            href="mailto:info@example.com">许多 13817717084@163.com</a></li>
+                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                            href="mailto:info@example.com">熊凯丽 65356789011@example.com</a></li>
+                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                            href="mailto:info@example.com">张乐乐 lelesunshine614@gmail.com</a></li>
                 </ul>
             </div>
 
             <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".7s">
                 <h3>Partners</h3>
                 <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
+                    <a href="http://www.shnu.edu.cn/"><img
+                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                            class="img-responsive"/></a>
                 </div>
                 <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
+                    <a href="http://www.shnu.edu.cn/"><img
+                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                            class="img-responsive"/></a>
                 </div>
                 <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
+                    <a href="http://www.shnu.edu.cn/"><img
+                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                            class="img-responsive"/></a>
                 </div>
                 <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
+                    <a href="http://www.shnu.edu.cn/"><img
+                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                            class="img-responsive"/></a>
                 </div>
                 <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
+                    <a href="http://www.shnu.edu.cn/"><img
+                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                            class="img-responsive"/></a>
                 </div>
                 <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
+                    <a href="http://www.shnu.edu.cn/"><img
+                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
+                            class="img-responsive"/></a>
                 </div>
 
 
-
-                <div class="clearfix"> </div>
+                <div class="clearfix"></div>
             </div>
 
-            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
         </div>
         <div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
             <h2><a href="index.jsp">GoodsWill <span>shop anywhere</span></a></h2>
