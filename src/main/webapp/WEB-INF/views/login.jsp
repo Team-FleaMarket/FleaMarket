@@ -26,8 +26,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //for-mobile-apps -->
     <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.css" rel="stylesheet" type="text/css"
           media="all"/>
-    <link href="${pageContext.request.getContextPath()}/static/css/style.css" rel="stylesheet" type="text/css"
-          media="all"/>
+    <%-- <link href="${pageContext.request.getContextPath()}/static/css/style.css" rel="stylesheet" type="text/css"
+           media="all"/>--%>
     <link href="${pageContext.request.contextPath}/static/css/login.css" rel="stylesheet" type="text/css">
     <!-- js -->
     <script src="${pageContext.request.getContextPath()}/static/js/jquery.min.js"></script>
