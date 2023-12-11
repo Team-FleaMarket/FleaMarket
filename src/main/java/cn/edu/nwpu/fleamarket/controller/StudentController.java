@@ -2,11 +2,14 @@ package cn.edu.nwpu.fleamarket.controller;
 
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.StudentService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: Hanwen
@@ -26,19 +32,24 @@ public class StudentController {
     @Autowired
     private StudentService userService;
 
-
-    @RequestMapping("/loginPage")
-    public ModelAndView loginPage(HttpServletRequest request)throws Exception{
-        ModelAndView modelAndView = new ModelAndView();
-        request.getSession().setAttribute("active","home");
-        modelAndView.setViewName("login");
-        return modelAndView;
+    @PostMapping("/login")
+    public ResponseEntity<?> login(HttpServletRequest request, @RequestBody Student student) throws Exception{
+        Student databaseStudent = userService.loginStudent(student);
+        if (databaseStudent == null) {
+            return ResponseEntity.badRequest().body("用户名或密码错误！");
+        }
+        request.getSession().setAttribute("student", databaseStudent);
+        return ResponseEntity.ok("登陆成功！");
     }
 
-    @RequestMapping("/home")
-    public void home(HttpServletRequest request, HttpServletResponse response)throws Exception{
-        request.getSession().setAttribute("active","home");
-        request.getRequestDispatcher("/home.jsp").forward(request,response);
+    @RequestMapping("/register")
+    public ResponseEntity<?> register(HttpServletRequest request, @RequestBody Student student) throws Exception{
+        Student databaseStudent = userService.registerStudent(student);
+        if (databaseStudent != null) {
+            return ResponseEntity.badRequest().body("该学号已经被注册！");
+        }
+        request.getSession().setAttribute("student", student);
+        return ResponseEntity.ok("注册成功！");
     }
 
     public static boolean isJson(String value) {
@@ -93,18 +104,6 @@ public class StudentController {
         return jsonObject.toString();
     }*/
 
-    @PostMapping("/login")
-    public String login(HttpServletRequest request, @ModelAttribute Student student, Model model) throws Exception{
-        boolean loginSuccess = userService.loginStudent(student);
-        System.out.println("studentlogin");
-
-        if (!loginSuccess) {
-            model.addAttribute("error", "用户名或密码错误！");
-            return "login";
-        }
-        request.getSession().setAttribute("student",student);
-        return "redirect:/home";
-    }
 
 
 
@@ -269,26 +268,10 @@ public class StudentController {
 
 
    */
-/* @RequestMapping("/registeruser")
-    public ModelAndView registeruser(HttpServletRequest request, User user) throws Exception{
-        ModelAndView modelAndView=new ModelAndView();
-        user.setUserName(new String(user.getUserName().getBytes("iso-8859-1"),"utf-8"));
-        if(user != null) {
-            userService.addStudent(user);
-        }
-        request.getSession().setAttribute("user",user);
-        modelAndView.setViewName("index");
-        return modelAndView;
-    }*//*
 
 
-    @RequestMapping("/register")
-    public ModelAndView register() throws Exception{
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("register");
-        return modelAndView;
-    }
 
+/*
     @RequestMapping("passwordSet")
     public ModelAndView passwordSet(HttpServletRequest request){
         ModelAndView modelAndView= new ModelAndView();

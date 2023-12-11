@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface GoodsDao {
 
-    List<Goods> selectAll();
+    List<Goods> selectAllGoods();
+    Integer selectCountByCateList(List<Integer> cateList);
     List<Goods> selectByStatus(int status);
     List<Goods> selectByStudentNo(String studentNo);
     Goods selectById(int id);
-
     void insertGoods(Goods goods);
     void deleteGoods(int id);
     void updateGoods(Goods goods);

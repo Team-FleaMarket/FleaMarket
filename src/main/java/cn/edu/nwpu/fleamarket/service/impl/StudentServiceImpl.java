@@ -18,25 +18,25 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     @Override
-    public boolean registerStudent(Student student) {
+    public Student registerStudent(Student student) {
         Student dataBaseStudent = studentDao.selectStudentByStudentNo(student.getStudentNo());
         // 若学号已被注册
         if (dataBaseStudent != null) {
-            return false;
+            return dataBaseStudent;
         }
         studentDao.addStudent(student);
-        return true;
+        return null;
     }
 
     @Override
-    public boolean loginStudent(Student student) {
+    public Student loginStudent(Student student) {
         System.out.println(student.getStudentNo());
         Student dataBaseStudent = studentDao.selectStudentByStudentNo(student.getStudentNo());
         // 若根据学号获取到的学生未空，则学号不存在，需要先去注册 || 判断密码，如果密码不相等，则错误
         if (dataBaseStudent == null || !dataBaseStudent.getPassword().equals(student.getPassword())) {
-            return false;
+            return null;
         }
-        return true;
+        return dataBaseStudent;
     }
 
     @Override

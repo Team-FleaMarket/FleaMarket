@@ -8,9 +8,9 @@ import cn.edu.nwpu.fleamarket.pojo.Student;
  */
 public interface StudentService {
     // 注册
-    boolean registerStudent(Student student);
+    Student registerStudent(Student student);
     // 登录
-    boolean loginStudent(Student student);
+    Student loginStudent(Student student);
 
     // 更新个人信息
     boolean updateName(Student student);

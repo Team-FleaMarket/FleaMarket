@@ -15,7 +15,7 @@
 
     <!-- ADD -->
     <insert id="addStudent" parameterType="cn.edu.nwpu.fleamarket.pojo.Student">
-        INSERT INTO users (student_no, name, phone, email, wechat, `password`)
+        INSERT INTO students (student_no, name, phone, email, wechat, `password`)
         VALUES (#{studentNo}, #{name}, #{phone}, #{email}, #{wechat},#{password});
     </insert>
 

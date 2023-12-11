@@ -3,6 +3,7 @@ package cn.edu.nwpu.fleamarket.pojo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  * @Author: Hanwen
@@ -11,7 +12,7 @@ import java.util.Date;
 
 @Setter
 @Getter
-public class Student {
+public class Student implements Serializable {
     private Integer id;
     private String studentNo;
     private String name;

@@ -12,36 +12,7 @@
 <html>
 <head>
     <title>管理中心</title>
-    <!-- for-mobile-apps -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Best Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-    function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- //for-mobile-apps -->
-    <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${pageContext.request.getContextPath()}/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- js -->
-    <script src="${pageContext.request.getContextPath()}/static/js/jquery.min.js"></script>
-    <!-- //js -->
-    <!-- cart -->
-    <script src="${pageContext.request.getContextPath()}/static/js/simpleCart.min.js"> </script>
-    <!-- cart -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.getContextPath()}/static/css/jquery-ui.css">
-    <!-- for bootstrap working -->
-    <script type="text/javascript" src="${pageContext.request.getContextPath()}/static/js/bootstrap-3.1.1.min.js"></script>
-    <!-- //for bootstrap working -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <!-- animation-effect -->
-    <link href="${pageContext.request.getContextPath()}/static/css/animate.min.css" rel="stylesheet">
-    <script src="${pageContext.request.getContextPath()}/static/js/wow.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
-
-
+    <%@ include file="components/jspheader.jsp"%>
     <script language="JavaScript">
         // $(document).ready(function() {
         //     //绑定下拉框change事件，当下来框改变时调用 SelectChange()方法
@@ -73,7 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
-    <%@ include file="/WEB-INF/views/components/header.jsp"%>
+    <%@ include file="./components/header.jsp"%>
     <div class="single">
     <div class="container">
         <div class="">
@@ -83,28 +54,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="information col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
                         <form >
                             <div class="self_information">
-                                <img src="${pageContext.request.contextPath}/static/images/${sessionScope.user.studentNo}.jpg" alt=" " class="img_self img-circle center-block" >
+                                <img src="${pageContext.request.contextPath}/static/images/${sessionScope.student.studentNo}.jpg" alt=" " class="img_self img-circle center-block" >
                             </div>
                             <br>
-                            <h4>学号：${sessionScope.user.studentNo}</h4>
+                            <h4>学号：${sessionScope.student.studentNo}</h4>
                             <br>
-                            <h4>昵称：${sessionScope.user.userName}</h4><h2></h2>
+                            <h4>昵称：${sessionScope.student.name}</h4><h2></h2>
                             <br>
-                            <h4>微信号：${sessionScope.user.wechat}</h4><h4></h4>
+                            <h4>微信号：${sessionScope.student.wechat}</h4><h4></h4>
                             <br>
-                            <h4>手机号：${sessionScope.user.phone}</h4><h4></h4>
+                            <h4>手机号：${sessionScope.student.phone}</h4><h4></h4>
                             <br>
-                            <h4>邮箱：${sessionScope.user.email}</h4><h4></h4>
+                            <h4>邮箱：${sessionScope.student.email}</h4><h4></h4>
                         </form>
                     </div>
                 <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
                         <div class="goods">
                             <div class="container">
                                 <div class="status">
-                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=0" >待审核</a> |
-                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=1" >待出售</a> |
-                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=2" >已出售</a> |
-                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=3">我的购买</a> |
+                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=0" >待审核</a> |
+                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=1" >待出售</a> |
+                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=2" >已出售</a> |
+                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=3">我的购买</a> |
                                     <a href="insert">添加商品</a> <span></span>
                                 </div>
                                 <br>
@@ -112,7 +83,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
                                     <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
                                     <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
-
                                 <br>
                                 <c:if test="${status == 0}">
                                     <div class="user-goods  ">
@@ -524,67 +494,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //banner-bottom -->
 
 <!-- footer -->
-<div class="footer">
-    <div class="container">
-        <div class="footer-grids">
-            <!--banner-bottom-grid-left-->
-            <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
-                <h3>关于我们</h3>
-                <p>足不出户获得最全的商品信息，</p>
-                <p>在这里找寻你急需要的商品，</p>
-                <p>在这里找寻你最喜欢的商品，</p>
-                <p>这里有你想要的，这里有你喜欢的，</p>
-                <p>还在等什么，赶快行动起来吧！</p>
-            </div>
-
-            <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
-                <h3>联系我们</h3>
-                <ul>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">张旱文 123456789@qq.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">徐孟达 dxxmda@126.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">许多 13817717084@163.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">熊凯丽 65356789011@qq.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">张乐乐 lelesunshine614@gmail.com</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".7s">
-                <h3>Partners</h3>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" " class="img-responsive" /></a>
-                </div>
-
-
-
-                <div class="clearfix"> </div>
-            </div>
-
-            <div class="clearfix"> </div>
-        </div>
-        <div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
-            <h2><a href="${pageContext.request.getContextPath()}/views/index">GoodsWill <span>shop anywhere</span></a></h2>
-        </div>
-        <div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
-            <p>Copyright &copy; 2018.Company name All rights reserved.
-                <a href="${pageContext.request.getContextPath()}/views/index" target="_blank" >GoodsWill</a>
-        </div>
-    </div>
-</div>
+    <%@ include file="./components/header.jsp"%>
 <!-- //footer -->
 </body>
 </html>
