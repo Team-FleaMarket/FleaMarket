@@ -14,7 +14,7 @@
 <div id="app">
     <div id="container">
         <el-container>
-            <el-header>GoodsWill</el-header>
+            <el-header>FleaMarket</el-header>
             <el-main>
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="1">主页</el-menu-item>
@@ -25,16 +25,26 @@
                 </el-menu>
 
                 <el-row :gutter="20">
-                    <el-col :span="6">
-                        <el-card>
+                    <el-col :span="5">
+                        <!--                        <el-card>-->
+                        <!--                            <div slot="header" class="clearfix">-->
+                        <!--                                <span>欢迎，{{username}}</span>-->
+                        <!--                            </div>-->
+                        <!--                            <el-avatar src="images/default.jpg" size="150"></el-avatar>-->
+                        <!--                            <div style="padding: 14px;">-->
+                        <!--&lt;!&ndash;                                <el-button type="text">个人信息</el-button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <el-button type="text">设置</el-button>&ndash;&gt;-->
+                        <!--                            </div>-->
+                        <!--                        </el-card>-->
+                        <el-card class="box-card">
                             <div slot="header" class="clearfix">
-                                <span>欢迎，{{username}}</span>
+                                <span style="line-height: 36px;">欢迎，{{username}}</span>
                             </div>
-<!--                            <el-avatar src="images/default.jpg"></el-avatar>-->
-                            <img src="images/default.jpg" width="100px" height="100px">
-                            <div style="padding: 14px;">
-<!--                                <el-button type="text">个人信息</el-button>-->
-<!--                                <el-button type="text">设置</el-button>-->
+                            <div style="text-align: center; margin: 14px;">
+                                <el-avatar shape="square" src="images/default.jpg"></el-avatar>
+                            </div>
+                            <div style="padding: 14px; text-align: center;">
+                                <el-button type="primary" icon="el-icon-edit" @click="visible=true" plain>修改密码</el-button>
                             </div>
                         </el-card>
                     </el-col>
@@ -54,6 +64,28 @@
                         </el-card>
                     </el-col>
                 </el-row>
+
+                <el-dialog
+                        title="修改密码"
+                        :visible.sync="visible"
+                        width="30%">
+                    <el-form>
+                        <el-form-item label="原密码">
+                            <el-input type="password" v-model="updatePW.pw"></el-input>
+                        </el-form-item>
+                        <el-form-item label="新密码">
+                            <el-input type="password" v-model="updatePW.npw"></el-input>
+                        </el-form-item>
+                        <el-form-item label="确认新密码">
+                            <el-input type="password" v-model="updatePW.cnpw"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                <el-button @click="cancel">取 消</el-button>
+                <el-button type="primary" @click="update">修 改</el-button>
+            </span>
+                </el-dialog>
+
             </el-main>
             <el-footer>NPU @2023</el-footer>
 
@@ -70,6 +102,12 @@
             return {
                 username: '',
                 activeIndex: '1',
+                visible: false,
+                updatePW: {
+                  pw: '',
+                  npw: '',
+                  cnpw: ''
+                },
                 announcement: {
                     title: '',
                     content: ''
@@ -78,6 +116,44 @@
             };
         },
         methods: {
+            cancel() {
+                this.visible = false;
+                this.updatePW.pw = '';
+                this.updatePW.npw = '';
+                this.updatePW.cnpw = '';
+            },
+            update() {
+                if(this.updatePW.pw === ''|| this.updatePW.npw === '' ||
+                    this.updatePW.cnpw === ''){
+                    this.$message.error('请先输入');
+                    return;
+                }
+                if(this.updatePW.npw !== this.updatePW.cnpw) {
+                    this.$message.error('两次输入的密码不一致');
+                    return;
+                }
+                let params = new URLSearchParams();
+                params.append('username', this.username);
+                params.append('pw', this.updatePW.pw);
+                params.append('npw', this.updatePW.npw);
+                axios.post("/admin/update/pw", params, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then((res=>{
+                    if(res.data === 'ok') {
+                        this.visible = false;
+                        this.$message({
+                            message: '修改成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message.error('密码错误');
+                    }
+                })).catch(err=>{
+                   console.log(err);
+                });
+            },
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
@@ -134,12 +210,12 @@
 
 <style>
     body {
-        background-image: url('images/w.png');
+        background-image: url('images/background.png');
         background-repeat: no-repeat;
         background-size: cover;
     }
 
-    .el-footer{
+    .el-footer {
         position: fixed;
         bottom: 0;
         width: 100%;

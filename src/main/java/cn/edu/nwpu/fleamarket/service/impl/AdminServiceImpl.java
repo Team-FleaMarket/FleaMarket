@@ -17,4 +17,14 @@ public class AdminServiceImpl implements AdminService {
         Admin admin1 = adminDao.login(admin);
         return (admin1 != null);
     }
+
+    @Override
+    public String getPwByUsername(String username) {
+        return adminDao.getPwByUsername(username);
+    }
+
+    @Override
+    public void updatePw(String username, String newPw) {
+        adminDao.updatePw(username, newPw);
+    }
 }
