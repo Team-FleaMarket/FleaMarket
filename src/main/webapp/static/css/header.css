@@ -1,7 +1,7 @@
 .header{
     margin-top: 20px;
 }
-a{
+.header a{
     text-decoration: none;
     color: #1a1e21;
 }
@@ -136,7 +136,7 @@ a{
 .sb-search.sb-search-open .sb-search-submit, .sb-search .sb-search-submit {
     z-index: 90;
 }
-.login{
+.login-button{
     margin-top: 25px;
     font-size:1.5em;
 }

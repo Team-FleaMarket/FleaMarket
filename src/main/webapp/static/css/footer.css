@@ -1,0 +1,411 @@
+html, body {
+    font-size: 100%;
+    background: #fff;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+}
+
+.footer ul, label {
+    margin: 0;
+    padding: 0;
+}
+
+body a:hover {
+    text-decoration: none;
+}
+
+/*-- footer --*/
+.footer {
+    background: #2E2E2E;
+    padding: 3em 0;
+}
+
+ .footer-grid h3{
+    font-size: 2em;
+    color: #fff;
+    margin: 0 0 1em;
+    position: relative;
+    padding-bottom: .5em;
+}
+
+.footer-grid h3:before {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    width: 30%;
+    height: 1px;
+    background: #828282;
+    content: '';
+}
+
+.footer-grid p {
+    font-size: 14px;
+    color: #999;
+    line-height: 1.8em;
+    margin: 0;
+}
+
+.footer-grid p span {
+    display: block;
+    margin: 1em 0 0;
+}
+
+.footer-grid ul li {
+    list-style-type: none;
+    margin-bottom: 1em;
+    color: #999;
+    font-size: 14px;
+}
+
+.footer-grid ul li i {
+    color: #999;
+    border: 1px solid #999;
+    padding: .5em;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -o-border-radius: 100%;
+    -ms-border-radius: 100%;
+    margin-right: 1em;
+}
+
+.footer-grid ul li span {
+    display: block;
+    margin-left: 3em;
+}
+
+.footer-grid ul li a {
+    color: #999;
+    text-decoration: none;
+}
+
+.footer-grid ul li a:hover {
+    color: #fff;
+}
+
+.footer-grid-left {
+    float: left;
+    width: 33.33%;
+    padding: .3em;
+}
+
+.footer-grid-sub-grid-left {
+    float: left;
+    width: 30%;
+}
+
+.footer-grid-sub-grid-right {
+    float: right;
+    width: 62%;
+}
+
+.footer-grid-sub-grid-right h4 a {
+    text-transform: capitalize;
+    font-size: 1em;
+    line-height: 1.5em;
+    color: #999;
+    text-decoration: none;
+}
+
+.footer-grid-sub-grid-right h4 a:hover {
+    color: #fff;
+}
+
+.footer-grid-sub-grid-right p {
+    margin: .5em 0 0;
+    color: #999;
+    font-size: 14px;
+    line-height: 1.8em;
+}
+
+.footer-grid-sub-grids:nth-child(3) {
+    margin: 1em 0 0;
+}
+
+.footer-logo {
+    text-align: center;
+    margin: 3em 0;
+}
+
+.footer-logo h2 a {
+    font-size: 2em;
+    color: #575757;
+    text-decoration: none;
+    position: relative;
+}
+
+.footer-logo h2 {
+    position: relative;
+}
+
+.footer-logo h2 a span {
+    display: block;
+    font-size: .2em;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.footer-logo h2:before, .footer-logo h2:after {
+    content: '';
+    width: 36%;
+    height: 4px;
+    border-top: 1px solid #575757;
+    border-bottom: 1px solid #575757;
+    position: absolute;
+    top: 60%;
+}
+
+.footer-logo h2:before {
+    left: 0%;
+}
+
+.footer-logo h2:after {
+    right: 0%;
+}
+
+.copy-right p {
+    text-align: center;
+    color: #999;
+    margin: 0;
+    line-height: 1.8em;
+}
+
+.copy-right p a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.copy-right p a:hover {
+    color: #999;
+}
+
+/*-- //footer --*/
+
+/*-----start-responsive-design------*/
+@media (max-width: 1080px) {
+
+    .footer-grid h3 {
+        font-size: 1.7em;
+    }
+
+    .footer-grid-sub-grid-right h4 a {
+        font-size: .9em;
+    }
+
+    .footer-logo {
+        margin: 2em 0 3em;
+    }
+
+    .footer-logo h2:before, .footer-logo h2:after {
+        width: 33%;
+    }
+
+    .filter-price h3 {
+        padding: 0 !important;
+    }
+
+    .single-right-left h3 {
+        font-size: 1.8em;
+    }
+
+    .bootstrap-tab-text-grids {
+        margin: 2em 0 0 0em;
+    }
+
+    .checkout-left-basket {
+        width: 40%;
+    }
+
+}
+
+
+@media (max-width: 991px) {
+
+    .box_1 h3 {
+        font-size: 9px;
+    }
+
+    .grid figure {
+        min-width: 238px;
+    }
+
+    figure.effect-julia h3 {
+        font-size: 1.6em;
+    }
+
+    .grid figure h3 i {
+        letter-spacing: 2px;
+    }
+
+    .grid figure figcaption {
+        padding: 1em;
+    }
+
+    .grid figure p {
+        letter-spacing: 0px;
+    }
+
+    h3.title, .mail h3 {
+        font-size: 2em;
+    }
+
+    .footer-grid {
+        float: left;
+        width: 50%;
+    }
+
+    .footer-grid:nth-child(2) {
+        margin-bottom: 2em;
+    }
+
+    .footer-logo h2 a {
+        font-size: 1.8em;
+    }
+
+    .footer-logo h2:before, .footer-logo h2:after {
+        width: 30%;
+    }
+
+    p.est {
+        width: 85%;
+    }
+
+    .mail-grid-right {
+        width: 50%;
+        margin: 2em auto 0;
+    }
+
+    .value-minus, .value-plus {
+        height: 25px;
+        width: 25px;
+        font-size: 10px;
+        margin-right: 0;
+    }
+
+    .value {
+        width: 25px;
+        height: 25px;
+        padding: 4px 0px;
+        line-height: 15px;
+        margin-right: 0;
+    }
+
+    .quantity-select .entry.value-plus:after {
+        height: 6px;
+        top: 60%;
+        margin-top: -4px;
+    }
+
+    .quantity-select .entry.value-minus:before, .quantity-select .entry.value-plus:before {
+        width: 6px;
+        margin-left: -3px;
+    }
+}
+
+@media (max-width: 767px) {
+    .box_1 h3 {
+        font-size: 13px;
+    }
+
+}
+
+@media (max-width: 640px) {
+
+    .footer-logo h2 a {
+        font-size: 1.5em;
+    }
+
+    .imagezoom-view {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .footer-grid h3 {
+        font-size: 1.5em;
+    }
+
+    .footer {
+        padding: 2em 0;
+    }
+
+    .footer-grid {
+        float: none;
+        width: 100%;
+    }
+
+    .footer-grid:nth-child(2) {
+        margin: 2em 0;
+    }
+
+    .footer-grid:nth-child(3) {
+        margin: 0em 0 2em;
+    }
+
+    .footer-grid-sub-grid-right h4 a {
+        font-size: 1.1em;
+    }
+
+    .footer-grid-sub-grid-right {
+        margin: 3em 0 0;
+    }
+
+    .footer-logo h2 a {
+        font-size: 1.3em;
+    }
+
+    .footer-logo h2:before, .footer-logo h2:after {
+        width: 26%;
+    }
+
+    .footer-logo {
+        margin: 2em 0 2em;
+    }
+
+}
+
+@media (max-width: 414px) {
+
+    .footer-grid-sub-grid-right {
+        margin: 1em 0 0;
+    }
+
+}
+
+
+@media (max-width: 320px) {
+    .footer-logo h2 a {
+        font-size: 1.1em;
+    }
+
+    .footer-logo h2:before, .footer-logo h2:after {
+        width: 21%;
+    }
+
+    .footer-grid-sub-grid-right {
+        margin: 0;
+    }
+
+    .footer-grid p span {
+        display: initial;
+        margin: 0;
+    }
+
+    .footer-grid h3 {
+        font-size: 1.3em;
+    }
+
+    .footer-grid, .mail-grid-right {
+        padding: 0;
+    }
+
+}
