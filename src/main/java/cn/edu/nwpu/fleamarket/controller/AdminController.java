@@ -1,9 +1,9 @@
+/*
 package cn.edu.nwpu.fleamarket.controller;
 
 import cn.edu.nwpu.fleamarket.pojo.Goods;
-import cn.edu.nwpu.fleamarket.pojo.User;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
-import cn.edu.nwpu.fleamarket.service.UserService;
+import cn.edu.nwpu.fleamarket.service.StudentService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +14,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+*/
 /**
  * @Author: Hanwen
  * @Date: 2018/6/8 上午9:00
- */
+ *//*
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
-    private UserService userService;
+    private StudentService userService;
     @Autowired
     private GoodsService goodsService;
 
@@ -111,3 +113,4 @@ public class AdminController {
 
 
 }
+*/
