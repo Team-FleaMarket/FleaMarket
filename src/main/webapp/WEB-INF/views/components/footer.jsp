@@ -123,7 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
             <p>Copyright &copy; 2023.FleaMarket All rights reserved.
-                <a href="index.jsp" target="_blank" title="GoodsPass">GoodsWill</a>
+                <a href="index.jsp" target="_blank" title="GoodsPass">FleaMarket</a>
             </p>
         </div>
     </div>

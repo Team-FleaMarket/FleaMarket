@@ -49,6 +49,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <!-- header -->
 <%@ include file="/WEB-INF/views/components/header.jsp"%>
+
+<!-- carousel -->
+<jsp:include page="/WEB-INF/views/components/carousel.jsp" />
+<%--<%@ include file="/WEB-INF/views/components/carousel.jsp"%>--%>
+
 <div class="new-collections">
     <div class="container">
         <h3 class="animated wow zoomIn" data-wow-delay=".2s">商品</h3>
