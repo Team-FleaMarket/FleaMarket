@@ -21,12 +21,7 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private UserService userService;
-    @Autowired
-    private GoodsService goodsService;
-    @Autowired
     private AdminService adminService;
-
 
     @PostMapping("/login")
     public String adminLogin(@RequestBody Admin admin, HttpSession session) {
