@@ -14,6 +14,7 @@ public interface GoodsService {
     List<Goods> selectByStatus(int status);
     List<Goods> selectByStudentNo(String studentNo);
     List<Goods> selectByStatusAndStudentNo(int status, String studentNo);
+    List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo);
     Goods selectById(int id);
 
     void insertGoods(Goods goods);

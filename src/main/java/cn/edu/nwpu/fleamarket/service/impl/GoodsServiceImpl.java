@@ -52,7 +52,13 @@ public class GoodsServiceImpl implements GoodsService{
         goods.setStudentNo(studentNo);
         return goodsDao.selectByStatusAndStudentNo(goods);
     }
-
+    public List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo) {
+        Goods goods = new Goods();
+        goods.setGoodsStatus(goodsStatus);
+        goods.setStudentNo(studentNo);
+        System.out.println("select");
+        return goodsDao.selectByGoodsStatusAndStudentNo(goods);
+    }
     public void updateGoodsStatus(Goods goods) {
         goodsDao.updateGoodsStatus(goods);
     }

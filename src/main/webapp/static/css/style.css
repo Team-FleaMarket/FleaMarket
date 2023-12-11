@@ -1,6 +1,28 @@
+.information
+{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    /*width: 20%;*/
+    padding: 20px;
+    /*margin-right: 10px;*/
+    height: 70%;
+}
+.self_information
+{
+    text-align: center;
+    /*justify-self: center;*/
+}
+.img_self{
+    display: grid;
+    justify-self: center;
+    width: 150px;
+    height:150px;
+
+}
+
 .status{
     background: #c4e3f3;
-    width:70%;
+    width:100%;
     font-size: 20px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -17,10 +39,10 @@
 
 .user-goods
 {
-    width: 70%;
-    height: 200px;
+    width: 100%;
+    height: 220px;
     padding: 1em;
-    background: #fff;
+    /*background: #fff;*/
     position: relative;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
@@ -37,7 +59,38 @@
     color: #5e5e5e;
 }
 .btn{
-    margin-right: 20px;
+    float: right;
+    margin-right: 10px;
+}
+.pop-ups{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+.white_content {
+
+    width: 40%;
+    height: 60%;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    border: 1px solid #bbbbbb;
+    border-radius: 20px;
+    background-color: white;
+    z-index: 1002;
+    /*层级要比.black_overlay高，这样才能显示在它前面*/
+    overflow: auto;
+}
+#light {
+    position: absolute;
+    /*left: 50%;*/
+    /* top: 50%;*/
+    /*width: 300px;*/
+    /*height: 250px;*/
+    /*margin-left: -150px;*/
+    /*!* margin-top: -125px *!;*/
 }
 /*.user-goods h3{*/
 /*    color: #080808;*/
@@ -2087,27 +2140,7 @@ table.timetable_sub {
     margin:0 0;
 }
 
-.information
-{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    width: 20%;
-    padding: 20px;
-    margin-right: 80px;
-    /*height: 70%;*/
-}
-.self_information
-{
-    text-align: center;
-    /*justify-self: center;*/
-}
-.img_self{
-    display: grid;
-    justify-self: center;
-    width: 120px;
-    height:120px;
 
-}
 .timetable_sub thead {
     background: #c4e3f3;
     border-radius: 25px;

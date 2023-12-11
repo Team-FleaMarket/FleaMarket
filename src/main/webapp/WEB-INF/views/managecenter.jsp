@@ -71,8 +71,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <!-- //animation-effect -->
 </head>
-
 <body>
+    <div id="light" class="pop-ups">
+        <div  class="white_content">
+
+            <form action="" method="post" id="form_submit">
+                <div class=""><!--login-form-grids-->
+                    <h5 class="" data-wow-delay=".5s">商品信息</h5>
+                    <form action="${pageContext.request.getContextPath()}/goods/insertGoods" class="" data-wow-delay=".5s" method="post" enctype="multipart/form-data">
+                        <table border="0" align="center" style="border-collapse:separate; border-spacing:25px;">
+                            <tr><td>商品名称</td><td><input align="center" type="text" name="goodsName" id="goodsName"></td></tr>
+                            <tr><td>商品价格</td><td><input align="center" type="text" name="price" id="price"></td></tr>
+                            <tr><td>商品概述</td><td><input align="center" type="text" name="description" id="description"></td></tr>
+                            <tr><td>新旧程度</td><td><input align="center" type="text" name="degree" id="degree"></td></tr>
+                            <tr>
+                                <td>商品分类</td>
+                                <td>
+                                    <select id="cate" name="cate" align="center">
+                                        <option value="1">图书书籍</option>
+                                        <option value="2">日用百货</option>
+                                        <option value="3">娱乐</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr><td colspan="2">上传照片<input value="file" type="file" name="file" id="file"></td></tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input type="submit" value="提     交">
+                                    <%--<input type="submit" value="取     消" onclick="javascript:window.history.back()">--%>
+                                    <input type="button" value="取消" class="button_beautiful" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" />
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+                <input type="button" value="确认" class="button_beautiful ceshi" /> <!-- 不要点击 -->
+
+            </form>
+        </div>
+    </div>
+
+
     <%@ include file="/WEB-INF/views/components/header.jsp"%>
     <div class="single">
     <div class="container">
@@ -80,239 +120,232 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="container">
                 <div class="footer-grids">
                     <!--banner-bottom-grid-left-->
-                    <div class="information col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
-                        <form >
-                            <div class="self_information">
-                                <img src="${pageContext.request.contextPath}/static/images/${sessionScope.user.studentNo}.jpg" alt=" " class="img_self img-circle center-block" >
-                            </div>
-                            <br>
-                            <h4>学号：${sessionScope.user.studentNo}</h4>
-                            <br>
-                            <h4>昵称：${sessionScope.user.userName}</h4><h2></h2>
-                            <br>
-                            <h4>微信号：${sessionScope.user.wechat}</h4><h4></h4>
-                            <br>
-                            <h4>手机号：${sessionScope.user.phone}</h4><h4></h4>
-                            <br>
-                            <h4>邮箱：${sessionScope.user.email}</h4><h4></h4>
-                        </form>
-                    </div>
-                <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
-                        <div class="goods">
-                            <div class="container">
-                                <div class="status">
-                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=0" >待审核</a> |
-                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=1" >待出售</a> |
-                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=2" >已出售</a> |
-                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=3">我的购买</a> |
-                                    <a href="${pageContext.request.getContextPath()}/views/managecenter?status=-1" >审核未通过</a> |
-                                    <a href="insert">添加商品</a> <span></span>
+                    <div class="row">
+                        <div class="col-3 information " data-wow-delay=".5s">
+                            <form >
+                                <div class="self_information">
+                                    <img src="${pageContext.request.contextPath}/static/images/${sessionScope.user.studentNo}.jpg" alt=" " class="img_self rounded-circle mx-auto d-block" >
                                 </div>
                                 <br>
-                                    <c:if test="${status == 0}"><h4>待审核: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 3}"><h4>欲购买: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == -1}"><h4>审核未通过: ${goodsList.size()} 件商品</h4></c:if>
-
+                                <h4>学号：${sessionScope.user.studentNo}</h4>
                                 <br>
-                                <c:if test="${status == 0}">
-                                    <div class="user-goods  ">
-                                        <div class="col-md-3">
-                                            <div class="user-goods-image">
-                                                <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
-                                            </div>
-                                            <br>
-                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <h3>于2023年5月3299购入的电脑</h3>
-                                            <p>电子产品</p>
-                                            <br>
-                                            <h3 class="money display-3">￥ 2899</h3>
-                                            <br>
-                                            <h4 class="date">2023年12月</h4>
-                                            <button type="button " class="btn btn-outline-light pull-right  ">删除</button>
-                                            <button type="button " class="btn btn-outline-light pull-right ">编辑</button>
-                                            <button type="button " class="btn btn-outline-light pull-right  ">降价</button>
-
-                                        </div>
+                                <h4>昵称：${sessionScope.user.userName}</h4><h2></h2>
+                                <br>
+                                <h4>微信号：${sessionScope.user.wechat}</h4><h4></h4>
+                                <br>
+                                <h4>手机号：${sessionScope.user.phone}</h4><h4></h4>
+                                <br>
+                                <h4>邮箱：${sessionScope.user.email}</h4><h4></h4>
+                            </form>
+                        </div>
+                        <div class="col-9 " data-wow-delay=".6s">
+                            <div class="goods">
+                                <div class="container">
+                                    <div class="status">
+                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=0" >待审核</a> |
+                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=1" >待出售</a> |
+                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=2" >已出售</a> |
+                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=3">我的购买</a> |
+                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=-1" >审核未通过</a> |
+                                        <a href="insert">添加商品</a> <span></span>
                                     </div>
-                                    <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                        <c:if test="${goods.status == 0}">
-                                            <div class="user-goods  ">
-                                                <div class="col-md-3">
+                                    <br>
+                                        <c:if test="${status == 0}"><h4>待审核: ${goodsList.size()} 件商品</h4></c:if>
+                                        <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
+                                        <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
+                                        <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
+                                        <c:if test="${status == 4}"><h4>欲购买: ${goodsList.size()} 件商品</h4></c:if>
+                                        <c:if test="${status == -1}"><h4>审核未通过: ${goodsList.size()} 件商品</h4></c:if>
+
+                                    <br>
+                                    <c:if test="${status == 0}">
+                                        <div class="user-goods  ">
+                                            <div class="row">
+                                                <div class="col-3">
                                                     <div class="user-goods-image">
-                                                        <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                        <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
                                                     </div>
                                                     <br>
-                                                    <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
+                                                    <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=1">>>更多</a></h4>
                                                 </div>
-                                                <div class="col-md-9">
-                                                    <h3>${goods.goodsName}</h3>
-                                                    <p>${goods.goodsStatus}</p>
-                                                    <br>
-                                                    <h3 class="money display-3">${goods.price}</h3>
-                                                    <br>
-                                                    <h4 class="date">${goods.description}</h4>
-                                                    <button type="button " class="btn btn-outline-light pull-right  ">删除</button>
-                                                    <button type="button " class="btn btn-outline-light pull-right ">编辑</button>
-                                                    <button type="button " class="btn btn-outline-light pull-right  ">降价</button>
+                                                <div class="col-9">
+                                                    <h3>于2023年5月3299购入的电脑</h3>
+                                                    <p>电子产品</p>
+                                                    <h3 class="money ">￥ 2899</h3>
+                                                    <h4 class="date">2023年12月</h4>
+                                                    <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                    <button type="button" class="btn btn-outline-dark pull-right"  onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">编辑</button>
+                                                    <button type="button" class="btn btn-outline-dark pull-right">降价</button>
                                                 </div>
                                             </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </c:if>
-                                <c:if test="${status == 1}">
-                                    <div class="user-goods  ">
-                                        <div class="col-md-3">
-                                            <div class="user-goods-image">
-                                                <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
-                                            </div>
-                                            <br>
-                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
                                         </div>
-                                        <div class="col-md-9">
-                                            <h3>于2023年5月3299购入的电脑</h3>
-                                            <p>电子产品</p>
-                                            <br>
-                                            <h3 class="money display-3">￥ 2899</h3>
-                                            <br>
-                                            <h4 class="date">2023年12月</h4>
-                                            <button type="button " class="btn btn-outline-light pull-right  ">删除</button>
-                                            <button type="button " class="btn btn-outline-light pull-right ">编辑</button>
-                                            <button type="button " class="btn btn-outline-light pull-right  ">降价</button>
 
-                                        </div>
-                                    </div>
-                                    <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                        <c:if test="${goods.status == 1}">
-                                            <div class="user-goods  ">
-                                                <div class="col-md-3">
+                                        <c:forEach items="${goodsList}" var="goods" varStatus="vs">
+<%--                                            <c:if test="${goods.status == 0}">--%>
+                                                <div class="user-goods  ">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                           <div class="user-goods-image">
+                                                                <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                            </div>
+                                                            <br>
+                                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <h3>${goods.goodsName}</h3>
+                                                            <p>${goods.goodsStatus}</p>
+                                                            <h3 class="money ">${goods.price}</h3>
+                                                            <h4 class="date">${goods.description}</h4>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">降价</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+<%--                                            </c:if>--%>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${status == 1}">
+                                        <div class="user-goods  ">
+                                            <div class="row">
+                                                <div class="col-3">
                                                     <div class="user-goods-image">
-                                                        <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                        <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
                                                     </div>
                                                     <br>
-                                                    <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
+                                                    <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
                                                 </div>
-                                                <div class="col-md-9">
-                                                    <h3>${goods.goodsName}</h3>
-                                                    <p>${goods.goodsStatus}</p>
-                                                    <br>
-                                                    <h3 class="money display-3">${goods.price}</h3>
-                                                    <br>
-                                                    <h4 class="date">${goods.description}</h4>
-                                                    <button type="button " class="btn btn-outline-light pull-right  ">删除</button>
-                                                    <button type="button " class="btn btn-outline-light pull-right ">编辑</button>
-                                                    <button type="button " class="btn btn-outline-light pull-right  ">降价</button>
+                                                <div class="col-9">
+                                                    <h3>于2023年5月3299购入的电脑</h3>
+                                                    <p>电子产品</p>
+                                                    <h3 class="money ">￥ 2899</h3>
+                                                    <h4 class="date">2023年12月</h4>
+                                                    <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                    <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
+                                                    <button type="button" class="btn btn-outline-dark pull-right">降价</button>
                                                 </div>
                                             </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </c:if>
-                                <c:if test="${status == 3}">
-                                    <div class="user-goods  ">
-                                        <div class="col-md-3">
-                                            <div class="user-goods-image">
-                                                <img src="${pageContext.request.getContextPath()}/static/images/2021301455.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
-                                            </div>
-                                            <br>
-                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
                                         </div>
-                                        <div class="col-md-9">
-                                            <h3>于2023年5月3299购入的电脑</h3>
-                                            <p>电子产品</p>
-                                            <br>
-                                            <h3 class="money display-3">￥ 2899</h3>
-                                            <br>
-                                            <h4 class="date">2023年12月</h4>
-
-                                        </div>
-                                    </div>
-                                    <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                        <c:if test="${goods.status == 3}">
-                                            <div class="user-goods  ">
-                                                <div class="col-md-3">
+                                        <c:forEach items="${goodsList}" var="goods" varStatus="vs">
+                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">
+                                                <div class="user-goods  ">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="user-goods-image">
+                                                                <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                            </div>
+                                                            <br>
+                                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <h3>${goods.goodsName}</h3>
+                                                            <p>${goods.goodsStatus}</p>
+                                                            <h3 class="money ">${goods.price}</h3>
+                                                            <h4 class="date">${goods.description}</h4>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">降价</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${status == 2}">
+                                        <div class="user-goods  ">
+                                            <div class="row">
+                                                <div class="col-3">
                                                     <div class="user-goods-image">
-                                                        <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                        <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
                                                     </div>
                                                     <br>
-                                                    <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">>>更多</a></h4>
+                                                    <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
                                                 </div>
-                                                <div class="col-md-9">
-                                                    <h3>${goods.goodsName}</h3>
-                                                    <p>${goods.goodsStatus}</p>
-                                                    <br>
-                                                    <h3 class="money display-3">${goods.price}</h3>
-                                                    <br>
-                                                    <h4 class="date">${goods.description}</h4>
+                                                <div class="col-9">
+                                                    <h3>于2023年5月3299购入的电脑</h3>
+                                                    <p>电子产品</p>
+                                                    <h3 class="money ">￥ 2899</h3>
+                                                    <h4 class="date">2023年12月</h4>
+                                                    <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                    <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
+                                                    <button type="button" class="btn btn-outline-dark pull-right">降价</button>
                                                 </div>
                                             </div>
-                                        </c:if>
+                                        </div>
+                                        <c:forEach items="${goodsList}" var="goods" varStatus="vs">
+                                            <c:if test="${goods.goodsStatus == 1}">
+                                                <div class="user-goods  ">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="user-goods-image">
+                                                                <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                            </div>
+                                                            <br>
+                                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <h3>${goods.goodsName}</h3>
+                                                            <p>${goods.goodsStatus}</p>
+                                                            <h3 class="money ">${goods.price}</h3>
+                                                            <h4 class="date">${goods.description}</h4>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">降价</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${status == 3}">
+                                        <div class="user-goods  row">
+                                            <div class="col-md-3">
+                                                <div class="user-goods-image">
+                                                    <img src="${pageContext.request.getContextPath()}/static/images/2021301455.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                </div>
+                                                <br>
+                                                <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <h3>于2023年5月3299购入的电脑</h3>
+                                                <p>电子产品</p>
+                                                <br>
+                                                <h3 class="money ">￥ 2899</h3>
+                                                <br>
+                                                <h4 class="date">2023年12月</h4>
 
+                                            </div>
+                                        </div>
+                                        <c:forEach items="${goodsList}" var="goods" varStatus="vs">
+                                            <c:if test="${goods.status == 3}">
+                                                <div class="user-goods  ">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="user-goods-image">
+                                                                <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                            </div>
+                                                            <br>
+                                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <h3>${goods.goodsName}</h3>
+                                                            <p>${goods.goodsStatus}</p>
+                                                            <h3 class="money ">${goods.price}</h3>
+                                                            <h4 class="date">${goods.description}</h4>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
+                                                            <button type="button" class="btn btn-outline-dark pull-right">降价</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:if>
 
-                                    </c:forEach>
-                                </c:if>
-
-
-
-
-
-                            <%--<tr class="rem1">--%>
-<%--                                      <td class="invert">1</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem2">--%>
-                                        <%--<td class="invert">2</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">羽毛球拍</a></td>--%>
-                                        <%--<td class="invert">日用百货：运动类</td>--%>
-                                        <%--<td class="invert">&yen128.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem3">--%>
-                                        <%--<td class="invert">3</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">小米头戴式耳机</a></td>--%>
-                                        <%--<td class="invert">娱乐：电子产品</td>--%>
-                                        <%--<td class="invert">&yen499.00</td>--%>
-                                        <%--<td class="invert">已审核 </td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">4</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">5</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">6</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                        <%--<tr class="rem1">--%>
-                                        <%--<td class="invert">7</td>--%>
-                                        <%--<td class="invert-image"><a href="single.html">深度学习</a></td>--%>
-                                        <%--<td class="invert">图书书籍</td>--%>
-                                        <%--<td class="invert">&yen168.00</td>--%>
-                                        <%--<td class="invert">已审核</td>--%>
-                                        <%--</tr>--%>
-                                    </table>
+                                        </c:forEach>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                     <div class="clearfix"> </div>
                 </div>
 

@@ -161,15 +161,29 @@ public class PageController {
     }
     @RequestMapping("/managecenter")
     public ModelAndView managecenter(HttpServletRequest request)throws Exception{
+
         ModelAndView modelAndView = new ModelAndView();
+
         String status = request.getParameter("status");
         User user = (User) request.getSession().getAttribute("user");
         if("".equals(status) || status == null) {
             status = "0";
+            List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), user.getStudentNo());
+            modelAndView.addObject("status", status);
+            modelAndView.addObject("goodsList", list);
         }
-        List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), user.getStudentNo());
-        modelAndView.addObject("status", status);
-        modelAndView.addObject("goodsList", list);
+        else if("0".equals(status)||"1".equals(status))
+        {
+            List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), user.getStudentNo());
+            modelAndView.addObject("status", status);
+            modelAndView.addObject("goodsList", list);
+        }
+        else if("2".equals(status)){
+            System.out.println("select status==2");
+            List<Goods> list = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), user.getStudentNo());
+            modelAndView.addObject("status", status);
+            modelAndView.addObject("goodsList", list);
+        }
         modelAndView.setViewName("managecenter");
         return modelAndView;
     }

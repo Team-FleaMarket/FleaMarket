@@ -53,15 +53,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="col-7">
                     <div class="col-1 logo-nav-left1 navbar">
-                        <c:if test="${sessionScope.user == null}">
+<%--                        <c:if test="${sessionScope.user == null}">--%>
                             <a href="${pageContext.request.contextPath}/" class="act">主页</a>
-                        </c:if>
-                        <c:if test="${sessionScope.user != null}">
-                            <a href="${pageContext.request.contextPath}/views/index" class="act">主页</a>
-                        </c:if>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${sessionScope.user != null}">--%>
+<%--                            <a href="${pageContext.request.contextPath}/views/index" class="act">主页</a>--%>
+<%--                        </c:if>--%>
                     </div>
                     <div class="col-2 logo-nav-left1 navbar dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">商品分类 <b class="caret"></b></a>
+                        <a href="${pageContext.request.contextPath}/views/sports" class="dropdown-toggle" data-toggle="dropdown">商品商城 <b class="caret"></b></a>
                         <ul class="dropdown-menu columns-3">
                             <div class="row">
                                 <div class="col-sm-4">
@@ -122,7 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <a href="${pageContext.request.contextPath}/views/login">登陆</a>
                             </c:if>
                             <c:if test="${sessionScope.user != null}">
-                                <a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.username}</a>
+                                <a href="${pageContext.request.contextPath}/views/managecenter">${sessionScope.user.userName}</a>
                             </c:if>
                         </a>
                     </div>
