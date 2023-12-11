@@ -69,7 +69,7 @@
 <!--            </el-card>-->
 
             <!--   分页     -->
-            <div class="block">
+            <div v-if="querying == 0" class="block">
                 <el-pagination
                         @current-change="handleCurrentChange"
                         :current-page="currentPage"
@@ -132,6 +132,7 @@
                     wechat: ''
                 },
                 users: [],
+                queryedUsers: [],
                 tempUser: {
                     id: 0,
                     userName: '',
@@ -150,11 +151,19 @@
                 placeholderMap: {
                     userName: '按用户名搜索',
                     studentNo: '按学号搜索'
-                }
+                },
+                querying: 0
             };
         },
         methods: {
             search() {
+                if(this.query === '') {
+                    this.querying = 0;
+                    this.handleCurrentChange(1);
+                    return;
+                }
+
+                this.querying = 1;
                 let url = '/user/query';
                 if(this.selected === 'userName') {
                     url += '/username?query=' + this.query;
@@ -235,7 +244,7 @@
         computed: {
             placeholderText() {
                 return this.placeholderMap[this.selected];
-            }
+            },
         },
 
     });

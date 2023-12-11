@@ -167,7 +167,6 @@ public class PageController {
         if("".equals(status) || status == null) {
             status = "0";
         }
-        //TODO: 根据学号查我的购买 student_no = buyer_no
         List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), user.getStudentNo());
         modelAndView.addObject("status", status);
         modelAndView.addObject("goodsList", list);
