@@ -1,0 +1,331 @@
+.register .container {
+    width: 75%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.register h3 {
+    text-align: center;
+    color: #222;
+    margin: 0;
+    position: relative;
+    font-size: 2.6em;
+}
+
+.register h3:before {
+    left: 20%;
+}
+
+.register h3:after {
+    right: 20%;
+}
+
+.register .form-check {
+    padding-left: 2em;
+}
+
+.register form-grids {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.register p {
+    font-size: 14px;
+    color: #999;
+    line-height: 1.8em;
+    margin: 0;
+    text-align: center;
+}
+
+.register p a {
+    color: #d8703f;
+    text-decoration: none;
+    padding: 0 0 0 0.3em;
+}
+
+.register p a:hover {
+    color: #212121;
+}
+
+.register p a span {
+    top: 0.1em;
+    font-size: .7em;
+    left: 0.3em;
+}
+
+.register-home a {
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+}
+
+.register, .register {
+    padding: 5em 0;
+}
+
+.register h3 {
+    text-align: center;
+    color: #222;
+    margin: 0;
+    position: relative;
+    font-size: 2.6em;
+}
+
+.register h3:before, .register h3:after {
+    position: absolute;
+    top: 50%;
+    width: 15%;
+    height: 1px;
+    background: #D5D5D5;
+    content: '';
+}
+
+.register form-grids {
+    /*width: 45%;*/
+    /* padding-bottom: 2em;*/
+    padding-top: 1em;
+    /*margin: 3em auto 0;*/
+}
+
+.register form-grids input[type="email"], .register form-grids input[type="password"], .register form-grids input[type="text"] {
+    outline: none;
+    border: 1px solid #DBDBDB;
+    padding: 10px 10px 10px 45px;
+    font-size: 14px;
+    color: #999;
+    display: block;
+    width: 100%;
+    margin: 1.5em auto 0;
+}
+
+.register form-grids input[type="email"] {
+    background: url(../images/img-sp.png) no-repeat 5px -182px #fff;
+}
+
+.register form-grids input[type="password"] {
+    background: url(../images/img-sp.png) no-repeat 5px -220px #fff;
+    /*margin: 1.5em 0 0;*/
+}
+
+.register form-grids input[type="submit"] {
+    outline: none;
+    border: none;
+    padding: 10px 0;
+    font-size: 1em;
+    color: #fff;
+    display: block;
+    width: 40%;
+    background: #FFC229;
+    margin: 1.5em auto 0.5em auto;
+    border-radius: 3em;
+}
+
+.register form-grids input[type="submit"]:hover {
+    background: #d8703f;
+}
+
+.register form-grids ::-webkit-input-placeholder {
+    color: #999;
+}
+
+.register form-grids h5, .register form-grids h6 {
+    font-size: 1em;
+    color: #212121;
+    text-transform: uppercase;
+    margin: 0 0 2em;
+}
+
+.register form-grids input[type="text"] {
+    background: url(../images/img-sp.png) no-repeat 5px -259px #fff;
+}
+
+.register form-grids input[type="text"]:nth-child(2) {
+    background: url(../images/img-sp.png) no-repeat 0px -298px #fff;
+    /*margin: 1em 0;*/
+}
+
+.form-check-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+
+.register form-grids h6 {
+    margin: 3em 0 2em !important;
+}
+
+.register-home {
+    margin: 2em 0 0;
+    text-align: center;
+}
+
+.register-home a {
+    padding: 8px 45px;
+    background: #9F9F9F;
+    color: #fff;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.register-home a:hover {
+    background: #d8703f;
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 640px) {
+
+}
+
+@media (max-width: 480px) {
+
+}
+
+@media (max-width: 320px) {
+
+}
+
+@media (max-width: 1440px) {
+
+}
+
+@media (max-width: 1366px) {
+
+}
+
+@media (max-width: 1280px) {
+
+}
+
+@media (max-width: 1080px) {
+
+    .register, .register {
+        padding: 4em 0;
+    }
+
+    .register h3 {
+        font-size: 2em;
+    }
+
+}
+
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 991px) {
+
+    .register h3 {
+        font-size: 2em;
+    }
+
+    .register {
+        padding: 3em 0;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 767px) {
+
+}
+
+@media (max-width: 736px) {
+
+}
+
+@media (max-width: 667px) {
+
+}
+
+@media (max-width: 640px) {
+
+    .register h3:before {
+        left: 15%;
+    }
+
+    .register h3:after {
+        right: 15%;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+}
+
+@media (max-width: 568px) {
+
+}
+
+@media (max-width: 480px) {
+
+    .register h3 {
+        font-size: 1.8em;
+    }
+
+    .register h3:before, .register h3:after {
+        width: 20%;
+    }
+
+    .register {
+        padding: 2em 0;
+    }
+
+    .register h3:before {
+        left: 5%;
+    }
+
+    .register h3:after {
+        right: 5%;
+    }
+
+}
+
+@media (max-width: 414px) {
+
+    .register h3 {
+        font-size: 1.6em;
+    }
+
+}
+
+@media (max-width: 384px) {
+
+}
+
+@media (max-width: 375px) {
+
+    .register h3 {
+        font-size: 1.5em;
+    }
+
+}
+
+@media (max-width: 320px) {
+
+    .register h3 {
+        font-size: 1.3em;
+    }
+
+    .register-check-box label {
+        font-size: 13px;
+    }
+
+    .register-home a {
+        font-size: 14px;
+    }
+
+}

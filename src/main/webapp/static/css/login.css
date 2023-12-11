@@ -1,0 +1,351 @@
+.login .container {
+    width: 75%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    margin: 0 auto;
+}
+
+.login-img {
+    padding-top: 15px;
+}
+
+.login h4 {
+    margin: 2em 0 0.5em;
+    font-size: 1.5em;
+    color: #212121;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.login p {
+    font-size: 14px;
+    color: #999;
+    line-height: 1.8em;
+    margin: 0;
+    text-align: center;
+}
+
+.login p a {
+    color: #d8703f;
+    text-decoration: none;
+    padding: 0 0 0 0.3em;
+}
+
+.login p a:hover {
+    color: #212121;
+}
+
+.login p a span {
+    top: 0.1em;
+    font-size: .7em;
+    left: 0.3em;
+}
+
+.login a {
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+}
+
+.login {
+    padding: 5em 0;
+}
+
+.login h3 {
+    text-align: center;
+    color: #222;
+    margin: 0;
+    position: relative;
+    font-size: 2.6em;
+}
+
+.login h3:before, .login h3:after {
+    position: absolute;
+    top: 50%;
+    width: 15%;
+    height: 1px;
+    background: #D5D5D5;
+    content: '';
+}
+
+.login h3:before {
+    left: 22%;
+}
+
+.login h3:after {
+    right: 22%;
+}
+
+.login form-grids {
+    /*width: 45%;*/
+    /* padding-bottom: 2em;*/
+    padding-top: 1em;
+    /*margin: 3em auto 0;*/
+}
+
+.login form-grids input[type="email"], .login form-grids input[type="password"], .login form-grids input[type="text"] {
+    outline: none;
+    border: 1px solid #DBDBDB;
+    padding: 10px 10px 10px 45px;
+    font-size: 14px;
+    color: #999;
+    display: block;
+    width: 100%;
+    margin: 1.5em auto 0;
+}
+
+.login form-grids input[type="email"] {
+    background: url(../images/img-sp.png) no-repeat 5px -182px #fff;
+}
+
+.login form-grids input[type="password"] {
+    background: url(../images/img-sp.png) no-repeat 5px -220px #fff;
+    /*margin: 1.5em 0 0;*/
+}
+
+.login form-grids input[type="submit"] {
+    outline: none;
+    border: none;
+    padding: 10px 0;
+    font-size: 1em;
+    color: #fff;
+    display: block;
+    width: 40%;
+    background: #FFC229;
+    margin: 1.5em auto 0.5em auto;
+    border-radius: 3em;
+}
+
+.login form-grids input[type="submit"]:hover {
+    background: #d8703f;
+}
+
+.login form-grids ::-webkit-input-placeholder {
+    color: #999;
+}
+
+.login form-grids h5, .login form-grids h6 {
+    font-size: 1em;
+    color: #212121;
+    text-transform: uppercase;
+    margin: 0 0 2em;
+}
+
+.login form-grids input[type="text"] {
+    background: url(../images/img-sp.png) no-repeat 5px -259px #fff;
+}
+
+.login form-grids input[type="text"]:nth-child(2) {
+    background: url(../images/img-sp.png) no-repeat 0px -298px #fff;
+    /*margin: 1em 0;*/
+}
+
+.form-check-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+
+.login form-grids h6 {
+    margin: 3em 0 2em !important;
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 640px) {
+
+}
+
+@media (max-width: 480px) {
+
+}
+
+@media (max-width: 320px) {
+
+}
+
+@media (max-width: 1440px) {
+
+}
+
+@media (max-width: 1366px) {
+
+}
+
+@media (max-width: 1280px) {
+
+}
+
+@media (max-width: 1080px) {
+
+    .login {
+        padding: 4em 0;
+    }
+
+    .login h3 {
+        font-size: 1.2em;
+    }
+
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 991px) {
+
+    .login h3 {
+        font-size: 2em;
+    }
+
+    .login {
+        padding: 3em 0;
+    }
+
+    .login-form-grids {
+        width: 75%;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 767px) {
+
+}
+
+@media (max-width: 736px) {
+
+}
+
+@media (max-width: 667px) {
+
+}
+
+@media (max-width: 640px) {
+
+    .login h3:before {
+        left: 17%;
+
+    }
+
+    .login h3:after {
+        right: 17%;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+}
+
+@media (max-width: 568px) {
+
+}
+
+@media (max-width: 480px) {
+
+    .login h3 {
+        font-size: 1.8em;
+    }
+
+    .login h3:before, .login h3:after {
+        width: 20%;
+    }
+
+    .login {
+        padding: 2em 0;
+    }
+
+    .login h3:before {
+        left: 8%;
+    }
+
+    .login h3:after {
+        right: 8%;
+    }
+
+    .login-form-grids {
+        width: 95%;
+        margin: 2em auto 0;
+        padding: 2em;
+    }
+
+    .login h4 {
+        margin: 1.5em 0 0.5em;
+        font-size: 1.1em;
+    }
+
+}
+
+@media (max-width: 414px) {
+
+    .login h3 {
+        font-size: 1.6em;
+    }
+
+}
+
+@media (max-width: 384px) {
+
+}
+
+@media (max-width: 375px) {
+
+    .login h3 {
+        font-size: 1.5em;
+    }
+
+    .login-form-grids {
+        width: 100%;
+        padding: 1em;
+    }
+
+}
+
+@media (max-width: 320px) {
+
+    .login h3 {
+        font-size: 1.3em;
+    }
+
+    .login-form-grids h5, .login-form-grids h6 {
+        margin: 0 0 1.5em;
+    }
+
+    .login-form-grids {
+        margin: 1.5em auto 0;
+
+    }
+
+    .login-form-grids input[type="email"], .login-form-grids input[type="password"], .login-form-grids input[type="text"] {
+        font-size: 13px;
+    }
+
+    .login-form-grids h6 {
+        margin: 2em 0 1.5em !important;
+    }
+
+    .login-form-grids input[type="submit"] {
+        font-size: 14px;
+    }
+
+    .login h4 {
+        font-size: 1em;
+    }
+
+    .login p {
+        font-size: 12px;
+    }
+
+}
