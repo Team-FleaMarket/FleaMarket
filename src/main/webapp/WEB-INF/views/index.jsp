@@ -355,7 +355,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="new-collections-grids">
             <h2 class="animated wow zoomIn" data-wow-delay=".5s">
                 <em>日用百货</em>
-                <a class="header-grid-right" href="${pageContext.request.contextPath}/views/sports">更多 >></a>
+                <a class="header-grid-right" href="${pageContext.request.contextPath}/bootstrap.min.js">更多 >></a>
             </h2>
             <div class="row">
                 <div class="col-4 new-collections-grid">
@@ -510,7 +510,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="new-collections-grids">
             <h2 class="animated wow zoomIn" data-wow-delay=".5s">
                 <em>娱乐</em>
-                <a class="header-grid-right" href="${pageContext.request.contextPath}/views/sports">更多 >></a>
+                <a class="header-grid-right" href="${pageContext.request.contextPath}/bootstrap.min.js">更多 >></a>
             </h2>
             <div class="row">
                 <div class="col-4 new-collections-grid">
