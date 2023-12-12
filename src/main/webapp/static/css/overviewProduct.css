@@ -22,7 +22,6 @@ ul {
 a {
     color: #494d55;
     text-decoration: none;
-    /* -webkit-tap-highlight-color: rgba(0, 0, 0, 0); */
 }
 
 .new-collections-grid1-image-pos a, .new-collections-grid1 h4 a, .new-collections-grid1-left p a {
@@ -63,7 +62,7 @@ a {
 
 .new-collections-grid {
     padding-left: 0;
-    border-radius: 9px;
+    border-radius: 10px;
     margin-top: 6px;
     margin-bottom: 6px;
 }
