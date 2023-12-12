@@ -24,4 +24,6 @@ public interface GoodsService {
     void updateGoodsStatus(Goods goods);
 
     List<Goods> selectByStatusAndGoodsStatus();
+
+    List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize);
 }

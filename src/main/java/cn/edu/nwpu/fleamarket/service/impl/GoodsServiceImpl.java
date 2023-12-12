@@ -67,4 +67,10 @@ public class GoodsServiceImpl implements GoodsService{
     public List<Goods> selectByStatusAndGoodsStatus() {
         return goodsDao.selectByStatusAndGoodsStatus();
     }
+
+    @Override
+    public List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize) {
+        System.out.println("cate: " + cate + " pageNum: " + pageNum + " pageSize: " + pageSize);
+        return goodsDao.getGoodsByCategoryPages(cate, pageNum*pageSize, pageSize);
+    }
 }
