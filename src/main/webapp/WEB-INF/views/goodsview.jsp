@@ -232,7 +232,7 @@
                         <div class="new-collections-grid1-image">
                             <a href="${pageContext.request.contextPath}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.contextPath}/static/images/mz1.jpg" alt=" " class="img-responsive"></a>
                             <div class="new-collections-grid1-image-pos products-right-grids-pos">
-                                <a href="${pageContext.request.contextPath}/views/single?goodsId=5">Quick View</a>
+                                <a href="${pageContext.request.contextPath}/views/goodsdetail">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right products-right-grids-pos-right">
                                 <div class="rating">

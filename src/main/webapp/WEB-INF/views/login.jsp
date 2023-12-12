@@ -238,6 +238,8 @@
                     document.getElementById("toast-header").classList.add("bg-success")
                     window.location.href = window.location.origin
                 } catch(error) {
+                    console.log("-------------------------------- 1")
+                    console.log(error)
                     message = error.response.data
                     document.getElementById("toast-body").innerText = message;
                     document.getElementById("toast-header").classList.remove("bg-success")

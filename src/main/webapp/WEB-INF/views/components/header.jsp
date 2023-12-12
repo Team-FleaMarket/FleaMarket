@@ -83,7 +83,7 @@
                             <a href="${pageContext.request.contextPath}/login">登录</a>
                         </c:if>
                         <c:if test="${sessionScope.student != null}">
-                            <a href="${pageContext.request.contextPath}/home">${sessionScope.student.name}，欢迎您</a>
+                            <a href="${pageContext.request.contextPath}/">${sessionScope.student.name}，欢迎您</a>
                         </c:if>
                     </a>
                 </div>
