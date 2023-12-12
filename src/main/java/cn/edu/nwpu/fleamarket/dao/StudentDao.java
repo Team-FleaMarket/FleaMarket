@@ -1,8 +1,7 @@
 package cn.edu.nwpu.fleamarket.dao;
 
 import cn.edu.nwpu.fleamarket.pojo.Student;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +21,52 @@ public interface StudentDao {
     void updateWechat(Student student);
     // SELECT
     Student selectStudentByStudentNo(String studentNo);
+
+
+    @Select("SELECT count(*) FROM students")
+    int countAll();
+
+
+    /**
+     * 分页
+     * @param start 起始id
+     * @return
+     */
+    @Select("SELECT * from students LIMIT #{start}, 6")
+    @Results({
+            @Result(column = "student_no", property = "studentNo"),
+    })
+    List<Student> getStudentsByPage(int start);
+
+    /**
+     * 更新用户信息
+     * @param student 更新的内容
+     */
+    @Update("UPDATE students set name = #{name}, password = #{password}, email = #{email}, " +
+            "phone = #{phone}, wechat = #{wechat} where id = #{id}")
+    void update(Student student);
+
+    /**
+     * 按用户名查找
+     * @param query 查询语句
+     */
+    @Select("SELECT * from students where name like #{query}")
+    @Results({
+            @Result(column = "student_no", property = "studentNo"),
+    })
+    List<Student> queryByUsername(String query);
+
+
+    /**
+     * 按学号查找
+     * @param query
+     * @return
+     */
+    @Select("SELECT * from students where student_no like #{query}")
+    @Results({
+            @Result(column = "student_no", property = "studentNo"),
+    })
+    List<Student> queryByStudentNo(String query);
 }
 
 

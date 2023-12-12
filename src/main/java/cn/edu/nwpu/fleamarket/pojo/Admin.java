@@ -1,9 +1,10 @@
 package cn.edu.nwpu.fleamarket.pojo;
 
-/**
- * @author: feoyang
- * @date: 2023/12/11 13:12
- * @description: TODO
- */
+import lombok.Data;
+
+@Data
 public class Admin {
+    private int id;
+    private String username;
+    private String password;
 }

@@ -32,5 +32,5 @@ public class Goods {
     private String imagePath;
     private int goodsStatus;
     private String degree;
-
+    private int attribute;
 }

@@ -62,6 +62,32 @@ public class StudentServiceImpl implements StudentService {
         studentDao.updateWechat(student);
         return false;
     }
+
+    @Override
+    public int countAll() {
+        return studentDao.countAll();
+    }
+
+    @Override
+    public List<Student> getStudentsByPage(int page) {
+        return studentDao.getStudentsByPage((page - 1) * 6);
+    }
+
+    @Override
+    public boolean update(Student student) {
+        studentDao.update(student);
+        return true;
+    }
+
+    @Override
+    public List<Student> queryByUserName(String query) {
+        return studentDao.queryByUsername(query);
+    }
+
+    @Override
+    public List<Student> queryByStudentNo(String query) {
+        return studentDao.queryByStudentNo(query);
+    }
 }
 
 

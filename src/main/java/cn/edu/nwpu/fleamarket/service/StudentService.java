@@ -2,6 +2,8 @@ package cn.edu.nwpu.fleamarket.service;
 
 import cn.edu.nwpu.fleamarket.pojo.Student;
 
+import java.util.List;
+
 /**
  * @Author: Hanwen
  * @Date: 2018/4/4 下午3:08
@@ -17,6 +19,12 @@ public interface StudentService {
     boolean updatePhone(Student student);
     boolean updateEmail(Student student);
     boolean updateWechat(Student student);
+
+    int countAll();
+    List<Student> getStudentsByPage(int page);
+    boolean update(Student student);
+    List<Student> queryByUserName(String query);
+    List<Student> queryByStudentNo(String query);
 }
 
 

@@ -12,19 +12,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-/**
- * @Author: Hanwen
- * @Date: 2018/4/5 下午1:08
- */
 @Controller
 @RequestMapping("/student")
 public class StudentController {
@@ -325,8 +319,64 @@ public class StudentController {
 
 */
 
+    /**
+     * 返回用户总数
+     * @return 用户总数
+     */
+    @ResponseBody
+    @GetMapping("/count")
+    public int count() {
+        return userService.countAll();
+    }
 
+    /**
+     * 获取某页面数据 一页展示6个用户
+     * @param page 页面
+     * @return 用户集合
+     */
+    @ResponseBody
+    @GetMapping("/page/{page}")
+    public List<Student> getByPage(@PathVariable("page") int page) {
+        if(page <= 0) {
+            return null;
+        }
+        return userService.getStudentsByPage(page);
+    }
 
+    /**
+     * 更新user
+     * @param student 更新内容
+     * @return 结果
+     */
+    @ResponseBody
+    @PutMapping
+    public String update(@RequestBody Student student) {
+        if(userService.update(student)) {
+            return "ok";
+        }
+        return "err";
+    }
 
+    /**
+     * 用户查询 根据用户名
+     * GET /user/username?query=
+     */
+    @ResponseBody
+    @GetMapping("/query/username")
+    public List<Student> queryByUsername(@RequestParam("query") String query) {
+        System.out.println(query);
+        String trueQuery = "%" + query + "%";
+        return userService.queryByUserName(trueQuery);
+    }
 
+    /**
+     * 用户查询 根据用户名
+     * GET /user/username?query=
+     */
+    @ResponseBody
+    @GetMapping("/query/studentno")
+    public List<Student> queryByStudentNo(@RequestParam("query") String query) {
+        String trueQuery = "%" + query + "%";
+        return userService.queryByStudentNo(trueQuery);
+    }
 }
