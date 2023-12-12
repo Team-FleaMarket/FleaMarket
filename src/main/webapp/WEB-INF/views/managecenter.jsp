@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>管理中心</title>
-    <%@ include file="components/jspheader.jsp"%>
+    <%@ include file="components/jspheader.jsp" %>
     <script language="JavaScript">
         // $(document).ready(function() {
         //     //绑定下拉框change事件，当下来框改变时调用 SelectChange()方法
@@ -44,8 +44,8 @@
 </head>
 
 <body>
-    <%@ include file="./components/header.jsp"%>
-    <div class="single">
+<%@ include file="./components/header.jsp" %>
+<div class="single">
     <div class="container">
         <div class="">
             <div class="container">
@@ -54,12 +54,14 @@
                     <div class="information col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
                         <form>
                             <div class="self_information">
-                                <img src="${pageContext.request.contextPath}/static/images/${sessionScope.student.studentNo}.jpg" alt=" " class="img_self img-circle center-block" >
+                                <img src="${pageContext.request.contextPath}/static/images/${sessionScope.student.studentNo}.jpg"
+                                     alt=" " class="img_self img-circle center-block">
                             </div>
                             <br>
                             <h4>学号：${sessionScope.student.studentNo}</h4>
                             <br>
-                            <h4>昵称：${sessionScope.student.name}</h4><h2></h2>
+                            <h4>昵称：${sessionScope.student.name}</h4>
+                            <h2></h2>
                             <br>
                             <h4>微信号：${sessionScope.student.wechat}</h4><h4></h4>
                             <br>
@@ -72,17 +74,18 @@
                         <div class="goods">
                             <div class="container">
                                 <div class="status">
-                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=0" >待审核</a> |
-                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=1" >待出售</a> |
-                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=2" >已出售</a> |
-                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=3">我的购买</a> |
+                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=0">待审核</a> |
+                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=1">待出售</a> |
+                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=2">已出售</a> |
+                                    <a href="${pageContext.request.getContextPath()}/managecenter?status=3">我的购买</a>
+                                    |
                                     <a href="insert">添加商品</a> <span></span>
                                 </div>
                                 <br>
-                                    <c:if test="${status == 0}"><h4>待审核: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
+                                <c:if test="${status == 0}"><h4>待审核: ${goodsList.size()} 件商品</h4></c:if>
+                                <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
+                                <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
+                                <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
                                 <br>
                                 <c:if test="${status == 0}">
                                     <div class="user-goods  ">
@@ -406,7 +409,8 @@
 <!-- //banner-bottom -->
 
 <!-- footer -->
-    <%@ include file="./components/header.jsp"%>
+<%@ include file="./components/footer.jsp" %>
+
 <!-- //footer -->
 </body>
 </html>
