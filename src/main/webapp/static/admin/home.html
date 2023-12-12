@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="../js/admin/element/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="container">
+        <el-container>
+            <el-header>FleaMarket</el-header>
+            <el-main>
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                    <el-menu-item index="1">主页</el-menu-item>
+                    <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
+                    <el-menu-item index="3" @click="to_review">审核商品</el-menu-item>
+                    <el-menu-item index="4" disabled>查询商品</el-menu-item>
+                    <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
+                </el-menu>
+
+                <el-row :gutter="20">
+                    <el-col :span="5">
+                        <!--                        <el-card>-->
+                        <!--                            <div slot="header" class="clearfix">-->
+                        <!--                                <span>欢迎，{{username}}</span>-->
+                        <!--                            </div>-->
+                        <!--                            <el-avatar src="images/default.jpg" size="150"></el-avatar>-->
+                        <!--                            <div style="padding: 14px;">-->
+                        <!--&lt;!&ndash;                                <el-button type="text">个人信息</el-button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <el-button type="text">设置</el-button>&ndash;&gt;-->
+                        <!--                            </div>-->
+                        <!--                        </el-card>-->
+                        <el-card class="box-card">
+                            <div slot="header" class="clearfix">
+                                <span style="line-height: 36px;">欢迎，{{username}}</span>
+                            </div>
+                            <div style="text-align: center; margin: 14px;">
+                                <el-avatar shape="square" src="images/default.jpg"></el-avatar>
+                            </div>
+                            <div style="padding: 14px; text-align: center;">
+                                <el-button type="primary" icon="el-icon-edit" @click="visible=true" plain>修改密码</el-button>
+                            </div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="18">
+                        <el-card>
+                            <div slot="header" class="clearfix">
+                                <span>公告</span>
+                            </div>
+                            <div v-for="announcement in announcements" :key="announcement.id">
+                                <el-alert
+                                        :title="announcement.title"
+                                        type="info"
+                                        :description="announcement.content"
+                                        show-icon>
+                                </el-alert>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </el-row>
+
+                <el-dialog
+                        title="修改密码"
+                        :visible.sync="visible"
+                        width="30%">
+                    <el-form>
+                        <el-form-item label="原密码">
+                            <el-input type="password" v-model="updatePW.pw"></el-input>
+                        </el-form-item>
+                        <el-form-item label="新密码">
+                            <el-input type="password" v-model="updatePW.npw"></el-input>
+                        </el-form-item>
+                        <el-form-item label="确认新密码">
+                            <el-input type="password" v-model="updatePW.cnpw"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                <el-button @click="cancel">取 消</el-button>
+                <el-button type="primary" @click="update">修 改</el-button>
+            </span>
+                </el-dialog>
+
+            </el-main>
+            <el-footer>NPU @2023</el-footer>
+
+        </el-container>
+
+    </div>
+
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                username: '',
+                activeIndex: '1',
+                visible: false,
+                updatePW: {
+                  pw: '',
+                  npw: '',
+                  cnpw: ''
+                },
+                announcement: {
+                    title: '',
+                    content: ''
+                },
+                announcements: []
+            };
+        },
+        methods: {
+            cancel() {
+                this.visible = false;
+                this.updatePW.pw = '';
+                this.updatePW.npw = '';
+                this.updatePW.cnpw = '';
+            },
+            update() {
+                if(this.updatePW.pw === ''|| this.updatePW.npw === '' ||
+                    this.updatePW.cnpw === ''){
+                    this.$message.error('请先输入');
+                    return;
+                }
+                if(this.updatePW.npw !== this.updatePW.cnpw) {
+                    this.$message.error('两次输入的密码不一致');
+                    return;
+                }
+                let params = new URLSearchParams();
+                params.append('username', this.username);
+                params.append('pw', this.updatePW.pw);
+                params.append('npw', this.updatePW.npw);
+                axios.post("/admin/update/pw", params, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then((res=>{
+                    if(res.data === 'ok') {
+                        this.visible = false;
+                        this.$message({
+                            message: '修改成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message.error('密码错误');
+                    }
+                })).catch(err=>{
+                   console.log(err);
+                });
+            },
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            to_user: function () {
+                window.location.href = "users.html";
+            },
+            to_review: function () {
+                window.location.href = "review.html";
+            },
+            getName: function () {
+                axios.get("/admin").then((res => {
+                    if (res.data === "Invalid") {
+                        this.$message.error('登录失效，请重新登录');
+                        setTimeout(() => {
+                            window.location.href = "login.html";
+                        }, 500);
+                    } else {
+                        this.username = res.data;
+                    }
+                })).catch(err => {
+                    console.log(err);
+                })
+            },
+            addAnnouncements() {
+                const announcementList = [
+                    {
+                        title: '商品发布规则',
+                        content: '为了保证商品质量，所有发布的商品都需要经过管理员审核才能上架。'
+                    },
+                    {
+                        title: '商品审核规则',
+                        content: '任何违反校规或法律法规的商品都不能通过审核。'
+                    },
+                    {
+                        title: '管理员行为规范',
+                        content: '请所有管理员公正、公平地执行他们的职责，尊重所有用户，及时处理用户的请求和投诉。'
+                    }
+
+                ];
+                this.announcements = announcementList;
+            }
+        },
+        created() {
+            this.getName();
+            this.addAnnouncements();
+        }
+    });
+</script>
+
+</body>
+
+
+</html>
+
+<style>
+    body {
+        background-image: url('images/background.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .el-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>

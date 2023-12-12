@@ -11,48 +11,7 @@
 <html>
 <head>
     <title>Register</title>
-    <!-- for-mobile-apps -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content="Best Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
-    <script type="application/x-javascript"> addEventListener("load", function () {
-        setTimeout(hideURLbar, 0);
-    }, false);
-
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    } </script>
-    <!-- //for-mobile-apps -->
-    <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.css" rel="stylesheet" type="text/css"
-          media="all"/>
-    <link href="${pageContext.request.contextPath}/static/css/register.css" rel="stylesheet" type="text/css"
-          media="all"/>
-    <!-- js -->
-    <script src="${pageContext.request.getContextPath()}/static/js/jquery.min.js"></script>
-    <!-- //js -->
-    <!-- cart -->
-    <script src="${pageContext.request.getContextPath()}/static/js/simpleCart.min.js"></script>
-    <!-- cart -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.getContextPath()}/static/css/jquery-ui.css">
-    <!-- for bootstrap working -->
-    <script type="text/javascript"
-            src="${pageContext.request.getContextPath()}/static/js/bootstrap-3.1.1.min.js"></script>
-    <!-- //for bootstrap working -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
-          rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic'
-          rel='stylesheet' type='text/css'>
-    <!-- animation-effect -->
-    <link href="${pageContext.request.getContextPath()}/static/css/animate.min.css" rel="stylesheet">
-    <link href="${pageContext.request.getContextPath()}/static/js/layer.css" rel="stylesheet">
-    <script src="${pageContext.request.getContextPath()}/static/js/wow.min.js"></script>
-    <script src="${pageContext.request.getContextPath()}/static/js/register.js"></script>
-    <script src="${pageContext.request.getContextPath()}/static/js/layer.js"></script>
-    <script>
-        new WOW().init();
-    </script>
-    <!-- //animation-effect -->
+    <%@ include file="components/jspheader.jsp"%>
 </head>
 
 <body>
@@ -101,14 +60,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>--%>
                 <input type="submit" id="chk" name="chk" value="注册" onclick="return registerCheck()">
+                <button type="button" class="btn btn-primary" id="liveToastBtn" >注册</button>
             </form>
             <p class="animated wow slideInUp">已有账号？请点击<a
                     href="${pageContext.request.contextPath}/views/login">登录</a></p>
 
-            <%--<div class="register-home animated wow slideInUp" data-wow-delay=".5s">
-                <a href="${pageContext.request.contextPath}/views/index">Home</a>
-            </div>--%>
+        <%-- 注册成功或失败消息提示 --%>
+        <div class="position-fixed bottom-0 end-0 p-3 col-xl-2" style="z-index: 5;">
+            <div id="liveToast" class="toast hide" data-bs-animation="false" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header text-black" id="toast-header">
+                    <strong class="me-auto">消息提示</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toast-body">
+                    消息内容...
+                </div>
+            </div>
         </div>
+        <script type="module">
+            import { registerAPI } from '/static/js/apis/student.js'
+            document.querySelector("#liveToastBtn").onclick = async () => {
+                var studentNo = $("input[name=studentNo]").val()
+                var name = $("input[name=name]").val()
+                var phone = $("input[name=phone]").val()
+                var wechat = $("input[name=wechat]").val()
+                var email = $("input[name=email]").val()
+                var password = $("input[name=password]").val()
+                var message = ""
+                try {
+                    var response = await registerAPI({ studentNo, name, phone, wechat, email, password })
+                    message = response.data
+                    document.getElementById("toast-body").innerText = message
+                    document.getElementById("toast-header").classList.remove("bg-danger")
+                    document.getElementById("toast-header").classList.add("bg-success")
+                    window.location.href = window.location.origin
+                } catch(error) {
+                    message = error.response.data
+                    document.getElementById("toast-body").innerText = message;
+                    document.getElementById("toast-header").classList.remove("bg-success")
+                    document.getElementById("toast-header").classList.add("bg-danger")
+                }
+                new bootstrap.Toast(document.querySelector('.toast')).show();
+            }
+        </script>
+        <%-- 登录失败消息提示 end--%>
+
     </div>
     <!-- //register -->
 </div>

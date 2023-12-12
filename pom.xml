@@ -16,8 +16,9 @@
         <maven.compiler.source>21</maven.compiler.source>
         <spring.version>6.1.1</spring.version>
         <junit.version>5.10.1</junit.version>
-        <log4j.version>2.22.0</log4j.version>
+        <log4j.sversion>2.22.0</log4j.sversion>
         <mybatis.generator.version>1.4.2</mybatis.generator.version>
+        <jackson.version>2.16.0</jackson.version>
     </properties>
 
     <dependencies>
@@ -213,9 +214,43 @@
         </dependency>
 
         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20231013</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.32</version>
+        </dependency>
+
+        <!-- Redisson -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.23.3</version>
+        </dependency>
+        <!-- Jedis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>4.3.1</version>
         </dependency>
 
         <dependency>

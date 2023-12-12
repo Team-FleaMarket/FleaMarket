@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员登录</title>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/admin/element/index.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <div id="container">
+        <el-container>
+            <el-header>FleaMarket</el-header>
+            <el-main>
+                <el-row>
+                    <el-col :span="8" :offset="8">
+                        <div id="loginBox">
+                            管理员登录<br>
+                            账号：<el-input v-model="admin.username" placeholder="账号"></el-input>
+                            <br>
+                            密码：<el-input type="password" v-model="admin.password" placeholder="密码"></el-input>
+                            <br>
+
+                            <el-button type="primary" @click="login">登录</el-button>
+                        </div>
+                    </el-col>
+                </el-row>
+            </el-main>
+            <el-footer>NPU  @2023</el-footer>
+        </el-container>
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                type: 'right',
+                admin: {
+                    username: '',
+                    password: '',
+                }
+            };
+        },
+        methods: {
+            login: function () {
+                axios.post("/admin/login", this.admin).then((res => {
+                    console.log(res.data)
+                    if (res.data === "ok") {
+                        this.$message({
+                            message: '登录成功，正在跳转',
+                            type: 'success'
+                        });
+                        setTimeout(() => {
+                            window.location.href = "home.html";
+                        }, 100);
+                    } else {
+                        this.$message.error('用户名或密码错误');
+                    }
+                })).catch(error => {
+                    console.log(error);
+                })
+            }
+        }
+    });
+</script>
+
+</body>
+
+</html>
+
+
+<style>
+    /*整体样式*/
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body,html,.el-container,#app{
+        height: 100%;
+    }
+
+    /*放账号密码input的div*/
+    #loginBox{
+        background-color: #eee;
+        border-radius: 15px;
+        margin-top: 15%;
+    }
+
+    /*布局容器样式 main header fotter*/
+    .el-header {
+        background-color:deepskyblue;
+        color: #fff;
+        text-align: center;
+        line-height: 60px;
+        font-size: xx-large;
+        font-weight: bolder;
+
+    }
+    .el-footer{
+        background-color: #bbb;
+        color: #000;
+        text-align: center;
+        line-height: 60px;
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+    }
+    .el-main {
+        background-color: #fff;
+        color: #333;
+        text-align: center;
+        line-height: 80px;
+
+    }
+
+    /*    输入框样式*/
+    .el-input{
+        width: 50%;
+    }
+
+</style>

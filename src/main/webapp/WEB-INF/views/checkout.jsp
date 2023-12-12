@@ -11,39 +11,11 @@
 <html>
 <head>
     <title>Checkout</title>
-    <!-- for-mobile-apps -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Best Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-    function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- //for-mobile-apps -->
-    <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${pageContext.request.getContextPath()}/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- js -->
-    <script src="${pageContext.request.getContextPath()}/static/js/jquery.min.js"></script>
-    <!-- //js -->
-    <!-- cart -->
-    <script src="${pageContext.request.getContextPath()}/static/js/simpleCart.min.js"> </script>
-    <!-- cart -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.getContextPath()}/static/css/jquery-ui.css">
-    <!-- for bootstrap working -->
-    <script type="text/javascript" src="${pageContext.request.getContextPath()}/static/js/bootstrap-3.1.1.min.js"></script>
-    <!-- //for bootstrap working -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <!-- animation-effect -->
-    <link href="${pageContext.request.getContextPath()}/static/css/animate.min.css" rel="stylesheet">
-    <script src="${pageContext.request.getContextPath()}/static/js/wow.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
-    <!-- //animation-effect -->
+    <%@ include file="components/jspheader.jsp"%>
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/components/header.jsp"%>
+<%@ include file="./components/header.jsp"%>
 <!-- //header -->
 <!-- breadcrumbs -->
 <div class="breadcrumbs">
@@ -194,95 +166,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //checkout -->
 <!-- footer -->
-<div class="footer">
-    <div class="container">
-        <div class="footer-grids">
-            <div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
-                <h3>About Us</h3>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse.<span>Excepteur sint occaecat cupidatat
-						non proident, sunt in culpa qui officia deserunt mollit.</span></p>
-            </div>
-            <div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
-                <h3>Contact Info</h3>
-                <ul>
-                    <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-                    <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
-                </ul>
-            </div>
-            <div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".7s">
-                <h3>Flickr Posts</h3>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="single.html"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".8s">
-                <h3>Blog Posts</h3>
-                <div class="footer-grid-sub-grids">
-                    <div class="footer-grid-sub-grid-left">
-                        <a href="single.html"><img src="images/9.jpg" alt=" " class="img-responsive" /></a>
-                    </div>
-                    <div class="footer-grid-sub-grid-right">
-                        <h4><a href="single.html">culpa qui officia deserunt</a></h4>
-                        <p>Posted On 25/3/2016</p>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <div class="footer-grid-sub-grids">
-                    <div class="footer-grid-sub-grid-left">
-                        <a href="single.html"><img src="images/10.jpg" alt=" " class="img-responsive" /></a>
-                    </div>
-                    <div class="footer-grid-sub-grid-right">
-                        <h4><a href="single.html">Quis autem vel eum iure</a></h4>
-                        <p>Posted On 25/3/2016</p>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        <div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
-            <h2><a href="index.html">Best Store <span>shop anywhere</span></a></h2>
-        </div>
-        <div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
-            <p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-        </div>
-    </div>
-</div>
+<%@ include file="./components/footer.jsp"%>
 <!-- //footer -->
 </body>
 </html>
