@@ -16,7 +16,8 @@
         <maven.compiler.source>21</maven.compiler.source>
         <spring.version>6.1.1</spring.version>
         <junit.version>5.10.1</junit.version>
-        <log4j.sversion>2.22.0</log4j.sversion>
+<!--        <log4j.sversion>2.22.0</log4j.sversion>-->
+        <log4j.version>2.22.0</log4j.version>
         <mybatis.generator.version>1.4.2</mybatis.generator.version>
         <jackson.version>2.16.0</jackson.version>
     </properties>
@@ -275,7 +276,37 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>static/**</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>static/**</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
