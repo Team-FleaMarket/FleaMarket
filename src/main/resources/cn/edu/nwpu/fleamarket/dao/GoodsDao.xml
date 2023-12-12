@@ -58,4 +58,9 @@
         SELECT * FROM goods WHERE goods_status = 0 AND status = 1
     </select>
 
+    <select id="getGoodsByCategoryPages" resultMap="BaseResultMap">
+        SELECT * FROM goods WHERE cate=#{cate} AND status = 1 ORDER BY id DESC LIMIT #{offset},#{pageSize}
+    </select>
+
+
 </mapper>
