@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品审核</title>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/admin/element/index.js"></script>
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+<body>
+<div id="app">
+    <div id="container">
+        <el-container>
+            <el-header>FleaMarket</el-header>
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="1" @click="to_home">主页</el-menu-item>
+            <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
+            <el-menu-item index="3">审核商品</el-menu-item>
+            <el-menu-item index="4" disabled>查询商品</el-menu-item>
+        </el-menu>
+            <el-main>
+                <el-table :data="goodsList" style="width: 100%">
+                    <el-table-column prop="id" label="id" width="180"></el-table-column>
+                    <el-table-column prop="cate" label="商品类别" width="180"></el-table-column>
+                    <el-table-column prop="goodsName" label="商品名称" width="180"></el-table-column>
+                    <el-table-column prop="imagePath" label="商品图片" width="180"></el-table-column>
+                    <el-table-column prop="description" label="商品描述"></el-table-column>
+                    <el-table-column
+                            fixed="right"
+                            label="操作"
+                            width="120">
+                        <template slot-scope="scope">
+
+                            <el-button
+                                    type="primary"
+                                    size="mini"
+                                    @click="pass()">通过
+                            </el-button>
+
+                            <el-button
+                                    type="info"
+                                    size="mini"
+                                    @click="reject">拒绝
+                            </el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-main>
+            <el-footer>NPU @2023</el-footer>
+        </el-container>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                admin: {
+                    username: '',
+                    password: '',
+                },
+                activeIndex: '3',
+                goods: {
+                    id: 0,
+
+                },
+                goodsList: []
+            };
+        },
+        methods: {
+            pass(id) {
+
+            },
+            reject(id) {
+
+            },
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            to_user: function () {
+                window.location.href = "users.html";
+            },
+            to_home: function () {
+                window.location.href = "home.html";
+            },
+        }
+    });
+</script>
+
+</body>
+</html>

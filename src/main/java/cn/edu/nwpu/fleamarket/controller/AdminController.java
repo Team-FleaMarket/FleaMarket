@@ -1,113 +1,66 @@
 package cn.edu.nwpu.fleamarket.controller;
 
-import cn.edu.nwpu.fleamarket.pojo.Goods;
-import cn.edu.nwpu.fleamarket.pojo.User;
-import cn.edu.nwpu.fleamarket.service.GoodsService;
-import cn.edu.nwpu.fleamarket.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
-import org.json.JSONObject;
+import cn.edu.nwpu.fleamarket.pojo.Admin;
+import cn.edu.nwpu.fleamarket.service.AdminService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
- * @Author: Hanwen
- * @Date: 2018/6/8 上午9:00
+ * 管理员controller
  */
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
-    private UserService userService;
-    @Autowired
-    private GoodsService goodsService;
+    private AdminService adminService;
 
-    @RequestMapping("/login")
-    public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/admin/login");
-        return modelAndView;
-    }
-
-    @ResponseBody
-    @RequestMapping("manager")
-    public String manager(HttpServletRequest request) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", "");
-        String userName = request.getParameter("studentNo");
-        String password = request.getParameter("pwd");
-        boolean succ = userService.findManager(userName, password);
-        if(succ){
-            User user = new User();
-            user.setUserName(userName);
-            user.setPassword(password);
-            request.getSession().setAttribute("admin", user);
-            jsonObject.put("result", "admin");
-            return jsonObject.toString();
-        }else{
-            jsonObject.put("result", "nameAndPwd");
+    /**
+     * 管理员登录
+     * @param admin 管理员 用户名和密码
+     * @param session httpsession
+     * @return 登录结果
+     */
+    @PostMapping("/login")
+    public String adminLogin(@RequestBody Admin admin, HttpSession session) {
+        if (adminService.login(admin)) {
+            session.setAttribute("admin", admin.getUsername());
+            return "ok";
         }
-        return jsonObject.toString();
+        return "err";
     }
 
-    @RequestMapping("bWFuYWdlcjEyMw==")
-    public ModelAndView hello(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-        List<Goods> goodsList = goodsService.selectByStatus(0);
-        modelAndView.addObject("goodsList", goodsList);
-        modelAndView.setViewName("admin/manager");
-        return modelAndView;
-    }
-
-    @RequestMapping("logout")
-    public ModelAndView logout(HttpServletRequest request){
-        ModelAndView modelAndView = new ModelAndView();
-        // 设置session为空
-        request.getSession().setAttribute("admin", null);
-        // 页面跳转
-        modelAndView.setViewName("/admin/login");
-        return modelAndView;
-    }
-
-    @RequestMapping("status")
-    public ModelAndView status(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-        String status = request.getParameter("status");
-        if("".equals(status) || status == null) {
-            status = "0";
-
+    /**
+     * 返回当前登录的管理员用户名
+     * @param session httpsession
+     * @return 当前登录的管理员用户名
+     */
+    @GetMapping
+    public String getUsername(HttpSession session) {
+        String name = (String) session.getAttribute("admin");
+        if (name == null) {
+            return "Invalid";
         }
-        if("0".equals(status)) {
-            request.getSession().setAttribute("active", "0");
-        }else {
-            request.getSession().setAttribute("active", "1");
+
+        return name;
+    }
+
+    /**
+     * 修改密码
+     * @param username 修改密码的管理员用户名
+     * @param pw 原密码
+     * @param npw 新密码
+     * @return 修改结果
+     */
+    @PostMapping("/update/pw")
+    public String changePW(@RequestParam("username") String username, @RequestParam("pw") String pw, @RequestParam("npw") String npw) {
+        String password = adminService.getPwByUsername(username);
+        if(!password.equals(pw)) {
+            return "err";
         }
-        List<Goods> goodsList = goodsService.selectByStatus(Integer.valueOf(status));
-        modelAndView.addObject("goodsList", goodsList);
-        modelAndView.setViewName("admin/manager");
-        return modelAndView;
+        adminService.updatePw(username, npw);
+        return "ok";
     }
-
-    @ResponseBody
-    @RequestMapping("/changeGoodsStatus")
-    public ModelAndView changeGoodsStatus(HttpServletRequest request)throws Exception{
-        ModelAndView modelAndView = new ModelAndView();
-        String status = request.getParameter("status");
-        String goodsId = request.getParameter("goodsId");
-
-        Goods goods = new Goods();
-        goods.setId(Integer.valueOf(goodsId));
-        goods.setStatus(Integer.valueOf(status));
-        goodsService.updateGoodsStatus(goods);
-
-        modelAndView.setViewName("redirect:/admin/status");
-        return modelAndView;
-    }
-
 
 }
