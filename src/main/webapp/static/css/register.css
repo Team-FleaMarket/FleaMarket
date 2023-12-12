@@ -110,10 +110,10 @@
     /*margin: 1.5em 0 0;*/
 }
 
-.register .form-grids input[type="submit"] {
+.register .form-grids button {
     outline: none;
     border: none;
-    padding: 10px 0;
+    padding: 8px 0;
     font-size: 1em;
     color: #fff;
     display: block;

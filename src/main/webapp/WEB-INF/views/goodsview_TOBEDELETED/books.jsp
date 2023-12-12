@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Books</title>
-    <%@ include file="../components/jspheader.jsp"%>
+    <%@ include file="../components/jspheader.jsp" %>
 </head>
 
 <body>
@@ -20,7 +20,8 @@
 <div class="breadcrumbs">
     <div class="container">
         <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-            <li><a href="${pageContext.request.contextPath}/views/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
+            <li><a href="${pageContext.request.contextPath}/views/index"><span class="glyphicon glyphicon-home"
+                                                                               aria-hidden="true"></span>主页</a></li>
             <li class="active">商品分类</li>
             <li class="active">教材</li>
         </ol>
@@ -238,7 +239,7 @@
 </div>
 <!-- //breadcrumbs -->
 <!-- footer -->
-<%@include file="components/footer.jsp" %>
+<%@include file="../components/footer.jsp" %>
 <!-- //footer -->
 </body>
 </html>

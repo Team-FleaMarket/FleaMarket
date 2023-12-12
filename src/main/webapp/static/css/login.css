@@ -106,11 +106,11 @@
     /*margin: 1.5em 0 0;*/
 }
 
-.login .form-grids input[type="submit"] {
+.login .form-grids button {
     outline: none;
     border: none;
     padding: 0.5em 0;
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: #fff;
     display: block;
     width: 40%;

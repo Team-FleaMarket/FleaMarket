@@ -5,7 +5,8 @@
 <html>
 <head>
     <title>Login</title>
-    <%@ include file="components/jspheader.jsp"%>
+    <%@ include file="components/jspheader.jsp" %>
+    <link href="${pageContext.request.contextPath}/static/css/login.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
 <body>
@@ -181,7 +182,6 @@
                                                                                         aria-hidden="true">
                     </span>主页</a>
                 </c:if>
-                </a>
             </li>
             <li class="active">登陆页面</li>
 
@@ -202,34 +202,19 @@
             <h3 class="animated wow zoomIn" data-wow-delay=".5s">登录</h3>
             <p class="est animated wow zoomIn" data-wow-delay=".5s">Login to your account...</p>
             <div class="login-form-grids form-grids animated wow slideInUp" data-wow-delay=".5s">
-                <form action="${pageContext.request.getContextPath()}/user/login" id="form"
-                      class="animated wow slideInUp"
-                      data-wow-delay=".5s">
+                <form id="form" class="animated wow slideInUp" data-wow-delay=".5s">
                     <input type="text" id="studentNo" name="studentNo" placeholder="输入学号"
                            onkeyup="value=value.replace(/[^\d]/g,'')">
                     <input type="password" id="password" name="password" placeholder="密码">
-                    <%--<div class="forgot">
-                        <a href="#">忘记密码 ?</a>
-                    </div>--%>
-                    <input type="submit" id="chk" name="chk" value="登录" onclick="return loginCheck()">
-                    <button type="button" class="btn btn-primary" id="liveToastBtn" >登录</button>
-                    <%--                    <a href="<c:url value="http://localhost:8080/FleaMarket/user/login" />">登录</a>--%>
-                    <%--
-    <input class="btn btn-lg btn-primary btn-block" type="button" onclick="return loginCheck()" value="登陆">--%>
-
+                    <button type="button" class="btn btn-primary" id="liveToastBtn">登录</button>
                 </form>
             </div>
             <p class="animated wow slideInUp" data-wow-delay=".5s">新用户？请点击<a
-                    href="${pageContext.request.contextPath}/views/register">注册</a></p>
-            <%--<h4 class="animated wow slideInUp" data-wow-delay=".5s">新用户</h4>
-            <p class="animated wow slideInUp" data-wow-delay=".5s">
-                <a href="${pageContext.request.contextPath}/views/register">注册</a>
-                (或) 返回
-                <a href="${pageContext.request.contextPath}/">主页
-                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>--%>
+                    href="${pageContext.request.contextPath}/register">注册</a></p>
             <%-- 登录成功或失败消息提示 --%>
             <div class="position-fixed bottom-0 end-0 p-3 col-xl-2" style="z-index: 5;">
-                <div id="liveToast" class="toast hide" data-bs-animation="false" role="alert" aria-live="assertive" aria-atomic="true">
+                <div id="liveToast" class="toast hide" data-bs-animation="false" role="alert" aria-live="assertive"
+                     aria-atomic="true">
                     <div class="toast-header text-black" id="toast-header">
                         <strong class="me-auto">消息提示</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -240,20 +225,23 @@
                 </div>
             </div>
             <script type="module">
-                import { loginAPI } from '/static/js/apis/student.js'
+                import {loginAPI} from '/static/js/apis/student.js'
+
                 document.querySelector("#liveToastBtn").onclick = async () => {
                     var studentNo = $("input[name=studentNo]").val()
                     var password = $("input[name=password]").val()
                     var message = ""
                     try {
-                        var response = await loginAPI({ studentNo, password })
+                        var response = await loginAPI({studentNo, password})
                         message = response.data
                         document.getElementById("toast-body").innerText = message
                         document.getElementById("toast-header").classList.remove("bg-danger")
                         document.getElementById("toast-header").classList.add("bg-success")
                         window.location.href = window.location.origin
-                    } catch(error) {
+                    } catch (error) {
                         message = error.response.data
+                        console.log("------------")
+                        console.log(error)
                         document.getElementById("toast-body").innerText = message;
                         document.getElementById("toast-header").classList.remove("bg-success")
                         document.getElementById("toast-header").classList.add("bg-danger")
@@ -268,83 +256,5 @@
 <!-- //login -->
 <!-- footer -->
 <%@include file="components/footer.jsp" %>
-<%--<div class="footer">
-    <div class="container">
-        <div class="footer-grids">
-            <!--banner-bottom-grid-left-->
-            <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
-                <h3>关于我们</h3>
-                <p>足不出户获得最全的商品信息，</p>
-                <p>在这里找寻你急需要的商品，</p>
-                <p>在这里找寻你最喜欢的商品，</p>
-                <p>这里有你想要的，这里有你喜欢的，</p>
-                <p>还在等什么，赶快行动起来吧！</p>
-            </div>
-
-            <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
-                <h3>联系我们</h3>
-                <ul>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
-                            href="mailto:info@example.com">张旱文 123456789@qq.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
-                            href="mailto:info@example.com">徐孟达 dxxmda@126.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
-                            href="mailto:info@example.com">许多 13817717084@163.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
-                            href="mailto:info@example.com">熊凯丽 65356789011@qq.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
-                            href="mailto:info@example.com">张乐乐 lelesunshine614@gmail.com</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".7s">
-                <h3>Partners</h3>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img
-                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
-                            class="img-responsive"/></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img
-                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
-                            class="img-responsive"/></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img
-                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
-                            class="img-responsive"/></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img
-                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
-                            class="img-responsive"/></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img
-                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
-                            class="img-responsive"/></a>
-                </div>
-                <div class="footer-grid-left">
-                    <a href="http://www.shnu.edu.cn/"><img
-                            src="${pageContext.request.getContextPath()}/static/images/13.png" alt=" "
-                            class="img-responsive"/></a>
-                </div>
-
-
-                <div class="clearfix"></div>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
-        <div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
-            <h2><a href="${pageContext.request.contextPath}/views/index">GoodsWill <span>shop anywhere</span></a></h2>
-        </div>
-        <div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
-            <p>Copyright &copy; 2018.Company name All rights reserved.
-                <a href="${pageContext.request.contextPath}/views/index" target="_blank" title="GoodsWill">GoodsWill</a>
-        </div>
-    </div>
-</div>--%>
-<!-- //footer -->
 </body>
 </html>
