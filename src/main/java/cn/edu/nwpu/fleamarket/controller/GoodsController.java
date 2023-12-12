@@ -1,13 +1,14 @@
 package cn.edu.nwpu.fleamarket.controller;
 
 import cn.edu.nwpu.fleamarket.pojo.Goods;
-import cn.edu.nwpu.fleamarket.pojo.User;
+import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload2.core.DiskFileItem;
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItemFactory;
 import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,16 +22,15 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @Author: Hanwen
- * @Date: 2018/6/7 下午4:48
- */
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private RedissonClient redissonClient;
 
     @RequestMapping("/insertGoods")
     public ModelAndView insertGoods(HttpServletRequest request, Goods goods)throws Exception{
@@ -91,11 +91,11 @@ public class GoodsController {
                         String type = diskFileItem.getContentType();    // 文件类型
                         InputStream in = diskFileItem.getInputStream(); // 上传文件流
 
-                        /*
-                         *  四、文件名重名
+                        /* *  四、文件名重名
                          *  对于不同用户readme.txt文件，不希望覆盖！
                          *  后台处理： 给用户添加一个唯一标记!
-                         */
+                         **/
+
 
                         // a. 随机生成一个唯一标记
                         String id = UUID.randomUUID().toString();
@@ -123,7 +123,7 @@ public class GoodsController {
             e.printStackTrace();
         }
 
-        User user = (User)request.getSession().getAttribute("user");
+        Student student = (Student)request.getSession().getAttribute("student");
 
         goods.setStatus(0);
         goods.setGoodsStatus(0);
@@ -133,10 +133,10 @@ public class GoodsController {
         goods.setGoodsName(goodsName);
         goods.setDegree(degree);
         goods.setImagePath(fileName);
-        goods.setStudentNo(user.getStudentNo());
+        goods.setStudentNo(student.getStudentNo());
         goodsService.insertGoods(goods);
 
-        modelAndView.setViewName("redirect:/views/managecenter");
+        modelAndView.setViewName("redirect:/managecenter");
         return modelAndView;
     }
 
