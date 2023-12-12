@@ -320,32 +320,7 @@
         </div>
     </div>
 </div>
-<%--        <div class="col-md-7  products-left">--%>
-<%--            <div class="col-md-10 categories animated wow slideInUp single-right-left simpleCart_shelfItem animated wow slideInRight" data-wow-delay=".5s">--%>
-<%--                <h4><span class="item_price">基本信息</span></h4>--%>
-<%--                <div class="color-quality">--%>
-<%--                    <div class="color-quality-left">--%>
-<%--                        <p>学号：${sessionScope.user.studentNo}</p><h5></h5>--%>
-<%--                        <p>昵称：${sessionScope.user.userName}</p><h5></h5>--%>
-<%--                        <p>微信号：${sessionScope.user.wechat}</p><h5></h5>--%>
-<%--                        <p>手机号：${sessionScope.user.phone}</p><h5></h5>--%>
-<%--                        <p>邮箱：${sessionScope.user.email}</p><h5></h5>--%>
-<%--                        <li><a href="insert">添加商品</a> <span></span></li>--%>
-<%--                        <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=0">待审核</a> <span></span></li>--%>
-<%--                        <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=1">已审核</a> <span></span></li>--%>
-<%--                    </div>--%>
-<%--                    <div class="clearfix"> </div>--%>
-<%--                </div>--%>
 
-<%--                <div class="occasional">--%>
-<%--                    <div class="clearfix"> </div>--%>
-<%--                </div>--%>
-<%--                &lt;%&ndash;<div class="occasion-cart">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<a class="correct" href="register.html">修改 </a>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</div>&ndash;%&gt;--%>
-<%--            </div>--%>
-<%--            <div class="clearfix"> </div>--%>
-<%--        </div>--%>
 <div class="clearfix"></div>
 </div>
 </div>

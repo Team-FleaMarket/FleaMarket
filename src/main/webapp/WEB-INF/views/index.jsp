@@ -38,21 +38,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //animation-effect -->
 </head>
 <body>
+<%--header--%>
 <%@ include file="components/header.jsp"%>
+
+<!-- carousel -->
+<jsp:include page="/WEB-INF/views/components/carousel.jsp" />
+<%--<%@ include file="/WEB-INF/views/components/carousel.jsp"%>--%>
+
 <!-- //banner-bottom -->
 <!-- collections -->
 <div class="new-collections">
     <div class="container">
         <h3 class="animated wow zoomIn" data-wow-delay=".5s">商品</h3>
         <p class="est animated wow zoomIn" data-wow-delay=".5s">你想要的商品都在这里，你喜欢的商品在这里都能找到。</p>
-
         <div class="new-collections-grids">
             <h2 class="animated wow zoomIn" data-wow-delay=".5s">
                 <em>图书书籍</em>
                 <a class="header-grid-right" href="${pageContext.request.contextPath}/views/books">更多 >></a>
             </h2>
-
-
             <c:forEach items="${bookList}" var="goods">
                 <div class="col-md-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
@@ -82,7 +85,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </div>
                             </div>
                         </div>
-                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">${goods.goodsName}</a></h4>
+                        <h4><a href="${pageContext.request.getContextPath()}/WEB-INF/views/single?goodsId=${goods.id}">${goods.goodsName}</a></h4>
                         <p>教材类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
                             <p><span class="item_price">￥${goods.price}</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">立即查看 </a></p>

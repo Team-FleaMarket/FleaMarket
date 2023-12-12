@@ -17,7 +17,13 @@
 <body>
 <!-- header -->
 <%@ include file="/WEB-INF/views/components/header.jsp"%>
+
+<!-- carousel -->
+<jsp:include page="/WEB-INF/views/components/carousel.jsp" />
+<%--<%@ include file="/WEB-INF/views/components/carousel.jsp"%>--%>
+
 <!-- collections -->
+
 <div class="new-collections">
     <div class="container">
         <h3 class="animated wow zoomIn" data-wow-delay=".2s">商品</h3>
@@ -630,7 +636,6 @@
     </div>
 </div>
 
-<<<<<<< HEAD
 <!-- //new-timer -->
 <!-- collections-bottom -->
 <div class="collections-bottom">
