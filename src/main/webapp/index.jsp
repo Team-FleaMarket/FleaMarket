@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: root
-  Date: 2018/5/4
-  Time: 21:27
+  User: Zhang Xin
+  Date: 2023/12/12 0012
+  Time: 19:11
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,18 +12,92 @@
 <head>
     <title>Home</title>
     <%@ include file="/WEB-INF/views/components/jspheader.jsp"%>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- 引入 Bootstrap 样式 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="keywords" content="Best Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <!-- //for-mobile-apps -->
+    <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.css" rel="stylesheet" type="text/css"          media="all"/>
+    <link href="${pageContext.request.getContextPath()}/static/css/overviewProduct.css" rel="stylesheet" type="text/css"          media="all"/>
+    <!-- for bootstrap working -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script type="text/javascript"
+            src="${pageContext.request.getContextPath()}/static/js/bootstrap-3.1.1.min.js"></script>
+    <!-- //for bootstrap working -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+          rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+    <!-- timer -->
+    <link rel="stylesheet" href="${pageContext.request.getContextPath()}/static/css/jquery.countdown.css"/>
+    <!-- //timer -->
+    <!-- animation-effect -->
+    <link href="${pageContext.request.getContextPath()}/static/css/animate.min.css" rel="stylesheet">
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+
+    <script src="${pageContext.request.getContextPath()}/static/js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
 </head>
 
 <body>
 <!-- header -->
 <%@ include file="/WEB-INF/views/components/header.jsp"%>
-
 <!-- carousel -->
-<jsp:include page="/WEB-INF/views/components/carousel.jsp" />
-<%--<%@ include file="/WEB-INF/views/components/carousel.jsp"%>--%>
+<div class="container mt-4">
+    <!-- 轮播图容器 -->
+    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+        <!-- 轮播项容器 全部存储瓜大图片 显示瓜大特色-->
+        <div class="carousel-inner">
+            <!-- 第一张轮播项（激活状态） -->
+            <div class="carousel-item active">
+                <!-- 图片使用 JSTL 的 c:url 标签来获取完整的 URL -->
+                <img src="<c:url value="/static/images/carousel/bird's%20eye%20view.png"/>"
+                     class="d-block w-100"
+                     style="max-height: 600px;max-width: 100%" alt="bird's eye view">
+            </div>
+            <!-- 第二张轮播项 -->
+            <div class="carousel-item">
+                <!-- 图片使用 JSTL 的 c:url 标签来获取完整的 URL -->
+                <img src="<c:url value="/static/images/carousel/Forging%20swords%20for%20the%20country.jpg"/>"
+                     class="d-block w-100"
+                     style="max-height: 600px;max-width: 100%" alt="Forging swords for the country">
+            </div>
+            <!-- 第三张轮播项 -->
+            <div class="carousel-item">
+                <!-- 图片使用 JSTL 的 c:url 标签来获取完整的 URL -->
+                <img src="<c:url value="/static/images/carousel/Kai%20Xiang%20House.jpg"/>"
+                     class="d-block w-100"
+                     style="max-height: 600px;max-width: 100%" alt="Kai Xiang House">
+            </div>
+        </div>
 
-<!-- collections -->
+        <!-- 轮播控制按钮 - 上一张 -->
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <!-- 轮播控制按钮 - 下一张 -->
+        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
 
+    </div>
+</div>
+<!-- carousel -->
+
+<p></p>
+<!-- overviewProduct -->
 <div class="new-collections">
     <div class="container">
         <h3 class="animated wow zoomIn" data-wow-delay=".2s">商品</h3>
@@ -33,293 +107,379 @@
                 <em>图书书籍</em>
                 <a class="header-grid-right" href="${pageContext.request.contextPath}/views/books">更多 >></a>
             </h2>
-            <div class="row">
-                <div class="col-4 new-collections-grid">
+            <div class="row items">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/jc1.jpg" alt=" " class="img-responsive" height="400"/></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/jc1.jpg" alt=" "
+                                    class="img-responsive img-wrap" height="400"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">成本会计</a></h4>
                         <p>教材类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥15</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥15</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/jc2.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/jc2.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">动态网页设计与制作</a></h4>
+                        <h4>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">动态网页设计与制作</a>
+                        </h4>
                         <p>教材类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥22</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥22</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/jc3.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/jc3.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Deep Learning</a></h4>
+                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Deep Learning</a>
+                        </h4>
                         <p>教材类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥35</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥35</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/jc4.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/jc4.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">市场营销学</a></h4>
                         <p>教材类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p> <span class="item_price">￥12</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥12</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/ks1.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/ks1.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">CIA</a></h4>
                         <p>考试类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p> <span class="item_price">￥50</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥50</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/ks2.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/ks2.jpg" alt=" "
+                                    class="img-responsive item"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">初级会计实务</a></h4>
+                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">初级会计实务</a>
+                        </h4>
                         <p>考试类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥10</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥10</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/yswx1.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/yswx1.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">白洋淀纪事</a></h4>
                         <p>艺术文学类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥22</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥22</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/yswx2.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/yswx2.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">传统文学艺术赏析</a></h4>
+                        <h4>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">传统文学艺术赏析</a>
+                        </h4>
                         <p>艺术文学类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥15</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥15</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="clearfix"> </div>
+                <div class="clearfix"></div>
             </div>
         </div>
 
@@ -330,152 +490,238 @@
                 <a class="header-grid-right" href="${pageContext.request.contextPath}/views/sports">更多 >></a>
             </h2>
             <div class="row">
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/sh17.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/sh17.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">肥皂盒</a></h4>
                         <p>生活类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥3</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥3</span><a class="item_add"
+                                                                    href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/sh12.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/sh12.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">台灯</a></h4>
                         <p>生活类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥35</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥35</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
 
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/sh2.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/sh2.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">电风扇</a></h4>
                         <p>生活类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p></i> <span class="item_price">￥35</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p></i> <span class="item_price">￥35</span><a class="item_add"
+                                                                          href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/sh9.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/sh9.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">脸盆</a></h4>
                         <p>生活类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥10</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥10</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="clearfix"> </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
+                    <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                        <div class="new-collections-grid1-image">
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/sh9.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
+                            <div class="new-collections-grid1-image-pos">
+                                <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
+                            </div>
+                            <div class="new-collections-grid1-right">
+                                <div class="rating">
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">脸盆</a></h4>
+                        <p>生活类</p>
+                        <div class="new-collections-grid1-left simpleCart_shelfItem">
+                            <p><span class="item_price">￥10</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
             </div>
         </div>
 
@@ -485,158 +731,199 @@
                 <a class="header-grid-right" href="${pageContext.request.contextPath}/views/sports">更多 >></a>
             </h2>
             <div class="row">
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/yd2.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/yd2.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">乒乓</a></h4>
                         <p>运动类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥50</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥50</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/yd13.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/yd13.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">瑜伽垫</a></h4>
                         <p>运动类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥30</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥30</span><a class="item_add"
+                                                                     href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/mz15.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/mz15.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">口红</a></h4>
                         <p>美妆类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥100</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥100</span><a class="item_add"
+                                                                      href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="col-4 new-collections-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3 new-collections-grid">
                     <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                         <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5" class="product-image"><img src="${pageContext.request.getContextPath()}/static/images/mz19.jpg" alt=" " class="img-responsive" /></a>
+                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"
+                               class="product-image item"><img
+                                    src="${pageContext.request.getContextPath()}/static/images/mz19.jpg" alt=" "
+                                    class="img-responsive item-wrap"/></a>
                             <div class="new-collections-grid1-image-pos">
                                 <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
                             </div>
                             <div class="new-collections-grid1-right">
                                 <div class="rating">
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/2.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
                                     <div class="rating-left">
-                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" " class="img-responsive" />
+                                        <img src="${pageContext.request.getContextPath()}/static/images/1.png" alt=" "
+                                             class="img-responsive"/>
                                     </div>
-                                    <div class="clearfix"> </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
                         <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">纪梵希</a></h4>
                         <p>美妆类</p>
                         <div class="new-collections-grid1-left simpleCart_shelfItem">
-                            <p><span class="item_price">￥200</span><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a></p>
+                            <p><span class="item_price">￥200</span><a class="item_add"
+                                                                      href="${pageContext.request.getContextPath()}/views/single?goodsId=5">立即查看 </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="clearfix"> </div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
 </div>
+<!-- overviewProduct -->
 
-<!-- //new-timer -->
+
 <!-- collections-bottom -->
 <div class="collections-bottom">
     <div class="container">
@@ -660,5 +947,8 @@
 <!-- footer -->
 <%@ include file="/WEB-INF/views/components/footer.jsp"%>
 <!-- //footer -->
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 </body>
 </html>

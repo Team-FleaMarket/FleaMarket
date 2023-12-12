@@ -1,17 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
-  student: root
+  User: root
   Date: 2018/5/21
   Time: 14:08
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>管理中心</title>
-    <%@ include file="components/jspheader.jsp"%>
+    <%@ include file="components/jspheader.jsp" %>
     <script language="JavaScript">
         // $(document).ready(function() {
         //     //绑定下拉框change事件，当下来框改变时调用 SelectChange()方法
@@ -43,10 +44,8 @@
 </head>
 
 <body>
-
-
-<%@ include file="/WEB-INF/views/components/header.jsp"%>
-<div class="manager">
+<%@ include file="./components/header.jsp" %>
+<div class="single">
     <div class="container">
         <div class="">
             <div class="container">
@@ -101,7 +100,6 @@
                                         <a href="${pageContext.request.getContextPath()}/views/managecenter?status=1" >待出售</a> |
                                         <a href="${pageContext.request.getContextPath()}/views/managecenter?status=2" >已出售</a> |
                                         <a href="${pageContext.request.getContextPath()}/views/managecenter?status=3">我的购买</a> |
-                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=-1" >审核未通过</a> |
                                         <a href="/views/insert">添加商品</a> <span></span>
                                     </div>
                                     <br>
@@ -337,185 +335,11 @@
     <div class="clearfix"> </div>
 </div>
 </div>
-<!-- -->
-
-<!-- checkout -->
-<%--<div class="checkout">--%>
-<%--    <div class="container">--%>
-<%--        <h3 class="animated wow slideInLeft" data-wow-delay=".5s">--%>
-<%--            <c:if test="${status == 1}">已审核: </c:if>--%>
-<%--            <c:if test="${status == 0}">待审核: </c:if>--%>
-<%--            <span>${goodsList.size()} 件商品</span></h3>--%>
-<%--        <div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">--%>
-<%--            <table class="timetable_sub">--%>
-<%--                <thead>--%>
-<%--                <tr>--%>
-<%--                    <th>序号</th>--%>
-<%--                    <th>商品名称</th>--%>
-<%--                    <!--<th>速度快放假</th>-->--%>
-<%--                    <th>商品分类</th>--%>
-<%--                    <th>价格</th>--%>
-<%--                    <th>状态</th>--%>
-<%--                    <th>商品状态</th>--%>
-<%--                    <!--<th>Remove</th>-->--%>
-<%--                </tr>--%>
-<%--                </thead>--%>
-
-<%--                <c:forEach items="${goodsList}" var="goods" varStatus="vs">--%>
-<%--                    <tr class="rem1">--%>
-<%--                        <td class="invert">${vs.index + 1}</td>--%>
-<%--                        <td class="invert-image"><a href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">${goods.goodsName}</a></td>--%>
-<%--                        <td class="invert">--%>
-<%--                            <c:if test="${goods.cate == '1'}">图书书籍</c:if>--%>
-<%--                            <c:if test="${goods.cate == '2'}">日用百货</c:if>--%>
-<%--                            <c:if test="${goods.cate == '3'}">娱乐</c:if>--%>
-<%--                        </td>--%>
-<%--                        <td class="invert">&yen${goods.price}</td>--%>
-<%--                        <td class="invert">--%>
-<%--                            <c:if test="${goods.status == 0}">待审核</c:if>--%>
-<%--                            <c:if test="${goods.status == 1}">已审核</c:if>--%>
-<%--                        </td>--%>
-<%--                        <td class="invert">--%>
-<%--                            <select <c:if test="${goods.status == 0}">disabled</c:if> id="checkGoodsStatus${vs.index+1}" name="checkGoodsStatus${vs.index+1}" onchange="SelectChange('checkGoodsStatus${vs.index+1}')">--%>
-<%--                                <option value="0.${goods.id}" <c:if test="${goods.goodsStatus == 0}">selected</c:if>>未出售</option>--%>
-<%--                                <option value="1.${goods.id}" <c:if test="${goods.goodsStatus == 1}">selected</c:if>>已出售</option>--%>
-<%--                            </select>--%>
-
-
-<%--                        </td>--%>
-<%--                    </tr>--%>
-<%--                </c:forEach>--%>
-
-
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">1</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem2">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">2</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">羽毛球拍</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">日用百货：运动类</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen128.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem3">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">3</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">小米头戴式耳机</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">娱乐：电子产品</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen499.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核 </td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">4</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">5</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">6</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;<tr class="rem1">&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">7</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert-image"><a href="single.html">深度学习</a></td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">图书书籍</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">&yen168.00</td>&ndash;%&gt;--%>
-<%--                    &lt;%&ndash;<td class="invert">已审核</td>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;</tr>&ndash;%&gt;--%>
-<%--            </table>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<!-- //checkout -->
-
-<!--&lt;!&ndash; banner-bottom &ndash;&gt;-->
-<%--<div class="banner-bottom">--%>
-<%--    <div class="container">--%>
-<%--        <h3 class="animated wow zoomIn" data-wow-delay=".5s">热门商品</h3>--%>
-<%--        <div class="banner-bottom-grids">--%>
-<%--            <div class="banner-bottom-grid-left animated wow slideInLeft" data-wow-delay=".5s">--%>
-<%--                <div class="grid">--%>
-<%--                    <figure class="effect-julia">--%>
-<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp1.jpg" alt=" " class="img-responsive" />--%>
-<%--                    </figure>--%>
-<%--                    <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">--%>
-<%--                        <div class="banner-bottom-grid-left-grid1">--%>
-<%--                            <img src="${pageContext.request.getContextPath()}/static/images/rmsp2.jpg" alt=" " class="img-responsive" />--%>
-<%--                        </div>--%>
-<%--                        <div class="banner-bottom-grid-left1-position">--%>
-<%--                            <div class="banner-bottom-grid-left1-pos1">--%>
-<%--                                <p>Latest New Collections</p>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="banner-bottom-grid-left1 animated wow slideInUp" data-wow-delay=".5s">--%>
-<%--                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">--%>
-<%--                    <div class="banner-bottom-grid-left-grid1">--%>
-<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp3.jpg" alt=" " class="img-responsive" />--%>
-<%--                    </div>--%>
-<%--                    <div class="banner-bottom-grid-left1-pos">--%>
-<%--                        <p>Discount 45%</p>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">--%>
-<%--                    <div class="banner-bottom-grid-left-grid1">--%>
-<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp4.jpg" alt=" " class="img-responsive" />--%>
-<%--                    </div>--%>
-<%--                    <div class="banner-bottom-grid-left1-position">--%>
-<%--                        <div class="banner-bottom-grid-left1-pos1">--%>
-<%--                            <p>Latest New Collections</p>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="banner-bottom-grid-right animated wow slideInRight" data-wow-delay=".5s">--%>
-<%--                <div class="banner-bottom-grid-left-grid grid-left-grid1">--%>
-<%--                    <div class="banner-bottom-grid-left-grid1">--%>
-<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp5.jpg" alt=" " class="img-responsive" />--%>
-<%--                        <!--<img src="images/3.jpg" alt=" " class="img-responsive" />-->--%>
-<%--                    </div>--%>
-<%--                    <div class="grid-left-grid1-pos">--%>
-<%--                        <p>top and classic designs </p>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">--%>
-<%--                    <div class="banner-bottom-grid-left-grid1">--%>
-<%--                        <img src="${pageContext.request.getContextPath()}/static/images/rmsp6.jpg" alt=" " class="img-responsive" />--%>
-<%--                    </div>--%>
-<%--                    <div class="banner-bottom-grid-left1-position">--%>
-<%--                        <div class="banner-bottom-grid-left1-pos1">--%>
-<%--                            <p>2016 Collection</p>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="clearfix"> </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
 <!-- //banner-bottom -->
 
 <!-- footer -->
-<%@ include file="components/footer.jsp"%>
+<%@ include file="./components/footer.jsp" %>
+
 <!-- //footer -->
 </body>
 </html>

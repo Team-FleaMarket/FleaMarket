@@ -60,4 +60,10 @@
     <select id="selectByGoodsStatusAndStudentNo" resultMap="BaseResultMap">
         SELECT * FROM goods WHERE goods_status = 1 AND student_no=#{studentNo}
     </select>
+
+    <select id="getGoodsByCategoryPages" resultMap="BaseResultMap">
+        SELECT * FROM goods WHERE cate=#{cate} AND status = 1 ORDER BY id DESC LIMIT #{offset},#{pageSize}
+    </select>
+
+
 </mapper>

@@ -47,6 +47,7 @@ public class PageController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
+
     @RequestMapping("/register")
     public ModelAndView register(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
@@ -82,23 +83,22 @@ public class PageController {
     }
 
     private void ByCate(List<Goods> goodsList, List<Goods> bookList, List<Goods> storeList, List<Goods> amazeList) {
-        for(Goods goods : goodsList) {
-            if("1".equals(goods.getCate())){
+        for (Goods goods : goodsList) {
+            if ("1".equals(goods.getCate())) {
                 bookList.add(goods);
             }
-            if("2".equals(goods.getCate())) {
+            if ("2".equals(goods.getCate())) {
                 storeList.add(goods);
             }
-            if("3".equals(goods.getCate())) {
+            if ("3".equals(goods.getCate())) {
                 amazeList.add(goods);
             }
         }
     }
 
 
-
     @RequestMapping("/checkout")
-    public ModelAndView checkout(HttpServletRequest request)throws Exception{
+    public ModelAndView checkout(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("checkout");
         return modelAndView;
@@ -114,14 +114,14 @@ public class PageController {
     }
 
     @RequestMapping("/products")
-    public ModelAndView products(HttpServletRequest request)throws Exception{
+    public ModelAndView products(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
         return modelAndView;
     }
 
     @RequestMapping("/views/books")
-    public ModelAndView books(HttpServletRequest request)throws Exception{
+    public ModelAndView books(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("navigation", "教材");
         List<Goods> goodsList = goodsService.selectAllGoods();
@@ -132,12 +132,12 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("books");
         return modelAndView;
     }
 
     @RequestMapping("/views/tests")
-    public ModelAndView tests(HttpServletRequest request)throws Exception{
+    public ModelAndView tests(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("navigation", "考试");
         List<Goods> goodsList = goodsService.selectAllGoods();
@@ -153,7 +153,7 @@ public class PageController {
     }
 
     @RequestMapping("/views/literature")
-    public ModelAndView literature(HttpServletRequest request)throws Exception{
+    public ModelAndView literature(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("navigation", "文学");
         List<Goods> goodsList = goodsService.selectAllGoods();
@@ -169,7 +169,7 @@ public class PageController {
     }
 
     @RequestMapping("/views/stationery")
-    public ModelAndView stationery(HttpServletRequest request)throws Exception{
+    public ModelAndView stationery(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("navigation", "文具");
         List<Goods> goodsList = goodsService.selectAllGoods();
@@ -185,7 +185,7 @@ public class PageController {
     }
 
     @RequestMapping("/views/life")
-    public ModelAndView life(HttpServletRequest request)throws Exception{
+    public ModelAndView life(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("navigation", "生活");
         List<Goods> goodsList = goodsService.selectAllGoods();
@@ -201,7 +201,7 @@ public class PageController {
     }
 
     @RequestMapping("/views/sports")
-    public ModelAndView sports(HttpServletRequest request)throws Exception{
+    public ModelAndView sports(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("navigation", "运动");
         List<Goods> goodsList = goodsService.selectAllGoods();
@@ -217,7 +217,7 @@ public class PageController {
     }
 
     @RequestMapping("/views/beautymakeup")
-    public ModelAndView beautymakeup(HttpServletRequest request)throws Exception{
+    public ModelAndView beautymakeup(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("navigation", "美妆");
         List<Goods> goodsList = goodsService.selectAllGoods();
@@ -233,7 +233,7 @@ public class PageController {
     }
 
     @RequestMapping("/views/electronicproducts")
-    public ModelAndView electronicproducts(HttpServletRequest request)throws Exception{
+    public ModelAndView electronicproducts(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("navigation", "电子产品");
         List<Goods> goodsList = goodsService.selectAllGoods();

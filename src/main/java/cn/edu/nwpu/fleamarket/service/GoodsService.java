@@ -26,4 +26,6 @@ public interface GoodsService {
     List<Goods> selectByStatusAndGoodsStatus();
 
     List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo);
+
+    List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize);
 }
