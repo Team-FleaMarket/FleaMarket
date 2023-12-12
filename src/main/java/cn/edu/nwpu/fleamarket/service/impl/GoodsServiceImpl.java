@@ -13,7 +13,7 @@ import java.util.List;
  * @Date: 2018/6/7 下午4:36
  */
 @Service
-public class GoodsServiceImpl implements GoodsService{
+public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsDao goodsDao;
@@ -60,6 +60,14 @@ public class GoodsServiceImpl implements GoodsService{
         return goodsDao.selectByStatusAndStudentNo(goods);
     }
 
+    public List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo) {
+        Goods goods = new Goods();
+        goods.setGoodsStatus(goodsStatus);
+        goods.setStudentNo(studentNo);
+        System.out.println("select");
+        return goodsDao.selectByGoodsStatusAndStudentNo(goods);
+    }
+
     public void updateGoodsStatus(Goods goods) {
         goodsDao.updateGoodsStatus(goods);
     }
@@ -74,3 +82,5 @@ public class GoodsServiceImpl implements GoodsService{
         return goodsDao.getGoodsByCategoryPages(cate, pageNum*pageSize, pageSize);
     }
 }
+
+
