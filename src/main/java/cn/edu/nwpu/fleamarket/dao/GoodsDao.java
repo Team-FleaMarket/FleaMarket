@@ -24,4 +24,6 @@ public interface GoodsDao {
     void updateGoodsStatus(Goods goods);
 
     List<Goods> selectByStatusAndGoodsStatus();
+
+    List<Goods> selectByGoodsStatusAndStudentNo(Goods goods);
 }

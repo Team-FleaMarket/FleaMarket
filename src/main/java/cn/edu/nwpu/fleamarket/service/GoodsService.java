@@ -24,4 +24,6 @@ public interface GoodsService {
     void updateGoodsStatus(Goods goods);
 
     List<Goods> selectByStatusAndGoodsStatus();
+
+    List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo);
 }

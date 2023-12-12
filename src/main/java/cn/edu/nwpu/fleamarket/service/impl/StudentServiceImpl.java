@@ -36,6 +36,7 @@ public class StudentServiceImpl implements StudentService {
         if (dataBaseStudent == null || !dataBaseStudent.getPassword().equals(student.getPassword())) {
             return null;
         }
+        dataBaseStudent.setStudentNo(student.getStudentNo());
         return dataBaseStudent;
     }
 

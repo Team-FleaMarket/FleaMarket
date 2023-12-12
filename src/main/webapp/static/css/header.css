@@ -1,7 +1,7 @@
 .header{
     margin-top: 20px;
 }
-a{
+.header a{
     text-decoration: none;
     color: #1a1e21;
 }
@@ -21,8 +21,8 @@ a{
 }
 .logo-nav-left1 {
     float: left;
-    margin-top: 25px;
-    margin-left: 2px;
+
+    /*margin-left: 2px;*/
 }
 .logo-nav-left1 ul li a{
     font-size:1.5em;
@@ -80,8 +80,6 @@ a{
 }
 .sb-search-input {
     position: absolute;
-    top: 0px;
-    left: 0px;
     border: none;
     outline: none;
     background:#F5F5F5;
@@ -136,7 +134,7 @@ a{
 .sb-search.sb-search-open .sb-search-submit, .sb-search .sb-search-submit {
     z-index: 90;
 }
-.login{
+.login-button{
     margin-top: 25px;
     font-size:1.5em;
 }
