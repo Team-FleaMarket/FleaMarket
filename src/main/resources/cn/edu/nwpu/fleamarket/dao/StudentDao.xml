@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.nwpu.fleamarket.dao.StudentDao">
+
+    <resultMap id="StudentResultMap" type="cn.edu.nwpu.fleamarket.pojo.Student">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="student_no" jdbcType="VARCHAR" property="studentNo"></result>
+        <result column="name" jdbcType="VARCHAR" property="name" ></result>
+        <result column="password" jdbcType="VARCHAR" property="password" ></result>
+        <result column="email" jdbcType="VARCHAR" property="email" ></result>
+        <result column="phone" jdbcType="VARCHAR" property="phone" ></result>
+        <result column="wechat" jdbcType="VARCHAR" property="wechat" ></result>
+    </resultMap>
+
+    <!-- ADD -->
+    <insert id="addStudent" parameterType="cn.edu.nwpu.fleamarket.pojo.Student">
+        INSERT INTO students (student_no, name, phone, email, wechat, `password`)
+        VALUES (#{studentNo}, #{name}, #{phone}, #{email}, #{wechat},#{password});
+    </insert>
+
+    <!-- UPDATE -->
+    <update id="updateName" parameterType="cn.edu.nwpu.fleamarket.pojo.Student">
+        UPDATE students SET name = #{name} WHERE student_no = #{studentNo};
+    </update>
+    <update id="updatePhone" parameterType="cn.edu.nwpu.fleamarket.pojo.Student">
+        UPDATE students SET phone = #{phone} WHERE student_no = #{studentNo};
+    </update>
+    <update id="updateEmail" parameterType="cn.edu.nwpu.fleamarket.pojo.Student">
+        UPDATE students SET email = #{email} WHERE student_no = #{studentNo};
+    </update>
+    <update id="updateWechat" parameterType="cn.edu.nwpu.fleamarket.pojo.Student">
+        UPDATE students SET wechat = #{wechat} WHERE student_no = #{studentNo};
+    </update>
+
+    <!-- SELECT -->
+    <select id="selectStudentByStudentNo" parameterType="string" resultType="cn.edu.nwpu.fleamarket.pojo.Student">
+        SELECT * FROM students WHERE student_no=#{studentNo}
+    </select>
+
+
+    <!--<insert id="addStudent" parameterType="cn.shnu.ssm.pojo.User" >
+        INSERT INTO user (`studentNo`,`name`,`grade`,`password`,`isfinish`, `sex`) VALUES (#{studentNo}, #{name}, #{grade}, #{password},#{isFinish},#{sex});
+    </insert>
+    <update id="updateStudent" parameterType="com.cn.shnu.ssm.pojo.User">
+        update user set name=#{usename},password=#{password} where id=#{id}
+    </update>
+    &lt;!&ndash;<delete id="delete" parameterType="int">
+        delete from admin where id=#{id}
+    </delete>&ndash;&gt;
+    <select id="findAllUser" resultMap="BaseResultMap">
+        select * from user
+    </select>
+    <select id="login" resultMap="BaseResultMap" parameterType="com.cn.shnu.ssm.pojo.User">
+        select * from USER where studentNo=#{studentNo} and password=#{password}
+    </select>-->
+
+</mapper>

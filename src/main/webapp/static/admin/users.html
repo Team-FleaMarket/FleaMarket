@@ -43,7 +43,7 @@
             <el-table :data="users" style="width: 100%">
                 <el-table-column prop="id" label="id" width="180"></el-table-column>
                 <el-table-column prop="studentNo" label="学号" width="180"></el-table-column>
-                <el-table-column prop="userName" label="用户名" width="180"></el-table-column>
+                <el-table-column prop="name" label="用户名" width="180"></el-table-column>
                 <el-table-column prop="phone" label="手机号"></el-table-column>
                 <el-table-column
                         fixed="right"
@@ -59,14 +59,6 @@
                     </template>
                 </el-table-column>
             </el-table>
-<!--            <el-card class="box-card" v-for="user in users" :key="user.id" style="margin-bottom: 20px; padding: 10px;">-->
-<!--                <div slot="header" class="clearfix" style="font-size: 14px;">-->
-<!--                    <span style="line-height: 36px;">用户 {{user.userName}}</span>-->
-<!--                </div>-->
-<!--                <div class="text item">-->
-<!--                    <el-button type="primary" @click="showInfo(user.id)" block size="small">查看详情</el-button>-->
-<!--                </div>-->
-<!--            </el-card>-->
 
             <!--   分页     -->
             <div v-if="querying == 0" class="block">
@@ -92,7 +84,7 @@
                         {{tempUser.studentNo}}
                     </el-form-item>
                     <el-form-item label="用户名">
-                        <el-input v-model="tempUser.userName"></el-input>
+                        <el-input v-model="tempUser.name"></el-input>
                     </el-form-item>
                     <el-form-item label="密码">
                         <el-input type="password" v-model="tempUser.password"></el-input>
@@ -124,7 +116,7 @@
             return {
                 user: {
                     id: 0,
-                    userName: '',
+                    name: '',
                     password: '',
                     studentNo: '',
                     email: '',
@@ -135,7 +127,7 @@
                 queryedUsers: [],
                 tempUser: {
                     id: 0,
-                    userName: '',
+                    name: '',
                     password: '',
                     studentNo: '',
                     email: '',
@@ -164,7 +156,7 @@
                 }
 
                 this.querying = 1;
-                let url = '/user/query';
+                let url = '/student/query';
                 if(this.selected === 'userName') {
                     url += '/username?query=' + this.query;
                 } else if(this.selected === 'studentNo') {
@@ -181,7 +173,7 @@
             },
             update() {
                 console.log(this.tempUser)
-                axios.put("/user", this.tempUser).then((res => {
+                axios.put("/student", this.tempUser).then((res => {
                     if (res.data === "ok") {
                         this.user = this.tempUser;
                         console.log(this.user);
@@ -216,7 +208,7 @@
             },
             handleCurrentChange: function (page) {
                 this.currentPage = page;
-                axios.get("/user/page/" + this.currentPage).then((res => {
+                axios.get("/student/page/" + this.currentPage).then((res => {
                     this.users = res.data;
                     // console.log(res.data)
                 })).catch(err => {
@@ -224,7 +216,7 @@
                 })
             },
             getPagenum: function () {
-                axios.get("/user/count").then((res => {
+                axios.get("/student/count").then((res => {
                     this.total = res.data;
                 })).catch(err => {
                     console.log(err);

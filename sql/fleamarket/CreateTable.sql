@@ -1,15 +1,15 @@
 CREATE DATABASE fleamarket;
 USE fleamarket;
-CREATE TABLE users
-(
-    id         INTEGER AUTO_INCREMENT,
-    student_no VARCHAR(100),
-    password   VARCHAR(100),
-    email      VARCHAR(100),
-    phone      VARCHAR(100),
-    user_name  VARCHAR(100),
-    wechat     VARCHAR(100),
-    PRIMARY KEY (id)
+
+CREATE TABLE students (
+	id INTEGER AUTO_INCREMENT,
+	student_no VARCHAR(30),
+	password VARCHAR(30),
+	email VARCHAR(30),
+	phone VARCHAR(30),
+	name VARCHAR(30),
+	wechat VARCHAR(30),
+	PRIMARY KEY(id)
 ) CHARACTER SET utf8mb4;
 
 CREATE TABLE goods

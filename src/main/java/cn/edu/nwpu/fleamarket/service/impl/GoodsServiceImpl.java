@@ -18,8 +18,15 @@ public class GoodsServiceImpl implements GoodsService{
     @Autowired
     private GoodsDao goodsDao;
 
-    public List<Goods> selectAll() {
-        return goodsDao.selectAll();
+    public List<Goods> selectAllGoods() {
+        return goodsDao.selectAllGoods();
+    }
+
+    public int selectCountByCateList(List<Integer> cateList) {
+        if (goodsDao.selectCountByCateList(cateList) == null) {
+            return 0;
+        }
+        return goodsDao.selectCountByCateList(cateList);
     }
 
     public List<Goods> selectByStatus(int status) {

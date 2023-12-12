@@ -1,56 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
-<head>
-    <title>footer</title>
-    <!-- for-mobile-apps -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content="Best Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
-    <script type="application/x-javascript"> addEventListener("load", function () {
-        setTimeout(hideURLbar, 0);
-    }, false);
-
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    } </script>
-    <!-- //for-mobile-apps -->
-    <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.min.css" rel="stylesheet" type="text/css"
-          media="all"/>
-    <link href="${pageContext.request.getContextPath()}/static/css/footer.css" rel="stylesheet" type="text/css"
-          media="all"/>
-
-    <!-- js -->
-    <script src="${pageContext.request.getContextPath()}/static/js/jquery.min.js"></script>
-    <!-- //js -->
-    <!-- cart -->
-    <script src="${pageContext.request.getContextPath()}/static/js/simpleCart.min.js"></script>
-    <!-- cart -->
-    <!-- for bootstrap working -->
-    <script type="text/javascript"
-            src="${pageContext.request.getContextPath()}/static/js/bootstrap.bundle.min.js"></script>
-    <!-- //for bootstrap working -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
-          rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic'
-          rel='stylesheet' type='text/css'>
-    <link href="<c:url value="/static/css/bootstrap.min.css"/>" rel="stylesheet">
-    <!-- timer -->
-    <link rel="stylesheet" href="${pageContext.request.getContextPath()}/static/css/jquery.countdown.css"/>
-
-    <!-- //timer -->
-    <!-- animation-effect -->
-    <link href="${pageContext.request.getContextPath()}/static/css/animate.min.css" rel="stylesheet">
-    <script src="${pageContext.request.getContextPath()}/static/js/wow.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
-    <!-- //animation-effect -->
-</head>
-<body>
 <div class="footer">
     <div class="container">
-        <div class="footer-grids">
+        <div class="footer-grids">Ss
             <!--banner-bottom-grid-left-->
             <div class="row">
                 <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
@@ -128,5 +79,3 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
-</body>
-</html>
