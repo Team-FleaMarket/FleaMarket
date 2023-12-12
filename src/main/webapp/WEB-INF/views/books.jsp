@@ -1,21 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: root
-  Date: 2018/5/21
-  Time: 14:24
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Books</title>
-    <%@ include file="../components/jspheader.jsp" %>
+    <%@ include file="components/jspheader.jsp" %>
+    <link href="${pageContext.request.contextPath}/static/css/products.css" rel="stylesheet" type="text/css"
+          media="all">
+    <link href="${pageContext.request.contextPath}/static/css/collections.css" rel="stylesheet" type="text/css"
+          media="all">
+
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/components/header.jsp" %>
+<%@ include file="components/header.jsp" %>
 <!-- breadcrumbs -->
 <div class="breadcrumbs">
     <div class="container">
@@ -239,7 +237,7 @@
 </div>
 <!-- //breadcrumbs -->
 <!-- footer -->
-<%@include file="../components/footer.jsp" %>
+<%@include file="components/footer.jsp" %>
 <!-- //footer -->
 </body>
 </html>
