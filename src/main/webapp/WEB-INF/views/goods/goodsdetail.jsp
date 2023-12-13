@@ -7,9 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!----------------------- Main Container -------------------------->
-<div class="goodsdetail container d-flex justify-content-center align-items-center min-vh-100">
+<div class="goodsdetail container d-flex justify-content-center align-items-center">
     <!----------------------- Login Container -------------------------->
-    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+    <div class="row box-area">
         <!--------------------------- Left Box ----------------------------->
         <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #9c9fa5;">
             <div class="featured-image mb-3">
@@ -22,38 +22,16 @@
         <div class="col-md-6 right-box">
             <div class="row align-items-center">
                 <div class="header-text mb-4">
-                    <h2>Hello,Again</h2>
-                    <p>We are happy to have you back.</p>
+                    <h2>三体旧书一本</h2>
+                    <p>新旧程度：旧</p>
                 </div>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>
+                    三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体
+                </textarea>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
-                </div>
-                <div class="input-group mb-1">
-                    <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password">
-                </div>
-                <div class="input-group mb-5 d-flex justify-content-between">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="formCheck">
-                        <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>
-                    </div>
-                    <div class="forgot">
-                        <small><a href="#">Forgot Password?</a></small>
-                    </div>
-                </div>
-                <div class="input-group mb-3">
-                    <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>
-                </div>
-                <div class="input-group mb-3">
-                    <button class="btn btn-lg btn-light w-100 fs-6">
-                        <%--                                            <img src="images/google.png" style="width:20px" class="me-2">--%>
-                        <small>Sign In with Google</small>
-                    </button>
-                </div>
-                <div class="row">
-                    <small>Don't have account? <a href="#">Sign Up</a></small>
+                    <button class="btn btn-md btn-warning w-100 mt-2 fs-6">添加到想要</button>
                 </div>
             </div>
         </div>
-
     </div>
 </div>

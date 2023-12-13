@@ -21,7 +21,7 @@
     <!-- goods -->
     <section class="goods min-vh-100">
         <!-- breadcrumbs -->
-        <div class="breadcrumbs py-1">
+        <div class="breadcrumbs">
             <div class="container-fluid">
                 <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
                     <li class="breadcrumb-item">
@@ -36,7 +36,7 @@
             </div>
         </div>
         <!-- // breadcrumbs -->
-        <div class="container py-1">
+        <div class="containe">
             <div class="categories row animated wow" data-wow-delay=".5s">
                 <div class="col-md-4 slideInUp">
                     <h3>商品分类</h3>
@@ -223,7 +223,7 @@
     <!-- // goods -->
     <!-- Modal -->
     <div class="modal fade" id="goods-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
 <%--                 <img src="${pageContext.request.getContextPath()}/static/images/goods.jpg" class="modal-img" alt="goods">--%>

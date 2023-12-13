@@ -40,5 +40,11 @@ img {
     color: #dd6161;
 }
 #goods-modal .modal-dialog {
-    max-width: 80vw;
+    max-width: 70vw; /* 设置最大宽度为100% */
+}
+#goods-modal .modal-content {
+    max-height: 70vh;
+}
+.modal {
+    overflow-y: hidden;
 }
