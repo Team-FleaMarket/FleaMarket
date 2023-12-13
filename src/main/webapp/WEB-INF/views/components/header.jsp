@@ -70,7 +70,7 @@
             <a href="${pageContext.request.contextPath}/"><i class="fas fa-user-check"></i>> ${sessionScope.student.name}</a>
         </c:if>
         <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fas fa-bars"></i>
         </button>
     </div>
 </nav>
