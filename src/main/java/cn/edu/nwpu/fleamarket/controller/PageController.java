@@ -71,7 +71,7 @@ public class PageController {
         int totalPage = 0;
         if("".equals(request.getParameter("currentPage"))||request.getParameter("currentPage")==null)
         {
-            currentPage=1;
+            currentPage=0;
         }
         else {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
