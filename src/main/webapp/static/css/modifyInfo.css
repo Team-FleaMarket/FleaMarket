@@ -45,12 +45,16 @@ a {
 
 .panel-right {
     width: 66.66%;
-    height:100%;
+    height: 100vh; /* 铺满整个高度 */
     overflow-y: auto;
     padding: 20px;
     box-sizing: border-box;
     background-color: #ffffff;
     margin: 0 auto;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+
 }
 
 .panel-left .self_information {

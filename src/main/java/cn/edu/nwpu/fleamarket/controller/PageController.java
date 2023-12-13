@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -269,6 +270,21 @@ public class PageController {
         modelAndView.setViewName("manage/modifyInfo");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public ModelAndView logout() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/login");
+        return modelAndView;
+    }
+//    @RequestMapping("/logout")
+//    public ModelAndView logout() {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("login");
+//        // 设置跳转到登录页面的视图名称
+//        return modelAndView;
+//    }
+
 /*    @RequestMapping("/single")
     public ModelAndView single(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
