@@ -167,3 +167,12 @@
      width: 15%;
      height:41px;
  }
+.pagination-tag{
+
+     height: 50px;
+     text-align: center;
+ }
+.pagination-tag a {
+    padding: 10px;
+    font-size: 20px;
+}

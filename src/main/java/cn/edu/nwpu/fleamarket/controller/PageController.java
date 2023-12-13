@@ -66,6 +66,7 @@ public class PageController {
         }
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
+        int totalCnt = 0;
         int currentPage;
         Student student = (Student) request.getSession().getAttribute("student");
         int totalPage = 0;
@@ -75,30 +76,54 @@ public class PageController {
         }
         else {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
+            if(currentPage<0)
+            {
+                currentPage=0;
+            }
         }
+        System.out.println(currentPage);
         List<Goods> goodsList = null;
         if("".equals(status) || status == null) {
             status = "0";
+            totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()),PAGE_SIZE) ;
+            totalCnt = goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo());
+            if(currentPage+1>totalPage&&currentPage!=0)
+            {
+                currentPage=totalPage-1;
+            }
             goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
+
         }
         else if("0".equals(status)||"1".equals(status))
         {
-            goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
             totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()),PAGE_SIZE) ;
+            totalCnt = goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo());
+            if(currentPage+1>totalPage&&currentPage!=0)
+            {
+                currentPage=totalPage-1;
+            }
+            goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
         }
         else if("2".equals(status)){
             System.out.println("select status==2");
-            goodsList = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo(), currentPage, PAGE_SIZE);
             totalPage =  Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo()),PAGE_SIZE);
+            totalCnt = goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo());
+            if(currentPage+1>totalPage&&currentPage!=0)
+            {
+                currentPage=totalPage-1;
+            }
+            goodsList = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo(), currentPage, PAGE_SIZE);
         }
         for (Goods goods : goodsList) {
             System.out.println("Good name: " + goods.getGoodsName() + "\n");
         }
+
         System.out.println("Total pages: " + totalPage + "\n");
         modelAndView.addObject("status", status);
         modelAndView.addObject("goodsList", goodsList);
         modelAndView.addObject("currentPage", currentPage);
         modelAndView.addObject("totalPage", totalPage);
+        modelAndView.addObject("totalCnt",  totalCnt);
         modelAndView.setViewName("manage/managecenter");
         return modelAndView;
     }
