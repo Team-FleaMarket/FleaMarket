@@ -364,7 +364,6 @@ public class StudentController {
     @ResponseBody
     @GetMapping("/query/username")
     public List<Student> queryByUsername(@RequestParam("query") String query) {
-        System.out.println(query);
         String trueQuery = "%" + query + "%";
         return userService.queryByUserName(trueQuery);
     }

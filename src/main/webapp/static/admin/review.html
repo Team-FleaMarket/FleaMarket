@@ -16,36 +16,41 @@
     <div id="container">
         <el-container>
             <el-header>FleaMarket</el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="1" @click="to_home">主页</el-menu-item>
-            <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
-            <el-menu-item index="3">审核商品</el-menu-item>
-            <el-menu-item index="4" disabled>查询商品</el-menu-item>
-        </el-menu>
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" @click="to_home">主页</el-menu-item>
+                <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
+                <el-menu-item index="3">商品审核</el-menu-item>
+                <el-menu-item index="4" disabled>交易记录</el-menu-item>
+            </el-menu>
             <el-main>
+                <el-card class="box-card" style="margin-bottom: 20px;">
+                    <div slot="header" class="clearfix" style="color: #409EFF; font-size: 18px;">
+                        <span>商品审核规则：</span>
+                    </div>
+                    <el-list>
+                        <el-list-item>所有商品必须符合平台的服务条款；</el-list-item>
+                        <el-list-item>禁止销售任何非法或违禁物品；</el-list-item>
+                        <el-list-item>商品描述和图片必须准确；</el-list-item>
+                        <el-list-item>商品价格必须公正合理。</el-list-item>
+                    </el-list>
+                </el-card>
+
                 <el-table :data="goodsList" style="width: 100%">
                     <el-table-column prop="id" label="id" width="180"></el-table-column>
                     <el-table-column prop="cate" label="商品类别" width="180"></el-table-column>
                     <el-table-column prop="goodsName" label="商品名称" width="180"></el-table-column>
                     <el-table-column prop="imagePath" label="商品图片" width="180"></el-table-column>
-                    <el-table-column prop="description" label="商品描述"></el-table-column>
+                    <el-table-column label="商品描述"><el-button type="text" @click="openDescription">详情</el-button></el-table-column>
+                    <el-table-column prop="price" label="商品价格"></el-table-column>
                     <el-table-column
                             fixed="right"
                             label="操作"
-                            width="120">
+                            width="130">
                         <template slot-scope="scope">
-
-                            <el-button
-                                    type="primary"
-                                    size="mini"
-                                    @click="pass()">通过
-                            </el-button>
-
-                            <el-button
-                                    type="info"
-                                    size="mini"
-                                    @click="reject">拒绝
-                            </el-button>
+                            <div style="display: flex;">
+                                <el-button type="primary" size="mini" @click="review(1)">通过</el-button>
+                                <el-button type="info" size="mini" @click="review(-1)">拒绝</el-button>
+                            </div>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -67,17 +72,40 @@
                 activeIndex: '3',
                 goods: {
                     id: 0,
-
+                    goodsName: '',
+                    description: '',
+                    cate: '',
+                    price: 0.0,
+                    imagePath: ''
                 },
                 goodsList: []
             };
         },
         methods: {
-            pass(id) {
-
-            },
-            reject(id) {
-
+            review(status) {
+                let params = new URLSearchParams();
+                params.append('id', this.goods.id);
+                params.append('status', status);
+                axios.put("/goods/review", {
+                    id: this.goods.id,
+                    status: status
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then((res => {
+                    if (res.data === 'ok') {
+                        this.$message({
+                            message: '审核成功',
+                            type: 'success'
+                        });
+                        this.getNext();
+                    } else {
+                        this.$message.error('审核失败，请重试');
+                    }
+                })).catch(err => {
+                    console.log(err);
+                });
             },
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
@@ -88,7 +116,37 @@
             to_home: function () {
                 window.location.href = "home.html";
             },
-        }
+            getNext() {
+                axios.get("/goods/next").then((res) => {
+                    //清空this.goodsList
+                    this.goodsList = [];
+                    if (!res.data) {
+                        this.$message({
+                            message: '暂无更多待审核商品',
+                            type: 'info'
+                        });
+                        return;
+                    }
+                    this.goods = res.data;
+                    //将this.goods放入this.goodsList
+                    this.goodsList.push(this.goods);
+                    this.$message({
+                        message: '已展示下一件商品',
+                        type: 'info'
+                    });
+                }).catch(err => {
+                    console.log(err);
+                });
+            },
+            openDescription() {
+                this.$alert(this.goods.description, '商品详情', {
+                    confirmButtonText: '关闭',
+                });
+            }
+        },
+        created() {
+            this.getNext();
+        },
     });
 </script>
 

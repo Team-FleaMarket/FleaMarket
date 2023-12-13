@@ -32,5 +32,6 @@ public class Goods {
     private String imagePath;
     private int goodsStatus;
     private String degree;
-    private int attribute;
+    private int attributed;
+    private String buyerNo; //买家学号
 }

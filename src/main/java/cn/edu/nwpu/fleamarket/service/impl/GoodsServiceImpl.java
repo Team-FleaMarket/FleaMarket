@@ -67,4 +67,34 @@ public class GoodsServiceImpl implements GoodsService{
     public List<Goods> selectByStatusAndGoodsStatus() {
         return goodsDao.selectByStatusAndGoodsStatus();
     }
+
+    @Override
+    public Goods getNextToBeReviewed() {
+        return goodsDao.getNextToBeReviewed();
+    }
+
+    @Override
+    public void setAttributed(int id) {
+        goodsDao.setAttributed(id);
+    }
+
+    @Override
+    public void setUnAttributed(int id) {
+        goodsDao.setUnAttributed(id);
+    }
+
+    @Override
+    public List<Goods> getAllAttributedGoodsNotReviewed() {
+        return goodsDao.getAllAttributedGoodsNotReviewed();
+    }
+
+    @Override
+    public boolean review(int id, int status) {
+        try {
+            goodsDao.review(id, status);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 }

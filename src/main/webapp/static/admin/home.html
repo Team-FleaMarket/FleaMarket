@@ -19,23 +19,12 @@
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="1">主页</el-menu-item>
                     <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
-                    <el-menu-item index="3" @click="to_review">审核商品</el-menu-item>
-                    <el-menu-item index="4" disabled>查询商品</el-menu-item>
-                    <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
+                    <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
+                    <el-menu-item index="4" disabled>交易记录</el-menu-item>
                 </el-menu>
 
                 <el-row :gutter="20">
                     <el-col :span="5">
-                        <!--                        <el-card>-->
-                        <!--                            <div slot="header" class="clearfix">-->
-                        <!--                                <span>欢迎，{{username}}</span>-->
-                        <!--                            </div>-->
-                        <!--                            <el-avatar src="images/default.jpg" size="150"></el-avatar>-->
-                        <!--                            <div style="padding: 14px;">-->
-                        <!--&lt;!&ndash;                                <el-button type="text">个人信息</el-button>&ndash;&gt;-->
-                        <!--&lt;!&ndash;                                <el-button type="text">设置</el-button>&ndash;&gt;-->
-                        <!--                            </div>-->
-                        <!--                        </el-card>-->
                         <el-card class="box-card">
                             <div slot="header" class="clearfix">
                                 <span style="line-height: 36px;">欢迎，{{username}}</span>

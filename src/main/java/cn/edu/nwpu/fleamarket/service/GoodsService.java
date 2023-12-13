@@ -24,4 +24,18 @@ public interface GoodsService {
     void updateGoodsStatus(Goods goods);
 
     List<Goods> selectByStatusAndGoodsStatus();
+
+    //下一个待审核
+    Goods getNextToBeReviewed();
+
+    //设置已分配
+    void setAttributed(int id);
+
+    //设置未分配
+    void setUnAttributed(int id);
+
+    //查询所有未被审核的已分配商品
+    List<Goods> getAllAttributedGoodsNotReviewed();
+
+    boolean review(int id, int status);
 }

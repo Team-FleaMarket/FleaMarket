@@ -1,5 +1,6 @@
 package cn.edu.nwpu.fleamarket.controller;
 
+import cn.edu.nwpu.fleamarket.data.Review;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
@@ -8,11 +9,13 @@ import org.apache.commons.fileupload2.core.DiskFileItem;
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItemFactory;
 import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
+import org.redisson.api.RBucket;
+import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.InputStream;
@@ -21,6 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/goods")
@@ -156,5 +160,54 @@ public class GoodsController {
         return modelAndView;
     }
 
+    /**
+     * @return 下一个待审核
+     */
+    @ResponseBody
+    @GetMapping("/next")
+    public Goods getNext() {
+        //悲观锁
+        RLock lock = redissonClient.getLock("nextGoodsLock");
+        lock.lock();
+        try {
+            Goods next = goodsService.getNextToBeReviewed();
+            if(next == null) {
+                return null;
+            }
+            goodsService.setAttributed(next.getId());
+            // 设置键的生存时间为1小时
+            redissonClient.getBucket("Goods:" + next.getId()).setAsync(1, 1, TimeUnit.HOURS);
 
+            return next;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    // 定期检查已分配商品是否已经被审核 如果发现1小时仍未被审核则重置
+    @Scheduled(fixedRate = 60000) // 每分钟检查一次
+    public void checkGoods() {
+        //获取所有未被审核且已分配的商品
+        List<Goods> goodsList = goodsService.getAllAttributedGoodsNotReviewed();
+        for (Goods goods : goodsList) {
+            RBucket<Object> bucket = redissonClient.getBucket("Goods:" + goods.getId());
+            if (!bucket.isExists()) {
+                goodsService.setUnAttributed(goods.getId());
+            }
+        }
+    }
+
+    @PutMapping("/update/unattributed")
+    public void setUnAttributed(@RequestBody Goods goods) {
+        goodsService.setUnAttributed(goods.getId());
+    }
+
+    @ResponseBody
+    @PutMapping("/review")
+    public String review(@RequestBody Review review) {
+        if(goodsService.review(review.getId(), review.getStatus())) {
+            return "ok";
+        }
+        return "err";
+    }
 }
