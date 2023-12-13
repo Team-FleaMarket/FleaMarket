@@ -247,7 +247,12 @@ public class PageController {
         modelAndView.setViewName("goodsview");
         return modelAndView;
     }
-
+    @RequestMapping("/views/modifyInfo")
+    public ModelAndView modifyInfo(HttpServletRequest request) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("modifyInfo");
+        return modelAndView;
+    }
 /*    @RequestMapping("/single")
     public ModelAndView single(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();

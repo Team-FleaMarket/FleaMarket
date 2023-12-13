@@ -88,7 +88,7 @@
                             <a href="${pageContext.request.contextPath}/login">登陆</a>
                         </c:if>
                         <c:if test="${sessionScope.student != null}">
-                            <a href="${pageContext.request.contextPath}/views/managercenter">${sessionScope.student.name}</a>
+                            <a href="${pageContext.request.contextPath}/views/modifyInfo">${sessionScope.student.name}</a>
                         </c:if>
                     </a>
                 </div>

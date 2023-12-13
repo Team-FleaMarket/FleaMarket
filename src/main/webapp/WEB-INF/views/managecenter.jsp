@@ -45,7 +45,16 @@
 
 <body>
 <%@ include file="./components/header.jsp" %>
-<div class="single">
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"
+                                                                               aria-hidden="true"></span>主页</a></li>
+            <li class="active">个人中心</li>
+        </ol>
+    </div>
+</div>
+<div class="manager">
     <div class="container">
         <div class="">
             <div class="container">

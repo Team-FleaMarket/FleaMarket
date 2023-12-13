@@ -227,7 +227,42 @@ a {
     text-decoration: underline;
     color: #3571f2e7;
 }
+.avatar{
+    display: grid;
+    margin: 0 auto;
+    justify-self: center;
+    width: 150px;
+    height:150px;
+    border:0;
+}
+.overlay {
 
+    position: absolute;
+    margin: 0 auto;
+    top: 0;
+    left:  calc(50% - 75px);
+    width: 150px;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.5); /* 设置遮盖框的颜色和透明度 */
+    opacity: 0; /* 初始时透明 */
+    transition: opacity 0.3s ease; /* 添加过渡效果 */
+}
+
+ .overlay :hover{
+    opacity: 1; /* 悬浮时不透明 */
+}
+
+.avatar-button{
+    padding: 10px 10px;
+    width:60%;
+    height: 50px;
+    margin: calc(50% - 25px) auto;
+
+    background-color: #c4e3f3;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
 @media (max-height: 600px){
     .home{
         height: 100%;
