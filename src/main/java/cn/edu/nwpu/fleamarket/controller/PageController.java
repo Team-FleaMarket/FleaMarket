@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 
 @Controller
@@ -22,6 +23,8 @@ public class PageController {
     private GoodsService goodsService;
     @Autowired
     private StudentService userService;
+
+    private static final int PAGE_SIZE = 5;
 
  /*   @RequestMapping("")
     public ModelAndView home(HttpServletRequest request)throws Exception{
@@ -57,28 +60,39 @@ public class PageController {
 
     @RequestMapping("/views/managecenter")
     public ModelAndView managecenter(HttpServletRequest request)throws Exception{
+        Enumeration<String> attributeNames = request.getSession().getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            System.out.println(attributeNames.nextElement());
+        }
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Student student = (Student) request.getSession().getAttribute("student");
+        int totalPage = 0;
+        List<Goods> goodsList = null;
         if("".equals(status) || status == null) {
             status = "0";
-            List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
-            modelAndView.addObject("status", status);
-            modelAndView.addObject("goodsList", list);
+            goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
         }
         else if("0".equals(status)||"1".equals(status))
         {
-            List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
-            modelAndView.addObject("status", status);
-            modelAndView.addObject("goodsList", list);
+            goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
+            totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()),PAGE_SIZE) ;
         }
         else if("2".equals(status)){
             System.out.println("select status==2");
-            List<Goods> list = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo());
-            modelAndView.addObject("status", status);
-            modelAndView.addObject("goodsList", list);
+            goodsList = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo(), currentPage, PAGE_SIZE);
+            totalPage =  Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo()),PAGE_SIZE);
         }
-        modelAndView.setViewName("managecenter");
+        for (Goods goods : goodsList) {
+            System.out.println("Good name: " + goods.getGoodsName() + "\n");
+        }
+        System.out.println("Total pages: " + totalPage + "\n");
+        modelAndView.addObject("status", status);
+        modelAndView.addObject("goodsList", goodsList);
+        modelAndView.addObject("currentPage", currentPage);
+        modelAndView.addObject("totalPage", totalPage);
+        modelAndView.setViewName("manage/managecenter");
         return modelAndView;
     }
 

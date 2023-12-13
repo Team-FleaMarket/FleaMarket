@@ -20,7 +20,7 @@ public interface GoodsDao {
     void deleteGoods(int id);
     void updateGoods(Goods goods);
 
-    List<Goods> selectByStatusAndStudentNo(Goods goods);
+    List<Goods> selectByStatusAndStudentNo(@Param("goods") Goods goods,@Param("offset") int offset, @Param("pageSize") int pageSize);
 
     void updateGoodsStatus(Goods goods);
 
@@ -28,5 +28,9 @@ public interface GoodsDao {
 
     List<Goods> getGoodsByCategoryPages(@Param("cate") int cate, @Param("offset") int offset, @Param("pageSize") int pageSize);
 
-    List<Goods> selectByGoodsStatusAndStudentNo(Goods goods);
+    List<Goods> selectByGoodsStatusAndStudentNo(@Param("goods") Goods goods, @Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    int selectByStatusAndStudentNoTotalCnt(@Param("status") int status, @Param("studentNo") String studentNo);
+
+    int selectByGoodsStatusAndStudentNoTotalCnt(@Param("goods_status") int goodsStatus, @Param("studentNo") String studentNo);
 }
