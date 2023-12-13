@@ -115,7 +115,7 @@
                                         <div class="col-md-8">
                                             <div class="search-container">
                                                 <input type="text" id="searchInput" placeholder="搜索商品">
-                                                <button class="search-button rounded-5" onclick="search()">Search</button>
+                                                <button class="search-button rounded-5" onclick="search()">搜索</button>
                                             </div>
                                         </div>
                                     </div>

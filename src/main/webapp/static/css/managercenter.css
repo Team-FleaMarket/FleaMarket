@@ -64,6 +64,7 @@
  .manager .status{
     background: #c4e3f3;
     width:100%;
+    padding: 10px;
     font-size: 20px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -137,7 +138,7 @@
     /*!* margin-top: -125px *!;*/
 }
 .manager .status-single{
-    text-align: center;
+
     margin: auto;
 }
  .manager.search-container {
