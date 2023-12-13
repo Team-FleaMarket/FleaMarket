@@ -4,6 +4,7 @@ import cn.edu.nwpu.fleamarket.data.Review;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
+import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload2.core.DiskFileItem;
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
@@ -16,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.InputStream;
@@ -35,6 +39,8 @@ public class GoodsController {
 
     @Autowired
     private RedissonClient redissonClient;
+
+    private static final int PAGE_SIZE = 10;
 
     @RequestMapping("/insertGoods")
     public ModelAndView insertGoods(HttpServletRequest request, Goods goods)throws Exception{
@@ -140,7 +146,7 @@ public class GoodsController {
         goods.setStudentNo(student.getStudentNo());
         goodsService.insertGoods(goods);
 
-        modelAndView.setViewName("redirect:/managecenter");
+        modelAndView.setViewName("redirect:/views/managecenter");
         return modelAndView;
     }
 
@@ -156,7 +162,7 @@ public class GoodsController {
         goods.setGoodsStatus(Integer.parseInt(status));
         goodsService.updateGoods(goods);
 
-        modelAndView.setViewName("redirect:/views/managecenter");
+        modelAndView.setViewName("redirect:/views/management");
         return modelAndView;
     }
 
@@ -205,9 +211,18 @@ public class GoodsController {
     @ResponseBody
     @PutMapping("/review")
     public String review(@RequestBody Review review) {
-        if(goodsService.review(review.getId(), review.getStatus())) {
+        if (goodsService.review(review.getId(), review.getStatus())) {
             return "ok";
         }
         return "err";
+    }
+    // 返回JSON
+    @ResponseBody
+    @RequestMapping("/category/{cate}/{page}")
+    public String category(HttpServletRequest request,
+                           @PathVariable("cate") int cate,
+                             @PathVariable("page") int pageNum) {
+        List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+        return JSON.toJSONString(goodsList);
     }
 }

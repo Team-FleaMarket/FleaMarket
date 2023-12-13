@@ -16,7 +16,6 @@
         <maven.compiler.source>21</maven.compiler.source>
         <spring.version>6.1.1</spring.version>
         <junit.version>5.10.1</junit.version>
-<!--        <log4j.sversion>2.22.0</log4j.sversion>-->
         <log4j.version>2.22.0</log4j.version>
         <mybatis.generator.version>1.4.2</mybatis.generator.version>
         <jackson.version>2.16.0</jackson.version>

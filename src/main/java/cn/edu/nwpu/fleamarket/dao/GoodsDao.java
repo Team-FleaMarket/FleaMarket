@@ -2,6 +2,7 @@ package cn.edu.nwpu.fleamarket.dao;
 
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -48,4 +49,7 @@ public interface GoodsDao {
 
     @Update("UPDATE goods set status = #{status} where id = #{id}")
     void review(@Param("id") int id, @Param("status") int status);
+    List<Goods> getGoodsByCategoryPages(@Param("cate") int cate, @Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    List<Goods> selectByGoodsStatusAndStudentNo(Goods goods);
 }

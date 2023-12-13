@@ -20,7 +20,7 @@
                     <el-menu-item index="1">主页</el-menu-item>
                     <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
                     <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
-                    <el-menu-item index="4" disabled>交易记录</el-menu-item>
+                    <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
                 </el-menu>
 
                 <el-row :gutter="20">
@@ -151,6 +151,9 @@
             },
             to_review: function () {
                 window.location.href = "review.html";
+            },
+            to_record: function () {
+                window.location.href = "record.html";
             },
             getName: function () {
                 axios.get("/admin").then((res => {

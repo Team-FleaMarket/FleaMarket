@@ -38,4 +38,7 @@ public interface GoodsService {
     List<Goods> getAllAttributedGoodsNotReviewed();
 
     boolean review(int id, int status);
+    List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo);
+
+    List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize);
 }

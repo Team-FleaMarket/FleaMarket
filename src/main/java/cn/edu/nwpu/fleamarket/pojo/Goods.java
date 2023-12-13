@@ -1,6 +1,7 @@
 package cn.edu.nwpu.fleamarket.pojo;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Goods {
     private int id;
     private String studentNo;

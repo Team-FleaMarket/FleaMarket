@@ -20,7 +20,7 @@
                 <el-menu-item index="1" @click="to_home">主页</el-menu-item>
                 <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
                 <el-menu-item index="3">商品审核</el-menu-item>
-                <el-menu-item index="4" disabled>交易记录</el-menu-item>
+                <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
             </el-menu>
             <el-main>
                 <el-card class="box-card" style="margin-bottom: 20px;">
@@ -112,6 +112,9 @@
             },
             to_user: function () {
                 window.location.href = "users.html";
+            },
+            to_record: function () {
+                window.location.href = "record.html";
             },
             to_home: function () {
                 window.location.href = "home.html";

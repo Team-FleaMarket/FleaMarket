@@ -26,7 +26,7 @@
     padding-left: 2em;
 }
 
-.register form-grids {
+.register .form-grids {
     width: 75%;
     margin: 0 auto;
 }
@@ -62,7 +62,7 @@
     -o-transition: .5s ease-in-out;
 }
 
-.register, .register {
+.register {
     padding: 5em 0;
 }
 
@@ -83,14 +83,14 @@
     content: '';
 }
 
-.register form-grids {
+.register .form-grids {
     /*width: 45%;*/
     /* padding-bottom: 2em;*/
     padding-top: 1em;
     /*margin: 3em auto 0;*/
 }
 
-.register form-grids input[type="email"], .register form-grids input[type="password"], .register form-grids input[type="text"] {
+.register .form-grids input[type="email"], .register .form-grids input[type="password"], .register .form-grids input[type="text"] {
     outline: none;
     border: 1px solid #DBDBDB;
     padding: 10px 10px 10px 45px;
@@ -101,19 +101,19 @@
     margin: 1.5em auto 0;
 }
 
-.register form-grids input[type="email"] {
+.register .form-grids input[type="email"] {
     background: url(../images/img-sp.png) no-repeat 5px -182px #fff;
 }
 
-.register form-grids input[type="password"] {
+.register .form-grids input[type="password"] {
     background: url(../images/img-sp.png) no-repeat 5px -220px #fff;
     /*margin: 1.5em 0 0;*/
 }
 
-.register form-grids input[type="submit"] {
+.register .form-grids button {
     outline: none;
     border: none;
-    padding: 10px 0;
+    padding: 8px 0;
     font-size: 1em;
     color: #fff;
     display: block;
@@ -123,26 +123,26 @@
     border-radius: 3em;
 }
 
-.register form-grids input[type="submit"]:hover {
+.register .form-grids input[type="submit"]:hover {
     background: #d8703f;
 }
 
-.register form-grids ::-webkit-input-placeholder {
+.register .form-grids ::-webkit-input-placeholder {
     color: #999;
 }
 
-.register form-grids h5, .register form-grids h6 {
+.register .form-grids h5, .register .form-grids h6 {
     font-size: 1em;
     color: #212121;
     text-transform: uppercase;
     margin: 0 0 2em;
 }
 
-.register form-grids input[type="text"] {
+.register .form-grids input[type="text"] {
     background: url(../images/img-sp.png) no-repeat 5px -259px #fff;
 }
 
-.register form-grids input[type="text"]:nth-child(2) {
+.register .form-grids input[type="text"]:nth-child(2) {
     background: url(../images/img-sp.png) no-repeat 0px -298px #fff;
     /*margin: 1em 0;*/
 }
@@ -153,25 +153,8 @@
     color: #999;
 }
 
-.register form-grids h6 {
+.register .form-grids h6 {
     margin: 3em 0 2em !important;
-}
-
-.register-home {
-    margin: 2em 0 0;
-    text-align: center;
-}
-
-.register-home a {
-    padding: 8px 45px;
-    background: #9F9F9F;
-    color: #fff;
-    font-size: 1em;
-    text-decoration: none;
-}
-
-.register-home a:hover {
-    background: #d8703f;
 }
 
 @media (max-width: 768px) {
