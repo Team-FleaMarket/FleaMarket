@@ -27,4 +27,6 @@ public interface GoodsDao {
     List<Goods> selectByStatusAndGoodsStatus();
 
     List<Goods> getGoodsByCategoryPages(@Param("cate") int cate, @Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    List<Goods> selectByGoodsStatusAndStudentNo(Goods goods);
 }

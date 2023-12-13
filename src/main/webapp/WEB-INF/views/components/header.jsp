@@ -1,16 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
-  User: YF
+  student: YF
   Date: 2023/12/6
   Time: 21:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!-- nav bar -->
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand me-auto" href="#">校园跳蚤市场</a>
+        <a class="navbar-brand me-auto" href="${pageContext.request.contextPath}/">校园跳蚤市场</a>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel">校园跳蚤市场</h5>
@@ -26,7 +25,7 @@
                             <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/login">
                         </c:if>
                         <c:if test="${sessionScope.student != null}">
-                            <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/managecenter">
+                            <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/managercenter">
                         </c:if>
                             个人中心
                             </a>

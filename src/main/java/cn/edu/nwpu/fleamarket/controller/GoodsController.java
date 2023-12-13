@@ -140,7 +140,7 @@ public class GoodsController {
         goods.setStudentNo(student.getStudentNo());
         goodsService.insertGoods(goods);
 
-        modelAndView.setViewName("redirect:/managecenter");
+        modelAndView.setViewName("redirect:/views/managecenter");
         return modelAndView;
     }
 

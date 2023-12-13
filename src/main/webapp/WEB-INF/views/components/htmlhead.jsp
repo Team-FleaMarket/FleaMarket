@@ -28,7 +28,8 @@
 <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!-- // for bootstrap working -->
 <!-- 自己写的 css -->
-<link href="${pageContext.request.getContextPath()}/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.getContextPath()}/static/css/header.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.getContextPath()}/static/css/footer.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.getContextPath()}/static/css/managercenter.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.getContextPath()}/static/css/goodsdetail.css" rel="stylesheet" type="text/css" media="all" />
 <!-- //自己写的 css -->
