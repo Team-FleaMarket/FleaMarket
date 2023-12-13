@@ -53,19 +53,21 @@ public class GoodsServiceImpl implements GoodsService {
         goodsDao.updateGoods(goods);
     }
 
-    public List<Goods> selectByStatusAndStudentNo(int status, String studentNo) {
+    public List<Goods> selectByStatusAndStudentNo(int status, String studentNo, int currentPage, int pageSize) {
         Goods goods = new Goods();
         goods.setStatus(status);
         goods.setStudentNo(studentNo);
-        return goodsDao.selectByStatusAndStudentNo(goods);
+        int offset = currentPage * pageSize;
+        return goodsDao.selectByStatusAndStudentNo(goods, offset, pageSize);
     }
 
-    public List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo) {
+    public List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo, int currentPage, int pageSize) {
         Goods goods = new Goods();
         goods.setGoodsStatus(goodsStatus);
         goods.setStudentNo(studentNo);
         System.out.println("select");
-        return goodsDao.selectByGoodsStatusAndStudentNo(goods);
+        int offset = currentPage * pageSize;
+        return goodsDao.selectByGoodsStatusAndStudentNo(goods, offset, pageSize);
     }
 
     public void updateGoodsStatus(Goods goods) {
@@ -109,5 +111,15 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize) {
         System.out.println("cate: " + cate + " pageNum: " + pageNum + " pageSize: " + pageSize);
         return goodsDao.getGoodsByCategoryPages(cate, pageNum*pageSize, pageSize);
+    }
+
+    @Override
+    public int selectByStatusAndStudentNoTotalCnt(int status, String studentNo) {
+        return goodsDao.selectByStatusAndStudentNoTotalCnt(status, studentNo);
+    }
+
+    @Override
+    public int selectByGoodsStatusAndStudentNoTotalCnt(int goodsStatus, String studentNo) {
+        return goodsDao.selectByGoodsStatusAndStudentNoTotalCnt(goodsStatus, studentNo);
     }
 }

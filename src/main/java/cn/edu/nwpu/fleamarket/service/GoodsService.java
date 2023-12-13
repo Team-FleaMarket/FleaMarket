@@ -14,7 +14,7 @@ public interface GoodsService {
     int selectCountByCateList(List<Integer> cateList);
     List<Goods> selectByStatus(int status);
     List<Goods> selectByStudentNo(String studentNo);
-    List<Goods> selectByStatusAndStudentNo(int status, String studentNo);
+    List<Goods> selectByStatusAndStudentNo(int status, String studentNo, int currentPage, int pageSize);
     Goods selectById(int id);
 
     void insertGoods(Goods goods);
@@ -38,7 +38,11 @@ public interface GoodsService {
     List<Goods> getAllAttributedGoodsNotReviewed();
 
     boolean review(int id, int status);
-    List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo);
+    List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo, int currentPage, int pageSize);
 
     List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize);
+
+    int selectByStatusAndStudentNoTotalCnt(int status, String studentNo);
+
+    int selectByGoodsStatusAndStudentNoTotalCnt(int goodsStatus, String studentNo);
 }
