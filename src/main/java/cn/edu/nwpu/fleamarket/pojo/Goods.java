@@ -34,5 +34,6 @@ public class Goods {
     private String imagePath;
     private int goodsStatus;
     private String degree;
-    private int attribute;
+    private int attributed; //商品是否已被分配给管理员
+    private String buyerNo; //买家学号
 }

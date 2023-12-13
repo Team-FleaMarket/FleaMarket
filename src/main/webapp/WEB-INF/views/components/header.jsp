@@ -25,7 +25,7 @@
                             <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/login">
                         </c:if>
                         <c:if test="${sessionScope.student != null}">
-                            <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/managecenter">
+                            <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/views/managecenter">
                         </c:if>
                             个人中心
                             </a>

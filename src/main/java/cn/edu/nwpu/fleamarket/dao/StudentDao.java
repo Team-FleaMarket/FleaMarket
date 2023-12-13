@@ -26,14 +26,13 @@ public interface StudentDao {
     @Select("SELECT count(*) FROM students")
     int countAll();
 
-
     /**
      * 分页
      * @param start 起始id
      * @return
      */
     @Select("SELECT * from students LIMIT #{start}, 6")
-    @Results({
+    @Results(id = "studentResultMap" ,value = {
             @Result(column = "student_no", property = "studentNo"),
     })
     List<Student> getStudentsByPage(int start);
@@ -51,9 +50,7 @@ public interface StudentDao {
      * @param query 查询语句
      */
     @Select("SELECT * from students where name like #{query}")
-    @Results({
-            @Result(column = "student_no", property = "studentNo"),
-    })
+    @ResultMap("studentResultMap")
     List<Student> queryByUsername(String query);
 
 
@@ -63,9 +60,7 @@ public interface StudentDao {
      * @return
      */
     @Select("SELECT * from students where student_no like #{query}")
-    @Results({
-            @Result(column = "student_no", property = "studentNo"),
-    })
+    @ResultMap("studentResultMap")
     List<Student> queryByStudentNo(String query);
 }
 
