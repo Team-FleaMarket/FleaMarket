@@ -19,8 +19,8 @@
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <el-menu-item index="1" @click="to_home">主页</el-menu-item>
                 <el-menu-item index="2">用户管理</el-menu-item>
-                <el-menu-item index="3" @click="to_review">审核商品</el-menu-item>
-                <el-menu-item index="4" disabled>查询商品</el-menu-item>
+                <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
+                <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
                 <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
             </el-menu>
 
@@ -227,6 +227,9 @@
             },
             to_home: function () {
                 window.location.href = "home.html";
+            },
+            to_record: function () {
+                window.location.href = "record.html";
             },
         },
         created() {

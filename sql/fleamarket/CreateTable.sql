@@ -24,6 +24,8 @@ CREATE TABLE goods
     image_path   VARCHAR(100),
     goods_status INTEGER,
     degree       INTEGER,
+    distributed  INTEGER DEFAULT 0,
+    buyer_no     VARCHAR(100),
     PRIMARY KEY (id)
 ) CHARACTER SET utf8mb4;
 
