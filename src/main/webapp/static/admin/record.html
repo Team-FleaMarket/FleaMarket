@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="../js/admin/element/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="container">
+        <el-container>
+            <el-header>FleaMarket</el-header>
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" @click="to_home">主页</el-menu-item>
+                <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
+                <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
+                <el-menu-item index="4">交易记录</el-menu-item>
+            </el-menu>
+
+            <el-footer>NPU @2023</el-footer>
+        </el-container>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                goods: {
+                },
+                goodsList: [],
+                queryedGoods: [],
+                activeIndex: '4',
+                total: 0, //总记录数
+                currentPage: 1,
+                dialogVisible: false,
+                selected: 'userName',
+                query: '',
+                placeholderMap: {
+                    userName: '按用户名搜索',
+                    studentNo: '按学号搜索'
+                },
+                querying: 0
+            };
+        },
+        methods: {
+            to_review: function () {
+                window.location.href = "review.html";
+            },
+            to_home: function () {
+                window.location.href = "home.html";
+            },
+            to_user: function () {
+                window.location.href = "users.html";
+            },
+        },
+        created() {
+            // this.getPagenum();
+            // this.handleCurrentChange(1);
+        },
+        computed: {
+            placeholderText() {
+                // return this.placeholderMap[this.selected];
+            },
+        },
+
+    });
+</script>
+
+</body>
+</html>
+
+<style>
+    .el-pagination {
+        text-align: center;
+    }
+</style>

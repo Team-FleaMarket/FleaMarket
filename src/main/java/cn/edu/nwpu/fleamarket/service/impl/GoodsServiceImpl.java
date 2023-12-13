@@ -79,6 +79,35 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public Goods getNextToBeReviewed() {
+        return goodsDao.getNextToBeReviewed();
+    }
+
+    @Override
+    public void setAttributed(int id) {
+        goodsDao.setAttributed(id);
+    }
+
+    @Override
+    public void setUnAttributed(int id) {
+        goodsDao.setUnAttributed(id);
+    }
+
+    @Override
+    public List<Goods> getAllAttributedGoodsNotReviewed() {
+        return goodsDao.getAllAttributedGoodsNotReviewed();
+    }
+
+    @Override
+    public boolean review(int id, int status) {
+        try {
+            goodsDao.review(id, status);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
     public List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize) {
         System.out.println("cate: " + cate + " pageNum: " + pageNum + " pageSize: " + pageSize);
         return goodsDao.getGoodsByCategoryPages(cate, pageNum*pageSize, pageSize);
@@ -94,5 +123,3 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsDao.selectByGoodsStatusAndStudentNoTotalCnt(goodsStatus, studentNo);
     }
 }
-
-
