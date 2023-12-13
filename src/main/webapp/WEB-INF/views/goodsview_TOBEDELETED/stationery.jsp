@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Stationery</title>
-    <%@ include file="../components/jspheader.jsp"%>
+    <%@ include file="../components/htmlhead.jsp"%>
 
 </head>
 

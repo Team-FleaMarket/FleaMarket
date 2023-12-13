@@ -49,23 +49,35 @@ public class PageController {
     }
 
     @RequestMapping("/register")
-    public ModelAndView register(HttpServletRequest request) throws Exception {
+    public ModelAndView register(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
         return modelAndView;
     }
 
-    @RequestMapping("/managecenter")
-    public ModelAndView managecenter(HttpServletRequest request) throws Exception {
+    @RequestMapping("/views/managecenter")
+    public ModelAndView managecenter(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
         Student student = (Student) request.getSession().getAttribute("student");
-        if ("".equals(status) || status == null) {
+        if("".equals(status) || status == null) {
             status = "0";
+            List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
+            modelAndView.addObject("status", status);
+            modelAndView.addObject("goodsList", list);
         }
-        List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
-        modelAndView.addObject("status", status);
-        modelAndView.addObject("goodsList", list);
+        else if("0".equals(status)||"1".equals(status))
+        {
+            List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
+            modelAndView.addObject("status", status);
+            modelAndView.addObject("goodsList", list);
+        }
+        else if("2".equals(status)){
+            System.out.println("select status==2");
+            List<Goods> list = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo());
+            modelAndView.addObject("status", status);
+            modelAndView.addObject("goodsList", list);
+        }
         modelAndView.setViewName("managecenter");
         return modelAndView;
     }
@@ -93,17 +105,18 @@ public class PageController {
     }
 
 
-    @RequestMapping("/insert")
-    public ModelAndView insert(HttpServletRequest request) throws Exception {
+
+    @RequestMapping("/views/insert")
+    public ModelAndView insert(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("insert");
+        modelAndView.setViewName("manage/insert");
         return modelAndView;
     }
 
     @RequestMapping("/products")
     public ModelAndView products(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("products");
+        modelAndView.setViewName("goods/products");
         return modelAndView;
     }
 
@@ -119,7 +132,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("books");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -135,7 +148,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -151,7 +164,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -167,7 +180,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -183,7 +196,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -199,7 +212,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -215,7 +228,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -231,7 +244,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 

@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Login</title>
-    <%@ include file="components/jspheader.jsp" %>
+    <%@ include file="components/htmlhead.jsp" %>
     <link href="${pageContext.request.contextPath}/static/css/login.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
@@ -226,7 +226,6 @@
             </div>
             <script type="module">
                 import {loginAPI} from '/static/js/apis/student.js'
-
                 document.querySelector("#liveToastBtn").onclick = async () => {
                     var studentNo = $("input[name=studentNo]").val()
                     var password = $("input[name=password]").val()
@@ -240,8 +239,6 @@
                         window.location.href = window.location.origin
                     } catch (error) {
                         message = error.response.data
-                        console.log("------------")
-                        console.log(error)
                         document.getElementById("toast-body").innerText = message;
                         document.getElementById("toast-header").classList.remove("bg-success")
                         document.getElementById("toast-header").classList.add("bg-danger")

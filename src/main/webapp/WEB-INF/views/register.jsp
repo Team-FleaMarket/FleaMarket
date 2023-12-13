@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Register</title>
-    <%@ include file="components/jspheader.jsp" %>
+    <%@ include file="components/htmlhead.jsp" %>
     <link href="${pageContext.request.contextPath}/static/css/register.css" rel="stylesheet" type="text/css"
           media="all">
 </head>
@@ -80,8 +80,6 @@
             </div>
             <script type="module">
                 import {registerAPI} from '/static/js/apis/student.js'
-
-                console.log("sssssssssssssssssss")
                 document.querySelector("#liveToastBtn").onclick = async () => {
                     var studentNo = $("input[name=studentNo]").val()
                     var name = $("input[name=name]").val()
@@ -90,7 +88,6 @@
                     var email = $("input[name=email]").val()
                     var password = $("input[name=password]").val()
                     var message = ""
-
                     try {
                         var response = await registerAPI({studentNo, name, phone, wechat, email, password})
                         message = response.data

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="footer">
     <div class="container">
-        <div class="footer-grids">Ss
+        <div class="footer-grids">
             <!--banner-bottom-grid-left-->
             <div class="row">
                 <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
