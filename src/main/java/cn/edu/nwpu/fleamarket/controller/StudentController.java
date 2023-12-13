@@ -32,7 +32,7 @@ public class StudentController {
         if (databaseStudent == null) {
             return ResponseEntity.badRequest().body("用户名或密码错误！");
         }
-
+        System.out.println(databaseStudent.getStudentNo());
         request.getSession().setAttribute("student", databaseStudent);
         return ResponseEntity.ok("登陆成功！");
     }
