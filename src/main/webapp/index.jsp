@@ -13,6 +13,7 @@
     <title>Home</title>
     <%@ include file="/WEB-INF/views/components/htmlhead.jsp"%>
     <link rel="stylesheet" href="<c:url value="/static/css/overviewProduct.css"/>">
+    <link rel="stylesheet" href="<c:url value="/static/css/collections-bottom.css"/>">
 </head>
 
 <body>
