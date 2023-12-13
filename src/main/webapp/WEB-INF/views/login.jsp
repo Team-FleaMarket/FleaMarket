@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Login</title>
-    <%@ include file="components/jspheader.jsp" %>
+    <%@ include file="components/htmlhead.jsp" %>
     <link href="${pageContext.request.contextPath}/static/css/login.css" rel="stylesheet" type="text/css" media="all">
 </head>
 

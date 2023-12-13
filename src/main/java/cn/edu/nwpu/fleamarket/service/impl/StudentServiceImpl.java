@@ -30,7 +30,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student loginStudent(Student student) {
-        System.out.println(student.getStudentNo());
         Student dataBaseStudent = studentDao.selectStudentByStudentNo(student.getStudentNo());
         // 若根据学号获取到的学生未空，则学号不存在，需要先去注册 || 判断密码，如果密码不相等，则错误
         if (dataBaseStudent == null || !dataBaseStudent.getPassword().equals(student.getPassword())) {

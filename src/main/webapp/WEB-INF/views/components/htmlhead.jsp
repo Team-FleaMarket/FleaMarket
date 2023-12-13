@@ -21,12 +21,14 @@
 <script>new WOW().init()</script>
 <link href="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.5.0/axios.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <!-- // 引用的 cdn： jquery bootstrap simplecart -->
 <!-- for bootstrap working -->
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!-- // for bootstrap working -->
-
 <!-- 自己写的 css -->
 <link href="${pageContext.request.getContextPath()}/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.getContextPath()}/static/css/header.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.getContextPath()}/static/css/goodsdetail.css" rel="stylesheet" type="text/css" media="all" />
 <!-- //自己写的 css -->
