@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>添加商品的页面</title>
-    <%@ include file="components/jspheader.jsp"%>
+    <%@ include file="../components/htmlhead.jsp"%>
 </head>
 <body>
 <div class="header">
@@ -202,7 +202,7 @@
 </div>
 
 <!-- footer -->
-<%@ include file="components/footer.jsp" %>
+<%@ include file="../components/footer.jsp" %>
 <!-- //footer -->
 </body>
 </html>

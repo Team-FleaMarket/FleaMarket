@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>管理中心</title>
-    <%@ include file="components/jspheader.jsp" %>
+    <%@ include file="../components/htmlhead.jsp" %>
     <script language="JavaScript">
         // $(document).ready(function() {
         //     //绑定下拉框change事件，当下来框改变时调用 SelectChange()方法
@@ -44,7 +44,7 @@
 </head>
 
 <body>
-<%@ include file="./components/header.jsp" %>
+<%@ include file="../components/header.jsp" %>
 <div class="single">
     <div class="container">
         <div class="">
@@ -338,7 +338,7 @@
 <!-- //banner-bottom -->
 
 <!-- footer -->
-<%@ include file="./components/footer.jsp" %>
+<%@ include file="../components/footer.jsp" %>
 
 <!-- //footer -->
 </body>

@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Products</title>
-    <%@ include file="components/jspheader.jsp"%>
+    <%@ include file="../components/htmlhead.jsp"%>
 </head>
 
 <body>
@@ -47,12 +47,6 @@
 
                 });//]]>
                 </script>
-<<<<<<< HEAD
-                <script type="text/javascript" src="${pageContext.request.getContextPath()}/static/js/lib/jquery-ui.min.js"></script>
-=======
-                <script type="text/javascript"
-                        src="${pageContext.request.getContextPath()}/static/js/jquery-ui.min.js"></script>
->>>>>>> dev
                 <!---->
             </div>
             <div class="categories animated wow slideInUp" data-wow-delay=".5s">
@@ -562,7 +556,7 @@
 </div>
 <!-- //breadcrumbs -->
 <!-- footer -->
-<%@ include file="components/footer.jsp" %>
+<%@ include file="../components/footer.jsp" %>
 <!-- //footer -->
 </body>
 </html>
