@@ -66,9 +66,16 @@ public class PageController {
         }
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
-        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        int currentPage;
         Student student = (Student) request.getSession().getAttribute("student");
         int totalPage = 0;
+        if("".equals(request.getParameter("currentPage"))||request.getParameter("currentPage")==null)
+        {
+            currentPage=0;
+        }
+        else {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        }
         List<Goods> goodsList = null;
         if("".equals(status) || status == null) {
             status = "0";
