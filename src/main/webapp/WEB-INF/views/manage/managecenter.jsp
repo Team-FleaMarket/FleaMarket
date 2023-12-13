@@ -44,7 +44,7 @@
 </head>
 
 <body>
-<%@ include file="./components/header.jsp" %>
+<%@ include file="../components/header.jsp" %>
 
 <div class="manager">
     <div class="container">
@@ -104,13 +104,20 @@
                                         <a href="/views/insert">添加商品</a> <span></span>
                                     </div>
                                     <br>
-                                    <c:if test="${status == 0}"><h4>待审核: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 4}"><h4>欲购买: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == -1}"><h4>审核未通过: ${goodsList.size()} 件商品</h4></c:if>
-
+                                    <div class="row">
+                                        <div class="col-md-4 status-single">
+                                            <c:if test="${status == 0}"><h4>待审核: ${goodsList.size()} 件商品</h4></c:if>
+                                            <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
+                                            <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
+                                            <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="search-container">
+                                                <input type="text" id="searchInput" placeholder="搜索商品">
+                                                <button class="search-button rounded-5" onclick="search()">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <br>
                                     <c:if test="${status == 0}">
                                         <div class="student-goods  ">
@@ -135,7 +142,6 @@
                                         </div>
 
                                         <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                            <%--                                            <c:if test="${goods.status == 0}">--%>
                                             <div class="student-goods  ">
                                                 <div class="row">
                                                     <div class="col-md-md-3">
@@ -253,21 +259,23 @@
                                     </c:if>
                                     <c:if test="${status == 3}">
                                         <div class="student-goods  row">
-                                            <div class="col-md-md-3">
-                                                <div class="student-goods-image">
-                                                    <img src="${pageContext.request.getContextPath()}/static/images/2021301455.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                            <div class="student-goods  ">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="student-goods-image">
+                                                            <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
+                                                        </div>
+                                                        <br>
+                                                        <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=1">>>更多</a></h4>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <h3>于2023年5月3299购入的电脑</h3>
+                                                        <p>电子产品</p>
+                                                        <h3 class="money ">￥ 2899</h3>
+                                                        <h4 class="date">2023年12月</h4>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                    </div>
                                                 </div>
-                                                <br>
-                                                <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
-                                            </div>
-                                            <div class="col-md-md-9">
-                                                <h3>于2023年5月3299购入的电脑</h3>
-                                                <p>电子产品</p>
-                                                <br>
-                                                <h3 class="money ">￥ 2899</h3>
-                                                <br>
-                                                <h4 class="date">2023年12月</h4>
-
                                             </div>
                                         </div>
                                         <c:forEach items="${goodsList}" var="goods" varStatus="vs">
@@ -307,32 +315,6 @@
             </div>
         </div>
     </div>
-    <%--        <div class="col-md-md-7  products-left">--%>
-    <%--            <div class="col-md-md-10 categories animated wow slideInUp single-right-left simpleCart_shelfItem animated wow slideInRight" data-wow-delay=".5s">--%>
-    <%--                <h4><span class="item_price">基本信息</span></h4>--%>
-    <%--                <div class="color-quality">--%>
-    <%--                    <div class="color-quality-left">--%>
-    <%--                        <p>学号：${sessionScope.student.studentNo}</p><h5></h5>--%>
-    <%--                        <p>昵称：${sessionScope.student.name}</p><h5></h5>--%>
-    <%--                        <p>微信号：${sessionScope.student.wechat}</p><h5></h5>--%>
-    <%--                        <p>手机号：${sessionScope.student.phone}</p><h5></h5>--%>
-    <%--                        <p>邮箱：${sessionScope.student.email}</p><h5></h5>--%>
-    <%--                        <li><a href="insert">添加商品</a> <span></span></li>--%>
-    <%--                        <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=0">待审核</a> <span></span></li>--%>
-    <%--                        <li><a href="${pageContext.request.getContextPath()}/views/managecenter?status=1">已审核</a> <span></span></li>--%>
-    <%--                    </div>--%>
-    <%--                    <div class="clearfix"> </div>--%>
-    <%--                </div>--%>
-
-    <%--                <div class="occasional">--%>
-    <%--                    <div class="clearfix"> </div>--%>
-    <%--                </div>--%>
-    <%--                &lt;%&ndash;<div class="occasion-cart">&ndash;%&gt;--%>
-    <%--                    &lt;%&ndash;<a class="correct" href="register.html">修改 </a>&ndash;%&gt;--%>
-    <%--                &lt;%&ndash;</div>&ndash;%&gt;--%>
-    <%--            </div>--%>
-    <%--            <div class="clearfix"> </div>--%>
-    <%--        </div>--%>
     <div class="clearfix"> </div>
 </div>
 </div>

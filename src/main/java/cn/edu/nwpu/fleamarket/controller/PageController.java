@@ -59,26 +59,26 @@ public class PageController {
     public ModelAndView managecenter(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
+        List<Goods> list=null;
         Student student = (Student) request.getSession().getAttribute("student");
         if("".equals(status) || status == null) {
             status = "0";
-            List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
-            modelAndView.addObject("status", status);
-            modelAndView.addObject("goodsList", list);
+            list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
+
         }
         else if("0".equals(status)||"1".equals(status))
         {
-            List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
-            modelAndView.addObject("status", status);
-            modelAndView.addObject("goodsList", list);
+            list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
+
         }
         else if("2".equals(status)){
             System.out.println("select status==2");
-            List<Goods> list = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo());
-            modelAndView.addObject("status", status);
-            modelAndView.addObject("goodsList", list);
+            list = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo());
+
         }
-        modelAndView.setViewName("managecenter");
+        modelAndView.addObject("status", status);
+        modelAndView.addObject("goodsList", list);
+        modelAndView.setViewName("manage/managecenter");
         return modelAndView;
     }
 

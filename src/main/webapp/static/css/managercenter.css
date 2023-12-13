@@ -1,14 +1,14 @@
- body{
+.manager body{
     font-size: 100%;
     background:	#FFFFFF;
     font-family: 'Open Sans', sans-serif;
 }
-.manager{
+ .manager .manager{
     padding-top: 40px;
     background: #F7F7F9;
     padding-bottom: 40px;
 }
-.information
+ .manager .information
 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
@@ -17,7 +17,7 @@
     /*margin-right: 10px;*/
     height: 70%;
 }
-.self_information
+ .manager .self_information
 {
 
     /*justify-self: center;*/
@@ -25,7 +25,7 @@
     /*display: inline-block;*/
     /*text-align: center;*/
 }
-.avatar{
+ .manager .avatar{
     display: grid;
     margin: 0 auto;
     justify-self: center;
@@ -33,7 +33,7 @@
     height:150px;
     border:0;
 }
- .overlay {
+ .manager .overlay {
 
      position: absolute;
      margin: 0 auto;
@@ -46,11 +46,11 @@
      transition: opacity 0.3s ease; /* 添加过渡效果 */
  }
 
- .self_information:hover .overlay {
+ .manager .self_information:hover .overlay {
      opacity: 1; /* 悬浮时不透明 */
  }
 
-.avatar-button{
+ .manager .avatar-button{
     padding: 10px 10px;
     width:60%;
     height: 50px;
@@ -61,7 +61,7 @@
     border: none;
     cursor: pointer;
 }
-.status{
+ .manager .status{
     background: #c4e3f3;
     width:100%;
     font-size: 20px;
@@ -70,15 +70,18 @@
     border-radius: 20px;
     margin-right: 20px;
 }
-.status a{
+ .manager .status a{
     color: #080808;
 }
-.single
+ .manager .single
 {
     background: #F7F7F9;
 }
+.manager .goods{
+    padding-left: 20px;
+}
 
-.student-goods
+ .manager .student-goods
 {
     width: 100%;
     /*height: 220px;*/
@@ -90,27 +93,27 @@
     margin-bottom: 20px;
 
 }
-.student-goods-image{
+ .manager .student-goods-image{
     width: 100%;
 }
-.money{
+ .manager .money{
     color:#c9302c;
 }
-.date{
+ .manager .date{
     color: #5e5e5e;
 }
-.btn{
+ .manager .btn{
     float: right;
     margin-right: 10px;
 }
-.pop-ups{
+ .manager .pop-ups{
     display: none;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 
 }
-.white_content {
+ .manager .white_content {
 
     width: 40%;
     height: 60%;
@@ -124,7 +127,7 @@
     /*层级要比.black_overlay高，这样才能显示在它前面*/
     overflow: auto;
 }
-#light {
+ .manager #light {
     position: absolute;
     /*left: 50%;*/
     /* top: 50%;*/
@@ -133,6 +136,34 @@
     /*margin-left: -150px;*/
     /*!* margin-top: -125px *!;*/
 }
-/*.student-goods h3{*/
-/*    color: #080808;*/
-/*}*/
+.manager .status-single{
+    text-align: center;
+    margin: auto;
+}
+ .manager.search-container {
+     display: flex;
+     /*margin: 20px;*/
+     outline:1px solid  #5e5e5e;
+     background: #FFFFFF;
+ }
+
+ .manager #searchInput {
+     flex: 1;
+     /*padding: 10px;*/
+     width: 70%;
+     height: 40px;
+     border: 1px ;
+     background: #FFFFFF;
+     outline: 1px solid #5e5e5e;
+ }
+
+ .manager .search-button {
+     /*padding: 10px;*/
+     background-color: #c4e3f3;
+     color: #fff;
+     border: none;
+     border-radius: 5%;
+     /*cursor: pointer;*/
+     width: 15%;
+     height:41px;
+ }
