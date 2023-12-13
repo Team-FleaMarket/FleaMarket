@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>管理中心</title>
-    <%@ include file="components/jspheader.jsp" %>
+    <%@ include file="../components/htmlhead.jsp" %>
     <script language="JavaScript">
         // $(document).ready(function() {
         //     //绑定下拉框change事件，当下来框改变时调用 SelectChange()方法
@@ -45,15 +45,7 @@
 
 <body>
 <%@ include file="./components/header.jsp" %>
-<div class="breadcrumbs">
-    <div class="container">
-        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-            <li><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"
-                                                                               aria-hidden="true"></span>主页</a></li>
-            <li class="active">个人中心</li>
-        </ol>
-    </div>
-</div>
+
 <div class="manager">
     <div class="container">
         <div class="">
@@ -116,6 +108,9 @@
                                     <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
                                     <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
                                     <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
+                                    <c:if test="${status == 4}"><h4>欲购买: ${goodsList.size()} 件商品</h4></c:if>
+                                    <c:if test="${status == -1}"><h4>审核未通过: ${goodsList.size()} 件商品</h4></c:if>
+
                                     <br>
                                     <c:if test="${status == 0}">
                                         <div class="student-goods  ">
@@ -344,7 +339,7 @@
 <!-- //banner-bottom -->
 
 <!-- footer -->
-<%@ include file="./components/footer.jsp" %>
+<%@ include file="../components/footer.jsp" %>
 
 <!-- //footer -->
 </body>

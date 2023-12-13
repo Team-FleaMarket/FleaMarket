@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Books</title>
-    <%@ include file="../components/jspheader.jsp" %>
+    <%@ include file="../components/htmlhead.jsp" %>
 </head>
 
 <body>

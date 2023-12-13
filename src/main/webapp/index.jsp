@@ -11,42 +11,7 @@
 <html>
 <head>
     <title>Home</title>
-    <%@ include file="/WEB-INF/views/components/jspheader.jsp"%>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- 引入 Bootstrap 样式 -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
-    <meta name="keywords" content="Best Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
-    <!-- //for-mobile-apps -->
-    <link href="${pageContext.request.getContextPath()}/static/css/bootstrap.css" rel="stylesheet" type="text/css"          media="all"/>
-    <link href="${pageContext.request.getContextPath()}/static/css/overviewProduct.css" rel="stylesheet" type="text/css"          media="all"/>
-    <!-- for bootstrap working -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script type="text/javascript"
-            src="${pageContext.request.getContextPath()}/static/js/bootstrap-3.1.1.min.js"></script>
-    <!-- //for bootstrap working -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
-          rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic'
-          rel='stylesheet' type='text/css'>
-    <!-- timer -->
-    <link rel="stylesheet" href="${pageContext.request.getContextPath()}/static/css/jquery.countdown.css"/>
-    <!-- //timer -->
-    <!-- animation-effect -->
-    <link href="${pageContext.request.getContextPath()}/static/css/animate.min.css" rel="stylesheet">
-    <script type="application/x-javascript"> addEventListener("load", function () {
-        setTimeout(hideURLbar, 0);
-    }, false);
-
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    } </script>
-
-    <script src="${pageContext.request.getContextPath()}/static/js/wow.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
+    <%@ include file="/WEB-INF/views/components/htmlhead.jsp"%>
 </head>
 
 <body>
