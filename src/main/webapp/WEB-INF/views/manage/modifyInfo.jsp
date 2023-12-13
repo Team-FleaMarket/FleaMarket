@@ -14,46 +14,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Personal Dashboard</title>
+    <%@ include file="../components/htmlhead.jsp" %>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<c:url value="/static/css/personalManagement.css"/>">
+    <link rel="stylesheet" href="<c:url value="/static/css/modifyInfo.css"/>">
     <link rel="stylesheet" href="/bootstrap-icons-1.11.1/bootstrap-icons.css">
 </head>
 
 <body>
+<%@ include file="../components/header.jsp" %>
 <div class="panel" id="panel">
     <div class="panel-left">
-<%--        <a href="http://localhost:8080/FleaMarket/views/login" class="btn btn-link">--%>
-<%--            <i class="bi bi-arrow-left"></i>--%>
-<%--        </a>--%>
         <p></p>
-<%--    先随便放张图--%>
-    <c:if test="${sessionScope.student.img!=null}">
-        <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg" alt=" " class="header avatar rounded-circle mx-auto d-block" >
-    </c:if>
-    <c:if test="${sessionScope.student.img==null}">
-        <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
-        <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg" alt=" " class="header avatar rounded-circle mx-auto d-block" >
-        <div class="avatar overlay rounded-circle">
-            <input type="file" accept="image/*" id="imageInput" style="display: none;">
-            <button  class="avatar-button rounded-3" onclick="uploadImage()">上传图像</button>
-            <script>
-                function uploadImage() {
-                    document.getElementById('imageInput').click();
-                }
-                document.getElementById('imageInput').addEventListener('change', function () {
-                    var selectedFile = this.files[0];
-                    if (selectedFile) {
-                        var formData = new FormData();
-                        formData.append('image', selectedFile);
-                        console.log('Selected file:', selectedFile);
-                    }
-                });
-            </script>
+        <%--    先随便放张图--%>
+        <div class="self_information">
+            <c:if test="${sessionScope.student.img!=null}">
+                <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg"
+                     alt=" " class="avatar rounded-circle mx-auto d-block">
+            </c:if>
+            <c:if test="${sessionScope.student.img==null}">
+                <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg"
+                     alt=" " class="avatar rounded-circle mx-auto d-block">
+                <div class="avatar overlay rounded-circle">
+                    <input type="file" accept="image/*" id="imageInput" style="display: none;">
+                    <button class="avatar-button rounded-3" onclick="uploadImage()">上传图像
+                    </button>
+                    <script>
+                        function uploadImage() {
+                            document.getElementById('imageInput').click();
+                        }
+
+                        document.getElementById('imageInput').addEventListener('change', function () {
+                            var selectedFile = this.files[0];
+                            if (selectedFile) {
+                                var formData = new FormData();
+                                formData.append('image', selectedFile);
+                                console.log('Selected file:', selectedFile);
+                            }
+                        });
+                    </script>
+                </div>
+            </c:if>
         </div>
-    </c:if>
         <p></p>
-        <h3 class="name">Zhsj</h3>
+        <h3 class="name">${sessionScope.student.name}</h3>
         <div class="options">
             <button class="btn btn-option active" onclick="showPersonalInfo()" data-target="personalInfo">个人信息修改
             </button>
@@ -81,7 +85,7 @@
 <!-- Bootstrap JS and jQuery Slim JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-<script src="<c:url value="/static/js/personalManagement.js"/>"></script>
+<script src="<c:url value="/static/js/modifyInfo.js"/>"></script>
 </body>
 
 </html>

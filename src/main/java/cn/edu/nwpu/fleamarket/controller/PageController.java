@@ -52,14 +52,14 @@ public class PageController {
     }
 
     @RequestMapping("/register")
-    public ModelAndView register(HttpServletRequest request)throws Exception{
+    public ModelAndView register(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
         return modelAndView;
     }
 
     @RequestMapping("/views/managecenter")
-    public ModelAndView managecenter(HttpServletRequest request)throws Exception{
+    public ModelAndView managecenter(HttpServletRequest request) throws Exception {
         Enumeration<String> attributeNames = request.getSession().getAttributeNames();
         while (attributeNames.hasMoreElements()) {
             System.out.println(attributeNames.nextElement());
@@ -69,27 +69,22 @@ public class PageController {
         int currentPage;
         Student student = (Student) request.getSession().getAttribute("student");
         int totalPage = 0;
-        if("".equals(request.getParameter("currentPage"))||request.getParameter("currentPage")==null)
-        {
-            currentPage=0;
-        }
-        else {
+        if ("".equals(request.getParameter("currentPage")) || request.getParameter("currentPage") == null) {
+            currentPage = 0;
+        } else {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
         }
         List<Goods> goodsList = null;
-        if("".equals(status) || status == null) {
+        if ("".equals(status) || status == null) {
             status = "0";
             goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
-        }
-        else if("0".equals(status)||"1".equals(status))
-        {
+        } else if ("0".equals(status) || "1".equals(status)) {
             goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
-            totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()),PAGE_SIZE) ;
-        }
-        else if("2".equals(status)){
+            totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()), PAGE_SIZE);
+        } else if ("2".equals(status)) {
             System.out.println("select status==2");
             goodsList = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo(), currentPage, PAGE_SIZE);
-            totalPage =  Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo()),PAGE_SIZE);
+            totalPage = Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo()), PAGE_SIZE);
         }
         for (Goods goods : goodsList) {
             System.out.println("Good name: " + goods.getGoodsName() + "\n");
@@ -126,9 +121,8 @@ public class PageController {
     }
 
 
-
     @RequestMapping("/views/insert")
-    public ModelAndView insert(HttpServletRequest request)throws Exception{
+    public ModelAndView insert(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manage/insert");
         return modelAndView;
@@ -269,6 +263,12 @@ public class PageController {
         return modelAndView;
     }
 
+    @RequestMapping("/managecenter/modifyInfo")
+    public ModelAndView modifyInfo(HttpServletRequest request) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manage/modifyInfo");
+        return modelAndView;
+    }
 /*    @RequestMapping("/single")
     public ModelAndView single(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
