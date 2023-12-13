@@ -107,9 +107,6 @@
                                     <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
                                     <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
                                     <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == 4}"><h4>欲购买: ${goodsList.size()} 件商品</h4></c:if>
-                                    <c:if test="${status == -1}"><h4>审核未通过: ${goodsList.size()} 件商品</h4></c:if>
-
                                     <br>
                                     <c:if test="${status == 0}">
                                         <div class="student-goods  ">
