@@ -56,4 +56,12 @@ public interface GoodsDao {
     int selectByStatusAndStudentNoTotalCnt(@Param("status") int status, @Param("studentNo") String studentNo);
 
     int selectByGoodsStatusAndStudentNoTotalCnt(@Param("goods_status") int goodsStatus, @Param("studentNo") String studentNo);
+
+    /**
+     * 选取已售出商品
+     */
+    @Select("SELECT * FROM goods WHERE goods_status = 1")
+    @ResultMap("goodsResultMap")
+    List<Goods> getSoldGoods();
+
 }

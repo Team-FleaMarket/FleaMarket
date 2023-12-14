@@ -60,7 +60,7 @@
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                     </c:if>
                                     <c:if test="${sessionScope.student.img==null}">
-<%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
+                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                         <div class="avatar overlay rounded-circle">
                                             <input type="file" accept="image/*" id="imageInput" style="display: none;">
@@ -70,11 +70,14 @@
                                                     document.getElementById('imageInput').click();
                                                 }
                                                 document.getElementById('imageInput').addEventListener('change', function () {
+                                                    alert("active");
                                                     var selectedFile = this.files[0];
                                                     if (selectedFile) {
                                                         var formData = new FormData();
                                                         formData.append('image', selectedFile);
                                                         console.log('Selected file:', selectedFile);
+
+                                                        // fetch()
                                                     }
                                                 });
                                             </script>

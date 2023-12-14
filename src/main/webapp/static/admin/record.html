@@ -21,6 +21,40 @@
                 <el-menu-item index="4">交易记录</el-menu-item>
             </el-menu>
 
+            <h3 style="margin: 20px 0; color: #34495e; font-size: 24px; background-color: #ecf0f1; padding: 10px; border-radius: 5px;">交易记录</h3>
+            <el-table :data="records" style="width: 100%">
+                <el-table-column prop="id" label="id" width="260"></el-table-column>
+                <el-table-column prop="goodsName" label="商品名" width="260"></el-table-column>
+                <el-table-column prop="price" label="价格" width="260"></el-table-column>
+                <el-table-column prop="studentNo" label="卖家" width="260"></el-table-column>
+                <el-table-column prop="buyerNo" label="买家" width="260"></el-table-column>
+<!--                <el-table-column-->
+<!--                        fixed="right"-->
+<!--                        label="操作"-->
+<!--                        width="120">-->
+<!--                    <template slot-scope="scope">-->
+
+<!--                        <el-button-->
+<!--                                type="primary"-->
+<!--                                size="mini"-->
+<!--                                @click="showInfo(scope.row.id)">修改-->
+<!--                        </el-button>-->
+<!--                    </template>-->
+<!--                </el-table-column>-->
+            </el-table>
+
+            <div v-if="querying == 0" class="block">
+                <el-pagination
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        background
+                        layout="prev, pager, next"
+                        :total="total"
+                        :page-size="6">
+                </el-pagination>
+            </div>
+
+
             <el-footer>Copyright © 2023.FleaMarket All rights reserved.</el-footer>
         </el-container>
     </div>
@@ -58,9 +92,15 @@
             to_user: function () {
                 window.location.href = "users.html";
             },
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            getTotal() {
+
+            }
         },
         created() {
-            // this.getPagenum();
+            this.getTotal();
             // this.handleCurrentChange(1);
         },
         computed: {
