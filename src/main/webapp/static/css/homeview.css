@@ -1,0 +1,72 @@
+
+
+img {
+    width: 100%;
+}
+
+
+.background {
+    background-color: #f9f6f2;
+    margin: 10px;
+    border-radius: 20px;
+}
+.category {
+    background-color: #f9f6f2;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 20px;
+    position: relative;
+}
+
+.category .carousel-indicators {
+    bottom: auto;
+    top: 20px; /* 调整到合适的位置 */
+}
+.category .carousel .c-item {
+    height: 600px;
+}
+
+.category .carousel .c-img {
+    height: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    object-fit: cover;
+    filter: brightness(0.6);
+    mask-image: linear-gradient(to bottom, rgba(227, 227, 227, 1) 50%, rgba(0, 0, 0, 0));
+}
+
+.category .categories {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.goods .card {
+    margin: -3px;
+    padding: 10px 20px 20px 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.goods .card:hover{
+    transform: scale(1.02);
+}
+.goods .card .card-img-top {
+    height: auto;
+    aspect-ratio: 1; /* 设置宽高比为5:6 */
+    object-fit: cover; /* 保持原始比例，填充整个容器 */
+    cursor: pointer;
+}
+.goods .card .card-body {
+    margin-top: -5px;
+    margin-bottom: -10px;
+    margin-left: -15px;
+    font-size: 12px;
+}
