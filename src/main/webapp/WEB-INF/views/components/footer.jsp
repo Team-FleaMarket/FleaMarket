@@ -32,40 +32,42 @@
                     </ul>
                 </div>
 
-                <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".7s">
-                    <h3>Links</h3>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="https://github.com/<user>" target="_blank"
-                               class="text-decoration-none">
-                                <i class="bi bi-github me-2"></i> Github
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://weibo.com/<user>" target="_blank" class="text-decoration-none">
-                                <i class="bi bi-sina-weibo me-2"></i> WeiBo
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://linkedin.com/in/<user>" target="_blank"
-                               class="text-decoration-none">
-                                <i class="bi bi-linkedin me-2"></i> Linkedin
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/<user>" target="_blank"
-                               class="text-decoration-none">
-                                <i class="bi bi-twitter me-2"></i> Twitter
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://weibo.com/<user>" target="_blank" class="text-decoration-none">
-                                <i class="bi bi-tencent-qq me-2"></i> 腾讯QQ
-                            </a>
-                        </li>
-                    </ul>
+                <div class="col-md-4  footer-grid animated wow slideInLeft" data-wow-delay=".7s">
+                    <div class="links">
+                        <h3>Links</h3>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="https://github.com/<user>" target="_blank"
+                                   class="text-decoration-none">
+                                    <i class="bi bi-github me-2"></i> Github
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://weibo.com/<user>" target="_blank" class="text-decoration-none">
+                                    <i class="bi bi-sina-weibo me-2"></i> WeiBo
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://linkedin.com/in/<user>" target="_blank"
+                                   class="text-decoration-none">
+                                    <i class="bi bi-linkedin me-2"></i> Linkedin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/<user>" target="_blank"
+                                   class="text-decoration-none">
+                                    <i class="bi bi-twitter me-2"></i> Twitter
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://weibo.com/<user>" target="_blank" class="text-decoration-none">
+                                    <i class="bi bi-tencent-qq me-2"></i> 腾讯QQ
+                                </a>
+                            </li>
+                        </ul>
 
-                    <div class="clearfix"></div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>

@@ -57,10 +57,10 @@
                         <div class="col-md-3 information " data-wow-delay=".5s">
                             <form >
                                 <div class="self_information">
-                                    <c:if test="${sessionScope.student.img!=null}">
+                                    <c:if test="${sessionScope.student.img!=0}">
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                     </c:if>
-                                    <c:if test="${sessionScope.student.img==null}">
+                                    <c:if test="${sessionScope.student.img==0}">
 <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                         <div class="avatar overlay rounded-circle">
@@ -154,7 +154,7 @@
                                                     </div>
                                                     <div class="col-md-md-9">
                                                         <h3>${goods.goodsName}</h3>
-                                                        <p>${goods.goodsStatus}</p>
+                                                        <mytag:cate category="${goods.cate}"></mytag:cate>
                                                         <h3 class="money ">${goods.price}</h3>
                                                         <h4 class="date">${goods.description}</h4>
                                                         <button type="button" class="btn btn-outline-dark pull-right">删除</button>
@@ -201,7 +201,7 @@
                                                         </div>
                                                         <div class="col-md-md-9">
                                                             <h3>${goods.goodsName}</h3>
-                                                            <p>${goods.goodsStatus}</p>
+                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
                                                             <h3 class="money ">${goods.price}</h3>
                                                             <h4 class="date">${goods.description}</h4>
                                                             <button type="button" class="btn btn-outline-dark pull-right">删除</button>
@@ -248,7 +248,7 @@
                                                         </div>
                                                         <div class="col-md-md-9">
                                                             <h3>${goods.goodsName}</h3>
-                                                            <p>${goods.goodsStatus}</p>
+                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
                                                             <h3 class="money ">${goods.price}</h3>
                                                             <h4 class="date">${goods.description}</h4>
                                                             <button type="button" class="btn btn-outline-dark pull-right">删除</button>
@@ -295,7 +295,7 @@
                                                         </div>
                                                         <div class="col-md-md-9">
                                                             <h3>${goods.goodsName}</h3>
-                                                            <p>${goods.goodsStatus}</p>
+                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
                                                             <h3 class="money ">${goods.price}</h3>
                                                             <h4 class="date">${goods.description}</h4>
                                                             <button type="button" class="btn btn-outline-dark pull-right">删除</button>

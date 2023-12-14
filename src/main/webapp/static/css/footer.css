@@ -25,7 +25,7 @@ html, body {
 {
     margin-left: auto;
     margin-right: auto;
-    padding-left: 10%;
+    padding-left: 5%;
 }
 /*-- footer --*/
 .footer {
@@ -197,6 +197,10 @@ html, body {
 /*-----start-responsive-design------*/
 @media (max-width: 1080px) {
 
+    .footer .links{
+        margin: 0 auto;
+        width: 100px;
+    }
     .footer-grid h3 {
         font-size: 1.7em;
     }
@@ -234,6 +238,10 @@ html, body {
 
 @media (max-width: 991px) {
 
+    .footer .links{
+        margin: 0 auto;
+        width: 100px;
+    }
     .box_1 h3 {
         font-size: 9px;
     }
@@ -316,6 +324,10 @@ html, body {
 }
 
 @media (max-width: 767px) {
+    .footer .links{
+        margin: 0;
+        width: 100px;
+    }
     .box_1 h3 {
         font-size: 13px;
     }
@@ -324,6 +336,10 @@ html, body {
 
 @media (max-width: 640px) {
 
+    .footer .links{
+        margin: 0 auto;
+        width: 100px;
+    }
     .footer-logo h2 a {
         font-size: 1.5em;
     }
@@ -335,6 +351,10 @@ html, body {
 
 @media (max-width: 480px) {
 
+    .footer .links{
+        margin: 0;
+        width: 100px;
+    }
     .footer-grid h3 {
         font-size: 1.5em;
     }
@@ -380,6 +400,10 @@ html, body {
 
 @media (max-width: 414px) {
 
+    .footer .links{
+        margin: 0;
+        width: 100px;
+    }
     .footer-grid-sub-grid-right {
         margin: 1em 0 0;
     }
@@ -388,6 +412,10 @@ html, body {
 
 
 @media (max-width: 320px) {
+    .footer .links{
+        margin: 0;
+        width: 100px;
+    }
     .footer-logo h2 a {
         font-size: 1.1em;
     }
