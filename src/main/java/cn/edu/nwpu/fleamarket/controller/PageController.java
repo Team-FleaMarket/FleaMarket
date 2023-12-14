@@ -4,10 +4,13 @@ import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
+import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ public class PageController {
     @Autowired
     private StudentService userService;
 
-    private static final int PAGE_SIZE = 5;
+    private static final int PAGE_SIZE = 8;
 
  /*   @RequestMapping("")
     public ModelAndView home(HttpServletRequest request)throws Exception{
@@ -43,6 +46,18 @@ public class PageController {
         modelAndView.setViewName("home");
         return modelAndView;
     }*/
+     @ResponseBody
+     @RequestMapping("/views/{cate}/{page}")
+     public ModelAndView category(HttpServletRequest request,
+                                  @PathVariable("cate") int cate,
+                                  @PathVariable("page") int pageNum) {
+         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+         ModelAndView modelAndView = new ModelAndView("goods/goodsview");
+         modelAndView.addObject("goodsList", goodsList);
+         modelAndView.addObject("cate", cate);
+         modelAndView.addObject("page", pageNum);
+         return modelAndView;
+     }
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -134,6 +149,13 @@ public class PageController {
         return modelAndView;
     }
 
+    @RequestMapping("/managecenter/modifyinfo")
+    public ModelAndView modifyinfo(HttpServletRequest request)throws Exception{
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manage/modifyinfo");
+        return modelAndView;
+    }
+
     @RequestMapping("/products")
     public ModelAndView products(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
@@ -141,21 +163,7 @@ public class PageController {
         return modelAndView;
     }
 
-    @RequestMapping("/views/books")
-    public ModelAndView books(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "教材");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goods/goodsview");
-        return modelAndView;
-    }
+
 
     @RequestMapping("/views/tests")
     public ModelAndView tests(HttpServletRequest request) throws Exception {

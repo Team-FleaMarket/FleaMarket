@@ -1,3 +1,8 @@
+.background {
+    background-color: #f9f6f2;
+    margin: 10px;
+    border-radius: 20px;
+}
 .login .container {
     width: 75%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
