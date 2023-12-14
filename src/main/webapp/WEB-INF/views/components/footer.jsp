@@ -5,6 +5,7 @@
             <!--banner-bottom-grid-left-->
             <div class="row">
                 <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
+
                     <h3>关于我们</h3>
                     <p>足不出户获得最全的商品信息，</p>
                     <p>在这里找寻你急需要的商品，</p>
@@ -16,7 +17,7 @@
                 <div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
                     <h3>联系我们</h3>
                     <ul>
-                        <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                        <li><i class="bi bi-envelope" aria-hidden="true"></i><a
                                 href="mailto:info@example.com">杨飞 862197091@qq.com</a></li>
                         <li><i class="bi bi-envelope" aria-hidden="true"></i><a
                                 href="mailto:info@example.com">苗庆圃 997312639@qq.com</a></li>
@@ -70,7 +71,7 @@
             </div>
         </div>
         <div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
-            <h2><a href="index.jsp">GoodsWill <span>shop anywhere</span></a></h2>
+            <h2><a href="index.jsp">FleaMarket<span>shop anywhere</span></a></h2>
         </div>
         <div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
             <p>Copyright &copy; 2023.FleaMarket All rights reserved.

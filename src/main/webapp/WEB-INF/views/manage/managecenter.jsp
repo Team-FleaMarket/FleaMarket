@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/WEB-INF/tld/MyTag.tld" prefix="mytag" %>
 
 <!DOCTYPE html>
 <html>
@@ -106,15 +107,15 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-4 status-single">
-                                            <c:if test="${status == 0}"><h4>待审核: ${goodsList.size()} 件商品</h4></c:if>
-                                            <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
-                                            <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
-                                            <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
+                                            <c:if test="${status == 0}"><h4>待审核: ${totalCnt} 件商品</h4></c:if>
+                                            <c:if test="${status == 1}"><h4>待出售: ${totalCnt} 件商品</h4></c:if>
+                                            <c:if test="${status == 2}"><h4>已出售: ${totalCnt} 件商品</h4></c:if>
+                                            <c:if test="${status == 3}"><h4>我的购买: ${totalCnt} 件商品</h4></c:if>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="search-container">
                                                 <input type="text" id="searchInput" placeholder="搜索商品">
-                                                <button class="search-button rounded-5" onclick="search()">Search</button>
+                                                <button class="search-button rounded-5" onclick="search()">搜索</button>
                                             </div>
                                         </div>
                                     </div>
@@ -164,6 +165,7 @@
                                             </div>
                                             <%--                                            </c:if>--%>
                                         </c:forEach>
+                                        <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
                                     <c:if test="${status == 1}">
                                         <div class="student-goods  ">
@@ -187,7 +189,7 @@
                                             </div>
                                         </div>
                                         <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">
+<%--                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">--%>
                                                 <div class="student-goods  ">
                                                     <div class="row">
                                                         <div class="col-md-md-3">
@@ -208,8 +210,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </c:if>
+<%--                                            </c:if>--%>
                                         </c:forEach>
+                                        <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
                                     <c:if test="${status == 2}">
                                         <div class="student-goods  ">
@@ -256,6 +259,7 @@
                                                 </div>
                                             </c:if>
                                         </c:forEach>
+                                        <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
                                     <c:if test="${status == 3}">
                                         <div class="student-goods  row">
@@ -303,6 +307,7 @@
                                             </c:if>
 
                                         </c:forEach>
+                                        <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
                                 </div>
                             </div>
