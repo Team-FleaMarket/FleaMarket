@@ -57,6 +57,7 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = new Goods();
         goods.setStatus(status);
         goods.setStudentNo(studentNo);
+        goods.setGoodsStatus(0);
         int offset = currentPage * pageSize;
         return goodsDao.selectByStatusAndStudentNo(goods, offset, pageSize);
     }
