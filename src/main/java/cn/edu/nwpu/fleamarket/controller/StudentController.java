@@ -335,7 +335,6 @@ public class StudentController {
         String path = request.getSession().getServletContext().getRealPath("/static/images/avatar");
         System.out.println(path);
 
-
         // 创建文件路径
         String filename = path + "/" + studentNo + ".jpg";
         File file = new File(filename);
@@ -348,9 +347,8 @@ public class StudentController {
             e.printStackTrace();
         }
         student.setImg(1);
-
-
-//        TODO: 在数据库中设置img为1
+        //设为有自定义头像
+        userService.setImg(studentNo);
     }
 
     /**

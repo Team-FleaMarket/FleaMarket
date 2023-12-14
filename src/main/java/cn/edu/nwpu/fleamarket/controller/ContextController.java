@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 管理员页面获取商品图片存储位置
+ */
 @RestController
 @RequestMapping("/context")
 public class ContextController {
