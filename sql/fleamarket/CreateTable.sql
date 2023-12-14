@@ -27,6 +27,8 @@ CREATE TABLE goods
     degree       INTEGER,
     distributed  INTEGER DEFAULT 0,
     buyer_no     VARCHAR(100),
+    added_time   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    sale_time    TIMESTAMP
     PRIMARY KEY (id)
 ) CHARACTER SET utf8mb4;
 

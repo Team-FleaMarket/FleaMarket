@@ -31,7 +31,9 @@ public interface GoodsDao {
     @Results(id = "goodsResultMap", value = {
             @Result(column = "student_no", property = "studentNo"),
             @Result(column = "goods_name", property = "goodsName"),
-            @Result(column = "image_path", property = "imagePath")
+            @Result(column = "image_path", property = "imagePath"),
+            @Result(column = "added_time", property = "addedTime"),
+            @Result(column = "sale_time", property = "saleTime")
     })
     Goods getNextToBeReviewed();
 
@@ -64,4 +66,9 @@ public interface GoodsDao {
     @ResultMap("goodsResultMap")
     List<Goods> getSoldGoods();
 
+    /**
+     * @return 已售商品数
+     */
+    @Select("SELECT count(*) FROM goods WHERE goods_status = 1")
+    int getSoldNumber();
 }

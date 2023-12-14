@@ -57,11 +57,11 @@
                         <div class="col-md-3 information " data-wow-delay=".5s">
                             <form >
                                 <div class="self_information">
-                                    <c:if test="${sessionScope.student.img!=null}">
+                                    <c:if test="${sessionScope.student.img!=0}">
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                     </c:if>
-                                    <c:if test="${sessionScope.student.img==null}">
-                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>
+                                    <c:if test="${sessionScope.student.img==0}">
+                                        <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                         <div class="avatar overlay rounded-circle">
                                             <input type="file" accept="image/*" id="imageInput" style="display: none;">
@@ -71,14 +71,21 @@
                                                     document.getElementById('imageInput').click();
                                                 }
                                                 document.getElementById('imageInput').addEventListener('change', function () {
-                                                    alert("active");
+                                                    alert("active"); //未知原因此
                                                     var selectedFile = this.files[0];
                                                     if (selectedFile) {
                                                         var formData = new FormData();
                                                         formData.append('image', selectedFile);
                                                         console.log('Selected file:', selectedFile);
 
-                                                        // fetch()
+                                                        //TODO:将formData post至 /student/upload
+                                                        // fetch('/student/upload', {
+                                                        //     method: 'POST',
+                                                        //     body: formData
+                                                        // })
+                                                        //     .then(response => response.json())
+                                                        //     .then(data => console.log(data))
+                                                        //     .catch(error => console.error(error));
                                                     }
                                                 });
                                             </script>
@@ -192,28 +199,28 @@
                                             </div>
                                         </div>
                                         <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-<%--                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">--%>
-                                                <div class="student-goods  ">
-                                                    <div class="row">
-                                                        <div class="col-md-md-3">
-                                                            <div class="student-goods-image">
-                                                                <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
-                                                            </div>
-                                                            <br>
-                                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                            <%--                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">--%>
+                                            <div class="student-goods  ">
+                                                <div class="row">
+                                                    <div class="col-md-md-3">
+                                                        <div class="student-goods-image">
+                                                            <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
                                                         </div>
-                                                        <div class="col-md-md-9">
-                                                            <h3>${goods.goodsName}</h3>
-                                                            <p>${goods.goodsStatus}</p>
-                                                            <h3 class="money ">${goods.price}</h3>
-                                                            <h4 class="date">${goods.description}</h4>
-                                                            <button type="button" class="btn btn-outline-dark pull-right">删除</button>
-                                                            <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
-                                                            <button type="button" class="btn btn-outline-dark pull-right">降价</button>
-                                                        </div>
+                                                        <br>
+                                                        <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                                    </div>
+                                                    <div class="col-md-md-9">
+                                                        <h3>${goods.goodsName}</h3>
+                                                        <p>${goods.goodsStatus}</p>
+                                                        <h3 class="money ">${goods.price}</h3>
+                                                        <h4 class="date">${goods.description}</h4>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">降价</button>
                                                     </div>
                                                 </div>
-<%--                                            </c:if>--%>
+                                            </div>
+                                            <%--                                            </c:if>--%>
                                         </c:forEach>
                                         <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
