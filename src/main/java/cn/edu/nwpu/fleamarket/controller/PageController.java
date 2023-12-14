@@ -4,14 +4,18 @@ import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
+import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 
 @Controller
@@ -22,6 +26,8 @@ public class PageController {
     private GoodsService goodsService;
     @Autowired
     private StudentService userService;
+
+    private static final int PAGE_SIZE = 8;
 
  /*   @RequestMapping("")
     public ModelAndView home(HttpServletRequest request)throws Exception{
@@ -40,6 +46,18 @@ public class PageController {
         modelAndView.setViewName("home");
         return modelAndView;
     }*/
+     @ResponseBody
+     @RequestMapping("/views/{cate}/{page}")
+     public ModelAndView category(HttpServletRequest request,
+                                  @PathVariable("cate") int cate,
+                                  @PathVariable("page") int pageNum) {
+         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+         ModelAndView modelAndView = new ModelAndView("goods/goodsview");
+         modelAndView.addObject("goodsList", goodsList);
+         modelAndView.addObject("cate", cate);
+         modelAndView.addObject("page", pageNum);
+         return modelAndView;
+     }
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -49,24 +67,79 @@ public class PageController {
     }
 
     @RequestMapping("/register")
-    public ModelAndView register(HttpServletRequest request) throws Exception {
+    public ModelAndView register(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
         return modelAndView;
     }
 
-    @RequestMapping("/managecenter")
-    public ModelAndView managecenter(HttpServletRequest request) throws Exception {
+    @RequestMapping("/views/managecenter")
+    public ModelAndView managecenter(HttpServletRequest request)throws Exception{
+        Enumeration<String> attributeNames = request.getSession().getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            System.out.println(attributeNames.nextElement());
+        }
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
+        int totalCnt = 0;
+        int currentPage;
         Student student = (Student) request.getSession().getAttribute("student");
-        if ("".equals(status) || status == null) {
-            status = "0";
+        int totalPage = 0;
+        if("".equals(request.getParameter("currentPage"))||request.getParameter("currentPage")==null)
+        {
+            currentPage=0;
         }
-        List<Goods> list = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo());
+        else {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+            if(currentPage<0)
+            {
+                currentPage=0;
+            }
+        }
+        System.out.println(currentPage);
+        List<Goods> goodsList = null;
+        if("".equals(status) || status == null) {
+            status = "0";
+            totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()),PAGE_SIZE) ;
+            totalCnt = goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo());
+            if(currentPage+1>totalPage&&currentPage!=0)
+            {
+                currentPage=totalPage-1;
+            }
+            goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
+
+        }
+        else if("0".equals(status)||"1".equals(status))
+        {
+            totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()),PAGE_SIZE) ;
+            totalCnt = goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo());
+            if(currentPage+1>totalPage&&currentPage!=0)
+            {
+                currentPage=totalPage-1;
+            }
+            goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
+        }
+        else if("2".equals(status)){
+            System.out.println("select status==2");
+            totalPage =  Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo()),PAGE_SIZE);
+            totalCnt = goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo());
+            if(currentPage+1>totalPage&&currentPage!=0)
+            {
+                currentPage=totalPage-1;
+            }
+            goodsList = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo(), currentPage, PAGE_SIZE);
+        }
+        for (Goods goods : goodsList) {
+            System.out.println("Good name: " + goods.getGoodsName() + "\n");
+        }
+
+        System.out.println("Total pages: " + totalPage + "\n");
         modelAndView.addObject("status", status);
-        modelAndView.addObject("goodsList", list);
-        modelAndView.setViewName("managecenter");
+        modelAndView.addObject("goodsList", goodsList);
+        modelAndView.addObject("currentPage", currentPage);
+        modelAndView.addObject("totalPage", totalPage);
+        modelAndView.addObject("totalCnt",  totalCnt);
+        modelAndView.setViewName("manage/managecenter");
         return modelAndView;
     }
 
@@ -93,35 +166,29 @@ public class PageController {
     }
 
 
-    @RequestMapping("/insert")
-    public ModelAndView insert(HttpServletRequest request) throws Exception {
+
+    @RequestMapping("/views/insert")
+    public ModelAndView insert(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("insert");
+        modelAndView.setViewName("manage/insert");
+        return modelAndView;
+    }
+
+    @RequestMapping("/managecenter/modifyinfo")
+    public ModelAndView modifyinfo(HttpServletRequest request)throws Exception{
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manage/modifyinfo");
         return modelAndView;
     }
 
     @RequestMapping("/products")
     public ModelAndView products(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("products");
+        modelAndView.setViewName("goods/products");
         return modelAndView;
     }
 
-    @RequestMapping("/views/books")
-    public ModelAndView books(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "教材");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("books");
-        return modelAndView;
-    }
+
 
     @RequestMapping("/views/tests")
     public ModelAndView tests(HttpServletRequest request) throws Exception {
@@ -135,7 +202,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -151,7 +218,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -167,7 +234,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -183,7 +250,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -199,7 +266,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -215,7 +282,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 
@@ -231,7 +298,7 @@ public class PageController {
         modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
         modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
         modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goodsview");
+        modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
 

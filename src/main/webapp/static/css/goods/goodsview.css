@@ -1,0 +1,57 @@
+img {
+    width: 100%;
+}
+.goods {
+    background-color: #f9f6f2;
+    padding: 10px 30px 30px 30px;
+    margin: 20px;
+    border-radius: 20px;
+}
+.goods .card {
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+.goods .card .card-img-top {
+    border-radius: 20px;
+    padding: 10px;
+    height: auto;
+    aspect-ratio: 1; /* 设置宽高比为5:6 */
+    object-fit: cover; /* 保持原始比例，填充整个容器 */
+    cursor: pointer;
+}
+.goods .card .card-body {
+    padding: 20px 20px 10px 20px;
+    margin-top: -15px;
+    font-size: 12px;
+}
+.goods .card .card-body .card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 控制显示的行数 */
+    -webkit-box-orient: vertical;
+}
+.d-flex.justify-content-around {
+    align-items: center;
+}
+.goods .card .btn {
+    border-radius: 50px;
+    width: 80px;
+    font-size: 12px;
+}
+.goods .card .btn:hover{
+    background-color: blanchedalmond;
+    border: none;
+}
+.goods .card h5, h6 {
+    color: #dd6161;
+}
+#goods-modal .modal-dialog {
+    max-width: 70vw; /* 设置最大宽度为100% */
+}
+#goods-modal .modal-content {
+    max-height: 70vh;
+}
+.modal {
+    overflow-y: hidden;
+}

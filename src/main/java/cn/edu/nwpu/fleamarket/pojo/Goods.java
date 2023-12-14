@@ -1,6 +1,7 @@
 package cn.edu.nwpu.fleamarket.pojo;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Goods {
     private int id;
     private String studentNo;
@@ -32,5 +34,6 @@ public class Goods {
     private String imagePath;
     private int goodsStatus;
     private String degree;
-    private int attribute;
+    private int attributed; //商品是否已被分配给管理员
+    private String buyerNo; //买家学号
 }

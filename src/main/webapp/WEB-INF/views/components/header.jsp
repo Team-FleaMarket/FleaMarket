@@ -1,93 +1,117 @@
 <%--
   Created by IntelliJ IDEA.
-  User: YF
+  student: YF
   Date: 2023/12/6
   Time: 21:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="header">
+<!-- nav bar -->
+<nav class="navbar navbar-expand-lg">
     <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <div class="logo-nav-left animated wow zoomIn" data-wow-delay=".1s">
-                    <h1><a href="${pageContext.request.getContextPath()}">FleaMarket<span>welcome</span></a></h1>
-                    <br>
-                </div>
+        <a class="navbar-brand me-auto" href="${pageContext.request.contextPath}/">跳蚤市场</a>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">跳蚤市场</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <c:if test="${sessionScope.student != null}">
+                    <ul class="navbar-user">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/">
+                                <i class="fas fa-user-check"></i>
+                            </a>
+                        </li>
+                        <li class="checkout">
+                            <a href="">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                <span id="checkout-items-in" class="checkout-items">3</span>
+                            </a>
+                        </li>
+                    </ul>
+                </c:if>
             </div>
-            <div class="col-7">
-                <ul class="nav nav-tabs">
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/">主页</a>
+                        <a class="nav-link mx-lg-2 active" aria-current="page"
+                           href="${pageContext.request.contextPath}/">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <c:if test="${sessionScope.student == null}">
+                        <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/login">
+                            </c:if>
+                            <c:if test="${sessionScope.student != null}">
+                            <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/views/managecenter">
+                                </c:if>
+                                个人中心
+                            </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#"  data-bs-toggle="dropdown">商品分类</a>
-                        <ul class="dropdown-menu multi-column columns-3">
-                            <div class="row">
-                                <div class="col-xl-4">
-                                    <li class="dropdown-header">图书书籍</li>
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/books">教材</a></li>
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/tests">考试</a></li>
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/literature">艺术文学</a></li>
-                                </div>
-                                <div class="col-xl-4">
-                                    <li class="dropdown-header">日用百货</li>
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/sports">运动类</a></li>
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/stationery">文具类</a></li>
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/life">生活类</a></li>
-                                </div>
-                                <div class="col-xl-4">
-                                    <li class="dropdown-header">娱乐</li>
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/beautymakeup">美妆</a></li>
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/electronicproducts">电子产品</a></li>
-                                </div>
-                            </div>
-                        </ul>
+                        <a class="nav-link mx-lg-2 dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            商品分类
+                        </a>
+                        <div class="dropdown-menu">
+                            <ul>
+                                <li class="dropdown-header">图书书籍</li>
+                                <li class="dropdown-item"><a
+                                        href="${pageContext.request.contextPath}/views/books">教材</a></li>
+                                <li class="dropdown-item"><a
+                                        href="${pageContext.request.contextPath}/views/tests">考试</a></li>
+                                <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/literature">艺术文学</a>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li class="dropdown-header">日用百货</li>
+                                <li class="dropdown-item"><a
+                                        href="${pageContext.request.contextPath}/views/sports">运动类</a></li>
+                                <li class="dropdown-item"><a href="${pageContext.request.contextPath}/views/stationery">文具类</a>
+                                </li>
+                                <li class="dropdown-item"><a
+                                        href="${pageContext.request.contextPath}/views/life">生活类</a></li>
+                            </ul>
+                            <ul>
+                                <li class="dropdown-header">娱乐</li>
+                                <li class="dropdown-item"><a
+                                        href="${pageContext.request.contextPath}/views/beautymakeup">美妆</a></li>
+                                <li class="dropdown-item"><a
+                                        href="${pageContext.request.contextPath}/views/electronicproducts">电子产品</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
-                    <c:if test="${sessionScope.student == null}">
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/login">个人中心</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/login">之前的英文购物车</a>
-                        </li>
-                    </c:if>
-                    <c:if test="${sessionScope.student != null}">
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/managecenter">个人中心</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/checkout">之前的英文购物车</a>
-                        </li>
-                    </c:if>
                 </ul>
-                <div id="sb-search" class="sb-search">
-                    <form>
-                        <input class="sb-search-input" placeholder="输入你想搜索的商品" type="search" id="search">
-                        <input class="sb-search-submit" type="submit" value="">
-                        <span class="sb-icon-search"> </span>
-                    </form>
-                </div>
-                <!-- search-scripts -->
-                <script src="${pageContext.request.getContextPath()}/static/js/classie.js"></script>
-                <script src="${pageContext.request.getContextPath()}/static/js/uisearch.js"></script>
-                <script>
-                    new UISearch( document.getElementById( 'sb-search' ) );
-                </script>
-            </div>
-            <div class="col-1">
-                <div class="login">
-                    <a href="${pageContext.request.contextPath}/checkout">
-                        <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
-                        <c:if test="${sessionScope.student == null}">
-                            <a href="${pageContext.request.contextPath}/login">登录</a>
-                        </c:if>
-                        <c:if test="${sessionScope.student != null}">
-                            <a href="${pageContext.request.contextPath}/home">${sessionScope.student.name}，欢迎您</a>
-                        </c:if>
-                    </a>
-                </div>
+
             </div>
         </div>
+        <div class="search-box">
+            <form action="">
+                <input type="text" name="search" placeholder="搜索" aria-label="Search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <c:if test="${sessionScope.student == null}">
+            <a class="login-button" href="${pageContext.request.contextPath}/login">登录</a>
+        </c:if>
+        <c:if test="${sessionScope.student != null}">
+            <ul class="navbar-user">
+                <li>
+                    <a href="${pageContext.request.contextPath}/">
+                        <i class="fas fa-user-check"></i>
+                    </a>
+                </li>
+                <li class="checkout">
+                    <a href="">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <span id="checkout-items-out" class="checkout-items">3</span>
+                    </a>
+                </li>
+            </ul>
+        </c:if>
+        <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
-</div>
+</nav>
+<!-- // nav bar -->

@@ -1,0 +1,179 @@
+.manager body{
+    font-size: 100%;
+    background:	#FFFFFF;
+    font-family: 'Open Sans', sans-serif;
+}
+ .manager .manager{
+    padding-top: 40px;
+    background: #F7F7F9;
+    padding-bottom: 40px;
+}
+ .manager .information
+{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    /*width: 20%;*/
+    padding: 20px;
+    /*margin-right: 10px;*/
+    height: 70%;
+}
+ .manager .self_information
+{
+
+    /*justify-self: center;*/
+    position: relative;
+    /*display: inline-block;*/
+    /*text-align: center;*/
+}
+ .manager .avatar{
+    display: grid;
+    margin: 0 auto;
+    justify-self: center;
+    width: 150px;
+    height:150px;
+    border:0;
+}
+ .manager .overlay {
+
+     position: absolute;
+     margin: 0 auto;
+     top: 0;
+     left:  calc(50% - 75px);
+     width: 150px;
+     height: 150px;
+     background-color: rgba(0, 0, 0, 0.5); /* 设置遮盖框的颜色和透明度 */
+     opacity: 0; /* 初始时透明 */
+     transition: opacity 0.3s ease; /* 添加过渡效果 */
+ }
+
+ .manager .self_information:hover .overlay {
+     opacity: 1; /* 悬浮时不透明 */
+ }
+
+ .manager .avatar-button{
+    padding: 10px 10px;
+    width:60%;
+    height: 50px;
+    margin: calc(50% - 25px) auto;
+
+    background-color: #c4e3f3;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
+ .manager .status{
+    background: #c4e3f3;
+    width:100%;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-right: 20px;
+}
+ .manager .status a{
+    color: #080808;
+}
+ .manager .single
+{
+    background: #F7F7F9;
+}
+.manager .goods{
+    padding-left: 20px;
+}
+
+ .manager .student-goods
+{
+    width: 100%;
+    /*height: 220px;*/
+    padding: 1em;
+    background: #fff;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-bottom: 20px;
+
+}
+ .manager .student-goods-image{
+    width: 100%;
+}
+ .manager .money{
+    color:#c9302c;
+}
+ .manager .date{
+    color: #5e5e5e;
+}
+ .manager .btn{
+    float: right;
+    margin-right: 10px;
+}
+ .manager .pop-ups{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+ .manager .white_content {
+
+    width: 40%;
+    height: 60%;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    border: 1px solid #bbbbbb;
+    border-radius: 20px;
+    background-color: white;
+    z-index: 1002;
+    /*层级要比.black_overlay高，这样才能显示在它前面*/
+    overflow: auto;
+}
+ .manager #light {
+    position: absolute;
+    /*left: 50%;*/
+    /* top: 50%;*/
+    /*width: 300px;*/
+    /*height: 250px;*/
+    /*margin-left: -150px;*/
+    /*!* margin-top: -125px *!;*/
+}
+.manager .status-single{
+
+    margin: auto;
+}
+ .manager.search-container {
+     display: flex;
+     /*margin: 20px;*/
+     outline:1px solid  #5e5e5e;
+     background: #FFFFFF;
+ }
+
+ .manager #searchInput {
+     flex: 1;
+     /*padding: 10px;*/
+     width: 70%;
+     height: 40px;
+     border: 1px ;
+     background: #FFFFFF;
+     outline: 1px solid #5e5e5e;
+ }
+
+ .manager .search-button {
+     /*padding: 10px;*/
+     background-color: #c4e3f3;
+     color: #fff;
+     border: none;
+     border-radius: 5%;
+     /*cursor: pointer;*/
+     width: 15%;
+     height:41px;
+ }
+.pagination-tag{
+
+     height: 50px;
+     text-align: center;
+ }
+.pagination-tag a {
+    padding: 10px;
+    font-size: 20px;
+}
