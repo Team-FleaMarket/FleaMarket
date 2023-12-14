@@ -2,7 +2,7 @@
     background-color: #f9f6f2;
     height: 80px;
     padding: 0.5rem;
-    margin: 20px;
+    margin: 10px;
     border-radius: 20px;
 }
 .navbar .navbar-brand {
@@ -84,11 +84,81 @@
     font-weight: bold;
     font-size: 1em;
 }
+
 .navbar .dropdown-item a {
     color: gray;
     font-size: 0.9em;
     padding: 0.5em 1em;
     text-decoration: none;
+}
+
+.navbar .checkout {
+    color: #b5aec4;
+    position: relative;
+}
+
+.navbar .checkout a {
+    background: #eceff6;
+    border-radius: 50%
+}
+.navbar .checkout-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -9px;
+    left: 22px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fe4c50;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.navbar-user li {
+    display: inline-block;
+    text-align: center;
+}
+.navbar-user li a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    color: #1e1e27;
+    transition: color 0.3s ease;
+}
+.navbar-user li a:hover {
+    color: #7c7c7c;
+}
+
+.navbar-user .checkout {
+    background: #f9f6f2;
+}
+
+.navbar-user .checkout a {
+    background: #eceff6;
+    border-radius: 50%;
+}
+
+.navbar-user .checkout-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -9px;
+    left: 22px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f4af5a;
+    font-size: 12px;
+    color: #ffffff;
 }
 
 @media (min-width: 991px) {
@@ -114,10 +184,21 @@
         width: 100px;
         visibility: visible;
     }
+
 }
 @media (max-width: 991px) {
     .dropdown-menu.show {
         max-height: 60vh;
         overflow-y: scroll;
+    }
+    .navbar #personal-information-out {
+        display: none;
+    }
+}
+
+/* 当屏幕宽度小于 576px 时，不显示 logo */
+@media (max-width: 576px) {
+    .navbar .navbar-brand {
+        display: none;
     }
 }
