@@ -71,21 +71,11 @@
                                                     document.getElementById('imageInput').click();
                                                 }
                                                 document.getElementById('imageInput').addEventListener('change', function () {
-                                                    alert("active"); //未知原因此
                                                     var selectedFile = this.files[0];
                                                     if (selectedFile) {
                                                         var formData = new FormData();
                                                         formData.append('image', selectedFile);
                                                         console.log('Selected file:', selectedFile);
-
-                                                        //TODO:将formData post至 /student/upload
-                                                        // fetch('/student/upload', {
-                                                        //     method: 'POST',
-                                                        //     body: formData
-                                                        // })
-                                                        //     .then(response => response.json())
-                                                        //     .then(data => console.log(data))
-                                                        //     .catch(error => console.error(error));
                                                     }
                                                 });
                                             </script>
@@ -164,7 +154,7 @@
                                                     </div>
                                                     <div class="col-md-md-9">
                                                         <h3>${goods.goodsName}</h3>
-                                                        <p>${goods.goodsStatus}</p>
+                                                        <mytag:cate category="${goods.cate}"></mytag:cate>
                                                         <h3 class="money ">${goods.price}</h3>
                                                         <h4 class="date">${goods.description}</h4>
                                                         <button type="button" class="btn btn-outline-dark pull-right">删除</button>
@@ -211,7 +201,7 @@
                                                     </div>
                                                     <div class="col-md-md-9">
                                                         <h3>${goods.goodsName}</h3>
-                                                        <p>${goods.goodsStatus}</p>
+                                                        <mytag:cate category="${goods.cate}"></mytag:cate>
                                                         <h3 class="money ">${goods.price}</h3>
                                                         <h4 class="date">${goods.description}</h4>
                                                         <button type="button" class="btn btn-outline-dark pull-right">删除</button>
@@ -258,7 +248,7 @@
                                                         </div>
                                                         <div class="col-md-md-9">
                                                             <h3>${goods.goodsName}</h3>
-                                                            <p>${goods.goodsStatus}</p>
+                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
                                                             <h3 class="money ">${goods.price}</h3>
                                                             <h4 class="date">${goods.description}</h4>
                                                             <button type="button" class="btn btn-outline-dark pull-right">删除</button>
@@ -305,7 +295,7 @@
                                                         </div>
                                                         <div class="col-md-md-9">
                                                             <h3>${goods.goodsName}</h3>
-                                                            <p>${goods.goodsStatus}</p>
+                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
                                                             <h3 class="money ">${goods.price}</h3>
                                                             <h4 class="date">${goods.description}</h4>
                                                             <button type="button" class="btn btn-outline-dark pull-right">删除</button>

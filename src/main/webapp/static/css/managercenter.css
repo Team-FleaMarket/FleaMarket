@@ -14,6 +14,8 @@
     border-radius: 20px;
     /*width: 20%;*/
     padding: 20px;
+     margin-top: 10px;
+     margin-bottom: 10px;
     /*margin-right: 10px;*/
     height: 70%;
 }
@@ -79,7 +81,10 @@
     background: #F7F7F9;
 }
 .manager .goods{
-    padding-left: 20px;
+    padding-left: 10px;
+    padding-right:10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
  .manager .student-goods
@@ -140,19 +145,22 @@
 .manager .status-single{
 
     margin: auto;
+    margin-bottom: 20px;
 }
  .manager.search-container {
      display: flex;
      /*margin: 20px;*/
+     width: 100%;
      outline:1px solid  #5e5e5e;
      background: #FFFFFF;
+     margin-bottom: 20px;
  }
 
  .manager #searchInput {
      flex: 1;
      /*padding: 10px;*/
      width: 70%;
-     height: 40px;
+     height: 35px;
      border: 1px ;
      background: #FFFFFF;
      outline: 1px solid #5e5e5e;
@@ -165,8 +173,8 @@
      border: none;
      border-radius: 5%;
      /*cursor: pointer;*/
-     width: 15%;
-     height:41px;
+     /*width: 15%;*/
+     height:36px;
  }
 .pagination-tag{
 
