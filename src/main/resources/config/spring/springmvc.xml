@@ -20,10 +20,5 @@
     <!-- 加载静态页面-->
     <mvc:default-servlet-handler/>
 
-
-    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
-    <!--<property name="maxUploadSize" value="209715200" />-->
-    <!--<property name="defaultEncoding" value="UTF-8" />-->
-    <!--<property name="resolveLazily" value="true" />-->
-    <!--</bean>-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 </beans>

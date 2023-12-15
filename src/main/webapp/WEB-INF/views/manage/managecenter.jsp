@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/WEB-INF/tld/MyTag.tld" prefix="mytag" %>
 
 <!DOCTYPE html>
 <html>
@@ -56,11 +57,11 @@
                         <div class="col-md-3 information " data-wow-delay=".5s">
                             <form >
                                 <div class="self_information">
-                                    <c:if test="${sessionScope.student.img!=null}">
+                                    <c:if test="${sessionScope.student.img!=0}">
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                     </c:if>
-                                    <c:if test="${sessionScope.student.img==null}">
-<%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
+                                    <c:if test="${sessionScope.student.img==0}">
+                                        <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                         <div class="avatar overlay rounded-circle">
                                             <input type="file" accept="image/*" id="imageInput" style="display: none;">
@@ -106,15 +107,15 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-4 status-single">
-                                            <c:if test="${status == 0}"><h4>待审核: ${goodsList.size()} 件商品</h4></c:if>
-                                            <c:if test="${status == 1}"><h4>待出售: ${goodsList.size()} 件商品</h4></c:if>
-                                            <c:if test="${status == 2}"><h4>已出售: ${goodsList.size()} 件商品</h4></c:if>
-                                            <c:if test="${status == 3}"><h4>我的购买: ${goodsList.size()} 件商品</h4></c:if>
+                                            <c:if test="${status == 0}"><h4>待审核: ${totalCnt} 件商品</h4></c:if>
+                                            <c:if test="${status == 1}"><h4>待出售: ${totalCnt} 件商品</h4></c:if>
+                                            <c:if test="${status == 2}"><h4>已出售: ${totalCnt} 件商品</h4></c:if>
+                                            <c:if test="${status == 3}"><h4>我的购买: ${totalCnt} 件商品</h4></c:if>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="search-container">
                                                 <input type="text" id="searchInput" placeholder="搜索商品">
-                                                <button class="search-button rounded-5" onclick="search()">Search</button>
+                                                <button class="search-button rounded-5" onclick="search()">搜索</button>
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +154,7 @@
                                                     </div>
                                                     <div class="col-md-md-9">
                                                         <h3>${goods.goodsName}</h3>
-                                                        <p>${goods.goodsStatus}</p>
+                                                        <mytag:cate category="${goods.cate}"></mytag:cate>
                                                         <h3 class="money ">${goods.price}</h3>
                                                         <h4 class="date">${goods.description}</h4>
                                                         <button type="button" class="btn btn-outline-dark pull-right">删除</button>
@@ -164,6 +165,7 @@
                                             </div>
                                             <%--                                            </c:if>--%>
                                         </c:forEach>
+                                        <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
                                     <c:if test="${status == 1}">
                                         <div class="student-goods  ">
@@ -187,29 +189,30 @@
                                             </div>
                                         </div>
                                         <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">
-                                                <div class="student-goods  ">
-                                                    <div class="row">
-                                                        <div class="col-md-md-3">
-                                                            <div class="student-goods-image">
-                                                                <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
-                                                            </div>
-                                                            <br>
-                                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                            <%--                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">--%>
+                                            <div class="student-goods  ">
+                                                <div class="row">
+                                                    <div class="col-md-md-3">
+                                                        <div class="student-goods-image">
+                                                            <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
                                                         </div>
-                                                        <div class="col-md-md-9">
-                                                            <h3>${goods.goodsName}</h3>
-                                                            <p>${goods.goodsStatus}</p>
-                                                            <h3 class="money ">${goods.price}</h3>
-                                                            <h4 class="date">${goods.description}</h4>
-                                                            <button type="button" class="btn btn-outline-dark pull-right">删除</button>
-                                                            <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
-                                                            <button type="button" class="btn btn-outline-dark pull-right">降价</button>
-                                                        </div>
+                                                        <br>
+                                                        <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                                    </div>
+                                                    <div class="col-md-md-9">
+                                                        <h3>${goods.goodsName}</h3>
+                                                        <mytag:cate category="${goods.cate}"></mytag:cate>
+                                                        <h3 class="money ">${goods.price}</h3>
+                                                        <h4 class="date">${goods.description}</h4>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">降价</button>
                                                     </div>
                                                 </div>
-                                            </c:if>
+                                            </div>
+                                            <%--                                            </c:if>--%>
                                         </c:forEach>
+                                        <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
                                     <c:if test="${status == 2}">
                                         <div class="student-goods  ">
@@ -245,7 +248,7 @@
                                                         </div>
                                                         <div class="col-md-md-9">
                                                             <h3>${goods.goodsName}</h3>
-                                                            <p>${goods.goodsStatus}</p>
+                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
                                                             <h3 class="money ">${goods.price}</h3>
                                                             <h4 class="date">${goods.description}</h4>
                                                             <button type="button" class="btn btn-outline-dark pull-right">删除</button>
@@ -256,6 +259,7 @@
                                                 </div>
                                             </c:if>
                                         </c:forEach>
+                                        <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
                                     <c:if test="${status == 3}">
                                         <div class="student-goods  row">
@@ -291,7 +295,7 @@
                                                         </div>
                                                         <div class="col-md-md-9">
                                                             <h3>${goods.goodsName}</h3>
-                                                            <p>${goods.goodsStatus}</p>
+                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
                                                             <h3 class="money ">${goods.price}</h3>
                                                             <h4 class="date">${goods.description}</h4>
                                                             <button type="button" class="btn btn-outline-dark pull-right">删除</button>
@@ -303,6 +307,7 @@
                                             </c:if>
 
                                         </c:forEach>
+                                        <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
                                 </div>
                             </div>

@@ -35,3 +35,11 @@ create table admin
     username VARCHAR(100),
     password VARCHAR(100)
 );
+
+create table cart
+(
+    id         INTEGER PRIMARY KEY AUTO_INCREMENT,
+    student_no VARCHAR(100),
+    goods_id   INTEGER,
+    num        INTEGER
+);

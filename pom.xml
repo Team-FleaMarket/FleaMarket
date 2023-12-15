@@ -246,12 +246,6 @@
             <artifactId>redisson</artifactId>
             <version>3.23.3</version>
         </dependency>
-        <!-- Jedis -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>4.3.1</version>
-        </dependency>
 
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
@@ -271,6 +265,8 @@
             <version>1.9.21.M1</version>
             <scope>runtime</scope>
         </dependency>
+<!--        simpleTag-->
+
 
     </dependencies>
 

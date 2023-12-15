@@ -1,8 +1,11 @@
 package cn.edu.nwpu.fleamarket.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 /**
  * @Author: Hanwen
@@ -36,4 +39,8 @@ public class Goods {
     private String degree;
     private int attributed; //商品是否已被分配给管理员
     private String buyerNo; //买家学号
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    private Date saleTime; //交易时间
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    private Date addedTime; //上架时间
 }

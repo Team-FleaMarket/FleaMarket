@@ -32,6 +32,6 @@ public class Student implements Serializable {
     private int finish;
     private String phone;
     private String wechat;
-    private String img=null;
+    private int img;
 }
 

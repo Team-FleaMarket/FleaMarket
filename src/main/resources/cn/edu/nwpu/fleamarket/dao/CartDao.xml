@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.nwpu.fleamarket.dao.CartDao">
+
+    <resultMap id="BaseResultMap" type="cn.edu.nwpu.fleamarket.pojo.Cart">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="studentNo" column="student_no" jdbcType="VARCHAR"/>
+            <result property="goodsId" column="goods_id" jdbcType="INTEGER"/>
+            <result property="num" column="num" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,student_no,goods_id,
+        num
+    </sql>
+    <insert id="addCartItem">
+        INSERT INTO cart (student_no, goods_id, num)
+        VALUES (#{studentNo}, #{goodsId}, 1);
+
+
+    </insert>
+    <update id="cartItemIncrementCount">
+        UPDATE cart SET num = num + #{num} WHERE student_no = #{studentNo} AND goods_id = #{goodsId};
+    </update>
+    <select id="getCartItemByStudentNoAndGoodsId" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM cart
+        WHERE student_no = #{studentNo} AND goods_id = #{goodsId};
+    </select>
+    <select id="getCartByStudentNo" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM cart
+        WHERE student_no = #{studentNo};
+    </select>
+</mapper>
