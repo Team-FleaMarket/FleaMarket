@@ -14,6 +14,8 @@
         <result column="image_path" jdbcType="VARCHAR" property="imagePath" ></result>
         <result column="goods_status" jdbcType="INTEGER" property="goodsStatus" ></result>
         <result column="degree" jdbcType="INTEGER" property="degree" ></result>
+        <result column="added_time" jdbcType="TIMESTAMP" property="addedTime"></result>
+        <result column="sale_time" jdbcType="TIMESTAMP" property="saleTime"></result>
     </resultMap>
 
     <!-- ADD -->

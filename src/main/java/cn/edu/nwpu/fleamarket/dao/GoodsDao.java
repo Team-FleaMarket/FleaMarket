@@ -3,7 +3,9 @@ package cn.edu.nwpu.fleamarket.dao;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +33,10 @@ public interface GoodsDao {
     @Results(id = "goodsResultMap", value = {
             @Result(column = "student_no", property = "studentNo"),
             @Result(column = "goods_name", property = "goodsName"),
-            @Result(column = "image_path", property = "imagePath")
+            @Result(column = "buyer_no", property = "buyerNo"),
+            @Result(column = "image_path", property = "imagePath"),
+            @Result(column = "added_time", property = "addedTime"),
+            @Result(column = "sale_time", property = "saleTime")
     })
     Goods getNextToBeReviewed();
 
@@ -57,6 +62,46 @@ public interface GoodsDao {
 
     int selectByGoodsStatusAndStudentNoTotalCnt(@Param("goods_status") int goodsStatus, @Param("studentNo") String studentNo);
 
+    /**
+     * 分页查找已售出商品 时间倒序排序
+     */
+    @Select("SELECT * FROM goods WHERE goods_status = 1 ORDER BY sale_time DESC LIMIT #{start}, 6")
+    @ResultMap("goodsResultMap")
+    List<Goods> getSoldGoodsByPage(int start);
+
+    /**
+     * @return 已售商品数
+     */
+    @Select("SELECT count(*) FROM goods WHERE goods_status = 1")
+    int getSoldNumber();
+
+    /**
+     * 按时间范围查询已售商品
+     */
+    @Select("SELECT * FROM goods WHERE goods_status = 1 AND sale_time BETWEEN #{start} AND #{end}")
+    @ResultMap("goodsResultMap")
+    List<Goods> getSoldGoodsByDate(@Param("start") Date start, @Param("end") Date end);
+
+    /**
+     *返回全部已售商品
+     */
+    @Select("SELECT * FROM goods WHERE goods_status = 1 ORDER BY sale_time DESC")
+    @ResultMap("goodsResultMap")
+    List<Goods> getAllSoldGoods();
+
+    /**
+     * 根据出售者学号查询
+     */
+    @Select("SELECT * FROM goods WHERE goods_status = 1 AND student_no LIKE #{query} ORDER BY sale_time DESC")
+    @ResultMap("goodsResultMap")
+    List<Goods> querySoldBySno(String query);
+
+    /**
+     * 根据购买者学号查询
+     */
+    @Select("SELECT * FROM goods WHERE goods_status = 1 AND buyer_no LIKE #{query} ORDER BY sale_time DESC")
+    @ResultMap("goodsResultMap")
+    List<Goods> querySoldByBno(String query);
     int selectByStatusAndStudentNoAndGoodsNameTotalCnt(@Param("status") Integer status, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName);
 
     List<Goods> selectByStatusAndStudentNoAndGoodsName(@Param("status") Integer status, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName, @Param("offset") int offset, @Param("pageSize") int pageSize);

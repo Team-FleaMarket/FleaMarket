@@ -61,7 +61,7 @@
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                     </c:if>
                                     <c:if test="${sessionScope.student.img==0}">
-<%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
+                                        <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
                                         <div class="avatar overlay rounded-circle">
                                             <input type="file" accept="image/*" id="imageInput" style="display: none;">
@@ -189,28 +189,28 @@
                                             </div>
                                         </div>
                                         <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-<%--                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">--%>
-                                                <div class="student-goods  ">
-                                                    <div class="row">
-                                                        <div class="col-md-md-3">
-                                                            <div class="student-goods-image">
-                                                                <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
-                                                            </div>
-                                                            <br>
-                                                            <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                            <%--                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">--%>
+                                            <div class="student-goods  ">
+                                                <div class="row">
+                                                    <div class="col-md-md-3">
+                                                        <div class="student-goods-image">
+                                                            <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg" alt=" " class="img-rounded" width="125px" height="125px"/>
                                                         </div>
-                                                        <div class="col-md-md-9">
-                                                            <h3>${goods.goodsName}</h3>
-                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
-                                                            <h3 class="money ">${goods.price}</h3>
-                                                            <h4 class="date">${goods.description}</h4>
-                                                            <button type="button" class="btn btn-outline-dark pull-right">删除</button>
-                                                            <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
-                                                            <button type="button" class="btn btn-outline-dark pull-right">降价</button>
-                                                        </div>
+                                                        <br>
+                                                        <h4><a class="item_add" href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a></h4>
+                                                    </div>
+                                                    <div class="col-md-md-9">
+                                                        <h3>${goods.goodsName}</h3>
+                                                        <mytag:cate category="${goods.cate}"></mytag:cate>
+                                                        <h3 class="money ">${goods.price}</h3>
+                                                        <h4 class="date">${goods.description}</h4>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">删除</button>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">编辑</button>
+                                                        <button type="button" class="btn btn-outline-dark pull-right">降价</button>
                                                     </div>
                                                 </div>
-<%--                                            </c:if>--%>
+                                            </div>
+                                            <%--                                            </c:if>--%>
                                         </c:forEach>
                                         <mytag:pagination status="${status}" currentPage="${currentPage}" totalPage="${totalPage}"/>
                                     </c:if>
