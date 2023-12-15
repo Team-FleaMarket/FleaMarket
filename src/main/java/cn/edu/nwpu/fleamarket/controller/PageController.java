@@ -68,12 +68,6 @@ public class PageController {
         modelAndView.addObject("cate", cate);
         modelAndView.addObject("page", pageNum);
         modelAndView.addObject("pages", pagesNum);
-
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            System.out.println(cookie.getName() + ": " + cookie.getValue());
-        }
-
         return modelAndView;
     }
 
@@ -88,6 +82,14 @@ public class PageController {
     public ModelAndView register(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
+        return modelAndView;
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request) throws Exception {
+        request.getSession().removeAttribute("student");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 

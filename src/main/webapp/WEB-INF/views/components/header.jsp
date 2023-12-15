@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.json.JSONArray" %><%--
   Created by IntelliJ IDEA.
   student: YF
   Date: 2023/12/6
@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!-- nav bar -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -27,7 +28,7 @@
                         <li class="checkout">
                             <a href="">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span id="checkout-items-in" class="checkout-items">3</span>
+                                <span id="checkout-items-in" class="checkout-items">${sessionScope.cartList.size()}</span>
                             </a>
                         </li>
                     </ul>
@@ -124,10 +125,15 @@
                         <i class="fas fa-user-check"></i>
                     </a>
                 </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/logout">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    </a>
+                </li>
                 <li class="checkout">
                     <a href="">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                        <span id="checkout-items-out" class="checkout-items">3</span>
+                        <span id="checkout-items-out" class="checkout-items">${sessionScope.cartList.size()}</span>
                     </a>
                 </li>
             </ul>
@@ -136,6 +142,13 @@
                 aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
+        <script type="module">
+            /*import { useGoodsStore } from "/static/js/stores/goods-store.js"
+            import { useStudentStore } from "/static/js/stores/student-store.js";
+            document.querySelectorAll(".checkout-items").forEach((item) => {
+                item.innerText = useGoodsStore().getCartGoodsNumber()
+            })*/
+        </script>
     </div>
 </nav>
 <!-- // nav bar -->

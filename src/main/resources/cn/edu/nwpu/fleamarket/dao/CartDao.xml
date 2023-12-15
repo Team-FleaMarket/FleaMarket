@@ -12,14 +12,12 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,student_no,goods_id,
+        id, student_no,goods_id,
         num
     </sql>
     <insert id="addCartItem">
         INSERT INTO cart (student_no, goods_id, num)
         VALUES (#{studentNo}, #{goodsId}, 1);
-
-
     </insert>
     <update id="cartItemIncrementCount">
         UPDATE cart SET num = num + #{num} WHERE student_no = #{studentNo} AND goods_id = #{goodsId};

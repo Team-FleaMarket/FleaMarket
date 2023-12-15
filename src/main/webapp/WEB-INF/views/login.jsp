@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <%@include file="components/jspheader.jsp" %>
+    <%@include file="components/htmlhead.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css">
 </head>
 <%--head--%>
@@ -19,20 +19,12 @@
 <div class="breadcrumbs">
     <div class="container">
         <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-            <li class="active">
-                <c:if test="${sessionScope.user == null}">
+            <li class="breadcrumb-item">
                     <a href="${pageContext.request.getContextPath()}/"><span class="glyphicon glyphicon-home"
-                                                                             aria-hidden="true">
-                    </span>主页</a>
-                </c:if>
-                <c:if test="${sessionScope.user != null}">
-                    <a href="${pageContext.request.getContextPath()}/views/index"><span class="glyphicon glyphicon-home"
                                                                                         aria-hidden="true">
                     </span>主页</a>
-                </c:if>
             </li>
-            <li class="active">登陆页面</li>
-
+            <li class="breadcrumb-item active">登陆页面</li>
         </ol>
     </div>
 </div>
@@ -85,23 +77,18 @@
                     </div>
                 </div>
                 <script type="module">
-                    import {loginAPI} from '/static/js/apis/student.js'
-
+                    import { loginAPI } from "/static/js/apis/student.js"
                     document.querySelector("#liveToastBtn").onclick = async () => {
-                        var studentNo = $("input[name=studentNo]").val()
-                        var password = $("input[name=password]").val()
-                        var message = ""
+                        const studentNo = $("input[name=studentNo]").val()
+                        const password = $("input[name=password]").val()
                         try {
-                            var response = await loginAPI({studentNo, password})
-                            message = response.data
-                            document.getElementById("toast-body").innerText = message
+                            const response = await loginAPI({studentNo, password})
+                            document.getElementById("toast-body").innerText = response.data
                             document.getElementById("toast-header").classList.remove("bg-danger")
                             document.getElementById("toast-header").classList.add("bg-success")
                             window.location.href = window.location.origin
                         } catch (error) {
-                            message = error.response.data
-                            console.log("------------")
-                            console.log(error)
+                            const message = error.response.data
                             document.getElementById("toast-body").innerText = message;
                             document.getElementById("toast-header").classList.remove("bg-success")
                             document.getElementById("toast-header").classList.add("bg-danger")

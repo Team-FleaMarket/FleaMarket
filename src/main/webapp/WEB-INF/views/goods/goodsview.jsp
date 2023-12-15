@@ -132,7 +132,8 @@
                 </div>
             </div>
         </div>
-        <script>
+        <script type="module">
+            import {getCartAPI, addGoodsToCartAPI} from "/static/js/apis/goods.js"
             // 商品详情
             document.querySelectorAll(".card-img-top").forEach((img) => {
                 img.addEventListener("click", (e) => {
@@ -141,12 +142,9 @@
                 })
             });
             // 点击想要，添加到购物车，header 中显示的购物车商品数量
-
             document.querySelectorAll('.want-btn').forEach(button => {
                 console.log("button: " + button)
                 button.addEventListener('click', function() {
-                    // 获取所有class为iii的span标签
-                    console.log("--------------------------------")
                     // 为每个span标签的内容加1
                     document.querySelectorAll('.checkout-items').forEach((checkoutItems) => {
                         checkoutItems.innerText = parseInt(checkoutItems.innerText) + 1;
