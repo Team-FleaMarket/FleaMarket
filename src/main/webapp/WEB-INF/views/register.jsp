@@ -67,9 +67,9 @@
                             </svg>
                         </i>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="userName" name="userName" placeholder=""
+                            <input type="text" class="form-control" id="name" name="name" placeholder=""
                                    required>
-                            <label for="userName">昵称</label>
+                            <label for="name">昵称</label>
                             <span class="required">*</span>
                         </div>
                     </div>
