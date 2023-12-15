@@ -29,7 +29,7 @@
                     三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体
                 </textarea>
                 <div class="input-group mb-3">
-                    <button class="btn btn-md btn-warning w-100 mt-2 fs-6">添加到想要</button>
+                    <button class="want-btn btn btn-md btn-warning w-100 mt-2 fs-6">添加到想要</button>
                 </div>
             </div>
         </div>
