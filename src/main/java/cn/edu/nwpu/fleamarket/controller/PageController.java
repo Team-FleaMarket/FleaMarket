@@ -214,10 +214,10 @@ public class PageController {
         return modelAndView;
     }
 
-    @RequestMapping("/managecenter/modifyinfo")
+    @RequestMapping("/managecenter/modifyInfo")
     public ModelAndView modifyinfo(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("manage/modifyinfo");
+        modelAndView.setViewName("manage/modifyInfo");
         return modelAndView;
     }
 
