@@ -3,6 +3,7 @@ package cn.edu.nwpu.fleamarket.controller;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONException;
@@ -27,22 +28,26 @@ public class StudentController {
     private StudentService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(HttpServletRequest request, @RequestBody Student student) throws Exception{
+    public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
         Student databaseStudent = userService.loginStudent(student);
         if (databaseStudent == null) {
             return ResponseEntity.badRequest().body("用户名或密码错误！");
         }
-        System.out.println(databaseStudent.getStudentNo());
+
+        Cookie cookie = new Cookie("username", "feo");
+        response.addCookie(cookie);
         request.getSession().setAttribute("student", databaseStudent);
         return ResponseEntity.ok("登陆成功！");
     }
 
     @RequestMapping("/register")
-    public ResponseEntity<?> register(HttpServletRequest request, @RequestBody Student student) throws Exception{
+    public ResponseEntity<?> register(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
         Student databaseStudent = userService.registerStudent(student);
         if (databaseStudent != null) {
             return ResponseEntity.badRequest().body("该学号已经被注册！");
         }
+        Cookie cookie = new Cookie("username", "feo");
+        response.addCookie(cookie);
         request.getSession().setAttribute("student", student);
         return ResponseEntity.ok("注册成功！");
     }

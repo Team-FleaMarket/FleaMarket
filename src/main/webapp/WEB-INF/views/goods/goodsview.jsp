@@ -30,13 +30,13 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item">商品分类</li>
-                    <li class="breadcrumb-item">${navigation}</li>
+                    <li class="breadcrumb-item">${mainCategory}</li>
                 </ol>
             </div>
         </div>
         <!-- // breadcrumbs -->
         <div class="container">
-            <div class="categories row animated wow" data-wow-delay=".5s">
+            <%--<div class="categories row animated wow" data-wow-delay=".5s">
                 <div class="col-md-4 slideInUp">
                     <h3>商品分类</h3>
                     <ul class="cate">
@@ -70,101 +70,98 @@
                     <div class="">
                         <h4>${navigation}</h4>
                         <p>${navigation}</p>
-                        <%--<h4>${sessionScope.category}</h4>
-                        <p>GoodsWill:${sessionScope.parentCategory}.</p>--%>
+                        &lt;%&ndash;<h4>${sessionScope.category}</h4>
+                        <p>GoodsWill:${sessionScope.parentCategory}.</p>&ndash;%&gt;
                     </div>
                 </div>
-            </div>
-            <%--<h1 class="text-center">${navigation}</h1>--%>
+            </div>--%>
+            <h1 class="text-center "><strong>${category}</strong></h1>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
                 <c:forEach var="goods" items="${goodsList}">
                     <div class="col">
                         <div class="card">
                             <img src="${goods.imagePath}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h6 class="card-title">${goods}</h6>
+                                <h6 class="card-title">${goods.goodsName}</h6>
                                 <p class="card-text">${goods.description}</p>
                             </div>
                             <div class="d-flex justify-content-around mb-3">
                                 <h5>${goods.price}</h5>
-                                <button class="btn btn-warning">我想要...</button>
+                                <button class="want-btn btn btn-warning">我想要...</button>
                             </div>
                         </div>
                     </div>
                 </c:forEach>
-                <%--<div class="col-md-3 new-collections-grid">
-                    <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
-                        <div class="new-collections-grid1-image">
-                            <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5"><img
-                                    src="${pageContext.request.getContextPath()}/static/images/jc1.jpg" alt=" "
-                                    class="img-fluid"/></a>
-                            <div class="new-collections-grid1-image-pos">
-                                <a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">Quick View</a>
-                            </div>
-                        </div>
-                        <div class="item-information">
-                            <div class="item-name">
-                                <h4><a href="${pageContext.request.getContextPath()}/views/single?goodsId=5">成本会计</a></h4>
-                            </div>
-                            <div class="item-price">
-                                <h4>
-                                    <p>￥15</p>
-                                </h4>
-                            </div>
-                        </div>
-
-                        <div class="item-categories">
+                      <%--  <div class="item-categories">
                             <p>图书书籍</p>
                             <p>文学</p>
                         </div>
-                    </div>
-                </div>--%>
-            </div>
-            <h1 id="page"></h1>
-            <a href="${pageContext.request.contextPath}/views/${cate}/${page - 1}">上一页</a>
-            <a href="${pageContext.request.contextPath}/views/${cate}/${page + 1}">下一页</a>
-            <h1 class="clearfix">当前页面为第 ${page + 1} 页</h1>
-            <!--<h2 class="animated wow zoomIn" data-wow-delay=".5s">
-                <a class="header-grid-right" href="${pageContext.request.contextPath}/static/">更多</a>
-            </h2>-->
-            <div class="clearfix"></div>
+                    </div>--%>
+                </div>
         </div>
-    </section>
-    <!-- // goods -->
-    <!-- Modal -->
-    <div class="modal fade" id="goods-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-<%--                 <img src="${pageContext.request.getContextPath()}/static/images/goods.jpg" class="modal-img" alt="goods">--%>
-                    <%@include file="./goodsdetail.jsp" %>
+        <!-- pagination -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <!-- 判断是否禁用上一页 -->
+                <li class="page-item<c:if test='${page == 1}'> disabled</c:if>">
+                    <a class="page-link" href="${pageContext.request.contextPath}/views/${cate}/${page - 1}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <!-- 输出所有页数 -->
+                <c:forEach var="pageNumber" begin="1" end="${pages}">
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/views/${cate}/${pageNumber}">${pageNumber}</a></li>
+                </c:forEach>
+                <!-- 判断是否禁用下一页 -->
+                <li class="page-item<c:if test='${page == pages}'> disabled</c:if>">
+                    <a class="page-link" href="${pageContext.request.contextPath}/views/${cate}/${page + 1}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- // pagination -->
+        <!-- modal -->
+        <div class="modal fade" id="goods-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%--                 <img src="${pageContext.request.getContextPath()}/static/images/goods.jpg" class="modal-img" alt="goods">--%>
+                        <%@include file="./goodsdetail.jsp" %>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script type="module">
-        import {useGoodStore} from '/static/js/stores/goods-store'
+        <script>
+            // 商品详情
+            document.querySelectorAll(".card-img-top").forEach((img) => {
+                img.addEventListener("click", (e) => {
+                    const myModal = new bootstrap.Modal(document.getElementById('goods-modal'))
+                    myModal.show()
+                })
+            });
+            // 点击想要，添加到购物车，header 中显示的购物车商品数量
 
-        // 商品详情
-        document.querySelectorAll(".card").forEach((card) => {
-            card.addEventListener("click", (e) => {
-                const myModal = new bootstrap.Modal(document.getElementById('goods-modal'))
-                myModal.show()
+            document.querySelectorAll('.want-btn').forEach(button => {
+                console.log("button: " + button)
+                button.addEventListener('click', function() {
+                    // 获取所有class为iii的span标签
+                    console.log("--------------------------------")
+                    // 为每个span标签的内容加1
+                    document.querySelectorAll('.checkout-items').forEach((checkoutItems) => {
+                        checkoutItems.innerText = parseInt(checkoutItems.innerText) + 1;
+                    });
+                });
             })
-        });
-            /*function (e) {
-            if (e.target.classList.contains("card")) {
-                // const src = e.target.getAttribute("src")
-                // document.querySelector(".modal-img").src = src
-                const myModal = new bootstrap.Modal(document.getElementById('goods-modal'))
-                myModal.show()
-            }*/
+        </script>
+        <!-- // modal -->
+    </section>
+    <!-- // goods -->
+    <!-- Modal -->
 
-    </script>
     <!-- // Modal -->
     <!-- footer -->
     <%@include file="../components/footer.jsp" %>
     <!-- //footer -->
-</div>
 </body>
 </html>

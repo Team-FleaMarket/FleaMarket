@@ -38,6 +38,7 @@
         </foreach>
         THEN 1 ELSE 0 END) AS count
         FROM goods
+        WHERE status = 1;
     </select>
     <select id="selectByStatusAndStudentNo" parameterType="cn.edu.nwpu.fleamarket.pojo.Goods" resultMap="BaseResultMap">
         SELECT * FROM goods WHERE student_no=#{goods.studentNo} AND status=#{goods.status} LIMIT #{offset},#{pageSize}

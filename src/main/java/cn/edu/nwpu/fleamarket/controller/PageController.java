@@ -5,7 +5,9 @@ import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
 import com.alibaba.fastjson2.JSON;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("")
@@ -28,36 +27,55 @@ public class PageController {
     private StudentService userService;
 
     private static final int PAGE_SIZE = 8;
+    private static Map<String, List<String>> CATEGORIES = new LinkedHashMap<String, List<String>>();
+    static {
+        CATEGORIES = initCATEGORIES(); // 调用init函数初始化静态变量
+    }
+    private static Map<String, List<String>> initCATEGORIES() {
+        Map<String, List<String>> categories = new LinkedHashMap<String, List<String>>();
+        categories.put("图书书籍", List.of("教材", "考试", "艺术文学"));
+        categories.put("日用百货", List.of("运动", "文具", "生活"));
+        categories.put("娱乐", List.of("美妆", "电子产品"));
+        return categories;
+    }
 
- /*   @RequestMapping("")
-    public ModelAndView home(HttpServletRequest request)throws Exception{
-        System.out.println(1231312);
-        ModelAndView modelAndView = new ModelAndView();
-        List<Goods> goodsList = goodsService.selectByStatusAndGoodsStatus();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
+    @ResponseBody
+    @RequestMapping("/views/{cate}/{page}")
+    public ModelAndView category(HttpServletRequest request,
+                                 @PathVariable("cate") int cate,
+                                 @PathVariable("page") int pageNum) {
+        // 从数据库中获取 goodsList
+        List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+        int pagesNum = goodsService.selectCountByCateList(Arrays.asList(cate)) / PAGE_SIZE + 1; // 当有 2 页商品时，得到的 pagesNum 是 1
+        // 根据 cate 获取对应中文
+        String[] category = new String[2];
+        int remainingCate = cate;
+        for (Map.Entry<String, List<String>> entry : CATEGORIES.entrySet()) {
+            List<String> valueList = entry.getValue();
+            if (remainingCate <= valueList.size()) {
+                category[0] = entry.getKey();
+                category[1] = valueList.get(remainingCate - 1);
+                break;
+            } else {
+                remainingCate -= valueList.size();
+            }
+        }
+        // 返回 modelAndView
+        ModelAndView modelAndView = new ModelAndView("goods/goodsview");
+        modelAndView.addObject("mainCategory", category[0]);
+        modelAndView.addObject("category", category[1]);
+        modelAndView.addObject("goodsList", goodsList);
+        modelAndView.addObject("cate", cate);
+        modelAndView.addObject("page", pageNum);
+        modelAndView.addObject("pages", pagesNum);
 
-        ByCate(goodsList, bookList, storeList, amazeList);
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            System.out.println(cookie.getName() + ": " + cookie.getValue());
+        }
 
-        modelAndView.addObject("bookList", bookList);
-        modelAndView.addObject("storeList", storeList);
-        modelAndView.addObject("amazeList", amazeList);
-        modelAndView.setViewName("home");
         return modelAndView;
-    }*/
-     @ResponseBody
-     @RequestMapping("/views/{cate}/{page}")
-     public ModelAndView category(HttpServletRequest request,
-                                  @PathVariable("cate") int cate,
-                                  @PathVariable("page") int pageNum) {
-         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
-         ModelAndView modelAndView = new ModelAndView("goods/goodsview");
-         modelAndView.addObject("goodsList", goodsList);
-         modelAndView.addObject("cate", cate);
-         modelAndView.addObject("page", pageNum);
-         return modelAndView;
-     }
+    }
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -67,44 +85,35 @@ public class PageController {
     }
 
     @RequestMapping("/register")
-    public ModelAndView register(HttpServletRequest request)throws Exception{
+    public ModelAndView register(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
         return modelAndView;
     }
 
-    @RequestMapping("/views/managecenter")
-    public ModelAndView managecenter(HttpServletRequest request)throws Exception{
-        Enumeration<String> attributeNames = request.getSession().getAttributeNames();
-        while (attributeNames.hasMoreElements()) {
-            System.out.println(attributeNames.nextElement());
-        }
+    @RequestMapping("/managecenter")
+    public ModelAndView managecenter(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
         int currentPage;
         Student student = (Student) request.getSession().getAttribute("student");
         int totalPage = 0;
-        if("".equals(request.getParameter("currentPage"))||request.getParameter("currentPage")==null)
-        {
-            currentPage=0;
-        }
-        else {
+        if ("".equals(request.getParameter("currentPage")) || request.getParameter("currentPage") == null) {
+            currentPage = 0;
+        } else {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
         }
         List<Goods> goodsList = null;
-        if("".equals(status) || status == null) {
+        if ("".equals(status) || status == null) {
             status = "0";
             goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
-        }
-        else if("0".equals(status)||"1".equals(status))
-        {
+        } else if ("0".equals(status) || "1".equals(status)) {
             goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
-            totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()),PAGE_SIZE) ;
-        }
-        else if("2".equals(status)){
+            totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()), PAGE_SIZE);
+        } else if ("2".equals(status)) {
             System.out.println("select status==2");
             goodsList = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo(), currentPage, PAGE_SIZE);
-            totalPage =  Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo()),PAGE_SIZE);
+            totalPage = Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo()), PAGE_SIZE);
         }
         for (Goods goods : goodsList) {
             System.out.println("Good name: " + goods.getGoodsName() + "\n");
@@ -115,6 +124,7 @@ public class PageController {
         modelAndView.addObject("currentPage", currentPage);
         modelAndView.addObject("totalPage", totalPage);
         modelAndView.setViewName("manage/managecenter");
+
         return modelAndView;
     }
 
@@ -141,16 +151,15 @@ public class PageController {
     }
 
 
-
     @RequestMapping("/views/insert")
-    public ModelAndView insert(HttpServletRequest request)throws Exception{
+    public ModelAndView insert(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manage/insert");
         return modelAndView;
     }
 
     @RequestMapping("/managecenter/modifyinfo")
-    public ModelAndView modifyinfo(HttpServletRequest request)throws Exception{
+    public ModelAndView modifyinfo(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manage/modifyinfo");
         return modelAndView;
@@ -162,8 +171,6 @@ public class PageController {
         modelAndView.setViewName("goods/products");
         return modelAndView;
     }
-
-
 
     @RequestMapping("/views/tests")
     public ModelAndView tests(HttpServletRequest request) throws Exception {

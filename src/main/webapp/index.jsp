@@ -143,8 +143,8 @@
             <script>
                 document.querySelectorAll(".card").forEach((card, index) => {
                     card.onclick = async () => {
-                        const cate = index + 1
-                        window.location.href = window.location.origin + "/views/" + cate.toString() + "/" + 0
+                        const cate = index + 1;
+                        window.location.href = window.location.origin + "/views/" + cate + "/" + 1
                     }
                 })
               /*  import {getGoodsAPI} from '/static/js/apis/goods'

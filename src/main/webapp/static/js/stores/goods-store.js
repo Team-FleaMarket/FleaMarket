@@ -1,11 +1,12 @@
-var page = 0;
+var page = 0
+
 const getPage = ()=> {
     return page;
 }
 const incrementPage = () => {
     page++;
 }
-export function useGoodStore() {
+export function useGoodsStore() {
     return {
         getPage,
         incrementPage

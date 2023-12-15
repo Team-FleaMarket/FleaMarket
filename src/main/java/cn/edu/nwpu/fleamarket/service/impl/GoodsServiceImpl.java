@@ -23,9 +23,6 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     public int selectCountByCateList(List<Integer> cateList) {
-        if (goodsDao.selectCountByCateList(cateList) == null) {
-            return 0;
-        }
         return goodsDao.selectCountByCateList(cateList);
     }
 
@@ -109,8 +106,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     public List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize) {
-        System.out.println("cate: " + cate + " pageNum: " + pageNum + " pageSize: " + pageSize);
-        return goodsDao.getGoodsByCategoryPages(cate, pageNum*pageSize, pageSize);
+        return goodsDao.getGoodsByCategoryPages(cate, (pageNum - 1) * pageSize, pageSize);
     }
 
     @Override
