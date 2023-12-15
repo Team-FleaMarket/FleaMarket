@@ -9,8 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Author: Hanwen
- * @Date: 2018/6/7 下午4:37
+ * 商品 mapper
  */
 public interface GoodsDao {
 
