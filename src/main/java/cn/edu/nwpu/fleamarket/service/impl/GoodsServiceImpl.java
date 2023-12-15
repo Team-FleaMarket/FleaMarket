@@ -123,4 +123,26 @@ public class GoodsServiceImpl implements GoodsService {
     public int selectByGoodsStatusAndStudentNoTotalCnt(int goodsStatus, String studentNo) {
         return goodsDao.selectByGoodsStatusAndStudentNoTotalCnt(goodsStatus, studentNo);
     }
+
+    @Override
+    public int selectByStatusAndStudentNoAndGoodsNameTotalCnt(Integer status, String studentNo, String goodsName) {
+        return goodsDao.selectByStatusAndStudentNoAndGoodsNameTotalCnt(status, studentNo, goodsName);
+    }
+
+    @Override
+    public List<Goods> selectByStatusAndStudentNoAndGoodsName(Integer status, String studentNo, String goodsName, int currentPage, int pageSize) {
+        int offset = currentPage * pageSize;
+        return goodsDao.selectByStatusAndStudentNoAndGoodsName(status, studentNo, goodsName, offset, pageSize);
+    }
+
+    @Override
+    public int selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(Integer goodsStatus, String studentNo, String goodsName) {
+        return goodsDao.selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(goodsStatus, studentNo, goodsName);
+    }
+
+    @Override
+    public List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize) {
+        int offset = currentPage * pageSize;
+        return goodsDao.selectByGoodsStatusAndStudentNoAndGoodsName(integer, studentNo, goodsName, offset, pageSize);
+    }
 }

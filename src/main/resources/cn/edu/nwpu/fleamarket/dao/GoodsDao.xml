@@ -70,6 +70,18 @@
     <select id="selectByGoodsStatusAndStudentNoTotalCnt" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM goods WHERE goods_status = 1 AND student_no=#{studentNo}
     </select>
+    <select id="selectByStatusAndStudentNoAndGoodsNameTotalCnt" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM goods WHERE student_no=#{studentNo} AND status=#{status} AND goods_name LIKE CONCAT('%',#{goodsName},'%')
+    </select>
+    <select id="selectByStatusAndStudentNoAndGoodsName" resultMap="BaseResultMap">
+        SELECT * FROM goods WHERE student_no=#{studentNo} AND status=#{status} AND goods_name LIKE CONCAT('%',#{goodsName},'%') AND goods_status = 0 LIMIT #{offset},#{pageSize}
+    </select>
+    <select id="selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM goods WHERE goods_status = 1 AND student_no=#{studentNo} AND goods_name LIKE CONCAT('%',#{goodsName},'%')
+    </select>
+    <select id="selectByGoodsStatusAndStudentNoAndGoodsName" resultMap="BaseResultMap">
+        SELECT * FROM goods WHERE goods_status = 1 AND student_no=#{studentNo} AND goods_name LIKE CONCAT('%',#{goodsName},'%') LIMIT #{offset},#{pageSize}
+    </select>
 
 
 </mapper>
