@@ -1,6 +1,9 @@
 package cn.edu.nwpu.fleamarket.service.impl;
 
 import cn.edu.nwpu.fleamarket.dao.GoodsDao;
+import cn.edu.nwpu.fleamarket.enums.GoodsStatusEnum;
+import cn.edu.nwpu.fleamarket.enums.ReviewStatusEnum;
+import cn.edu.nwpu.fleamarket.exception.BusinessException;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,6 +184,24 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize) {
         int offset = currentPage * pageSize;
         return goodsDao.selectByGoodsStatusAndStudentNoAndGoodsName(integer, studentNo, goodsName, offset, pageSize);
+    }
+
+    @Override
+    public Goods checkIsReviewedAndNotSold(Integer goodsId) {
+        Goods goods = goodsDao.selectById(goodsId);
+        if (goods == null) {
+            throw new BusinessException("商品不存在");
+        }
+        if (goods.getStatus() != ReviewStatusEnum.REVIEWED.getCode()) {
+            throw new BusinessException("商品未被审核");
+        }
+        if (goods.getGoodsStatus() == GoodsStatusEnum.SOLD.getCode()) {
+            throw new BusinessException("商品已被购买");
+        }
+        if (goods.getGoodsStatus() == GoodsStatusEnum.IN_PROGRESS.getCode()) {
+            throw new BusinessException("商品正在交易中");
+        }
+        return goods;
     }
 }
 

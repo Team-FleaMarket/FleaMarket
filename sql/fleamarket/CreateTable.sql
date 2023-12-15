@@ -47,3 +47,17 @@ create table cart
     goods_id   INTEGER,
     num        INTEGER
 );
+
+create table orders
+(
+    id         INTEGER PRIMARY KEY AUTO_INCREMENT,
+    seller_id  INTEGER,
+    buyer_id   INTEGER,
+    goods_id   INTEGER,
+    seller_confirm     INTEGER,
+    buyer_confirm      INTEGER,
+    buyer_cancel       INTEGER,
+    seller_cancel      INTEGER,
+    is_delete          INTEGER,
+    order_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

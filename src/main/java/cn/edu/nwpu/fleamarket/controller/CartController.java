@@ -16,9 +16,8 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping("/add")
-    public String addCart(@RequestBody CartItem cartItem) {
+    public void addCart(@RequestBody CartItem cartItem) {
         cartService.addCartItem(cartItem.getStudentNo(), cartItem.getGoodsId(), cartItem.getNum());
-        return "ok";
     }
 
     @GetMapping("/{studentNo}")
