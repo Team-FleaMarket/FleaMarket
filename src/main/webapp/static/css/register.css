@@ -1,314 +1,304 @@
-.register .container {
-    width: 75%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    padding-top: 40px;
-    padding-bottom: 30px;
-}
-
-.register h3 {
-    text-align: center;
-    color: #222;
-    margin: 0;
-    position: relative;
-    font-size: 2.6em;
-}
-
-.register h3:before {
-    left: 20%;
-}
-
-.register h3:after {
-    right: 20%;
-}
-
-.register .form-check {
-    padding-left: 2em;
-}
-
-.register .form-grids {
-    width: 75%;
-    margin: 0 auto;
-}
-
-.register p {
-    font-size: 14px;
-    color: #999;
-    line-height: 1.8em;
-    margin: 0;
-    text-align: center;
-}
-
-.register p a {
-    color: #d8703f;
-    text-decoration: none;
-    padding: 0 0 0 0.3em;
-}
-
-.register p a:hover {
-    color: #212121;
-}
-
-.register p a span {
-    top: 0.1em;
-    font-size: .7em;
-    left: 0.3em;
-}
-
-.register-home a {
-    transition: .5s ease-in-out;
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
+* {
+    font-family: 'Poppins', sans-serif;
 }
 
 .register {
-    padding: 5em 0;
+    background: #ececec;
 }
 
-.register h3 {
-    text-align: center;
-    color: #222;
-    margin: 0;
+.main {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*min-height: 100vh;*/
+}
+
+.side-image {
+    padding: 5px;
+    background-image: url("/static/images/login/1.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px 0 0 10px;
     position: relative;
-    font-size: 2.6em;
 }
 
-.register h3:before, .register h3:after {
+.register .row {
+    width: 900px;
+    height: 700px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0px;
+    box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+.text {
     position: absolute;
     top: 50%;
-    width: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text p {
+    color: #fff;
+    font-size: 20px;
+}
+
+i {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.input-box {
+    width: 330px;
+    box-sizing: border-box;
+}
+
+img {
+    width: 35px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.input-box header {
+    position: relative;
+    font-weight: 520;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.input-box header:before, .input-box header:after {
+    position: absolute;
+    top: 20px;
+    width: 70px;
     height: 1px;
     background: #D5D5D5;
     content: '';
 }
 
-.register .form-grids {
-    /*width: 45%;*/
-    /* padding-bottom: 2em;*/
-    padding-top: 1em;
-    /*margin: 3em auto 0;*/
+.input-box header:before {
+    left: 50px;
 }
 
-.register .form-grids input[type="email"], .register .form-grids input[type="password"], .register .form-grids input[type="text"] {
-    outline: none;
-    border: 1px solid #DBDBDB;
-    padding: 10px 10px 10px 45px;
+.input-box header:after {
+    right: 50px;
+}
+
+.input-box p {
     font-size: 14px;
     color: #999;
-    display: block;
+    line-height: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 10px 0 10px;
+}
+
+
+.input-group-text {
+    height: 40px;
+    background: #667c9d;
+    color: white;
+}
+
+.form-floating {
+    position: relative;
+    width: 87.5%;
+}
+
+.form-floating label {
+    padding: 0.5rem 0.75rem;
+}
+
+.form-floating > .form-control:focus ~ label, .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    font-size: 14px;
+    opacity: .65;
+}
+
+.form-floating input {
+    height: 40px !important;
+    padding: 0 0 2px;
+    border-left: none;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.contact-start {
+    position: relative;
+}
+
+.contact-start h6 {
+    text-align: center;
+    font-weight: 600;
+}
+
+.contact-start h6:before, .contact-start h6:after {
+    position: absolute;
+    width: 115px;
+    bottom: 0.5em;
+    height: 2px;
+    /*background: #667c9d;*/
+    background: repeating-linear-gradient(to right, #667c9d, #667c9d 8px, transparent 5px, transparent 10px);
+    content: '';
+    margin: 0 2px;
+}
+
+.contact-start h6:before {
+    left: -1px;
+}
+
+.contact-start h6:after {
+    right: -1px;
+}
+
+.contact-end {
+    height: 2px;
+    /*background: #667c9d;*/
+    background: repeating-linear-gradient(to right, #667c9d, #667c9d 8px, transparent 5px, transparent 10px);
+    content: '';
+    margin: 0 2px;
+}
+
+.required {
+    position: absolute;
+    left: 292px;
+    bottom: 5px;
+    color: red;
+}
+
+.contact-start span {
+    position: absolute;
+    left: 333px;
+    top: 1px;
+    color: red;
+}
+
+.form-floating input:valid ~ span {
+    color: black;
+}
+
+.contact-method input:valid ~ .contact-start span {
+    color: black;
+}
+
+.button {
     width: 100%;
-    margin: 1.5em auto 0;
-}
-
-.register .form-grids input[type="email"] {
-    background: url(../images/img-sp.png) no-repeat 5px -182px #fff;
-}
-
-.register .form-grids input[type="password"] {
-    background: url(../images/img-sp.png) no-repeat 5px -220px #fff;
-    /*margin: 1.5em 0 0;*/
-}
-
-.register .form-grids button {
-    outline: none;
     border: none;
-    padding: 8px 0;
-    font-size: 1em;
+    outline: none;
+    height: 35px;
+    background: #667c9d;
     color: #fff;
-    display: block;
-    width: 40%;
-    background: #FFC229;
-    margin: 1.5em auto 0.5em auto;
-    border-radius: 3em;
+    border-radius: 8px;
+    transition: .4s;
+    margin: 5px auto 0;
 }
 
-.register .form-grids input[type="submit"]:hover {
-    background: #d8703f;
+.button:hover {
+    background: #0d6efd;
+    /*background: rgba(37, 95, 156, 0.937);*/
+    color: #fff;
 }
 
-.register .form-grids ::-webkit-input-placeholder {
-    color: #999;
+.tologin {
+    text-align: center;
+    font-size: small;
+    margin-top: 10px;
 }
 
-.register .form-grids h5, .register .form-grids h6 {
-    font-size: 1em;
-    color: #212121;
-    text-transform: uppercase;
-    margin: 0 0 2em;
+span a {
+    text-decoration: none;
+    font-weight: 700;
+    transition: .5s;
 }
 
-.register .form-grids input[type="text"] {
-    background: url(../images/img-sp.png) no-repeat 5px -259px #fff;
+span a:hover {
+    text-decoration: underline;
 }
 
-.register .form-grids input[type="text"]:nth-child(2) {
-    background: url(../images/img-sp.png) no-repeat 0px -298px #fff;
-    /*margin: 1em 0;*/
-}
+@media only screen and (max-width: 992px) {
 
-.form-check-label {
-    font-size: 14px;
-    font-weight: 500;
-    color: #999;
-}
-
-.register .form-grids h6 {
-    margin: 3em 0 2em !important;
-}
-
-@media (max-width: 768px) {
-
-}
-
-@media (max-width: 640px) {
-
-}
-
-@media (max-width: 480px) {
-
-}
-
-@media (max-width: 320px) {
-
-}
-
-@media (max-width: 1440px) {
-
-}
-
-@media (max-width: 1366px) {
-
-}
-
-@media (max-width: 1280px) {
-
-}
-
-@media (max-width: 1080px) {
-
-    .register, .register {
-        padding: 4em 0;
+    .input-box header:before, .input-box header:after {
+        position: absolute;
+        height: 1px;
+        background: #D5D5D5;
+        content: '';
     }
 
-    .register h3 {
-        font-size: 2em;
+    .input-box header:before {
+        left: 50px;
     }
 
+    .input-box header:after {
+        right: 50px;
+    }
 }
 
-@media (max-width: 1024px) {
-
-}
-
-@media (max-width: 991px) {
-
-    .register h3 {
-        font-size: 2em;
+@media only screen and (max-width: 768px) {
+    .main {
+        padding: 0;
     }
 
-    .register {
-        padding: 3em 0;
+    .register .row, .side-image {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
     }
 
-}
-
-@media (max-width: 800px) {
-
-}
-
-@media (max-width: 768px) {
-
-}
-
-@media (max-width: 767px) {
-
-}
-
-@media (max-width: 736px) {
-
-}
-
-@media (max-width: 667px) {
-
-}
-
-@media (max-width: 640px) {
-
-    .register h3:before {
-        left: 15%;
+    .side-image {
+        padding: 30px;
     }
 
-    .register h3:after {
-        right: 15%;
+    img {
+        width: 35px;
+        position: absolute;
+        top: 20px;
+        left: 47%;
     }
 
-}
-
-@media (max-width: 600px) {
-
-}
-
-@media (max-width: 568px) {
-
-}
-
-@media (max-width: 480px) {
-
-    .register h3 {
-        font-size: 1.8em;
+    .input-box header:before, .input-box header:after {
+        position: absolute;
+        top: 20px;
+        width: 70px;
+        height: 1px;
+        background: #D5D5D5;
+        content: '';
     }
 
-    .register h3:before, .register h3:after {
-        width: 20%;
+    .input-box header:before {
+        left: 50px;
     }
 
-    .register {
-        padding: 2em 0;
+    .input-box header:after {
+        right: 50px;
     }
 
-    .register h3:before {
-        left: 5%;
+    .text {
+        position: absolute;
+        top: 70%;
+        text-align: center;
     }
 
-    .register h3:after {
-        right: 5%;
+    .text p, i {
+        font-size: 16px;
     }
 
-}
-
-@media (max-width: 414px) {
-
-    .register h3 {
-        font-size: 1.6em;
+    .register .row {
+        max-width: 420px;
+        width: 100%;
+        height: auto;
     }
-
-}
-
-@media (max-width: 384px) {
-
-}
-
-@media (max-width: 375px) {
-
-    .register h3 {
-        font-size: 1.5em;
-    }
-
-}
-
-@media (max-width: 320px) {
-
-    .register h3 {
-        font-size: 1.3em;
-    }
-
-    .register-check-box label {
-        font-size: 13px;
-    }
-
-    .register-home a {
-        font-size: 14px;
-    }
-
 }
