@@ -56,4 +56,12 @@ public interface GoodsDao {
     int selectByStatusAndStudentNoTotalCnt(@Param("status") int status, @Param("studentNo") String studentNo);
 
     int selectByGoodsStatusAndStudentNoTotalCnt(@Param("goods_status") int goodsStatus, @Param("studentNo") String studentNo);
+
+    int selectByStatusAndStudentNoAndGoodsNameTotalCnt(@Param("status") Integer status, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName);
+
+    List<Goods> selectByStatusAndStudentNoAndGoodsName(@Param("status") Integer status, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName, @Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    int selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(@Param("goodsStatus") Integer goodsStatus, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName);
+
+    List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(@Param("goodsStatus") Integer integer, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName, @Param("offset") int offset, @Param("pageSize") int pageSize);
 }
