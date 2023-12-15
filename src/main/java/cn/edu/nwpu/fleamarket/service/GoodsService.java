@@ -2,6 +2,7 @@ package cn.edu.nwpu.fleamarket.service;
 
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,4 +46,18 @@ public interface GoodsService {
     int selectByStatusAndStudentNoTotalCnt(int status, String studentNo);
 
     int selectByGoodsStatusAndStudentNoTotalCnt(int goodsStatus, String studentNo);
+
+    //已售商品总数
+    int getSoldTotalCnt();
+
+    //分页查询已售商品
+    List<Goods> getSoldByPage(int page);
+
+    List<Goods> getAllSoldGoods();
+
+    List<Goods> getSoldGoodsByDate(Date start, Date end);
+
+    List<Goods> querySoldBySno(String query);
+
+    List<Goods> querySoldByBno(String query);
 }

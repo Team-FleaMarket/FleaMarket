@@ -124,7 +124,7 @@
                     wechat: ''
                 },
                 users: [],
-                queryedUsers: [],
+                queriedUsers: [],
                 tempUser: {
                     id: 0,
                     name: '',
@@ -172,7 +172,10 @@
                 });
             },
             update() {
-                console.log(this.tempUser)
+                console.log(this.tempUser);
+                if(this.tempUser.name === '' || this.tempUser.password === '') {
+                    this.$message.error('用户名或密码不能为空');
+                }
                 axios.put("/student", this.tempUser).then((res => {
                     if (res.data === "ok") {
                         this.user = this.tempUser;

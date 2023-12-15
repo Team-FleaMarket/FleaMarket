@@ -22,28 +22,47 @@
             </el-menu>
 
             <h3 style="margin: 20px 0; color: #34495e; font-size: 24px; background-color: #ecf0f1; padding: 10px; border-radius: 5px;">交易记录</h3>
-            <el-table :data="records" style="width: 100%">
-                <el-table-column prop="id" label="id" width="260"></el-table-column>
-                <el-table-column prop="goodsName" label="商品名" width="260"></el-table-column>
-                <el-table-column prop="price" label="价格" width="260"></el-table-column>
-                <el-table-column prop="studentNo" label="卖家" width="260"></el-table-column>
-                <el-table-column prop="buyerNo" label="买家" width="260"></el-table-column>
-<!--                <el-table-column-->
-<!--                        fixed="right"-->
-<!--                        label="操作"-->
-<!--                        width="120">-->
-<!--                    <template slot-scope="scope">-->
 
-<!--                        <el-button-->
-<!--                                type="primary"-->
-<!--                                size="mini"-->
-<!--                                @click="showInfo(scope.row.id)">修改-->
-<!--                        </el-button>-->
-<!--                    </template>-->
-<!--                </el-table-column>-->
+            <el-row>
+                <el-col :span="8">
+                    <el-date-picker
+                            v-model="date_range"
+                            type="daterange"
+                            range-separator="至"
+                            start-placeholder="开始日期"
+                            end-placeholder="结束日期">
+                    </el-date-picker>
+                </el-col>
+                <el-col :span="4">
+                    <el-select v-model="selected" placeholder="请选择">
+                        <el-option label="购买人学号" value="buyNo"></el-option>
+                        <el-option label="出售人学号" value="sNo"></el-option>
+                    </el-select>
+                </el-col>
+                <el-col :span="12">
+                    <el-input
+                            :placeholder="placeholderText"
+                            v-model="query_body.query"
+                            clearable
+                            style="width: 300px;">
+                        <template slot="append">
+                            <el-button type="primary" icon="el-icon-search" circle @click="search"></el-button>
+                        </template>
+                    </el-input>
+                </el-col>
+            </el-row>
+
+
+            <el-table :data="goodsList" style="width: 100%">
+                <el-table-column prop="id" label="商品id" width="200"></el-table-column>
+                <el-table-column prop="goodsName" label="商品名" width="200"></el-table-column>
+                <el-table-column prop="price" label="价格" width="200"></el-table-column>
+                <el-table-column prop="studentNo" label="销售者" width="200"></el-table-column>
+                <el-table-column prop="buyerNo" label="购买者" width="200"></el-table-column>
+                <el-table-column prop="saleTime" label="交易时间" width="200"></el-table-column>
             </el-table>
 
-            <div v-if="querying == 0" class="block">
+            <div v-if="querying === 0" class="block">
                 <el-pagination
                         @current-change="handleCurrentChange"
                         :current-page="currentPage"
@@ -65,24 +84,31 @@
         el: '#app',
         data() {
             return {
-                goods: {
+                query_body: {
+                    type: 0,
+                    query: '',
+                    start: '',
+                    end: ''
                 },
                 goodsList: [],
-                queryedGoods: [],
+                queriedGoods: [],
                 activeIndex: '4',
                 total: 0, //总记录数
                 currentPage: 1,
                 dialogVisible: false,
-                selected: 'userName',
-                query: '',
+                selected: 'buyNo',
                 placeholderMap: {
-                    userName: '按用户名搜索',
-                    studentNo: '按学号搜索'
+                    buyNo: '按购买人学号与日期搜索',
+                    sNo: '按出售人学号与日期搜索'
                 },
-                querying: 0
+                querying: 0,
+                date_range: ['', '']
             };
         },
         methods: {
+            show() {
+              console.log(this.date_range);
+            },
             to_review: function () {
                 window.location.href = "review.html";
             },
@@ -96,16 +122,41 @@
                 console.log(key, keyPath);
             },
             getTotal() {
+                axios.get("/goods/sold/number").then((res=>{
+                    this.total = res.data;
+                })).catch(err=>{
+                    console.log(err);
+                });
+            },
+            handleCurrentChange: function (page) {
+                this.currentPage = page;
+                axios.get("/goods/sold/" + this.currentPage).then((res => {
+                    this.goodsList = res.data;
+                    // console.log(res.data)
+                })).catch(err => {
+                    console.log(err);
+                })
+            },
+            search() {
 
+                this.query_body.type = (this.selected === 'sNo'? 0 : 1);
+                this.query_body.start = this.date_range[0];
+                this.query_body.end = this.date_range[1];
+                axios.post("/goods/record/query", this.query_body).then((res=>{
+                    this.goodsList = res.data;
+                    this.querying = 1;
+                })).catch(err=>{
+                    console.log(err);
+                });
             }
         },
         created() {
             this.getTotal();
-            // this.handleCurrentChange(1);
+            this.handleCurrentChange(1);
         },
         computed: {
             placeholderText() {
-                // return this.placeholderMap[this.selected];
+                return this.placeholderMap[this.selected];
             },
         },
 
