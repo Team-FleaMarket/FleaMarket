@@ -32,4 +32,5 @@
 <link href="${pageContext.request.getContextPath()}/static/css/header.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.getContextPath()}/static/css/footer.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.getContextPath()}/static/css/managercenter.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.getContextPath()}/static/css/insert.css" rel="stylesheet" type="text/css" media="all" />
 <!-- //自己写的 css -->

@@ -1,0 +1,98 @@
+
+.insert{
+    text-align: center;
+    background: #F7F7F9;
+}
+.insert .login-form-grids
+{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    background: #FFFFFF;
+    margin: auto;
+    padding-left: 10px;
+
+}
+.insert .btn-primary{
+
+    border:#c4e3f3 ;
+    background:#c4e3f3 ;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.insert td
+{
+
+    margin: auto;
+}
+.insert .td-input{
+
+    margin: 0;
+}
+.insert a{
+    font-size: 25px;
+    color: #000;
+    text-decoration: none;
+}
+
+.insert .insert-table{
+    margin: auto;
+    width: 100%;
+}
+.insert .fw-bold{
+    width: 30%;
+}
+@media(max-width: 2000px) {
+    .insert .insert-table{
+        margin: auto;
+        width: 80%;
+    }
+    .insert .login-form-grids{
+        width: 40%;
+    }
+    .insert .custom-input{
+        width: 90%;
+
+    }
+}
+@media(max-width: 1080px) {
+    .insert .login-form-grids{
+        width: 50%;
+    }
+    .insert .custom-input{
+        width: 90%;
+
+    }
+}
+@media(max-width: 770px) {
+    .insert .insert-table{
+        margin: auto;
+        width: 80%;
+    }
+    .insert .login-form-grids{
+        width: 80%;
+    }
+    .insert .custom-input{
+        width: 95%;
+
+    }
+}
+@media (max-width: 430px)
+{
+    .insert .login-form-grids{
+        width: 100%;
+    }
+    .insert .custom-input{
+        width: 95%;
+
+    }
+}
+@media (max-width:400px)
+{
+    .insert .login-form-grids{
+        width: 100%;
+    }
+    .insert .custom-input{
+        width: 95%;
+
+    }
+}
