@@ -62,6 +62,9 @@ public interface StudentDao {
     @Select("SELECT * from students where student_no like #{query}")
     @ResultMap("studentResultMap")
     List<Student> queryByStudentNo(String query);
+
+    @Update("UPDATE students set img = 1 where student_no = #{studentNo}")
+    void setImg(String studentNo);
 }
 
 

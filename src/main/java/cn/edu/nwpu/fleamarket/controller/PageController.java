@@ -4,11 +4,13 @@ import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
+import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ public class PageController {
     @Autowired
     private StudentService userService;
 
-    private static final int PAGE_SIZE = 5;
+    private static final int PAGE_SIZE = 8;
 
  /*   @RequestMapping("")
     public ModelAndView home(HttpServletRequest request)throws Exception{
@@ -44,6 +46,18 @@ public class PageController {
         modelAndView.setViewName("home");
         return modelAndView;
     }*/
+     @ResponseBody
+     @RequestMapping("/views/{cate}/{page}")
+     public ModelAndView category(HttpServletRequest request,
+                                  @PathVariable("cate") int cate,
+                                  @PathVariable("page") int pageNum) {
+         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+         ModelAndView modelAndView = new ModelAndView("goods/goodsview");
+         modelAndView.addObject("goodsList", goodsList);
+         modelAndView.addObject("cate", cate);
+         modelAndView.addObject("page", pageNum);
+         return modelAndView;
+     }
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -53,48 +67,118 @@ public class PageController {
     }
 
     @RequestMapping("/register")
-    public ModelAndView register(HttpServletRequest request) throws Exception {
+    public ModelAndView register(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
         return modelAndView;
     }
 
     @RequestMapping("/views/managecenter")
-    public ModelAndView managecenter(HttpServletRequest request) throws Exception {
+    public ModelAndView managecenter(HttpServletRequest request)throws Exception{
         Enumeration<String> attributeNames = request.getSession().getAttributeNames();
         while (attributeNames.hasMoreElements()) {
             System.out.println(attributeNames.nextElement());
         }
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
+        int totalCnt = 0;
         int currentPage;
+        boolean isSearching = false;
         Student student = (Student) request.getSession().getAttribute("student");
+        String goodsName = request.getParameter("goodsName");
+        if (goodsName != null) {
+            isSearching = true;
+        }
         int totalPage = 0;
-        if ("".equals(request.getParameter("currentPage")) || request.getParameter("currentPage") == null) {
-            currentPage = 0;
-        } else {
+        List<Goods> searchList = null;
+        if("".equals(request.getParameter("currentPage"))||request.getParameter("currentPage")==null)
+        {
+            currentPage=0;
+        }
+        else {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
+            if(currentPage<0)
+            {
+                currentPage=0;
+            }
         }
+        System.out.println(currentPage);
         List<Goods> goodsList = null;
-        if ("".equals(status) || status == null) {
-            status = "0";
-            goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
-        } else if ("0".equals(status) || "1".equals(status)) {
-            goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
-            totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()), PAGE_SIZE);
-        } else if ("2".equals(status)) {
+        if("".equals(status) || status == null) {
+            if (isSearching){
+                status = "0";
+                totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoAndGoodsNameTotalCnt(Integer.valueOf(status), student.getStudentNo(), goodsName),PAGE_SIZE) ;
+                totalCnt = goodsService.selectByStatusAndStudentNoAndGoodsNameTotalCnt(Integer.valueOf(status), student.getStudentNo(), goodsName);
+                if(currentPage+1>totalPage&&currentPage!=0)
+                {
+                    currentPage=totalPage-1;
+                }
+                searchList = goodsService.selectByStatusAndStudentNoAndGoodsName(Integer.valueOf(status), student.getStudentNo(), goodsName, currentPage, PAGE_SIZE);
+            }else{
+                status = "0";
+                totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()),PAGE_SIZE) ;
+                totalCnt = goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo());
+                if(currentPage+1>totalPage&&currentPage!=0)
+                {
+                    currentPage=totalPage-1;
+                }
+                goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
+
+            }
+        }
+        else if("0".equals(status)||"1".equals(status))
+        {
+            if (isSearching){
+                totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoAndGoodsNameTotalCnt(Integer.valueOf(status), student.getStudentNo(), goodsName),PAGE_SIZE) ;
+                totalCnt = goodsService.selectByStatusAndStudentNoAndGoodsNameTotalCnt(Integer.valueOf(status), student.getStudentNo(), goodsName);
+                if(currentPage+1>totalPage&&currentPage!=0)
+                {
+                    currentPage=totalPage-1;
+                }
+                searchList = goodsService.selectByStatusAndStudentNoAndGoodsName(Integer.valueOf(status), student.getStudentNo(), goodsName, currentPage, PAGE_SIZE);
+            }else {
+                totalPage = Math.ceilDiv(goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo()),PAGE_SIZE) ;
+                totalCnt = goodsService.selectByStatusAndStudentNoTotalCnt(Integer.valueOf(status), student.getStudentNo());
+                if(currentPage+1>totalPage&&currentPage!=0)
+                {
+                    currentPage=totalPage-1;
+                }
+                goodsList = goodsService.selectByStatusAndStudentNo(Integer.valueOf(status), student.getStudentNo(), currentPage, PAGE_SIZE);
+            }
+        }
+        else if("2".equals(status)){
             System.out.println("select status==2");
+            if (isSearching){
+                totalPage = Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(Integer.valueOf("1"), student.getStudentNo(), goodsName),PAGE_SIZE);
+                totalCnt = goodsService.selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(Integer.valueOf("1"), student.getStudentNo(), goodsName);
+                if(currentPage+1>totalPage&&currentPage!=0)
+                {
+                    currentPage=totalPage-1;
+                }
+                searchList = goodsService.selectByGoodsStatusAndStudentNoAndGoodsName(Integer.valueOf("1"), student.getStudentNo(), goodsName, currentPage, PAGE_SIZE);
+            }
+            totalPage =  Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo()),PAGE_SIZE);
+            totalCnt = goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo());
+            if(currentPage+1>totalPage&&currentPage!=0)
+            {
+                currentPage=totalPage-1;
+            }
             goodsList = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo(), currentPage, PAGE_SIZE);
-            totalPage = Math.ceilDiv(goodsService.selectByGoodsStatusAndStudentNoTotalCnt(Integer.valueOf("1"), student.getStudentNo()), PAGE_SIZE);
         }
-        for (Goods goods : goodsList) {
-            System.out.println("Good name: " + goods.getGoodsName() + "\n");
-        }
+//        System.out.println("isSearching"+isSearching);
+//        if (searchList!=null){
+//            for (Goods goods : searchList) {
+//                System.out.println(goods.getGoodsName());
+//            }
+//        }
         System.out.println("Total pages: " + totalPage + "\n");
         modelAndView.addObject("status", status);
+        modelAndView.addObject("searchList", searchList);
+        modelAndView.addObject("isSearching", isSearching);
         modelAndView.addObject("goodsList", goodsList);
         modelAndView.addObject("currentPage", currentPage);
         modelAndView.addObject("totalPage", totalPage);
+        modelAndView.addObject("totalCnt",  totalCnt);
         modelAndView.setViewName("manage/managecenter");
         return modelAndView;
     }
@@ -122,10 +206,18 @@ public class PageController {
     }
 
 
+
     @RequestMapping("/views/insert")
-    public ModelAndView insert(HttpServletRequest request) throws Exception {
+    public ModelAndView insert(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manage/insert");
+        return modelAndView;
+    }
+
+    @RequestMapping("/managecenter/modifyinfo")
+    public ModelAndView modifyinfo(HttpServletRequest request)throws Exception{
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("manage/modifyinfo");
         return modelAndView;
     }
 
@@ -136,21 +228,7 @@ public class PageController {
         return modelAndView;
     }
 
-    @RequestMapping("/views/books")
-    public ModelAndView books(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "教材");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goods/goodsview");
-        return modelAndView;
-    }
+
 
     @RequestMapping("/views/tests")
     public ModelAndView tests(HttpServletRequest request) throws Exception {
@@ -263,27 +341,6 @@ public class PageController {
         modelAndView.setViewName("goods/goodsview");
         return modelAndView;
     }
-
-    @RequestMapping("/managecenter/modifyInfo")
-    public ModelAndView modifyInfo(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("manage/modifyInfo");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public ModelAndView logout() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/login");
-        return modelAndView;
-    }
-//    @RequestMapping("/logout")
-//    public ModelAndView logout() {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("login");
-//        // 设置跳转到登录页面的视图名称
-//        return modelAndView;
-//    }
 
 /*    @RequestMapping("/single")
     public ModelAndView single(HttpServletRequest request)throws Exception{

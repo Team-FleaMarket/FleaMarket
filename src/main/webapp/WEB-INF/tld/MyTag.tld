@@ -1,0 +1,35 @@
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.2</tlib-version>
+    <short-name>MyTag</short-name>
+
+    <tag>
+        <name>pagination</name>
+        <tag-class>cn.edu.nwpu.fleamarket.tag.PaginationTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>status</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>currentPage</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>totalPage</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>cate</name>
+        <tag-class>cn.edu.nwpu.fleamarket.tag.cateTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>category</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

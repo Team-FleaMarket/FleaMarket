@@ -88,6 +88,11 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> queryByStudentNo(String query) {
         return studentDao.queryByStudentNo(query);
     }
+
+    @Override
+    public void setImg(String studentNo) {
+        studentDao.setImg(studentNo);
+    }
 }
 
 

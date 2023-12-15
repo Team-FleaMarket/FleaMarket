@@ -13,8 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -319,6 +322,34 @@ public class StudentController {
     }
 
 */
+
+    /**
+     * 接收用户头像
+     * @param image 头像图片数据
+     */
+    @ResponseBody
+    @PostMapping("/upload")
+    public void avatar(HttpServletRequest request, @RequestParam("image") MultipartFile image) {
+        Student student = (Student) request.getSession().getAttribute("student");
+        String studentNo = student.getStudentNo();
+        String path = request.getSession().getServletContext().getRealPath("/static/images/avatar");
+        System.out.println(path);
+
+        // 创建文件路径
+        String filename = path + "/" + studentNo + ".jpg";
+        File file = new File(filename);
+
+        // 将图像保存到文件中
+        try {
+            image.transferTo(file);
+            System.out.println("Image saved successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        student.setImg(1);
+        //设为有自定义头像
+        userService.setImg(studentNo);
+    }
 
     /**
      * 返回用户总数

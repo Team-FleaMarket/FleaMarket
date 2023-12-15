@@ -1,5 +1,6 @@
 package cn.edu.nwpu.fleamarket.controller;
 
+import cn.edu.nwpu.fleamarket.data.QueryRecord;
 import cn.edu.nwpu.fleamarket.data.Review;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
@@ -21,14 +22,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/goods")
@@ -43,7 +45,7 @@ public class GoodsController {
     private static final int PAGE_SIZE = 10;
 
     @RequestMapping("/insertGoods")
-    public ModelAndView insertGoods(HttpServletRequest request, Goods goods)throws Exception{
+    public ModelAndView insertGoods(HttpServletRequest request, Goods goods) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
 
         String goodsName = "";
@@ -71,26 +73,26 @@ public class GoodsController {
                 // 4. 把请求数据转换为一个个 DiskFileItem 对象，再用集合封装
                 List<DiskFileItem> diskFileItemList = upload.parseRequest(request);
                 // 遍历： 得到每一个上传的数据
-                for (DiskFileItem diskFileItem : diskFileItemList){
+                for (DiskFileItem diskFileItem : diskFileItemList) {
                     // 判断：普通文本数据
                     String fieldName = diskFileItem.getFieldName();    // 表单元素名称
 // 表单元素名称
-                    if (diskFileItem.isFormField()){
+                    if (diskFileItem.isFormField()) {
                         // 普通文本数据
-                        if("goodsName".equals(fieldName)) {
-                            goodsName = new String(diskFileItem.getString().getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);// 表单元素名称， 对应的数据
+                        if ("goodsName".equals(fieldName)) {
+                            goodsName = new String(diskFileItem.getString().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);// 表单元素名称， 对应的数据
                         }
-                        if("price".equals(fieldName)) {
+                        if ("price".equals(fieldName)) {
                             price = Double.valueOf(diskFileItem.getString());
                         }
-                        if("description".equals(fieldName)) {
-                            description = new String(diskFileItem.getString().getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
+                        if ("description".equals(fieldName)) {
+                            description = new String(diskFileItem.getString().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
                         }
-                        if("cate".equals(fieldName)) {
+                        if ("cate".equals(fieldName)) {
                             cate = diskFileItem.getString();
                         }
-                        if("degree".equals(fieldName)) {
-                            degree = new String(diskFileItem.getString().getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
+                        if ("degree".equals(fieldName)) {
+                            degree = new String(diskFileItem.getString().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
                         }
                     }
                     // 上传文件(文件流) ----> 上传到upload目录下
@@ -113,7 +115,7 @@ public class GoodsController {
                         String suffix = name.substring(name.lastIndexOf(".") + 1);
                         fileName = id + "." + suffix;
                         // 获取上传基路径
-                        path = request.getSession().getServletContext().getRealPath( "/static/upload/file/");
+                        path = request.getSession().getServletContext().getRealPath("/static/upload/file/");
 
                         // 创建目标文件
                         // 创建文件夹
@@ -133,7 +135,7 @@ public class GoodsController {
             e.printStackTrace();
         }
 
-        Student student = (Student)request.getSession().getAttribute("student");
+        Student student = (Student) request.getSession().getAttribute("student");
 
         goods.setStatus(0);
         goods.setGoodsStatus(0);
@@ -152,7 +154,7 @@ public class GoodsController {
 
     @ResponseBody
     @RequestMapping("/changeGoodsStatus")
-    public ModelAndView changeGoodsStatus(HttpServletRequest request)throws Exception{
+    public ModelAndView changeGoodsStatus(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         String status = request.getParameter("status");
         String goodsId = request.getParameter("goodsId");
@@ -177,7 +179,7 @@ public class GoodsController {
         lock.lock();
         try {
             Goods next = goodsService.getNextToBeReviewed();
-            if(next == null) {
+            if (next == null) {
                 return null;
             }
             goodsService.setAttributed(next.getId());
@@ -216,13 +218,80 @@ public class GoodsController {
         }
         return "err";
     }
+
     // 返回JSON
     @ResponseBody
     @RequestMapping("/category/{cate}/{page}")
     public String category(HttpServletRequest request,
                            @PathVariable("cate") int cate,
-                             @PathVariable("page") int pageNum) {
+                           @PathVariable("page") int pageNum) {
         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
         return JSON.toJSONString(goodsList);
+    }
+
+    //已售商品总数
+    @ResponseBody
+    @GetMapping("/sold/number")
+    public int getSoldNum() {
+        return goodsService.getSoldTotalCnt();
+    }
+
+
+    @ResponseBody
+    @GetMapping("/sold/{page}")
+    public List<Goods> getSoldGoodsByPage(@PathVariable("page") int page) {
+        if (page <= 0) {
+            return null;
+        }
+        return goodsService.getSoldByPage(page);
+    }
+
+    /**
+     * 查询交易记录
+     * 使用post传递查询信息
+     */
+    @ResponseBody
+    @PostMapping("/record/query")
+    public List<Goods> queryByStudentNo(@RequestBody QueryRecord queryRecord) {
+        if (queryRecord.getStart() == null || queryRecord.getEnd() == null) {
+            if ("".equals(queryRecord.getQuery())) {
+                //条件全空
+                return goodsService.getAllSoldGoods();
+            } else {
+                //只根据query
+                String query = "%" + queryRecord.getQuery() + "%";
+                if (queryRecord.getType() == 0) {
+                    //出售者学号
+                    return goodsService.querySoldBySno(query);
+                } else {
+                    //购买者学号
+                    return goodsService.querySoldByBno(query);
+                }
+            }
+        } else if ("".equals(queryRecord.getQuery())) {
+            //只根据日期
+            return goodsService.getSoldGoodsByDate(queryRecord.getStart(), queryRecord.getEnd());
+        } else {
+            //根据日期与query
+            String query = "%" + queryRecord.getQuery() + "%";
+            List<Goods> list1 = goodsService.getSoldGoodsByDate(queryRecord.getStart(), queryRecord.getEnd());
+            List<Goods> list2;
+            if (queryRecord.getType() == 0) {
+                list2 = goodsService.querySoldBySno(query);
+            } else {
+                list2 = goodsService.querySoldByBno(query);
+            }
+            //取交集
+
+            Set<Integer> set1 = list1.stream().map(Goods::getId).collect(Collectors.toSet());
+            Set<Integer> set2 = list2.stream().map(Goods::getId).collect(Collectors.toSet());
+
+            set1.retainAll(set2);
+
+            return list1.stream()
+                    .filter(goods -> set1.contains(goods.getId()))
+                    .toList();
+
+        }
     }
 }

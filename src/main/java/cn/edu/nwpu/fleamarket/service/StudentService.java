@@ -25,6 +25,11 @@ public interface StudentService {
     boolean update(Student student);
     List<Student> queryByUserName(String query);
     List<Student> queryByStudentNo(String query);
+
+    /**
+     * 设为有自定义头像
+     */
+    void setImg(String studentNo);
 }
 
 

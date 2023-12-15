@@ -6,6 +6,7 @@ import cn.edu.nwpu.fleamarket.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,6 +58,7 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = new Goods();
         goods.setStatus(status);
         goods.setStudentNo(studentNo);
+        goods.setGoodsStatus(0);
         int offset = currentPage * pageSize;
         return goodsDao.selectByStatusAndStudentNo(goods, offset, pageSize);
     }
@@ -129,6 +131,56 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int selectByGoodsStatusAndStudentNoTotalCnt(int goodsStatus, String studentNo) {
         return goodsDao.selectByGoodsStatusAndStudentNoTotalCnt(goodsStatus, studentNo);
+    }
+
+    @Override
+    public int getSoldTotalCnt() {
+        return goodsDao.getSoldNumber();
+    }
+
+    @Override
+    public List<Goods> getSoldByPage(int page) {
+        return goodsDao.getSoldGoodsByPage((page - 1) * 6);
+    }
+
+    @Override
+    public List<Goods> getAllSoldGoods() {
+        return goodsDao.getAllSoldGoods();
+    }
+
+    @Override
+    public List<Goods> getSoldGoodsByDate(Date start, Date end) {
+        return goodsDao.getSoldGoodsByDate(start, end);
+    }
+
+    @Override
+    public List<Goods> querySoldBySno(String query) {
+        return goodsDao.querySoldBySno(query);
+    }
+
+    @Override
+    public List<Goods> querySoldByBno(String query) {
+        return goodsDao.querySoldByBno(query);
+    }
+    public int selectByStatusAndStudentNoAndGoodsNameTotalCnt(Integer status, String studentNo, String goodsName) {
+        return goodsDao.selectByStatusAndStudentNoAndGoodsNameTotalCnt(status, studentNo, goodsName);
+    }
+
+    @Override
+    public List<Goods> selectByStatusAndStudentNoAndGoodsName(Integer status, String studentNo, String goodsName, int currentPage, int pageSize) {
+        int offset = currentPage * pageSize;
+        return goodsDao.selectByStatusAndStudentNoAndGoodsName(status, studentNo, goodsName, offset, pageSize);
+    }
+
+    @Override
+    public int selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(Integer goodsStatus, String studentNo, String goodsName) {
+        return goodsDao.selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(goodsStatus, studentNo, goodsName);
+    }
+
+    @Override
+    public List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize) {
+        int offset = currentPage * pageSize;
+        return goodsDao.selectByGoodsStatusAndStudentNoAndGoodsName(integer, studentNo, goodsName, offset, pageSize);
     }
 }
 
