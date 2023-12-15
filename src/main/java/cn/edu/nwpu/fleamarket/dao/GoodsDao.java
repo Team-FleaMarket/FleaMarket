@@ -102,4 +102,11 @@ public interface GoodsDao {
     @Select("SELECT * FROM goods WHERE goods_status = 1 AND buyer_no LIKE #{query} ORDER BY sale_time DESC")
     @ResultMap("goodsResultMap")
     List<Goods> querySoldByBno(String query);
+    int selectByStatusAndStudentNoAndGoodsNameTotalCnt(@Param("status") Integer status, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName);
+
+    List<Goods> selectByStatusAndStudentNoAndGoodsName(@Param("status") Integer status, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName, @Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    int selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(@Param("goodsStatus") Integer goodsStatus, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName);
+
+    List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(@Param("goodsStatus") Integer integer, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName, @Param("offset") int offset, @Param("pageSize") int pageSize);
 }
