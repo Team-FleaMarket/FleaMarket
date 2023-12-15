@@ -69,6 +69,14 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsDao.selectByGoodsStatusAndStudentNo(goods, offset, pageSize);
     }
 
+//    public List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo) {
+//        Goods goods = new Goods();
+//        goods.setGoodsStatus(goodsStatus);
+//        goods.setStudentNo(studentNo);
+//        System.out.println("select");
+//        return goodsDao.selectByGoodsStatusAndStudentNo(goods,offset,pagesize);
+//    }
+
     public void updateGoodsStatus(Goods goods) {
         goodsDao.updateGoodsStatus(goods);
     }
@@ -171,3 +179,5 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsDao.selectByGoodsStatusAndStudentNoAndGoodsName(integer, studentNo, goodsName, offset, pageSize);
     }
 }
+
+

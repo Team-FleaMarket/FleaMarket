@@ -9,8 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Author: Hanwen
- * @Date: 2018/6/7 下午4:37
+ * 商品 mapper
  */
 public interface GoodsDao {
 
@@ -78,7 +77,7 @@ public interface GoodsDao {
     /**
      * 按时间范围查询已售商品
      */
-    @Select("SELECT * FROM goods WHERE goods_status = 1 AND sale_time BETWEEN #{start} AND #{end}")
+    @Select("SELECT * FROM goods WHERE goods_status = 1 AND sale_time BETWEEN #{start} AND #{end} ORDER BY sale_time DESC")
     @ResultMap("goodsResultMap")
     List<Goods> getSoldGoodsByDate(@Param("start") Date start, @Param("end") Date end);
 
