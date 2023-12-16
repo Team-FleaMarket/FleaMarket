@@ -77,7 +77,8 @@
                 </div>
             </div>
         </div>--%>
-        <h1 class="text-center "><strong>${category}</strong></h1>
+        <p class="text-center display-3 mt-4 mb-4" style="letter-spacing: 10px">${category}</p>
+        <hr>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
             <c:forEach var="goods" items="${goodsList}">
                 <div class="col">
@@ -91,7 +92,7 @@
                             <h5>${goods.price}</h5>
                             <c:if test="${sessionScope.student == null}">
                                 <button class="redirect-btn btn btn-warning">我想要...</button>
-                            </c:if>>
+                            </c:if>
                             <c:if test="${sessionScope.student != null}">
                                 <button class="want-btn btn btn-warning">我想要...</button>
                             </c:if>>

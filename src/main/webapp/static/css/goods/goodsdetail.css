@@ -5,10 +5,25 @@
     background: #ececec;
 }
 
-/*------------ Login container ------------*/
-
 .goodsdetail .box-area{
     width: 930px;
+}
+/*------------ Login container ------------*/
+.carousel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+
+}
+
+.carousel .c-img {
+    border-radius: 20px;
+    padding: 10px;
+    height: auto;
+    aspect-ratio: 1; /* 设置宽高比为5:6 */
+    object-fit: cover; /* 保持原始比例，填充整个容器 */
+    cursor: pointer;
 }
 
 /*------------ Right box ------------*/
