@@ -88,6 +88,12 @@
     <select id="selectByGoodsStatusAndStudentNoAndGoodsName" resultMap="BaseResultMap">
         SELECT * FROM goods WHERE goods_status = 1 AND student_no=#{studentNo} AND goods_name LIKE CONCAT('%',#{goodsName},'%') LIMIT #{offset},#{pageSize}
     </select>
+    <select id="getStudentByStudentNo" resultMap="BaseResultMap">
+        SELECT * FROM students WHERE student_no=#{studentNo}
+    </select>
+    <select id="selectByGoodsName" resultMap="BaseResultMap">
+        SELECT * FROM goods WHERE goods_name LIKE CONCAT('%',#{query},'%') AND status = 1 AND goods_status = 0 LIMIT #{offset},#{pageSize}
+    </select>
 
 
 </mapper>
