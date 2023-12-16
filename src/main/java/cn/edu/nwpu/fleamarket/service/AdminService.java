@@ -2,6 +2,8 @@ package cn.edu.nwpu.fleamarket.service;
 
 import cn.edu.nwpu.fleamarket.pojo.Admin;
 
+import java.util.List;
+
 /**
  * admin service接口
  */
@@ -26,4 +28,20 @@ public interface AdminService {
      * @param newPw 新密码
      */
     void updatePw(String username, String newPw);
+
+    /**
+     * 添加管理员
+     * @param admin 新管理员
+     */
+    boolean addAdmin(Admin admin);
+
+    /**
+     * 删除管理员
+     * @param username 待删管理员用户名
+     */
+    boolean delete(String username);
+
+    List<Admin> getAll();
+
+    List<Admin> queryByUsername(String query);
 }

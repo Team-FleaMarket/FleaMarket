@@ -21,6 +21,7 @@
                     <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
                     <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
                     <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
+                    <el-menu-item index="5" @click="to_admins">管理员</el-menu-item>
                 </el-menu>
 
                 <el-row :gutter="20">
@@ -33,7 +34,9 @@
                                 <el-avatar shape="square" src="images/default.jpg"></el-avatar>
                             </div>
                             <div style="padding: 14px; text-align: center;">
-                                <el-button type="primary" icon="el-icon-edit" @click="visible=true" plain>修改密码</el-button>
+                                <el-button type="text" @click="visible=true" plain>修改密码</el-button>
+                                <el-button type="text" @click="add_visible=true" plain>添加管理员</el-button>
+                                <el-button type="text" @click="delete_visible=true" plain>删除管理员</el-button>
                             </div>
                         </el-card>
                     </el-col>
@@ -75,6 +78,44 @@
             </span>
                 </el-dialog>
 
+
+                <el-dialog
+                        title="添加管理员"
+                        :visible.sync="add_visible"
+                        width="30%">
+                    <el-form>
+                        <el-form-item label="新管理员用户名">
+                            <el-input v-model="admin.username"></el-input>
+                        </el-form-item>
+                        <el-form-item label="新管理员密码">
+                            <el-input type="password" v-model="admin.password"></el-input>
+                        </el-form-item>
+                        <el-form-item label="确认密码">
+                            <el-input type="password" v-model="addPwConfirm"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                <el-button @click="add_cancel">取 消</el-button>
+                <el-button type="primary" @click="add">添 加</el-button>
+            </span>
+                </el-dialog>
+
+
+                <el-dialog
+                        title="删除管理员"
+                        :visible.sync="delete_visible"
+                        width="30%">
+                    <el-form>
+                        <el-form-item label="待删除管理员用户名">
+                            <el-input v-model="delete_username"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <span slot="footer" class="dialog-footer">
+                <el-button @click="delete_cancel">取 消</el-button>
+                <el-button type="primary" @click="delete_admin">删 除</el-button>
+            </span>
+                </el-dialog>
+
             </el-main>
             <el-footer>Copyright © 2023.FleaMarket All rights reserved.</el-footer>
 
@@ -92,19 +133,87 @@
                 username: '',
                 activeIndex: '1',
                 visible: false,
+                add_visible: false,
+                delete_visible: false,
                 updatePW: {
                   pw: '',
                   npw: '',
                   cnpw: ''
                 },
+                delete_username: '',
                 announcement: {
                     title: '',
                     content: ''
                 },
-                announcements: []
+                announcements: [],
+                addPwConfirm: '',
+                admin: {
+                    username: '',
+                    password: ''
+                }
             };
         },
         methods: {
+            delete_cancel() {
+                this.delete_visible = false;
+                this.delete_username = '';
+            },
+            add_cancel() {
+                this.add_visible = false;
+                this.admin.username = '';
+                this.admin.password = '';
+                this.addPwConfirm = '';
+            },
+            add() {
+                if(this.admin.username === '' || this.admin.password === '') {
+                  this.$message.error("请输入用户名和密码");
+                  return;
+                }
+
+                if(this.addPwConfirm !== this.admin.password) {
+                    this.$message.error("两次输入的密码不一致");
+                    return;
+                }
+
+                axios.post("/admin/save", this.admin).then((res=>{
+                   if(res.data === "ok") {
+                       this.add_visible = false;
+                       this.admin.username = '';
+                       this.admin.password = '';
+                       this.addPwConfirm = '';
+                       this.$message({
+                           message: '添加成功',
+                           type: 'success'
+                       });
+                   } else {
+                       this.$message.error("用户名已存在");
+                   }
+                })).catch(err=>{
+                    console.log(err);
+                });
+            },
+            delete_admin() {
+              if(this.delete_username === this.username) {
+                  this.$message.error('不能删除自己！');
+                  return;
+              }
+              let f = new FormData();
+              f.append('username', this.delete_username);
+              axios.delete("/admin", { data: f }).then((res=>{
+                  if(res.data === 'ok') {
+                      this.delete_visible = false;
+                      this.delete_username = '';
+                      this.$message({
+                          message: '删除成功',
+                          type: 'success'
+                      });
+                  } else {
+                      this.$message.error("该管理员不存在");
+                  }
+              })).catch(err=>{
+                  console.log(err);
+              })
+            },
             cancel() {
                 this.visible = false;
                 this.updatePW.pw = '';
@@ -154,6 +263,9 @@
             },
             to_record: function () {
                 window.location.href = "record.html";
+            },
+            to_admins: function () {
+                window.location.href = "admins.html";
             },
             getName: function () {
                 axios.get("/admin").then((res => {
