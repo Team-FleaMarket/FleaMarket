@@ -37,7 +37,7 @@ public class StudentController {
     @PostMapping("/login")
     public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
         Student databaseStudent = userService.loginStudent(student);
-        List<Cart> cartList = cartService.getCartList(Integer.parseInt(student.getStudentNo()));
+        List<Cart> cartList = cartService.getCartList(student.getStudentNo());
         if (databaseStudent == null) {
             return ResponseEntity.badRequest().body("用户名或密码错误！");
         }
@@ -45,24 +45,32 @@ public class StudentController {
         request.getSession().setAttribute("student", databaseStudent);
         request.getSession().setAttribute("cartList", cartList);
         // 存储 nameCookie
-        Cookie nameCookie = new Cookie("name", databaseStudent.getName());
+        Cookie nameCookie = new Cookie("studentName", databaseStudent.getName());
+        Cookie studentNoCookie = new Cookie("studentNo", databaseStudent.getStudentNo());
         nameCookie.setPath("/"); // 设置路径为根路径
+        studentNoCookie.setPath("/"); // 设置路径为根路径
         response.addCookie(nameCookie);
+        response.addCookie(studentNoCookie);
         return ResponseEntity.ok("登录成功！");
     }
 
     @RequestMapping("/register")
     public ResponseEntity<?> register(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
         Student databaseStudent = userService.registerStudent(student);
-        List<Cart> cartList = cartService.getCartList(Integer.parseInt(student.getStudentNo()));
+        List<Cart> cartList = cartService.getCartList(student.getStudentNo());
         if (databaseStudent != null) {
             return ResponseEntity.badRequest().body("该学号已经被注册！");
         }
-        request.getSession().setAttribute("student", student);
-        Cookie nameCookie = new Cookie("name", student.getName());
-        Cookie cartCookie = new Cookie("cart", cartList.toString());
+        // 存储 session
+        request.getSession().setAttribute("student", databaseStudent);
+        request.getSession().setAttribute("cartList", cartList);
+        // 存储 nameCookie
+        Cookie nameCookie = new Cookie("studentName", databaseStudent.getName());
+        Cookie studentNoCookie = new Cookie("studentNo", databaseStudent.getStudentNo());
+        nameCookie.setPath("/"); // 设置路径为根路径
+        studentNoCookie.setPath("/"); // 设置路径为根路径
         response.addCookie(nameCookie);
-        response.addCookie(cartCookie);
+        response.addCookie(studentNoCookie);
         return ResponseEntity.ok("注册成功！");
     }
 

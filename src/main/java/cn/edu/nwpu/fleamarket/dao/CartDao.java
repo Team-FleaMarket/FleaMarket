@@ -15,13 +15,13 @@ import java.util.List;
 @Mapper
 public interface CartDao {
 
-    Cart getCartItemByStudentNoAndGoodsId(@Param("studentNo") int studentNo, @Param("goodsId") int goodsId);
+    Cart getCartItemByStudentNoAndGoodsId(@Param("studentNo") String studentNo, @Param("goodsId") int goodsId);
 
-    void addCartItem(@Param("studentNo") int studentNo, @Param("goodsId") int goodsId);
+    void addCartItem(@Param("studentNo") String studentNo, @Param("goodsId") int goodsId);
 
-    void cartItemIncrementCount(@Param("studentNo") int studentNo, @Param("goodsId") int goodsId, @Param("num") int num);
+    void cartItemIncrementCount(@Param("studentNo") String studentNo, @Param("goodsId") int goodsId, @Param("num") int num);
 
-    List<Cart> getCartByStudentNo(@Param("studentNo") int studentNo);
+    List<Cart> getCartByStudentNo(@Param("studentNo") String studentNo);
 }
 
 
