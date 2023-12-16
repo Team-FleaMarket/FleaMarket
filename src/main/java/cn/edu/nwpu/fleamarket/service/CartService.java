@@ -14,4 +14,6 @@ public interface CartService {
     void addCartItem(String studentNo, int goodsId, int num);
 
     List<Cart> getCartList(String studentNo);
+
+    Boolean checkIsInCart(String studentNo, int goodsId);
 }

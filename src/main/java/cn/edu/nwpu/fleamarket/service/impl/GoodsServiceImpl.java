@@ -1,10 +1,12 @@
 package cn.edu.nwpu.fleamarket.service.impl;
 
 import cn.edu.nwpu.fleamarket.dao.GoodsDao;
+import cn.edu.nwpu.fleamarket.dao.StudentDao;
 import cn.edu.nwpu.fleamarket.enums.GoodsStatusEnum;
 import cn.edu.nwpu.fleamarket.enums.ReviewStatusEnum;
 import cn.edu.nwpu.fleamarket.exception.BusinessException;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
+import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsDao goodsDao;
+
+    @Autowired
+    private StudentDao studentDao;
 
     public List<Goods> selectAllGoods() {
         return goodsDao.selectAllGoods();
@@ -198,6 +203,18 @@ public class GoodsServiceImpl implements GoodsService {
             throw new BusinessException("商品正在交易中");
         }
         return goods;
+    }
+
+    @Override
+    public Student getStudentByStudentNo(String studentNo) {
+
+        return studentDao.selectStudentByStudentNo(studentNo);
+    }
+
+    @Override
+    public List<Goods> selectByGoodsName(String query, int page, int pageSize) {
+        System.out.println("query: " + query + "page: " + page + "pageSize: " + pageSize);
+        return goodsDao.selectByGoodsName(query, (page - 1) * pageSize, pageSize);
     }
 }
 
