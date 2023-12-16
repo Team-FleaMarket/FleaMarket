@@ -42,7 +42,7 @@ public class GoodsController {
     @Autowired
     private RedissonClient redissonClient;
 
-    private static final int PAGE_SIZE = 10;
+    private static final int PAGE_SIZE = 24;
 
     @RequestMapping("/insertGoods")
     public ModelAndView insertGoods(HttpServletRequest request, Goods goods) throws Exception {

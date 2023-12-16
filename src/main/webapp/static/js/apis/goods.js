@@ -3,7 +3,7 @@ import request from '../utils/http.js'
 // 假设你的接口地址是 http://example.com/category/1/0
 export const getGoodsAPI = (cate, page) => {
     return request({
-        url: `/category/${cate}/${page}`,
+        url: `/goods/category/${cate}/${page}`,
         method: 'GET'
     });
 };
@@ -12,7 +12,7 @@ export const getGoodsAPI = (cate, page) => {
 export const addGoodsToCartAPI = ({goodsId, studentNo}) => {
     return request({
         url: `/cart/add`,
-        method: 'UPDATE',
+        method: 'POST',
         data: {
             goodsId,
             studentNo
