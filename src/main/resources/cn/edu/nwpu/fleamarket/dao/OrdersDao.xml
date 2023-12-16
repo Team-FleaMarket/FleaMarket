@@ -74,4 +74,15 @@
         from orders
         where goods_id = #{goodsId}
     </select>
+
+    <select id="getByBuyerId" resultMap="BaseResultMap">
+        select *
+        from orders
+        where buyer_id = #{buyerId}
+    </select>
+    <select id="selectByGoodsId" resultMap="BaseResultMap">
+        select *
+        from orders
+        where goods_id = #{goodsId}
+    </select>
 </mapper>

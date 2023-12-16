@@ -1,7 +1,10 @@
 package cn.edu.nwpu.fleamarket.dao;
 
 import cn.edu.nwpu.fleamarket.pojo.Goods;
+import cn.edu.nwpu.fleamarket.pojo.Orders;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author xh254
@@ -28,6 +31,10 @@ public interface OrdersDao {
     int isBuyerCanceled(@Param("goodsId") Integer goodsId);
 
     void setSellerCancel(@Param("goodsId") Integer goodsId);
+
+    Orders selectByGoodsId(@Param("goodsId") int id);
+
+    List<Orders> getByBuyerId(@Param("buyerId") Integer buyerId);
 }
 
 

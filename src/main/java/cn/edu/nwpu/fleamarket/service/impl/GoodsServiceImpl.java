@@ -1,18 +1,28 @@
 package cn.edu.nwpu.fleamarket.service.impl;
 
 import cn.edu.nwpu.fleamarket.dao.GoodsDao;
+import cn.edu.nwpu.fleamarket.dao.OrdersDao;
+import cn.edu.nwpu.fleamarket.data.OrderInformation;
 import cn.edu.nwpu.fleamarket.dao.StudentDao;
+import cn.edu.nwpu.fleamarket.data.OrderInformationPageResult;
 import cn.edu.nwpu.fleamarket.enums.GoodsStatusEnum;
 import cn.edu.nwpu.fleamarket.enums.ReviewStatusEnum;
 import cn.edu.nwpu.fleamarket.exception.BusinessException;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
+import cn.edu.nwpu.fleamarket.pojo.Orders;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
+import jakarta.persistence.criteria.Order;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
+import org.hibernate.grammars.ordering.OrderingParserListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static cn.edu.nwpu.fleamarket.controller.PageController.PAGE_SIZE;
 
 /**
  * @Author: Hanwen
@@ -26,6 +36,12 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private StudentDao studentDao;
+
+    @Autowired
+    private OrdersDao ordersDao;
+
+    private static final int PAGE_SIZE = 24;
+
 
     public List<Goods> selectAllGoods() {
         return goodsDao.selectAllGoods();
@@ -59,22 +75,57 @@ public class GoodsServiceImpl implements GoodsService {
         goodsDao.updateGoods(goods);
     }
 
-    public List<Goods> selectByStatusAndStudentNo(int status, String studentNo, int currentPage, int pageSize) {
+    public List<OrderInformation> selectByStatusAndStudentNo(int status, String studentNo, int currentPage, int pageSize) {
         Goods goods = new Goods();
+        List<OrderInformation> resultList = new ArrayList<>();
         goods.setStatus(status);
         goods.setStudentNo(studentNo);
         goods.setGoodsStatus(0);
         int offset = currentPage * pageSize;
-        return goodsDao.selectByStatusAndStudentNo(goods, offset, pageSize);
+        List<Goods> goodsList = goodsDao.selectByStatusAndStudentNo(goods, offset, pageSize);
+        for (Goods goods1 : goodsList) {
+            Orders orders = ordersDao.selectByGoodsId(goods1.getId());
+            OrderInformation orderInformation = new OrderInformation();
+            orderInformation.setGoods(goods1);
+            Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
+            Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
+            orderInformation.setSeller(seller);
+            orderInformation.setBuyer(buyer);
+            orderInformation.setOrderId(orders.getId());
+            orderInformation.setSellerConfirm(orders.getSellerConfirm());
+            orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
+            orderInformation.setBuyerCancel(orders.getBuyerCancel());
+            orderInformation.setSellerCancel(orders.getSellerCancel());
+            resultList.add(orderInformation);
+        }
+        return resultList;
     }
 
-    public List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo, int currentPage, int pageSize) {
+    public List<OrderInformation> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo, int currentPage, int pageSize) {
         Goods goods = new Goods();
+        List<OrderInformation> resultList = new ArrayList<>();
+
         goods.setGoodsStatus(goodsStatus);
         goods.setStudentNo(studentNo);
         System.out.println("select");
         int offset = currentPage * pageSize;
-        return goodsDao.selectByGoodsStatusAndStudentNo(goods, offset, pageSize);
+        List<Goods> goodsList =  goodsDao.selectByGoodsStatusAndStudentNo(goods, offset, pageSize);
+        for (Goods goods1 : goodsList) {
+            Orders orders = ordersDao.selectByGoodsId(goods1.getId());
+            OrderInformation orderInformation = new OrderInformation();
+            orderInformation.setGoods(goods1);
+            Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
+            Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
+            orderInformation.setSeller(seller);
+            orderInformation.setBuyer(buyer);
+            orderInformation.setOrderId(orders.getId());
+            orderInformation.setSellerConfirm(orders.getSellerConfirm());
+            orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
+            orderInformation.setBuyerCancel(orders.getBuyerCancel());
+            orderInformation.setSellerCancel(orders.getSellerCancel());
+            resultList.add(orderInformation);
+        }
+        return resultList;
     }
 
 //    public List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo) {
@@ -171,9 +222,27 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> selectByStatusAndStudentNoAndGoodsName(Integer status, String studentNo, String goodsName, int currentPage, int pageSize) {
+    public List<OrderInformation> selectByStatusAndStudentNoAndGoodsName(Integer status, String studentNo, String goodsName, int currentPage, int pageSize) {
         int offset = currentPage * pageSize;
-        return goodsDao.selectByStatusAndStudentNoAndGoodsName(status, studentNo, goodsName, offset, pageSize);
+        List<Goods> goodsList =  goodsDao.selectByStatusAndStudentNoAndGoodsName(status, studentNo, goodsName, offset, pageSize);
+        List<OrderInformation> resultList = new ArrayList<>();
+        for (Goods goods : goodsList){
+            Orders orders = ordersDao.selectByGoodsId(goods.getId());
+            OrderInformation orderInformation = new OrderInformation();
+            orderInformation.setGoods(goods);
+            Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
+            Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
+            orderInformation.setSeller(seller);
+            orderInformation.setBuyer(buyer);
+            orderInformation.setOrderId(orders.getId());
+            orderInformation.setSellerConfirm(orders.getSellerConfirm());
+            orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
+            orderInformation.setBuyerCancel(orders.getBuyerCancel());
+            orderInformation.setSellerCancel(orders.getSellerCancel());
+
+        }
+        return resultList;
+
     }
 
     @Override
@@ -182,9 +251,25 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize) {
+    public List<OrderInformation> selectByGoodsStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize) {
         int offset = currentPage * pageSize;
-        return goodsDao.selectByGoodsStatusAndStudentNoAndGoodsName(integer, studentNo, goodsName, offset, pageSize);
+        List<OrderInformation> orderInformationList = new ArrayList<>();
+        List<Goods>  goodsList=  goodsDao.selectByGoodsStatusAndStudentNoAndGoodsName(integer, studentNo, goodsName, offset, pageSize);
+        for (Goods goods : goodsList) {
+            Orders orders = ordersDao.selectByGoodsId(goods.getId());
+            OrderInformation orderInformation = new OrderInformation();
+            orderInformation.setGoods(goods);
+            Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
+            Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
+            orderInformation.setSeller(seller);
+            orderInformation.setBuyer(buyer);
+            orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
+            orderInformation.setSellerConfirm(orders.getSellerConfirm());
+            orderInformation.setSellerCancel(orders.getSellerCancel());
+            orderInformation.setBuyerCancel(orders.getBuyerCancel());
+            orderInformationList.add(orderInformation);
+        }
+        return orderInformationList;
     }
 
     @Override
@@ -216,6 +301,91 @@ public class GoodsServiceImpl implements GoodsService {
         System.out.println("query: " + query + "page: " + page + "pageSize: " + pageSize);
         return goodsDao.selectByGoodsName(query, (page - 1) * pageSize, pageSize);
     }
-}
+
+    @Override
+    public OrderInformationPageResult getNotReviewed(boolean isSearching, String goodsName, String studentNo, int currentPage) {
+        OrderInformationPageResult result = new OrderInformationPageResult();
+        List<OrderInformation> informationList = null;
+        if (isSearching){
+            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.PENDING.getCode(), studentNo, goodsName),PAGE_SIZE)) ;
+            result.setTotalCount(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.PENDING.getCode(), studentNo, goodsName));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByStatusAndStudentNoAndGoodsName(ReviewStatusEnum.PENDING.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
+        }else {
+            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.PENDING.getCode(),studentNo),PAGE_SIZE));
+            result.setTotalCount(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.PENDING.getCode(), studentNo));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByStatusAndStudentNo(ReviewStatusEnum.PENDING.getCode(), studentNo, currentPage, PAGE_SIZE);
+        }
+        result.setOrderInformationList(informationList);
+        return result;
+    }
+
+    @Override
+    public OrderInformationPageResult getNotSold(boolean isSearching, String goodsName, String studentNo, int currentPage) {
+        OrderInformationPageResult result = new OrderInformationPageResult();
+        List<OrderInformation> informationList = null;
+        if (isSearching){
+            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, goodsName),PAGE_SIZE)) ;
+            result.setTotalCount(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, goodsName));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByStatusAndStudentNoAndGoodsName(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
+        }else {
+            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(),studentNo),PAGE_SIZE));
+            result.setTotalCount(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByStatusAndStudentNo(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, currentPage, PAGE_SIZE);
+        }
+        result.setOrderInformationList(informationList);
+        return result;
+    }
+
+    @Override
+    public OrderInformationPageResult getSold(boolean isSearching, String goodsName, String studentNo, int currentPage) {
+        OrderInformationPageResult result = new OrderInformationPageResult();
+        List<OrderInformation> informationList = null;
+        if (isSearching){
+            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.SOLD.getCode(), studentNo, goodsName),PAGE_SIZE));
+            result.setTotalCount(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.SOLD.getCode(), studentNo, goodsName));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByGoodsStatusAndStudentNoAndGoodsName(GoodsStatusEnum.SOLD.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
+            return result;
+        }else{
+            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.SOLD.getCode(), studentNo),PAGE_SIZE));
+            result.setTotalCount(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.SOLD.getCode(),studentNo));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByGoodsStatusAndStudentNo(GoodsStatusEnum.SOLD.getCode(), studentNo, currentPage, PAGE_SIZE);
+            result.setOrderInformationList(informationList);
+            return result;
+        }
+    }
+
+    @Override
+    public OrderInformationPageResult getMyPurchase(boolean isSearching, String goodsName, String studentNo, int currentPage) {
+        OrderInformationPageResult result = new OrderInformationPageResult();
+        List<OrderInformation> informationList = null;
+        List<Orders> ordersList=  ordersDao.getByBuyerId(Integer.valueOf(studentNo));
+        for (Orders orders : ordersList) {
+
+        }
+    }
 
 

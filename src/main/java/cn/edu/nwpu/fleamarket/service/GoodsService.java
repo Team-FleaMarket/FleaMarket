@@ -1,7 +1,10 @@
 package cn.edu.nwpu.fleamarket.service;
 
+import cn.edu.nwpu.fleamarket.data.OrderInformation;
+import cn.edu.nwpu.fleamarket.data.OrderInformationPageResult;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +19,7 @@ public interface GoodsService {
     int selectCountByCateList(List<Integer> cateList);
     List<Goods> selectByStatus(int status);
     List<Goods> selectByStudentNo(String studentNo);
-    List<Goods> selectByStatusAndStudentNo(int status, String studentNo, int currentPage, int pageSize);
+    List<OrderInformation> selectByStatusAndStudentNo(int status, String studentNo, int currentPage, int pageSize);
     Goods selectById(int id);
 
     void insertGoods(Goods goods);
@@ -40,7 +43,7 @@ public interface GoodsService {
     List<Goods> getAllAttributedGoodsNotReviewed();
 
     boolean review(int id, int status);
-    List<Goods> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo, int currentPage, int pageSize);
+    List<OrderInformation> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo, int currentPage, int pageSize);
 
     List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize);
 
@@ -63,15 +66,23 @@ public interface GoodsService {
     List<Goods> querySoldByBno(String query);
     int selectByStatusAndStudentNoAndGoodsNameTotalCnt(Integer status, String studentNo, String goodsName);
 
-    List<Goods> selectByStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize);
+    List<OrderInformation> selectByStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize);
 
     int selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(Integer goodsStatus, String studentNo, String goodsName);
 
-    List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize);
+    List<OrderInformation> selectByGoodsStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize);
 
     Goods checkIsReviewedAndNotSold(Integer goodsId);
 
     Student getStudentByStudentNo(String studentNo);
 
     List<Goods> selectByGoodsName(String query, int page, int pageSize);
+
+    OrderInformationPageResult getNotReviewed(boolean isSearching, String goodsName, String studentNo,int currentPage);
+
+    OrderInformationPageResult getNotSold(boolean isSearching, String goodsName, String studentNo, int currentPage);
+
+    OrderInformationPageResult getSold(boolean isSearching, String goodsName, String studentNo, int currentPage);
+
+    OrderInformationPageResult getMyPurchase(boolean isSearching, String goodsName, String studentNo, int currentPage);
 }

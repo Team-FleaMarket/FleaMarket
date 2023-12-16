@@ -46,7 +46,7 @@
                             <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/login">个人中心</a>
                         </c:if>
                         <c:if test="${sessionScope.student != null}">
-                            <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/managecenter">个人中心</a>
+                            <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/views/managecenter">个人中心</a>
                         </c:if>
 
                     </li>
