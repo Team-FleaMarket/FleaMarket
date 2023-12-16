@@ -24,8 +24,6 @@ public class CartController {
     @GetMapping("/{studentNo}")
     public String getCart(@PathVariable("studentNo") String studentNo) {
         int studentNoInt = Integer.parseInt(studentNo);
-        System.out.println("getCart");
-        System.out.println(studentNo);
         List<Cart> carts = cartService.getCartList(studentNoInt);
         return JSON.toJSONString(carts);
     }
