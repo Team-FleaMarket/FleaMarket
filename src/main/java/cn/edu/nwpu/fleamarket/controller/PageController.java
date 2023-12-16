@@ -26,38 +26,38 @@ public class PageController {
     private GoodsService goodsService;
     @Autowired
     private StudentService userService;
+    String status=null;
+    private static final int PAGE_SIZE = 5;
 
-    private static final int PAGE_SIZE = 8;
+    /*   @RequestMapping("")
+       public ModelAndView home(HttpServletRequest request)throws Exception{
+           System.out.println(1231312);
+           ModelAndView modelAndView = new ModelAndView();
+           List<Goods> goodsList = goodsService.selectByStatusAndGoodsStatus();
+           List<Goods> bookList = new ArrayList<Goods>();
+           List<Goods> storeList = new ArrayList<Goods>();
+           List<Goods> amazeList = new ArrayList<Goods>();
 
- /*   @RequestMapping("")
-    public ModelAndView home(HttpServletRequest request)throws Exception{
-        System.out.println(1231312);
-        ModelAndView modelAndView = new ModelAndView();
-        List<Goods> goodsList = goodsService.selectByStatusAndGoodsStatus();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
+           ByCate(goodsList, bookList, storeList, amazeList);
 
-        ByCate(goodsList, bookList, storeList, amazeList);
-
-        modelAndView.addObject("bookList", bookList);
-        modelAndView.addObject("storeList", storeList);
-        modelAndView.addObject("amazeList", amazeList);
-        modelAndView.setViewName("home");
+           modelAndView.addObject("bookList", bookList);
+           modelAndView.addObject("storeList", storeList);
+           modelAndView.addObject("amazeList", amazeList);
+           modelAndView.setViewName("home");
+           return modelAndView;
+       }*/
+    @ResponseBody
+    @RequestMapping("/views/{cate}/{page}")
+    public ModelAndView category(HttpServletRequest request,
+                                 @PathVariable("cate") int cate,
+                                 @PathVariable("page") int pageNum) {
+        List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+        ModelAndView modelAndView = new ModelAndView("goods/goodsview");
+        modelAndView.addObject("goodsList", goodsList);
+        modelAndView.addObject("cate", cate);
+        modelAndView.addObject("page", pageNum);
         return modelAndView;
-    }*/
-     @ResponseBody
-     @RequestMapping("/views/{cate}/{page}")
-     public ModelAndView category(HttpServletRequest request,
-                                  @PathVariable("cate") int cate,
-                                  @PathVariable("page") int pageNum) {
-         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
-         ModelAndView modelAndView = new ModelAndView("goods/goodsview");
-         modelAndView.addObject("goodsList", goodsList);
-         modelAndView.addObject("cate", cate);
-         modelAndView.addObject("page", pageNum);
-         return modelAndView;
-     }
+    }
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -80,14 +80,19 @@ public class PageController {
             System.out.println(attributeNames.nextElement());
         }
         ModelAndView modelAndView = new ModelAndView();
-        String status = request.getParameter("status");
+
         int totalCnt = 0;
         int currentPage;
         boolean isSearching = false;
         Student student = (Student) request.getSession().getAttribute("student");
-        String goodsName = request.getParameter("goodsName");
+        String goodsName = request.getParameter("searchInput");
+        System.out.println(goodsName);
         if (goodsName != null) {
             isSearching = true;
+        }
+        if(!isSearching)
+        {
+            status = request.getParameter("status");
         }
         int totalPage = 0;
         List<Goods> searchList = null;
@@ -165,20 +170,20 @@ public class PageController {
             }
             goodsList = goodsService.selectByGoodsStatusAndStudentNo(Integer.valueOf("1"), student.getStudentNo(), currentPage, PAGE_SIZE);
         }
-//        System.out.println("isSearching"+isSearching);
-//        if (searchList!=null){
-//            for (Goods goods : searchList) {
-//                System.out.println(goods.getGoodsName());
-//            }
-//        }
         System.out.println("Total pages: " + totalPage + "\n");
         modelAndView.addObject("status", status);
-        modelAndView.addObject("searchList", searchList);
-        modelAndView.addObject("isSearching", isSearching);
-        modelAndView.addObject("goodsList", goodsList);
+        if(isSearching)
+        {
+            modelAndView.addObject("goodsList", searchList);
+        }
+        else {
+            modelAndView.addObject("goodsList", goodsList);
+        }
+
         modelAndView.addObject("currentPage", currentPage);
         modelAndView.addObject("totalPage", totalPage);
         modelAndView.addObject("totalCnt",  totalCnt);
+        modelAndView.addObject("searchText",goodsName);
         modelAndView.setViewName("manage/managecenter");
         return modelAndView;
     }

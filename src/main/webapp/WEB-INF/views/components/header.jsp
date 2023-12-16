@@ -95,9 +95,11 @@
         </c:if>
         <c:if test="${sessionScope.student != null}">
             <ul class="navbar-user">
-                <li>
+                <li class="user">
                     <a href="${pageContext.request.contextPath}/">
-                        <i class="fas fa-user-check"></i>
+                        <i class="fas fa-user-check">  ${sessionScope.student.name}  </i>
+                        <h4></h4>
+
                     </a>
                 </li>
                 <li class="checkout">

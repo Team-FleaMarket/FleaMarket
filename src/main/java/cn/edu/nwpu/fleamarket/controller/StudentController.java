@@ -1,5 +1,6 @@
 package cn.edu.nwpu.fleamarket.controller;
 
+import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/student")
@@ -38,6 +40,39 @@ public class StudentController {
         System.out.println(databaseStudent.getStudentNo());
         request.getSession().setAttribute("student", databaseStudent);
         return ResponseEntity.ok("登陆成功！");
+    }
+    @PostMapping("/addAvatar")
+    public ModelAndView insertGoods(HttpServletRequest request,@RequestParam("files[]") MultipartFile multipartFile) throws Exception {
+
+
+        ModelAndView modelAndView = new ModelAndView();
+        Student student = (Student) request.getSession().getAttribute("student");
+        System.out.println("multipartFile.getName() "+multipartFile.getName());
+        String name = multipartFile.getName();            // 文件名
+        String type = multipartFile.getContentType();    // 文件类型
+
+
+
+        // a. 随机生成一个唯一标记
+        // b. 与文件后锥名拼接
+        String suffix = type.substring(type.lastIndexOf("/") + 1);
+        String fileName = student.getStudentNo() + "." + suffix;
+        student.setImg(1);
+        // 获取上传基路径
+        String path = request.getSession().getServletContext().getRealPath("src/main/webapp/static/images/avatar");
+
+        // 创建目标文件
+        // 创建文件夹
+        File directory = new File(path);
+        if (directory.exists() || directory.mkdirs()) {
+            File file = new File(path, fileName);
+            // 工具类，文件上传
+            System.out.println(path);
+            multipartFile.transferTo(file);
+        }
+
+        modelAndView.setViewName("redirect:/views/managecenter");
+        return modelAndView;
     }
 
     @RequestMapping("/register")
