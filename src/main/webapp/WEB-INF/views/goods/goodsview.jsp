@@ -196,18 +196,18 @@
         document.querySelectorAll('.card .want-btn').forEach((wantBtn, index) => {
             wantBtn.addEventListener('click', async () => {
                 const response = await addGoodsToCartAPI({goodsId: goodsList[index].id, studentNo: studentNo})
-                console.log(response.data)
-                if (response.data === "OK") {
-                    console.log(123123123)
+                console.log(typeof response.data)
+                if (response.data === "ok") {
                     document.getElementById("toast-body").innerText = "商品已成功添加至想要列表！"
                     document.getElementById("toast-header").classList.remove("bg-danger")
                     document.getElementById("toast-header").classList.add("bg-success")
                 } else {
-                    console.log(45646456)
                     document.getElementById("toast-body").innerText = "未知原因，添加失败！"
                     document.getElementById("toast-header").classList.remove("bg-success")
                     document.getElementById("toast-header").classList.add("bg-danger")
                 }
+                new bootstrap.Toast(document.querySelector('.toast')).show();
+
                 // header 外面和伸缩边框里面的购物车都要更新
                /* document.querySelectorAll('.checkout-items').forEach((checkoutItems) => {
                     await addGoodsToCartAPI({goodsId, studentNo})
