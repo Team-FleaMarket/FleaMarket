@@ -129,7 +129,7 @@ public class PageController {
     @RequestMapping("/views/managecenter")
     public ModelAndView managecenter(HttpServletRequest request )throws Exception{
         String str_option = request.getParameter("status");
-        if (str_option.equals("")  || str_option == null){
+        if ( str_option == null || str_option.equals("")){
             str_option = "0";
         }
         ManageCenterStatusEnum option = ManageCenterStatusEnum.getByCode(
@@ -165,21 +165,33 @@ public class PageController {
 
 
         List<Goods> goodsList = null;
-
+        OrderInformationPageResult orderInformationPageResult = new OrderInformationPageResult();
+        System.out.println("option: " + option);
         if(option.equals(ManageCenterStatusEnum.NOT_REVIEWED))
         {
-            OrderInformationPageResult orderInformationPageResult = goodsService.getNotReviewed(isSearching, goodsName, student.getStudentNo(),currentPage);
+             orderInformationPageResult = goodsService.getNotReviewed(isSearching, goodsName, student.getStudentNo(),currentPage);
         } else if (option.equals(ManageCenterStatusEnum.NOT_SOLD)) {
-            OrderInformationPageResult orderInformationPageResult = goodsService.getNotSold(isSearching, goodsName, student.getStudentNo(),currentPage);
+             orderInformationPageResult = goodsService.getNotSold(isSearching, goodsName, student.getStudentNo(),currentPage);
         } else if(option.equals(ManageCenterStatusEnum.SOLD)){
-            OrderInformationPageResult orderInformationPageResult = goodsService.getSold(isSearching, goodsName, student.getStudentNo(),currentPage);
+             orderInformationPageResult = goodsService.getSold(isSearching, goodsName, student.getStudentNo(),currentPage);
         } else if (option.equals(ManageCenterStatusEnum.MY_PURCHASE)){
-            OrderInformationPageResult orderInformationPageResult = goodsService.getMyPurchase(isSearching, goodsName, student.getStudentNo(),currentPage);
+             orderInformationPageResult = goodsService.getMyPurchase(isSearching, goodsName, student.getStudentNo(),currentPage);
         } else if (option.equals(ManageCenterStatusEnum.IN_PROGRESS)){
-            OrderInformationPageResult orderInformationPageResult = goodsService.getInProgress(isSearching, goodsName, student.getStudentNo(),currentPage);
+             orderInformationPageResult = goodsService.getInProgress(isSearching, goodsName, student.getStudentNo(),currentPage);
+        } else if (option.equals(ManageCenterStatusEnum.REVIEWED_FAIL)){
+             orderInformationPageResult = goodsService.getReviewedFail(isSearching, goodsName, student.getStudentNo(),currentPage);
+        }
+        if (orderInformationPageResult!=null && orderInformationPageResult.getOrderInformationList()!=null)
+            for (OrderInformation orderInformation : orderInformationPageResult.getOrderInformationList()) {
+                System.out.println(orderInformation.toString());
         }
         System.out.println("Total pages: " + totalPage + "\n");
         modelAndView.addObject("status", option.getCode().toString());
+
+
+        modelAndView.addObject("orderInformationPageResult", orderInformationPageResult);
+
+
         if(isSearching)
         {
             modelAndView.addObject("goodsList", searchList);

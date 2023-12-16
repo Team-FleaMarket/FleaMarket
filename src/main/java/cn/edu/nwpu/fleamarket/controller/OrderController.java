@@ -4,6 +4,7 @@ import cn.edu.nwpu.fleamarket.dao.OrdersDao;
 import cn.edu.nwpu.fleamarket.enums.OrderStatusEnum;
 import cn.edu.nwpu.fleamarket.exception.BusinessException;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
+import cn.edu.nwpu.fleamarket.pojo.Orders;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.OrdersService;
@@ -26,13 +27,14 @@ public class OrderController {
 
     @GetMapping("/add")
     @ResponseBody
-    public String addOrder(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
+    public String addOrder(HttpServletRequest request, @RequestParam("goodsId") Integer goodsId) {
         try {
             System.out.println(goodsId);
             Goods goods = goodsService.checkIsReviewedAndNotSold(goodsId);
             Student student = (Student) request.getSession().getAttribute("student");
             orderService.addOrder(goods, student.getStudentNo());
         }catch (BusinessException e) {
+            System.out.println(e.getMessage());
             return e.getMessage();
         }
         return "ok";
@@ -40,10 +42,10 @@ public class OrderController {
 
     @GetMapping("/sellerconfirm")
     @ResponseBody
-    public String sellerConfirmOrder(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
+    public String sellerConfirmOrder(HttpServletRequest request, @RequestParam("id") Integer orderId) {
         try {
             Student student = (Student) request.getSession().getAttribute("student");
-            orderService.sellerConfirm(goodsId, Integer.valueOf(student.getStudentNo()));
+            orderService.sellerConfirm(orderId, Integer.valueOf(student.getStudentNo()));
         }catch (BusinessException e) {
             return e.getMessage();
         }
@@ -52,49 +54,39 @@ public class OrderController {
 
     @GetMapping("/buyerconfirm")
     @ResponseBody
-    public String buyerConfirmOrder(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
+    public String buyerConfirmOrder(HttpServletRequest request, @RequestParam("id") Integer orderId) {
         try {
             Student student = (Student) request.getSession().getAttribute("student");
-            orderService.buyerConfirm(goodsId, Integer.valueOf(student.getStudentNo()));
+            orderService.buyerConfirm(orderId, Integer.valueOf(student.getStudentNo()));
         }catch (BusinessException e) {
             return e.getMessage();
         }
         return "ok";
     }
 
-    @GetMapping("/delete")
-    @ResponseBody
-    public String deleteOrder(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
-        try {
-            Student student = (Student) request.getSession().getAttribute("student");
-            orderService.deleteOrder(goodsId, Integer.valueOf(student.getStudentNo()));
-        }catch (BusinessException e) {
-            return e.getMessage();
-        }
-        return "ok";
-    }
 
-    @GetMapping("/buyercancel")
-    @ResponseBody
-    public String buyerCancelOrder(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
-        try {
-            orderService.checkForCancel(goodsId);
-            Student student = (Student) request.getSession().getAttribute("student");
-            orderService.buyerCancel(goodsId, Integer.valueOf(student.getStudentNo()));
-        }catch (BusinessException e) {
-            return e.getMessage();
-        }
-        return "ok";
-    }
+//    public String deleteOrder(HttpServletRequest request, @RequestParam("id") Integer orderId) {
+//        try {
+//            Student student = (Student) request.getSession().getAttribute("student");
+//            orderService.deleteOrder(orderId, Integer.valueOf(student.getStudentNo()));
+//        }catch (BusinessException e) {
+//            return e.getMessage();
+//        }
+//        return "ok";
+//    }
 
-    @GetMapping("/sellercancel")
+    @GetMapping("/cancel")
     @ResponseBody
-    public String sellerCancelOrder(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
+    public String cancelOrder(HttpServletRequest request, @RequestParam("id") Integer orderId) {
         try {
-            orderService.checkForCancel(goodsId);
+            Orders orders = ordersDao.selectById(orderId);
+            Goods goods = goodsService.selectById(orders.getGoodsId());
+            //Goods goods = goodsService.checkIsReviewedAndNotSold(orders.getGoodsId());
+            orderService.checkForCancel(goods.getId());
             Student student = (Student) request.getSession().getAttribute("student");
-            orderService.sellerCancel(goodsId, Integer.valueOf(student.getStudentNo()));
+            orderService.cancelOrder(orderId, Integer.valueOf(student.getStudentNo()));
         }catch (BusinessException e) {
+            System.out.println(e.getMessage());
             return e.getMessage();
         }
         return "ok";
@@ -104,15 +96,15 @@ public class OrderController {
     @ResponseBody
     public Boolean checkOrder(HttpServletRequest request,
                              @RequestParam("status") String status,
-                             @RequestParam("id") Integer goodsId) {
-        if (status.equals(OrderStatusEnum.BUYER_CANCELED.getDesc())){
-            return ordersDao.isBuyerCanceled(goodsId)==1;
+                             @RequestParam("id") Integer orderId) {
+        if (status.equals(OrderStatusEnum.IS_CANCELED.getDesc())){
+            return ordersDao.isCanceled(orderId)==1;
         }
-        if (status.equals(OrderStatusEnum.SELLER_CANCELED.getDesc())){
-            return ordersDao.isSellerCanceled(goodsId)==1;
+        if (status.equals(OrderStatusEnum.BUYER_CONFIRM.getDesc())){
+            return ordersDao.isBuyerConfirmd(orderId)==1;
         }
         if (status.equals(OrderStatusEnum.SELLER_CONFIRM.getDesc())){
-            return ordersDao.isSellerConfirmed(goodsId)==1;
+            return ordersDao.isSellerConfirmed(orderId)==1;
         }
         return false;
     }

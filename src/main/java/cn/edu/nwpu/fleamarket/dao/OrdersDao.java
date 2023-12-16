@@ -16,17 +16,17 @@ public interface OrdersDao {
 
     void addOrder(@Param("goods") Goods goods, @Param("buyer") Integer buyer);
 
-    void sellerConfirm(@Param("goodsId") Integer goodsId, @Param("sellerNo") Integer sellerNo);
+    void sellerConfirm(@Param("orderId") Integer orderId, @Param("sellerNo") Integer sellerNo);
 
-    Integer isSellerConfirmed(@Param("goodsId") Integer goodsId);
+    Integer isSellerConfirmed(@Param("orderId") Integer orderId);
 
-    void buyerConfirm(@Param("goodsId") Integer goodsId, @Param("buyerNo") Integer buyerNo);
+    void buyerConfirm(@Param("orderId") Integer orderId, @Param("buyerNo") Integer buyerNo);
 
     void deleteOrder(@Param("goodsId") Integer goodsId, Integer id);
 
-    int isSellerCanceled(@Param("goodsId") Integer goodsId);
+    int isSellerCanceled(@Param("orderId") Integer orderId);
 
-    void setBuyerCancel(@Param("goodsId") Integer goodsId);
+    void setBuyerCancel(@Param("orderId") Integer orderId);
 
     int isBuyerCanceled(@Param("goodsId") Integer goodsId);
 
@@ -35,6 +35,14 @@ public interface OrdersDao {
     Orders selectByGoodsId(@Param("goodsId") int id);
 
     List<Orders> getByBuyerId(@Param("buyerId") Integer buyerId);
+
+    void logicCancelOrder(@Param("orderId") Integer orderId);
+
+    Orders selectById(@Param("orderId") Integer orderId);
+
+    int isCanceled(@Param("orderId") Integer orderId);
+
+    int isBuyerConfirmd(Integer orderId);
 }
 
 

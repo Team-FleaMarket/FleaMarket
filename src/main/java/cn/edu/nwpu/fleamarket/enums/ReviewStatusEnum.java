@@ -7,7 +7,9 @@ public enum ReviewStatusEnum {
 
         PENDING(0, "未审核"),
 
-        REVIEWED(1, "已审核");
+        REVIEWED(1, "已审核"),
+
+        REVIEW_FAIL(-1, "审核未通过");
 
         private Integer code;
         private String desc;

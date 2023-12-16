@@ -3,6 +3,7 @@ package cn.edu.nwpu.fleamarket.data;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class OrderInformation {
@@ -18,8 +19,17 @@ public class OrderInformation {
 
     private Integer buyerConfirm;
 
-    private Integer buyerCancel;
-
-    private Integer sellerCancel;
-
+    private Integer isCancel;
+    @Override
+    public String toString() {
+        return "OrderInformation{" +
+                "goods=" + goods +
+                ", orderId=" + orderId +
+                ", seller=" + seller +
+                ", buyer=" + buyer +
+                ", sellerConfirm=" + sellerConfirm +
+                ", buyerConfirm=" + buyerConfirm +
+                ", isCancel=" + isCancel +
+                '}';
+    }
 }

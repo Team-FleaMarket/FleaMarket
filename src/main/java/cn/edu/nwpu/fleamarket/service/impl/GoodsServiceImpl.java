@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static cn.edu.nwpu.fleamarket.controller.PageController.PAGE_SIZE;
 
 /**
  * @Author: Hanwen
@@ -84,18 +83,19 @@ public class GoodsServiceImpl implements GoodsService {
         int offset = currentPage * pageSize;
         List<Goods> goodsList = goodsDao.selectByStatusAndStudentNo(goods, offset, pageSize);
         for (Goods goods1 : goodsList) {
-            Orders orders = ordersDao.selectByGoodsId(goods1.getId());
             OrderInformation orderInformation = new OrderInformation();
             orderInformation.setGoods(goods1);
-            Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
-            Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
-            orderInformation.setSeller(seller);
-            orderInformation.setBuyer(buyer);
-            orderInformation.setOrderId(orders.getId());
-            orderInformation.setSellerConfirm(orders.getSellerConfirm());
-            orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
-            orderInformation.setBuyerCancel(orders.getBuyerCancel());
-            orderInformation.setSellerCancel(orders.getSellerCancel());
+            Orders orders = ordersDao.selectByGoodsId(goods1.getId());
+            if (orders != null) {
+                Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
+                Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
+                orderInformation.setSeller(seller);
+                orderInformation.setBuyer(buyer);
+                orderInformation.setOrderId(orders.getId());
+                orderInformation.setIsCancel(orders.getIsCancel());
+                orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
+                orderInformation.setSellerConfirm(orders.getSellerConfirm());
+            }
             resultList.add(orderInformation);
         }
         return resultList;
@@ -114,15 +114,17 @@ public class GoodsServiceImpl implements GoodsService {
             Orders orders = ordersDao.selectByGoodsId(goods1.getId());
             OrderInformation orderInformation = new OrderInformation();
             orderInformation.setGoods(goods1);
-            Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
-            Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
-            orderInformation.setSeller(seller);
-            orderInformation.setBuyer(buyer);
-            orderInformation.setOrderId(orders.getId());
-            orderInformation.setSellerConfirm(orders.getSellerConfirm());
-            orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
-            orderInformation.setBuyerCancel(orders.getBuyerCancel());
-            orderInformation.setSellerCancel(orders.getSellerCancel());
+            if (orders != null) {
+                Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
+                Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
+                orderInformation.setSeller(seller);
+                orderInformation.setBuyer(buyer);
+                orderInformation.setOrderId(orders.getId());
+                orderInformation.setSellerConfirm(orders.getSellerConfirm());
+                orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
+                orderInformation.setIsCancel(orders.getIsCancel());
+
+            }
             resultList.add(orderInformation);
         }
         return resultList;
@@ -230,16 +232,18 @@ public class GoodsServiceImpl implements GoodsService {
             Orders orders = ordersDao.selectByGoodsId(goods.getId());
             OrderInformation orderInformation = new OrderInformation();
             orderInformation.setGoods(goods);
-            Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
-            Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
-            orderInformation.setSeller(seller);
-            orderInformation.setBuyer(buyer);
-            orderInformation.setOrderId(orders.getId());
-            orderInformation.setSellerConfirm(orders.getSellerConfirm());
-            orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
-            orderInformation.setBuyerCancel(orders.getBuyerCancel());
-            orderInformation.setSellerCancel(orders.getSellerCancel());
+            if (orders != null) {
+                Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
+                Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
+                orderInformation.setSeller(seller);
+                orderInformation.setBuyer(buyer);
+                orderInformation.setOrderId(orders.getId());
+                orderInformation.setSellerConfirm(orders.getSellerConfirm());
+                orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
+                orderInformation.setIsCancel(orders.getIsCancel());
 
+            }
+            resultList.add(orderInformation);
         }
         return resultList;
 
@@ -257,16 +261,20 @@ public class GoodsServiceImpl implements GoodsService {
         List<Goods>  goodsList=  goodsDao.selectByGoodsStatusAndStudentNoAndGoodsName(integer, studentNo, goodsName, offset, pageSize);
         for (Goods goods : goodsList) {
             Orders orders = ordersDao.selectByGoodsId(goods.getId());
+
             OrderInformation orderInformation = new OrderInformation();
             orderInformation.setGoods(goods);
-            Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
-            Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
-            orderInformation.setSeller(seller);
-            orderInformation.setBuyer(buyer);
-            orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
-            orderInformation.setSellerConfirm(orders.getSellerConfirm());
-            orderInformation.setSellerCancel(orders.getSellerCancel());
-            orderInformation.setBuyerCancel(orders.getBuyerCancel());
+            if (orders != null) {
+                Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
+                Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
+                orderInformation.setSeller(seller);
+                orderInformation.setBuyer(buyer);
+                orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
+                orderInformation.setSellerConfirm(orders.getSellerConfirm());
+                orderInformation.setIsCancel(orders.getIsCancel());
+
+            }
+
             orderInformationList.add(orderInformation);
         }
         return orderInformationList;
@@ -322,6 +330,9 @@ public class GoodsServiceImpl implements GoodsService {
                 currentPage=result.getTotalPage()-1;
             }
             informationList = selectByStatusAndStudentNo(ReviewStatusEnum.PENDING.getCode(), studentNo, currentPage, PAGE_SIZE);
+            for (OrderInformation orderInformation : informationList) {
+                System.out.println(orderInformation.getGoods().getGoodsName());
+            }
         }
         result.setOrderInformationList(informationList);
         return result;
@@ -338,7 +349,7 @@ public class GoodsServiceImpl implements GoodsService {
             {
                 currentPage=result.getTotalPage()-1;
             }
-            informationList = selectByStatusAndStudentNoAndGoodsName(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
+            informationList = selectByGoodsStatusAndStudentNoAndGoodsName(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
         }else {
             result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(),studentNo),PAGE_SIZE));
             result.setTotalCount(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo));
@@ -346,7 +357,7 @@ public class GoodsServiceImpl implements GoodsService {
             {
                 currentPage=result.getTotalPage()-1;
             }
-            informationList = selectByStatusAndStudentNo(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, currentPage, PAGE_SIZE);
+            informationList = selectByGoodsStatusAndStudentNo(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, currentPage, PAGE_SIZE);
         }
         result.setOrderInformationList(informationList);
         return result;
@@ -381,11 +392,100 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public OrderInformationPageResult getMyPurchase(boolean isSearching, String goodsName, String studentNo, int currentPage) {
         OrderInformationPageResult result = new OrderInformationPageResult();
-        List<OrderInformation> informationList = null;
+        List<OrderInformation> informationList = new ArrayList<>();
         List<Orders> ordersList=  ordersDao.getByBuyerId(Integer.valueOf(studentNo));
         for (Orders orders : ordersList) {
+            Goods goods = goodsDao.selectById(orders.getGoodsId());
+            OrderInformation orderInformation = new OrderInformation();
+            orderInformation.setGoods(goods);
+            Student seller = studentDao.selectStudentByStudentNo(orders.getSellerId().toString());
+            Student buyer = studentDao.selectStudentByStudentNo(orders.getBuyerId().toString());
+            orderInformation.setSeller(seller);
+            orderInformation.setBuyer(buyer);
+            orderInformation.setOrderId(orders.getId());
+            orderInformation.setSellerConfirm(orders.getSellerConfirm());
+            orderInformation.setBuyerConfirm(orders.getBuyerConfirm());
+            orderInformation.setIsCancel(orders.getIsCancel());
 
+            informationList.add(orderInformation);
+            }
+            result.setOrderInformationList(informationList);
+            return result;
         }
+
+    @Override
+    public OrderInformationPageResult getInProgress(boolean isSearching, String goodsName, String studentNo, int currentPage) {
+        OrderInformationPageResult result = new OrderInformationPageResult();
+        List<OrderInformation> informationList = new ArrayList<>();
+        if (isSearching){
+            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo, goodsName),PAGE_SIZE));
+            result.setTotalCount(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo, goodsName));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByGoodsStatusAndStudentNoAndGoodsName(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
+        }else{
+            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo),PAGE_SIZE));
+            result.setTotalCount(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(),studentNo));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByGoodsStatusAndStudentNo(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo, currentPage, PAGE_SIZE);
+        }
+        result.setOrderInformationList(informationList);
+        return result;
     }
+
+    @Override
+    public OrderInformationPageResult getReviewedFail(boolean isSearching, String goodsName, String studentNo, int currentPage) {
+        OrderInformationPageResult result = new OrderInformationPageResult();
+        List<OrderInformation> informationList = null;
+        if (isSearching){
+            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo, goodsName),PAGE_SIZE)) ;
+            result.setTotalCount(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo, goodsName));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByStatusAndStudentNoAndGoodsName(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
+        }else {
+            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(),studentNo),PAGE_SIZE));
+            result.setTotalCount(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo));
+            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
+            {
+                currentPage=result.getTotalPage()-1;
+            }
+            informationList = selectByStatusAndStudentNo(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo, currentPage, PAGE_SIZE);
+            for (OrderInformation orderInformation : informationList) {
+                System.out.println(orderInformation.getGoods().getGoodsName());
+            }
+        }
+        result.setOrderInformationList(informationList);
+        return result;
+    }
+
+    @Override
+    public void offShelf(Integer goodsId, String studentNo) {
+        Goods goods = goodsDao.selectById(goodsId);
+        if (goods == null) {
+            throw new BusinessException("商品不存在");
+        }
+        if (!goods.getStudentNo().equals(studentNo)) {
+            throw new BusinessException("非法操作");
+        }
+        if (goods.getGoodsStatus() == GoodsStatusEnum.SOLD.getCode()) {
+            throw new BusinessException("商品已售出，不能下架");
+        }
+        goodsDao.logicDeleteGoods(goodsId);
+    }
+
+    @Override
+    public void editGoods(Goods goods) {
+        goodsDao.editGoods(goods);
+        goodsDao.setStatus(goods.getId(), ReviewStatusEnum.PENDING.getCode());
+    }
+}
 
 

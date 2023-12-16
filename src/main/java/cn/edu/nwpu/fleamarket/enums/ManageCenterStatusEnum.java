@@ -10,7 +10,9 @@ public enum ManageCenterStatusEnum {
 
     MY_PURCHASE(3, "我的购买"),
 
-    IN_PROGRESS(4, "出售中");
+    IN_PROGRESS(4, "出售中"),
+
+    REVIEWED_FAIL(-1, "审核未通过");
 
     private Integer code;
     private String desc;

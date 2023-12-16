@@ -7,9 +7,9 @@ public enum OrderStatusEnum {
 
         SELLER_CONFIRM(0, "sellerconfirmed"),
 
-        SELLER_CANCELED(1, "sellercanceled"),
+        BUYER_CONFIRM(1, "buyercanceled"),
 
-        BUYER_CANCELED(2, "buyercanceled");
+        IS_CANCELED(2, "iscanceled");
 
         private Integer code;
         private String desc;

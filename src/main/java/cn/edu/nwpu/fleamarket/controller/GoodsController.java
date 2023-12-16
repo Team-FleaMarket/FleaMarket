@@ -3,6 +3,7 @@ package cn.edu.nwpu.fleamarket.controller;
 import cn.edu.nwpu.fleamarket.data.GoodsItem;
 import cn.edu.nwpu.fleamarket.data.QueryRecord;
 import cn.edu.nwpu.fleamarket.data.Review;
+import cn.edu.nwpu.fleamarket.exception.BusinessException;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.CartService;
@@ -52,6 +53,28 @@ public class GoodsController {
     private CartService cartService;
 
     private static final int PAGE_SIZE = 24;
+
+
+    @PostMapping("/edit")
+    @ResponseBody
+    public String editGoods(HttpServletRequest request, @RequestBody Goods goods) {
+        System.out.println(goods);
+        goodsService.editGoods(goods);
+        return "ok";
+    }
+
+    @GetMapping("/delete")
+    @ResponseBody
+    public String offShelf(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
+        try {
+            Student student = (Student) request.getSession().getAttribute("student");
+            goodsService.offShelf(goodsId, student.getStudentNo());
+        }catch (BusinessException e) {
+            return e.getMessage();
+        }
+        return "ok";
+    }
+
 
     @RequestMapping("/insertGoods")
     public ModelAndView insertGoods(HttpServletRequest request, Goods goods,@RequestParam("files[]") MultipartFile multipartFile) throws Exception {

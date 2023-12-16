@@ -17,6 +17,7 @@ CREATE TABLE students
 CREATE TABLE goods
 (
     id           INTEGER AUTO_INCREMENT,
+    is_delete    INTEGER DEFAULT 0,
     student_no   VARCHAR(100),
     goods_name   VARCHAR(100),
     description  VARCHAR(100),
@@ -56,8 +57,7 @@ create table orders
     goods_id   INTEGER,
     seller_confirm     INTEGER,
     buyer_confirm      INTEGER,
-    buyer_cancel       INTEGER,
-    seller_cancel      INTEGER,
+    is_cancel       INTEGER,
     is_delete          INTEGER,
     order_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

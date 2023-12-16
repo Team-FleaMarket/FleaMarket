@@ -85,4 +85,12 @@ public interface GoodsService {
     OrderInformationPageResult getSold(boolean isSearching, String goodsName, String studentNo, int currentPage);
 
     OrderInformationPageResult getMyPurchase(boolean isSearching, String goodsName, String studentNo, int currentPage);
+
+    OrderInformationPageResult getInProgress(boolean isSearching, String goodsName, String studentNo, int currentPage);
+
+    OrderInformationPageResult getReviewedFail(boolean isSearching, String goodsName, String studentNo, int currentPage);
+
+    void offShelf(Integer goodsId, String studentNo);
+
+    void editGoods(Goods goods);
 }
