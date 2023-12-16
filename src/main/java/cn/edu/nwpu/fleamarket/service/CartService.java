@@ -11,7 +11,9 @@ import java.util.List;
 */
 public interface CartService {
 
-    void addCartItem(int studentNo, int goodsId, int num);
+    void addCartItem(String studentNo, int goodsId, int num);
 
-    List<Cart> getCartList(int studentNo);
+    List<Cart> getCartList(String studentNo);
+
+    Boolean checkIsInCart(String studentNo, int goodsId);
 }

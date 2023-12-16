@@ -1,9 +1,11 @@
 package cn.edu.nwpu.fleamarket.controller;
 
+import cn.edu.nwpu.fleamarket.data.GoodsItem;
 import cn.edu.nwpu.fleamarket.data.QueryRecord;
 import cn.edu.nwpu.fleamarket.data.Review;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
+import cn.edu.nwpu.fleamarket.service.CartService;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,7 +44,10 @@ public class GoodsController {
     @Autowired
     private RedissonClient redissonClient;
 
-    private static final int PAGE_SIZE = 10;
+    @Autowired
+    private CartService cartService;
+
+    private static final int PAGE_SIZE = 24;
 
     @RequestMapping("/insertGoods")
     public ModelAndView insertGoods(HttpServletRequest request, Goods goods) throws Exception {
@@ -147,7 +152,6 @@ public class GoodsController {
         goods.setImagePath(fileName);
         goods.setStudentNo(student.getStudentNo());
         goodsService.insertGoods(goods);
-
         modelAndView.setViewName("redirect:/views/managecenter");
         return modelAndView;
     }
@@ -225,8 +229,22 @@ public class GoodsController {
     public String category(HttpServletRequest request,
                            @PathVariable("cate") int cate,
                            @PathVariable("page") int pageNum) {
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
-        return JSON.toJSONString(goodsList);
+        for (Goods goods : goodsList) {
+            if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+                continue;
+            };
+            GoodsItem goodsItem = new GoodsItem();
+            goodsItem.setGoods(goods);
+            System.out.println("goods.studentNo "+goods.getStudentNo());
+            Student student = goodsService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItemList.add(goodsItem);
+        }
+        return JSON.toJSONString(goodsItemList);
     }
 
     //已售商品总数
@@ -245,6 +263,28 @@ public class GoodsController {
         }
         return goodsService.getSoldByPage(page);
     }
+
+
+    @GetMapping("/search")
+    @ResponseBody
+    public String search(HttpServletRequest request, @RequestParam("query") String query, @RequestParam("page") int page) {
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
+        List<Goods> goodsList = goodsService.selectByGoodsName(query, page, PAGE_SIZE);
+        for (Goods goods : goodsList) {
+            if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+                continue;
+            };
+            GoodsItem goodsItem = new GoodsItem();
+            goodsItem.setGoods(goods);
+            Student student = goodsService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItemList.add(goodsItem);
+        }
+        return JSON.toJSONString(goodsItemList);
+    }
+
 
     /**
      * 查询交易记录

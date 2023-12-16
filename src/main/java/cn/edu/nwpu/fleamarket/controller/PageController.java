@@ -26,7 +26,7 @@ public class PageController {
     @Autowired
     private StudentService userService;
 
-    private static final int PAGE_SIZE = 8;
+    private static final int PAGE_SIZE = 24;
     private static Map<String, List<String>> CATEGORIES = new LinkedHashMap<String, List<String>>();
     static {
         CATEGORIES = initCATEGORIES(); // 调用init函数初始化静态变量
