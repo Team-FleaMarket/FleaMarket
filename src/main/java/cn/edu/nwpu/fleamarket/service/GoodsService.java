@@ -67,4 +67,6 @@ public interface GoodsService {
     int selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(Integer goodsStatus, String studentNo, String goodsName);
 
     List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize);
+
+    Goods checkIsReviewedAndNotSold(Integer goodsId);
 }
