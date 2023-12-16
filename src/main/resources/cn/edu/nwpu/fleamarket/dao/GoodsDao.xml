@@ -31,6 +31,9 @@
     <update id="updateGoodsStatus" parameterType="cn.edu.nwpu.fleamarket.pojo.Goods">
         UPDATE goods set status=#{status} WHERE id = #{id}
     </update>
+    <update id="setGoodsStatus">
+        UPDATE goods set goods_status=#{goodsStatus} WHERE id = #{goodsId}
+    </update>
 
     <!-- SELECT -->
     <select id="selectCountByCateList" parameterType="java.util.List" resultType="int" >
@@ -40,6 +43,7 @@
         </foreach>
         THEN 1 ELSE 0 END) AS count
         FROM goods
+        WHERE status = 1;
     </select>
     <select id="selectByStatusAndStudentNo" parameterType="cn.edu.nwpu.fleamarket.pojo.Goods" resultMap="BaseResultMap">
         SELECT * FROM goods WHERE student_no=#{goods.studentNo} AND status=#{goods.status} AND goods_status = 0 LIMIT #{offset},#{pageSize}
@@ -83,6 +87,12 @@
     </select>
     <select id="selectByGoodsStatusAndStudentNoAndGoodsName" resultMap="BaseResultMap">
         SELECT * FROM goods WHERE goods_status = 1 AND student_no=#{studentNo} AND goods_name LIKE CONCAT('%',#{goodsName},'%') LIMIT #{offset},#{pageSize}
+    </select>
+    <select id="getStudentByStudentNo" resultMap="BaseResultMap">
+        SELECT * FROM students WHERE student_no=#{studentNo}
+    </select>
+    <select id="selectByGoodsName" resultMap="BaseResultMap">
+        SELECT * FROM goods WHERE goods_name LIKE CONCAT('%',#{query},'%') AND status = 1 AND goods_status = 0 LIMIT #{offset},#{pageSize}
     </select>
 
 

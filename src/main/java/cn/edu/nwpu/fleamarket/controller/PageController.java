@@ -5,7 +5,9 @@ import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
 import com.alibaba.fastjson2.JSON;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("")
@@ -27,7 +26,20 @@ public class PageController {
     @Autowired
     private StudentService userService;
     String status=null;
-    private static final int PAGE_SIZE = 5;
+    private static final int PAGE_SIZE = 24;
+    private static Map<String, List<String>> CATEGORIES = new LinkedHashMap<String, List<String>>();
+    static {
+        CATEGORIES = initCATEGORIES(); // 调用init函数初始化静态变量
+    }
+    private static Map<String, List<String>> initCATEGORIES() {
+        Map<String, List<String>> categories = new LinkedHashMap<String, List<String>>();
+        categories.put("图书书籍", List.of("教材", "考试", "艺术文学"));
+        categories.put("日用百货", List.of("运动", "文具", "生活"));
+        categories.put("娱乐", List.of("美妆", "电子产品"));
+        return categories;
+    }
+
+
 
     /*   @RequestMapping("")
        public ModelAndView home(HttpServletRequest request)throws Exception{
@@ -38,6 +50,37 @@ public class PageController {
            List<Goods> storeList = new ArrayList<Goods>();
            List<Goods> amazeList = new ArrayList<Goods>();
 
+    @ResponseBody
+    @RequestMapping("/views/{cate}/{page}")
+    public ModelAndView category(HttpServletRequest request,
+                                 @PathVariable("cate") int cate,
+                                 @PathVariable("page") int pageNum) {
+        // 从数据库中获取 goodsList
+        List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+        int pagesNum = goodsService.selectCountByCateList(Arrays.asList(cate)) / PAGE_SIZE + 1; // 当有 2 页商品时，得到的 pagesNum 是 1
+        // 根据 cate 获取对应中文
+        String[] category = new String[2];
+        int remainingCate = cate;
+        for (Map.Entry<String, List<String>> entry : CATEGORIES.entrySet()) {
+            List<String> valueList = entry.getValue();
+            if (remainingCate <= valueList.size()) {
+                category[0] = entry.getKey();
+                category[1] = valueList.get(remainingCate - 1);
+                break;
+            } else {
+                remainingCate -= valueList.size();
+            }
+        }
+        // 返回 modelAndView
+        ModelAndView modelAndView = new ModelAndView("goods/goodsview");
+        modelAndView.addObject("mainCategory", category[0]);
+        modelAndView.addObject("category", category[1]);
+        modelAndView.addObject("goodsList", goodsList);
+        modelAndView.addObject("cate", cate);
+        modelAndView.addObject("page", pageNum);
+        modelAndView.addObject("pages", pagesNum);
+        return modelAndView;
+    }
            ByCate(goodsList, bookList, storeList, amazeList);
 
            modelAndView.addObject("bookList", bookList);
@@ -67,20 +110,23 @@ public class PageController {
     }
 
     @RequestMapping("/register")
-    public ModelAndView register(HttpServletRequest request)throws Exception{
+    public ModelAndView register(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
         return modelAndView;
     }
 
-    @RequestMapping("/views/managecenter")
-    public ModelAndView managecenter(HttpServletRequest request)throws Exception{
-        Enumeration<String> attributeNames = request.getSession().getAttributeNames();
-        while (attributeNames.hasMoreElements()) {
-            System.out.println(attributeNames.nextElement());
-        }
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request) throws Exception {
+        request.getSession().removeAttribute("student");
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
 
+    @RequestMapping("/managecenter")
+    public ModelAndView managecenter(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
         int totalCnt = 0;
         int currentPage;
         boolean isSearching = false;
@@ -185,6 +231,7 @@ public class PageController {
         modelAndView.addObject("totalCnt",  totalCnt);
         modelAndView.addObject("searchText",goodsName);
         modelAndView.setViewName("manage/managecenter");
+
         return modelAndView;
     }
 
@@ -211,18 +258,17 @@ public class PageController {
     }
 
 
-
     @RequestMapping("/views/insert")
-    public ModelAndView insert(HttpServletRequest request)throws Exception{
+    public ModelAndView insert(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manage/insert");
         return modelAndView;
     }
 
-    @RequestMapping("/managecenter/modifyinfo")
+    @RequestMapping("/managecenter/modifyInfo")
     public ModelAndView modifyinfo(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("manage/modifyinfo");
+        modelAndView.setViewName("manage/modifyInfo");
         return modelAndView;
     }
 
@@ -232,8 +278,6 @@ public class PageController {
         modelAndView.setViewName("goods/products");
         return modelAndView;
     }
-
-
 
     @RequestMapping("/views/tests")
     public ModelAndView tests(HttpServletRequest request) throws Exception {

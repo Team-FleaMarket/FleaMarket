@@ -1,9 +1,12 @@
 package cn.edu.nwpu.fleamarket.controller;
 
 import cn.edu.nwpu.fleamarket.pojo.Goods;
+import cn.edu.nwpu.fleamarket.pojo.Cart;
 import cn.edu.nwpu.fleamarket.pojo.Student;
+import cn.edu.nwpu.fleamarket.service.CartService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONException;
@@ -30,16 +33,27 @@ public class StudentController {
 
     @Autowired
     private StudentService userService;
+    @Autowired
+    private CartService cartService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(HttpServletRequest request, @RequestBody Student student) throws Exception{
+    public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
         Student databaseStudent = userService.loginStudent(student);
+        List<Cart> cartList = cartService.getCartList(student.getStudentNo());
         if (databaseStudent == null) {
             return ResponseEntity.badRequest().body("用户名或密码错误！");
         }
-        System.out.println(databaseStudent.getStudentNo());
+        // 存储 session
         request.getSession().setAttribute("student", databaseStudent);
-        return ResponseEntity.ok("登陆成功！");
+        request.getSession().setAttribute("cartList", cartList);
+        // 存储 nameCookie
+        Cookie nameCookie = new Cookie("studentName", databaseStudent.getName());
+        Cookie studentNoCookie = new Cookie("studentNo", databaseStudent.getStudentNo());
+        nameCookie.setPath("/"); // 设置路径为根路径
+        studentNoCookie.setPath("/"); // 设置路径为根路径
+        response.addCookie(nameCookie);
+        response.addCookie(studentNoCookie);
+        return ResponseEntity.ok("登录成功！");
     }
     @PostMapping("/addAvatar")
     public ModelAndView insertGoods(HttpServletRequest request,@RequestParam("files[]") MultipartFile multipartFile) throws Exception {
@@ -76,12 +90,22 @@ public class StudentController {
     }
 
     @RequestMapping("/register")
-    public ResponseEntity<?> register(HttpServletRequest request, @RequestBody Student student) throws Exception{
+    public ResponseEntity<?> register(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
         Student databaseStudent = userService.registerStudent(student);
+        List<Cart> cartList = cartService.getCartList(student.getStudentNo());
         if (databaseStudent != null) {
             return ResponseEntity.badRequest().body("该学号已经被注册！");
         }
-        request.getSession().setAttribute("student", student);
+        // 存储 session
+        request.getSession().setAttribute("student", databaseStudent);
+        request.getSession().setAttribute("cartList", cartList);
+        // 存储 nameCookie
+        Cookie nameCookie = new Cookie("studentName", databaseStudent.getName());
+        Cookie studentNoCookie = new Cookie("studentNo", databaseStudent.getStudentNo());
+        nameCookie.setPath("/"); // 设置路径为根路径
+        studentNoCookie.setPath("/"); // 设置路径为根路径
+        response.addCookie(nameCookie);
+        response.addCookie(studentNoCookie);
         return ResponseEntity.ok("注册成功！");
     }
 

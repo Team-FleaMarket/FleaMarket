@@ -22,14 +22,13 @@
         <div class="col-md-6 right-box">
             <div class="row align-items-center">
                 <div class="header-text mb-4">
-                    <h2>三体旧书一本</h2>
-                    <p>新旧程度：旧</p>
+                    <h2 class="goodsName"></h2>
+                    <p class="goodsDegree"></p>
                 </div>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>
-                    三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体三体
+                <textarea class="form-control goodsDescription" id="exampleFormControlTextarea1" rows="3" disabled>
                 </textarea>
                 <div class="input-group mb-3">
-                    <button class="btn btn-md btn-warning w-100 mt-2 fs-6">添加到想要</button>
+                    <button class="want-btn btn btn-md btn-warning w-100 mt-2 fs-6">添加到想要</button>
                 </div>
             </div>
         </div>

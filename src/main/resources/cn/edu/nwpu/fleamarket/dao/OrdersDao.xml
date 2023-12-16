@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.nwpu.fleamarket.dao.OrdersDao">
+
+    <resultMap id="BaseResultMap" type="cn.edu.nwpu.fleamarket.pojo.Orders">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="sellerId" column="seller_id" jdbcType="INTEGER"/>
+            <result property="buyerId" column="buyer_id" jdbcType="INTEGER"/>
+            <result property="goodsId" column="goods_id" jdbcType="INTEGER"/>
+            <result property="sellerConfirm" column="seller_confirm" jdbcType="INTEGER"/>
+            <result property="buyerConfirm" column="buyer_confirm" jdbcType="INTEGER"/>
+            <result property="buyerCancel" column="buyer_cancel" jdbcType="INTEGER"/>
+            <result property="sellerCancel" column="seller_cancel" jdbcType="INTEGER"/>
+            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+            <result property="orderTime" column="order_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,seller_id,buyer_id,
+        goods_id,seller_confirm,buyer_confirm,
+        buyer_cancel,seller_cancel,is_delete,
+        order_time
+    </sql>
+    <insert id="addOrder">
+        insert into orders
+        (seller_id,buyer_id,goods_id,seller_confirm,buyer_confirm,buyer_cancel,seller_cancel,is_delete)
+        values
+        (#{goods.studentNo},#{buyer},#{goods.id},0,0,0,0,0)
+    </insert>
+    <update id="sellerConfirm">
+        update orders
+        set seller_confirm = 1
+        where goods_id = #{goodsId} and seller_id = #{sellerNo}
+    </update>
+    <update id="buyerConfirm">
+        update orders
+        set buyer_confirm = 1
+        where goods_id = #{goodsId} and buyer_id = #{buyerNo}
+
+    </update>
+
+
+    <update id="deleteOrder">
+        update orders
+        set is_delete = 1
+        where goods_id = #{goodsId}
+    </update>
+    <update id="setBuyerCancel">
+        update orders
+        set buyer_cancel = 1
+        where goods_id = #{goodsId}
+    </update>
+    <update id="setSellerCancel">
+        update orders
+        set seller_cancel = 1
+        where goods_id = #{goodsId}
+    </update>
+
+
+    <select id="isSellerConfirmed" resultType="int">
+        select seller_confirm
+        from orders
+        where goods_id = #{goodsId}
+    </select>
+    <select id="isSellerCanceled" resultType="java.lang.Integer">
+        select seller_cancel
+        from orders
+        where goods_id = #{goodsId}
+    </select>
+    <select id="isBuyerCanceled" resultType="java.lang.Integer">
+        select buyer_cancel
+        from orders
+        where goods_id = #{goodsId}
+    </select>
+</mapper>

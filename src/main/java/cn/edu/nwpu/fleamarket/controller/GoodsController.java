@@ -1,9 +1,11 @@
 package cn.edu.nwpu.fleamarket.controller;
 
+import cn.edu.nwpu.fleamarket.data.GoodsItem;
 import cn.edu.nwpu.fleamarket.data.QueryRecord;
 import cn.edu.nwpu.fleamarket.data.Review;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
+import cn.edu.nwpu.fleamarket.service.CartService;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,49 +48,11 @@ public class GoodsController {
     @Autowired
     private RedissonClient redissonClient;
 
-    private static final int PAGE_SIZE = 10;
-    private static final String UPLOAD_DIR = "src/main/webapp/static/images/goods/";
-    //    @RequestMapping("/insertGoods")
-//    public ModelAndView insertGoods(HttpServletRequest request, Goods goods,@RequestParam("files[]") MultipartFile multipartFile) throws Exception {
-//        System.out.println("goodsName "+goods.getGoodsName());
-//        ModelAndView modelAndView = new ModelAndView();
-//        System.out.println("multipartFile.getName() "+multipartFile.getName());
-//        String name = multipartFile.getName();            // 文件名
-//        String type = multipartFile.getContentType();    // 文件类型
-//        InputStream in = multipartFile.getInputStream(); // 上传文件流
-//
-//        /* *  四、文件名重名
-//         *  对于不同用户readme.txt文件，不希望覆盖！
-//         *  后台处理： 给用户添加一个唯一标记!
-//         **/
-//
-//
-//        // a. 随机生成一个唯一标记
-//        String id = UUID.randomUUID().toString();
-//        // b. 与文件后锥名拼接
-//        String suffix = type.substring(type.lastIndexOf("/") + 1);
-//        String fileName = id + "." + suffix;
-//        // 获取上传基路径
-//        String path = request.getSession().getServletContext().getRealPath("/static/upload/file/");
-//
-//        // 创建目标文件
-//        // 创建文件夹
-//        File directory = new File(path);
-//        if (directory.exists() || directory.mkdirs()) {
-//            File file = new File(path, fileName);
-//            // 工具类，文件上传
-//            multipartFile.transferTo(file);
-//        }
-//        Student student = (Student) request.getSession().getAttribute("student");
-//        goods.setStatus(0);
-//        goods.setGoodsStatus(0);
-//        goods.setImagePath(fileName);
-//        goods.setStudentNo(student.getStudentNo());
-//        System.out.println("status = " + goods.getStatus() + " goodsStatus = " + goods.getGoodsStatus() + " price = " + goods.getPrice() + " cate = " + goods.getCate() + " description = " + goods.getDescription() + " goodsName = " + goods.getGoodsName() + " degree = " + goods.getDegree() + " imagePath = " + goods.getImagePath() + " studentNo = " + goods.getStudentNo());
-//        goodsService.insertGoods(goods);
-//        modelAndView.setViewName("redirect:/views/managecenter");
-//        return modelAndView;
-//    }
+    @Autowired
+    private CartService cartService;
+
+    private static final int PAGE_SIZE = 24;
+
     @RequestMapping("/insertGoods")
     public ModelAndView insertGoods(HttpServletRequest request, Goods goods,@RequestParam("files[]") MultipartFile multipartFile) throws Exception {
 
@@ -206,8 +170,22 @@ public class GoodsController {
     public String category(HttpServletRequest request,
                            @PathVariable("cate") int cate,
                            @PathVariable("page") int pageNum) {
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
-        return JSON.toJSONString(goodsList);
+        for (Goods goods : goodsList) {
+            if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+                continue;
+            };
+            GoodsItem goodsItem = new GoodsItem();
+            goodsItem.setGoods(goods);
+            System.out.println("goods.studentNo "+goods.getStudentNo());
+            Student student = goodsService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItemList.add(goodsItem);
+        }
+        return JSON.toJSONString(goodsItemList);
     }
 
     //已售商品总数
@@ -226,6 +204,28 @@ public class GoodsController {
         }
         return goodsService.getSoldByPage(page);
     }
+
+
+    @GetMapping("/search")
+    @ResponseBody
+    public String search(HttpServletRequest request, @RequestParam("query") String query, @RequestParam("page") int page) {
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
+        List<Goods> goodsList = goodsService.selectByGoodsName(query, page, PAGE_SIZE);
+        for (Goods goods : goodsList) {
+            if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+                continue;
+            };
+            GoodsItem goodsItem = new GoodsItem();
+            goodsItem.setGoods(goods);
+            Student student = goodsService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItemList.add(goodsItem);
+        }
+        return JSON.toJSONString(goodsItemList);
+    }
+
 
     /**
      * 查询交易记录

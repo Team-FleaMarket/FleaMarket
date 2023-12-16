@@ -1,9 +1,9 @@
 package cn.edu.nwpu.fleamarket.dao;
 
 import cn.edu.nwpu.fleamarket.pojo.Goods;
+import cn.edu.nwpu.fleamarket.pojo.Student;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Date;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public interface GoodsDao {
 
     List<Goods> selectAllGoods();
-    Integer selectCountByCateList(List<Integer> cateList);
+    int selectCountByCateList(List<Integer> cateList);
     List<Goods> selectByStatus(int status);
     List<Goods> selectByStudentNo(String studentNo);
     Goods selectById(int id);
@@ -108,4 +108,10 @@ public interface GoodsDao {
     int selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(@Param("goodsStatus") Integer goodsStatus, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName);
 
     List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(@Param("goodsStatus") Integer integer, @Param("studentNo") String studentNo, @Param("goodsName") String goodsName, @Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    void setGoodsStatus(@Param("goodsId") int goodsId, @Param("goodsStatus") Integer code);
+
+    Student getStudentByStudentNo(@Param("studentNo") String studentNo);
+
+    List<Goods> selectByGoodsName(@Param("query") String query, @Param("offset") int offset, @Param("pageSize") int pageSize);
 }

@@ -55,24 +55,24 @@
                     <!--banner-bottom-grid-left-->
                     <div class="row">
                         <div class="col-md-3 information " data-wow-delay=".5s">
-                            <form >
+                            <form>
                                 <div class="self_information">
                                     <c:if test="${sessionScope.student.img!=0}">
-                                        <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
+                                        <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg"
+                                             alt=" " class="avatar rounded-circle mx-auto d-block">
                                     </c:if>
                                     <c:if test="${sessionScope.student.img==0}">
                                         <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg" alt=" " class="avatar rounded-circle mx-auto d-block" >
-                                        <form>
-
-                                        </form>
                                         <div class="avatar overlay rounded-circle">
                                             <input type="file" accept="image/*" id="imageInput" style="display: none;">
-                                            <button  class="avatar-button rounded-3" onclick="uploadImage()">上传图像</button>
+                                            <button class="avatar-button rounded-3" onclick="uploadImage()">上传图像
+                                            </button>
                                             <script>
                                                 function uploadImage() {
                                                     document.getElementById('imageInput').click();
                                                 }
+
                                                 document.getElementById('imageInput').addEventListener('change', function () {
                                                     var selectedFile = this.files[0];
                                                     if (selectedFile) {
@@ -367,7 +367,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix"> </div>
+                    <div class="clearfix"></div>
                 </div>
 
                 <div class="clearfix"> </div>

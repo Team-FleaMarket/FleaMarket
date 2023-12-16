@@ -11,6 +11,7 @@
         <result column="email" jdbcType="VARCHAR" property="email" ></result>
         <result column="phone" jdbcType="VARCHAR" property="phone" ></result>
         <result column="wechat" jdbcType="VARCHAR" property="wechat" ></result>
+        <result column="img" jdbcType="INTEGER" property="img" ></result>
     </resultMap>
 
     <!-- ADD -->
@@ -34,7 +35,7 @@
     </update>
 
     <!-- SELECT -->
-    <select id="selectStudentByStudentNo" parameterType="string" resultType="cn.edu.nwpu.fleamarket.pojo.Student">
+    <select id="selectStudentByStudentNo" parameterType="string" resultMap="StudentResultMap">
         SELECT * FROM students WHERE student_no=#{studentNo}
     </select>
 

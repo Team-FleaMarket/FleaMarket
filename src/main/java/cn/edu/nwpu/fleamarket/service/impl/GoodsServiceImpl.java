@@ -1,7 +1,12 @@
 package cn.edu.nwpu.fleamarket.service.impl;
 
 import cn.edu.nwpu.fleamarket.dao.GoodsDao;
+import cn.edu.nwpu.fleamarket.dao.StudentDao;
+import cn.edu.nwpu.fleamarket.enums.GoodsStatusEnum;
+import cn.edu.nwpu.fleamarket.enums.ReviewStatusEnum;
+import cn.edu.nwpu.fleamarket.exception.BusinessException;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
+import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +24,14 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsDao goodsDao;
 
+    @Autowired
+    private StudentDao studentDao;
+
     public List<Goods> selectAllGoods() {
         return goodsDao.selectAllGoods();
     }
 
     public int selectCountByCateList(List<Integer> cateList) {
-        if (goodsDao.selectCountByCateList(cateList) == null) {
-            return 0;
-        }
         return goodsDao.selectCountByCateList(cateList);
     }
 
@@ -119,8 +124,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     public List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize) {
-        System.out.println("cate: " + cate + " pageNum: " + pageNum + " pageSize: " + pageSize);
-        return goodsDao.getGoodsByCategoryPages(cate, pageNum*pageSize, pageSize);
+        return goodsDao.getGoodsByCategoryPages(cate, (pageNum - 1) * pageSize, pageSize);
     }
 
     @Override
@@ -181,6 +185,36 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> selectByGoodsStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize) {
         int offset = currentPage * pageSize;
         return goodsDao.selectByGoodsStatusAndStudentNoAndGoodsName(integer, studentNo, goodsName, offset, pageSize);
+    }
+
+    @Override
+    public Goods checkIsReviewedAndNotSold(Integer goodsId) {
+        Goods goods = goodsDao.selectById(goodsId);
+        if (goods == null) {
+            throw new BusinessException("商品不存在");
+        }
+        if (goods.getStatus() != ReviewStatusEnum.REVIEWED.getCode()) {
+            throw new BusinessException("商品未被审核");
+        }
+        if (goods.getGoodsStatus() == GoodsStatusEnum.SOLD.getCode()) {
+            throw new BusinessException("商品已被购买");
+        }
+        if (goods.getGoodsStatus() == GoodsStatusEnum.IN_PROGRESS.getCode()) {
+            throw new BusinessException("商品正在交易中");
+        }
+        return goods;
+    }
+
+    @Override
+    public Student getStudentByStudentNo(String studentNo) {
+
+        return studentDao.selectStudentByStudentNo(studentNo);
+    }
+
+    @Override
+    public List<Goods> selectByGoodsName(String query, int page, int pageSize) {
+        System.out.println("query: " + query + "page: " + page + "pageSize: " + pageSize);
+        return goodsDao.selectByGoodsName(query, (page - 1) * pageSize, pageSize);
     }
 }
 

@@ -224,27 +224,24 @@
                     </div>
                 </div>
                 <script type="module">
-                    import {registerAPI} from '/static/js/apis/student.js'
-
+                    import { registerAPI } from "/static/js/apis/student.js"
                     document.querySelector("#liveToastBtn").onclick = async () => {
-                        var studentNo = $("input[name=studentNo]").val()
-                        var name = $("input[name=name]").val()
-                        var phone = $("input[name=phone]").val()
-                        var wechat = $("input[name=wechat]").val()
-                        var email = $("input[name=email]").val()
-                        var password = $("input[name=password]").val()
-                        var message = ""
-
+                        const studentNo = $("input[name=studentNo]").val()
+                        const name = $("input[name=name]").val()
+                        const phone = $("input[name=phone]").val()
+                        const wechat = $("input[name=wechat]").val()
+                        const email = $("input[name=email]").val()
+                        const password = $("input[name=password]").val()
                         try {
-                            var response = await registerAPI({studentNo, name, phone, wechat, email, password})
-                            message = response.data
-                            document.getElementById("toast-body").innerText = message
+                            const message = await registerAPI({studentNo, name, phone, wechat, email, password})
+                            document.getElementById("toast-body").innerText = message.response.data
                             document.getElementById("toast-header").classList.remove("bg-danger")
                             document.getElementById("toast-header").classList.add("bg-success")
                             window.location.href = window.location.origin
                         } catch (error) {
-                            message = error.response.data
-                            document.getElementById("toast-body").innerText = message;
+                            console.log(error)
+                            const message = error.response.data
+                            document.getElementById("toast-body").innerText = message
                             document.getElementById("toast-header").classList.remove("bg-success")
                             document.getElementById("toast-header").classList.add("bg-danger")
                         }
