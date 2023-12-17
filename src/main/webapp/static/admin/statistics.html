@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计</title>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/admin/element/index.js"></script>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div id="app">
+    <div id="container">
+        <el-container>
+            <el-header>FleaMarket</el-header>
+            <el-main>
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                    <el-menu-item index="1" @click="to_home">主页</el-menu-item>
+                    <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
+                    <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
+                    <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
+                    <el-menu-item index="5" @click="to_admins">管理员</el-menu-item>
+                    <el-menu-item index="6">统计</el-menu-item>
+                </el-menu>
+
+            </el-main>
+            <el-footer>Copyright © 2023.FleaMarket All rights reserved.</el-footer>
+
+        </el-container>
+
+    </div>
+
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                admins: [],
+                activeIndex: '6',
+                query: ''
+            };
+        },
+        methods: {
+            to_user: to_user,
+            to_review: to_review,
+            to_record: to_record,
+            to_home: to_home,
+            to_admins: to_admins,
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        },
+        created() {
+        },
+    });
+</script>
+</body>
+</html>
