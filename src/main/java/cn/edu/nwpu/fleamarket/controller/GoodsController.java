@@ -9,6 +9,7 @@ import cn.edu.nwpu.fleamarket.service.CartService;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.commons.fileupload2.core.DiskFileItem;
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItemFactory;
@@ -333,5 +334,20 @@ public class GoodsController {
                     .toList();
 
         }
+    }
+
+    @ResponseBody
+    @GetMapping("/charts/sales")
+    List<Double> getSales(HttpSession session) {
+        List<Double> sales = new ArrayList<>();
+        if(session.getAttribute("admin") == null) {
+            //非管理员操作
+            return sales;
+        }
+
+        for(int i = 1; i <= 8; ++i) {
+            sales.add(goodsService.getSales(i));
+        }
+        return sales;
     }
 }
