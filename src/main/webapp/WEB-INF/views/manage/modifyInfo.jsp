@@ -84,13 +84,13 @@
                     const wechatInputGroup = createEditableInputWithIcon('微信', 'studentWechat', wechatValue, 'bi-pencil');
                     personalInfoForm.appendChild(wechatInputGroup);
 
-                    // 添加学院输入框及修改按钮
-                    const collegeValue = ${sessionScope.student.wechat} ? ${sessionScope.student.wechat} : '软件学院';
-                    const collegeInputGroup = createEditableInputWithIcon('学院', 'college', collegeValue, 'bi-pencil');
-                    personalInfoForm.appendChild(collegeInputGroup);
+                    // 添加QQ输入框及修改按钮
+                    const qqValue = '${sessionScope.student.qq}' ? '${sessionScope.student.qq}' : '111';
+                    const qqInputGroup = createEditableInputWithIcon('QQ', 'studentQQ', qqValue, 'bi-pencil');
+                    personalInfoForm.appendChild(qqInputGroup);
 
                     // 添加邮箱输入框及修改按钮
-                    const emailValue = ${sessionScope.student.email} ? ${sessionScope.student.email} : '111@qq.com';
+                    const emailValue = '${sessionScope.student.email}' ? '${sessionScope.student.email}' : '111@qq.com';
                     const emailInputGroup = createEditableInputWithIcon('email', 'studentEmail', emailValue, 'bi-pencil');
                     personalInfoForm.appendChild(emailInputGroup);
 
@@ -114,7 +114,7 @@
                     panelRight.appendChild(personalInfoForm);
                     }" data-target="personalInfo">个人信息修改
             </button>
-
+            <%--            <button class="btn btn-option" onclick="logout()" data-target="logout">Logout</button>--%>
             <button class="btn btn-option" onclick="function showOther() {
             // 暂时不知道写啥，放着先，目前可以按键更改样式
             }
@@ -124,6 +124,16 @@
     </div>
     <div class="panel-right" id="panelRight">
         <!-- Right panel content will be dynamically filled -->
+        <!-- 在这里添加一个隐藏的表单，用于提交修改后的个人信息 -->
+        <%--        <form id="updateUserInfoForm" style="display:none;">--%>
+        <%--            <input type="hidden" id="updatedStudentNo" name="studentNo">--%>
+        <%--            <input type="hidden" id="updatedUserName" name="userName">--%>
+        <%--            <input type="hidden" id="updatedWechat" name="wechat">--%>
+        <%--            <input type="hidden" id="updatedPhone" name="phone">--%>
+        <%--            <input type="hidden" id="updatedEmail" name="email">--%>
+        <%--            <!-- 添加其他需要更新的字段，如wechat、phone、email等 -->--%>
+        <%--            <button type="submit" id="submitUpdateUserInfo"></button>--%>
+        <%--        </form>--%>
     </div>
 </div>
 <!-- footer -->
@@ -132,9 +142,8 @@
 <!-- Bootstrap JS and jQuery Slim JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-<script type="module">
-    import {updateAPI} from "../../../static/js/apis/student.js";
-
+<%--<script src="<c:url value="/static/js/modifyInfo.js"/>"></script>--%>
+<script>
     // 在右侧面板展示用户信息 需要和数据库进行连接
     function showPersonalInfo() {
         // 获取 panelRight 元素
@@ -145,28 +154,27 @@
         const personalInfoForm = document.createElement('form');
         personalInfoForm.id = 'personalInfoForm';
         personalInfoForm.className = 'm-auto p-4 bg-light rounded';
-
         // 添加学号信息（不可编辑）
         const studentIdInputGroup = createNonEditableInput('学号', 'studentId', ${sessionScope.student.studentNo});
         personalInfoForm.appendChild(studentIdInputGroup);
 
         // 添加姓名输入框及修改按钮
-        const nameValue = ${sessionScope.student.name} ? ${sessionScope.student.name} : 'zhangsan';
+        const nameValue = '${sessionScope.student.name}' ? '${sessionScope.student.name}' : 'zhangsan';
         const nameInputGroup = createEditableInputWithIcon('姓名', 'studentName', nameValue, 'bi-pencil');
         personalInfoForm.appendChild(nameInputGroup);
 
         // 添加微信输入框及修改按钮
-        const wechatValue = ${sessionScope.student.wechat} ? ${sessionScope.student.wechat} : '111';
+        const wechatValue = '${sessionScope.student.wechat}' ? '${sessionScope.student.wechat}' : '111';
         const wechatInputGroup = createEditableInputWithIcon('微信', 'studentWechat', wechatValue, 'bi-pencil');
         personalInfoForm.appendChild(wechatInputGroup);
 
         // 添加学院输入框及修改按钮
-        const collegeValue = ${sessionScope.student.wechat} ? ${sessionScope.student.wechat} : '软件学院';
-        const collegeInputGroup = createEditableInputWithIcon('学院', 'college', collegeValue, 'bi-pencil');
-        personalInfoForm.appendChild(collegeInputGroup);
+        const qqValue = '${sessionScope.student.qq}' ? '${sessionScope.student.qq}' : '111';
+        const qqInputGroup = createEditableInputWithIcon('QQ', 'studentQQ', qqValue, 'bi-pencil');
+        personalInfoForm.appendChild(qqInputGroup);
 
         // 添加邮箱输入框及修改按钮
-        const emailValue = ${sessionScope.student.email} ? ${sessionScope.student.email} : '111@qq.com';
+        const emailValue = '${sessionScope.student.email}' ? '${sessionScope.student.email}' : '111@qq.com';
         const emailInputGroup = createEditableInputWithIcon('email', 'studentEmail', emailValue, 'bi-pencil');
         personalInfoForm.appendChild(emailInputGroup);
 
@@ -290,57 +298,84 @@
         toggleEditSaveButtons(inputId, true);
     }
 
+    // 处理保存按钮点击事件
+    <%--function handleSaveClick() {--%>
+    <%--    // 在这里添加保存信息的逻辑，可以将信息发送到服务器或本地存储--%>
+    <%--    const firstName = document.getElementById('firstName').value;--%>
+    <%--    const age = document.getElementById('age').value;--%>
+    <%--    const college = document.getElementById('college').value;--%>
+    <%--    const className = document.getElementById('class').value;--%>
+    <%--    const phone = document.getElementById('phone').value;--%>
+
+    <%--    console.log(`姓名: ${sessionScope.student.name}, 年龄: ${sessionScope.student.birthday}, 微信号: ${sessionScope.student.wechat}, 班级: ${className}, 电话: ${sessionScope.student.phone}`);--%>
+
+    <%--    // 切换显示编辑按钮和保存按钮--%>
+    <%--    toggleEditSaveButtons('firstName', false);--%>
+    <%--    toggleEditSaveButtons('age', false);--%>
+    <%--    toggleEditSaveButtons('college', false);--%>
+    <%--    toggleEditSaveButtons('class', false);--%>
+    <%--    toggleEditSaveButtons('phone', false);--%>
+    <%--}--%>
 
     function handleSaveClick() {
         // 在这里添加保存信息的逻辑，可以将信息发送到服务器或本地存储
-        const firstName = document.getElementById('studentName').value;
+        const name = document.getElementById('studentName').value;
         const wechat = document.getElementById('studentWechat').value;
-        const college = document.getElementById('college').value;
+        const qq = document.getElementById('studentQQ').value;
         const email = document.getElementById('studentEmail').value;
         const phone = document.getElementById('phone').value;
-
+        console.log(name + wechat + qq + email + phone);
         <%--console.log(`姓名: ${sessionScope.student.name}, 年龄: ${sessionScope.student.birthday}, 微信号: ${sessionScope.student.wechat}, 班级: ${className}, 电话: ${sessionScope.student.phone}`);--%>
         <%----%>
         // 切换显示编辑按钮和保存按钮
         toggleEditSaveButtons('studentName', false);
         toggleEditSaveButtons('studentWechat', false);
-        toggleEditSaveButtons('college', false);
+        toggleEditSaveButtons('studentQQ', false);
         toggleEditSaveButtons('studentEmail', false);
         toggleEditSaveButtons('phone', false);
-        console.log(`姓名: ${sessionScope.student.name}, 年龄: ${sessionScope.student.birthday}, 微信号: ${sessionScope.student.wechat}, 电话: ${sessionScope.student.phone}`);
         updateStudent();
+        console.log(`姓名: ${sessionScope.student.name}, 微信号: ${sessionScope.student.wechat}, QQ: ${sessionScope.student.qq}, 电话: ${sessionScope.student.phone}`);
+
     }
 
-    async function updateStudent() {
+    function updateStudent() {
         // 获取表单数据
         var studentNo = document.getElementById('studentId').value;
         var name = document.getElementById('studentName').value;
+        var qq = document.getElementById('studentQQ').value;
         var email = document.getElementById('studentEmail').value;
         var phone = document.getElementById('phone').value;
         var wechat = document.getElementById('studentWechat').value;
-        // 构建学生信息对象
-        var studentInfo = {
-            studentNo: studentNo,
-            name: name,
-            email: email,
-            phone: phone,
-            wechat: wechat
-        };
 
-        // 调用 updateAPI 函数
-        updateAPI(studentInfo)
-            .then(updateSuccessful => {
-                if (updateSuccessful) {
+        // 使用 Fetch API 发送请求
+        fetch('${pageContext.request.getContextPath()}/student', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                studentNo: studentNo,
+                name: name,
+                qq: qq,
+                email: email,
+                phone: phone,
+                wechat: wechat
+            }),
+        })
+            .then(response => response.text())  // 使用 .text() 获取响应
+            .then(data => {
+                if (data === "ok") {
+                    console.log('更新成功');
                     // 处理成功响应
-                    console("ok");
                 } else {
+                    console.error('更新失败');
                     // 处理失败响应
-                    console("false");
                 }
+            })
+            .catch(error => {
+                console.error('更新失败', error);
+                // 处理错误响应
             });
-        const response = await updateAPI({studentNo, name, wechat, email, phone});
-        console.log("response: " + response);
-
     }
 
     // 切换编辑按钮和保存按钮的显示状态
