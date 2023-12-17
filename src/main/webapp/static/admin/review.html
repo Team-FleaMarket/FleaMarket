@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>商品审核</title>
+    <script src="../js/navigation.js"></script>
     <script src="../js/admin/vue.js"></script>
     <script src="../js/admin/axios.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
     <script src="../js/admin/element/index.js"></script>
     <link rel="stylesheet" href="admin.css">
@@ -22,6 +22,7 @@
                 <el-menu-item index="3">商品审核</el-menu-item>
                 <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
                 <el-menu-item index="5" @click="to_admins">管理员</el-menu-item>
+                <el-menu-item index="6" @click="to_statistics">统计</el-menu-item>
             </el-menu>
             <el-main>
                 <el-card class="box-card" style="margin-bottom: 20px;">
@@ -116,18 +117,11 @@
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            to_user: function () {
-                window.location.href = "users.html";
-            },
-            to_record: function () {
-                window.location.href = "record.html";
-            },
-            to_home: function () {
-                window.location.href = "home.html";
-            },
-            to_admins: function () {
-                window.location.href = "admins.html";
-            },
+            to_user: to_user,
+            to_record: to_record,
+            to_home: to_home,
+            to_admins: to_admins,
+            to_statistics: to_statistics,
             getNext() {
                 axios.get("/goods/next").then((res) => {
                     //清空this.goodsList

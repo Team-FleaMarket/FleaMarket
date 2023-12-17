@@ -77,9 +77,10 @@
                 </div>
             </div>
         </div>--%>
-        <h1 class="text-center "><strong>${category}</strong></h1>
+        <p class="text-center display-3 mt-4 mb-4" style="letter-spacing: 10px">${category}</p>
+        <hr>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-            <c:forEach var="goods" items="${goodsList}">
+            <c:forEach var="goods" items="${goodsItemList}">
                 <div class="col">
                     <div class="card">
                         <img src="${goods.imagePath}" class="card-img-top" alt="...">
@@ -91,7 +92,7 @@
                             <h5>${goods.price}</h5>
                             <c:if test="${sessionScope.student == null}">
                                 <button class="redirect-btn btn btn-warning">我想要...</button>
-                            </c:if>>
+                            </c:if>
                             <c:if test="${sessionScope.student != null}">
                                 <button class="want-btn btn btn-warning">我想要...</button>
                             </c:if>>
@@ -158,23 +159,48 @@
     </div>
     <script type="module">
         import {getCartAPI, addGoodsToCartAPI, getGoodsAPI} from "/static/js/apis/goods.js"
-        // 用 js 获取商品
-        let goodsList;
+        // 用 js 获取商品和用户信息
+        let goodsItemList;
         window.onload = async () => {
             const currentUrl = window.location.href;
             const segments = currentUrl.split('/'); // 将 URL 按照 '/' 分割成数组
             const cate = segments[segments.length - 2]; // 获取倒数第二个参数
             const page = segments[segments.length - 1]; // 获取最后一个参数
             const response = await getGoodsAPI(cate, page)
-            goodsList = response.data
+            goodsItemList = response.data
+            console.log("--------------------------------:" + JSON.stringify(goodsItemList))
         }
+
         // 商品详情
         document.querySelectorAll(".card-img-top").forEach((img, index) => {
             img.addEventListener("click", (e) => {
                 const goodsModal = document.getElementById('goods-modal')
-                goodsModal.querySelector(".goodsName").innerText = goodsList[index].goodsName
-                goodsModal.querySelector(".goodsDegree").innerText = goodsList[index].degree
-                goodsModal.querySelector(".goodsDescription").innerText = goodsList[index].description
+                console.log("goodsgoodsItemListList[index].goods.goodsName: " + goodsItemList[index].goods.goodsName)
+                console.log("goodsgoodsItemListList[index].goods.addedTime: " + goodsItemList[index].goods.addedTime)
+                console.log("goodsgoodsItemListList[index].goods.degree: " + goodsItemList[index].goods.degree)
+                console.log("goodsgoodsItemListList[index].goods.description: " + goodsItemList[index].goods.description)
+                console.log("goodsgoodsItemListList[index].goods.price: " + goodsItemList[index].goods.price)
+                console.log("goodsgoodsItemListList[index].goods.name: " + goodsItemList[index].goods.name)
+                console.log("goodsgoodsItemListList[index].goods.studentNo: " + goodsItemList[index].goods.studentNo)
+                goodsModal.querySelector(".goodsName").innerText = goodsItemList[index].goods.goodsName
+                goodsModal.querySelector(".goodsAddedTime").innerText = goodsItemList[index].goods.addedTime
+                goodsModal.querySelector(".goodsDegree").innerText = goodsItemList[index].goods.degree
+                goodsModal.querySelector(".goodsDescription").innerText = goodsItemList[index].goods.description
+                goodsModal.querySelector(".goodsPrice").innerText = goodsItemList[index].goods.price
+                goodsModal.querySelector(".sellerName").innerText = goodsItemList[index].student.name
+                goodsModal.querySelector(".sellerStudentNo").innerText = goodsItemList[index].student.studentNo
+                if (goodsItemList[index].student.hasOwnProperty("phone")) {
+                    goodsModal.querySelector(".sellerPhone").innerText = goodsItemList[index].student.phone
+                }
+                if (goodsItemList[index].student.hasOwnProperty("wechat")) {
+                    goodsModal.querySelector(".sellerWechat").innerText = goodsItemList[index].student.wechat
+                }
+                if (goodsItemList[index].student.hasOwnProperty("email")) {
+                    goodsModal.querySelector(".sellerEmail").innerText = goodsItemList[index].student.email
+                }
+                if (goodsItemList[index].student.hasOwnProperty("qq")) {
+                    goodsModal.querySelector(".sellerQq").innerText = goodsItemList[index].student.qq
+                }
                 const myModal = new bootstrap.Modal(goodsModal)
                 myModal.show()
             })
@@ -195,7 +221,7 @@
         // 点击想要，添加到购物车，header 中显示的购物车商品数量
         document.querySelectorAll('.card .want-btn').forEach((wantBtn, index) => {
             wantBtn.addEventListener('click', async () => {
-                const response = await addGoodsToCartAPI({goodsId: goodsList[index].id, studentNo: studentNo})
+                const response = await addGoodsToCartAPI({goodsId: goodsItemList[index].goods.id, studentNo: studentNo})
                 console.log(typeof response.data)
                 if (response.data === "ok") {
                     document.getElementById("toast-body").innerText = "商品已成功添加至想要列表！"
