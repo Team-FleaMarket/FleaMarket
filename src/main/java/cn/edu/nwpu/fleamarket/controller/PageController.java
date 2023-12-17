@@ -1,10 +1,12 @@
 package cn.edu.nwpu.fleamarket.controller;
 
+import cn.edu.nwpu.fleamarket.data.GoodsItem;
 import cn.edu.nwpu.fleamarket.data.OrderInformation;
 import cn.edu.nwpu.fleamarket.data.OrderInformationPageResult;
 import cn.edu.nwpu.fleamarket.enums.ManageCenterStatusEnum;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
+import cn.edu.nwpu.fleamarket.service.CartService;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
 import jakarta.persistence.criteria.Order;
@@ -26,6 +28,8 @@ public class PageController {
     private GoodsService goodsService;
     @Autowired
     private StudentService userService;
+    @Autowired
+    private CartService cartService;
     private static final int PAGE_SIZE = 24;
     private static final int MANAGE_PAGE_SIZE = 5;
     private static Map<String, List<String>> CATEGORIES = new LinkedHashMap<String, List<String>>();

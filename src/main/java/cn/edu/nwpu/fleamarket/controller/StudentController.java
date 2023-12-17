@@ -444,7 +444,7 @@ public class StudentController {
     @PutMapping
 
     public String update(HttpServletRequest request, @RequestBody Student student) {
-        if(studentService.update(student)) {
+        if(studentService.updateStudent(student)) {
             request.getSession().setAttribute("student", studentService.getStudentByStudentNo(student.getStudentNo()));
             return "ok";
         }
