@@ -209,5 +209,11 @@
     transform: translate(-50%);
     margin: 0 auto;
     text-align: center;
+    z-index: 1070;
 }
+
+.modal {
+    z-index: 1060;
+}
+
 

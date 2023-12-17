@@ -2,8 +2,8 @@ package cn.edu.nwpu.fleamarket.service.impl;
 
 import cn.edu.nwpu.fleamarket.dao.GoodsDao;
 import cn.edu.nwpu.fleamarket.dao.OrdersDao;
-import cn.edu.nwpu.fleamarket.data.OrderInformation;
 import cn.edu.nwpu.fleamarket.dao.StudentDao;
+import cn.edu.nwpu.fleamarket.data.OrderInformation;
 import cn.edu.nwpu.fleamarket.data.OrderInformationPageResult;
 import cn.edu.nwpu.fleamarket.enums.GoodsStatusEnum;
 import cn.edu.nwpu.fleamarket.enums.ReviewStatusEnum;
@@ -12,9 +12,6 @@ import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Orders;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
-import jakarta.persistence.criteria.Order;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
-import org.hibernate.grammars.ordering.OrderingParserListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +37,7 @@ public class GoodsServiceImpl implements GoodsService {
     private OrdersDao ordersDao;
 
     private static final int PAGE_SIZE = 24;
-    private static final int MANAGE_PAGE_SIZE=5;
+    private static final int MANAGE_PAGE_SIZE = 5;
 
 
     public List<Goods> selectAllGoods() {
@@ -315,14 +312,14 @@ public class GoodsServiceImpl implements GoodsService {
         OrderInformationPageResult result = new OrderInformationPageResult();
         List<OrderInformation> informationList = null;
         if (isSearching) {
-            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.PENDING.getCode(), studentNo, goodsName), MANAGE_PAGE_SIZE));
+//            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.PENDING.getCode(), studentNo, goodsName), MANAGE_PAGE_SIZE));
             result.setTotalCount(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.PENDING.getCode(), studentNo, goodsName));
             if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
                 currentPage = result.getTotalPage() - 1;
             }
             informationList = selectByStatusAndStudentNoAndGoodsName(ReviewStatusEnum.PENDING.getCode(), studentNo, goodsName, currentPage, MANAGE_PAGE_SIZE);
         } else {
-            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.PENDING.getCode(), studentNo), MANAGE_PAGE_SIZE));
+//            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.PENDING.getCode(), studentNo), MANAGE_PAGE_SIZE));
             result.setTotalCount(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.PENDING.getCode(), studentNo));
             if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
                 currentPage = result.getTotalPage() - 1;
@@ -341,14 +338,14 @@ public class GoodsServiceImpl implements GoodsService {
         OrderInformationPageResult result = new OrderInformationPageResult();
         List<OrderInformation> informationList = null;
         if (isSearching) {
-            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, goodsName), MANAGE_PAGE_SIZE));
+//            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, goodsName), MANAGE_PAGE_SIZE));
             result.setTotalCount(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, goodsName));
             if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
                 currentPage = result.getTotalPage() - 1;
             }
             informationList = selectByGoodsStatusAndStudentNoAndGoodsName(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo, goodsName, currentPage, MANAGE_PAGE_SIZE);
         } else {
-            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo), MANAGE_PAGE_SIZE));
+//            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo), MANAGE_PAGE_SIZE));
             result.setTotalCount(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.NOT_SOLD.getCode(), studentNo));
             if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
                 currentPage = result.getTotalPage() - 1;
@@ -364,7 +361,7 @@ public class GoodsServiceImpl implements GoodsService {
         OrderInformationPageResult result = new OrderInformationPageResult();
         List<OrderInformation> informationList = null;
         if (isSearching) {
-            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.SOLD.getCode(), studentNo, goodsName), PAGE_SIZE));
+//            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.SOLD.getCode(), studentNo, goodsName), PAGE_SIZE));
             result.setTotalCount(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.SOLD.getCode(), studentNo, goodsName));
             if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
                 currentPage = result.getTotalPage() - 1;
@@ -372,7 +369,7 @@ public class GoodsServiceImpl implements GoodsService {
             informationList = selectByGoodsStatusAndStudentNoAndGoodsName(GoodsStatusEnum.SOLD.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
             return result;
         } else {
-            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.SOLD.getCode(), studentNo), PAGE_SIZE));
+//            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.SOLD.getCode(), studentNo), PAGE_SIZE));
             result.setTotalCount(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.SOLD.getCode(), studentNo));
             if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
                 currentPage = result.getTotalPage() - 1;
@@ -402,30 +399,28 @@ public class GoodsServiceImpl implements GoodsService {
             orderInformation.setIsCancel(orders.getIsCancel());
 
             informationList.add(orderInformation);
-            }
-            result.setOrderInformationList(informationList);
-            result.setTotalCount(ordersList.size());
-            return result;
         }
+        result.setOrderInformationList(informationList);
+        result.setTotalCount(ordersList.size());
+        return result;
+    }
 
     @Override
     public OrderInformationPageResult getInProgress(boolean isSearching, String goodsName, String studentNo, int currentPage) {
         OrderInformationPageResult result = new OrderInformationPageResult();
         List<OrderInformation> informationList = new ArrayList<>();
-        if (isSearching){
-            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo, goodsName),PAGE_SIZE));
+        if (isSearching) {
+//            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo, goodsName),PAGE_SIZE));
             result.setTotalCount(selectByGoodsStatusAndStudentNoAndGoodsNameTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo, goodsName));
-            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
-            {
-                currentPage=result.getTotalPage()-1;
+            if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
+                currentPage = result.getTotalPage() - 1;
             }
             informationList = selectByGoodsStatusAndStudentNoAndGoodsName(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
-        }else{
-            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo),PAGE_SIZE));
-            result.setTotalCount(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(),studentNo));
-            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
-            {
-                currentPage=result.getTotalPage()-1;
+        } else {
+//            result.setTotalPage(Math.ceilDiv(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo),PAGE_SIZE));
+            result.setTotalCount(selectByGoodsStatusAndStudentNoTotalCnt(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo));
+            if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
+                currentPage = result.getTotalPage() - 1;
             }
             informationList = selectByGoodsStatusAndStudentNo(GoodsStatusEnum.IN_PROGRESS.getCode(), studentNo, currentPage, PAGE_SIZE);
         }
@@ -437,20 +432,18 @@ public class GoodsServiceImpl implements GoodsService {
     public OrderInformationPageResult getReviewedFail(boolean isSearching, String goodsName, String studentNo, int currentPage) {
         OrderInformationPageResult result = new OrderInformationPageResult();
         List<OrderInformation> informationList = null;
-        if (isSearching){
-            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo, goodsName),PAGE_SIZE)) ;
+        if (isSearching) {
+//            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo, goodsName),PAGE_SIZE)) ;
             result.setTotalCount(selectByStatusAndStudentNoAndGoodsNameTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo, goodsName));
-            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
-            {
-                currentPage=result.getTotalPage()-1;
+            if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
+                currentPage = result.getTotalPage() - 1;
             }
             informationList = selectByStatusAndStudentNoAndGoodsName(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo, goodsName, currentPage, PAGE_SIZE);
-        }else {
-            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(),studentNo),PAGE_SIZE));
+        } else {
+//            result.setTotalPage(Math.ceilDiv(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(),studentNo),PAGE_SIZE));
             result.setTotalCount(selectByStatusAndStudentNoTotalCnt(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo));
-            if(currentPage+1>result.getTotalPage()&&currentPage!=0)
-            {
-                currentPage=result.getTotalPage()-1;
+            if (currentPage + 1 > result.getTotalPage() && currentPage != 0) {
+                currentPage = result.getTotalPage() - 1;
             }
             informationList = selectByStatusAndStudentNo(ReviewStatusEnum.REVIEW_FAIL.getCode(), studentNo, currentPage, PAGE_SIZE);
             for (OrderInformation orderInformation : informationList) {

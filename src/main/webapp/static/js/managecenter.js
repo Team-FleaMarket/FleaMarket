@@ -19,6 +19,7 @@ deleteModal.addEventListener('show.bs.modal', event => {
     const goods_id = button.getAttribute('data-bs-whatever')
     const modalUrl = deleteModal.querySelector('a')
     modalUrl.href = "/goods/delete?id=" + goods_id
+    event.preventDefault()
 })
 const deleteConfirmButton = deleteModal.querySelector('a')
 deleteConfirmButton.onclick = function () {
@@ -73,7 +74,7 @@ document.getElementById('editSubmitButton').onclick = function () {
         },
         error: function (error) {
             // 请求失败的处理逻辑
-            alert('修改失败，请稍后充实', 'danger');
+            alert('修改失败，请稍后重试', 'danger');
         }
     });
 }
@@ -105,18 +106,24 @@ sellerConfirmButton.onclick = function () {
 const buyerConfirmModal = document.getElementById('buyerConfirmModal');
 buyerConfirmModal.addEventListener('show.bs.modal', async event => {
     const button = event.relatedTarget;
+    event.preventDefault();
     const orderId = button.getAttribute('data-bs-whatever');
-    const cancelResponse = await fetch(`/order/check?status=buyercancled&id=${orderId}`);
+    const cancelResponse = await fetch(`/order/check?status=iscanceled&id=${orderId}`);
     const cancelResult = await cancelResponse.json();
-    if (cancelResult === 'true') {
-        alert('卖家已取消交易，无法确认购买', 'danger')
+    event.preventDefault()
+    if (cancelResult === true) {
+        console.log("禁止弹出")
         event.preventDefault();
+        alert('卖家已拒绝交易，无法确认购买', 'danger')
     } else {
         const confirmResponse = await fetch(`/order/check?status=sellerconfirmed&id=${orderId}`);
-        const confirmResult = confirmResponse.json()
-        if (confirmResult === 'false') {
+        const confirmResult = await confirmResponse.json()
+        if (confirmResult === false) {
+            console.log("取消失败")
+            console.log(event)
             alert('请等待或联系卖家确认出售', 'danger')
-            event.preventDefault();
+            event.preventDefault()
+
         } else {
             const modalUrl = buyerConfirmModal.querySelector('a');
             modalUrl.href = "/order/buyerconfirm?id=" + orderId;
