@@ -59,7 +59,7 @@ public interface GoodsDao {
 
     int selectByStatusAndStudentNoTotalCnt(@Param("status") int status, @Param("studentNo") String studentNo);
 
-    int selectByGoodsStatusAndStudentNoTotalCnt(@Param("goods_status") int goodsStatus, @Param("studentNo") String studentNo);
+    int selectByGoodsStatusAndStudentNoTotalCnt(@Param("goodsStatus") int goodsStatus, @Param("studentNo") String studentNo);
 
     /**
      * 分页查找已售出商品 时间倒序排序
@@ -122,4 +122,10 @@ public interface GoodsDao {
      */
     @Select("SELECT COALESCE(SUM(price), 0) FROM goods WHERE cate = #{cate} AND goods_status = 1")
     double getSales(@Param("cate") String cate);
+
+    void logicDeleteGoods(@Param("goodsId") int goodsId);
+
+    void editGoods(@Param("goods") Goods goods);
+
+    void setStatus(@Param("goodsId")int id,@Param("status") Integer code);
 }

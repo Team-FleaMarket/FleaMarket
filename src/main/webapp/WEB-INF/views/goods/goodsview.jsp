@@ -26,7 +26,7 @@
         <div class="container-fluid">
             <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
                 <li class="breadcrumb-item">
-                    <a href="${pageContext.request.contextPath}/views/index">
+                    <a href="${pageContext.request.contextPath}/">
                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                         主页
                     </a>

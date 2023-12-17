@@ -23,7 +23,7 @@ public interface StudentService {
 
     int countAll();
     List<Student> getStudentsByPage(int page);
-    boolean update(Student student);
+    boolean updateStudent(Student student);
     List<Student> queryByUserName(String query);
     List<Student> queryByStudentNo(String query);
     Student getStudentByStudentNo(String studentNo);

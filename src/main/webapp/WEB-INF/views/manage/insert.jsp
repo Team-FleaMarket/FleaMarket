@@ -53,7 +53,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input class="form-control"  type="file" accept="image/*" id="fileInput"  name="files[]" multiple></td>
+                        <td colspan="2"><input class="form-control"  type="file" accept="image/*" id="files[]"  name="files[]" multiple></td>
                     </tr>
 
                 </table>

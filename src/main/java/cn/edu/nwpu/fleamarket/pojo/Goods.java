@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -43,4 +44,27 @@ public class Goods {
     private Date saleTime; //交易时间
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date addedTime; //上架时间
+    String pattern = "yyyy年MM月dd日";
+    // 创建 SimpleDateFormat 对象，并设置日期格式
+    SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+    private Integer isDelete;
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "id=" + id +
+                ", studentNo='" + studentNo + '\'' +
+                ", goodsName='" + goodsName + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", status=" + status +
+                ", cate='" + cate + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", goodsStatus=" + goodsStatus +
+                ", degree='" + degree + '\'' +
+                ", attributed=" + attributed +
+                ", buyerNo='" + buyerNo + '\'' +
+                ", saleTime=" + saleTime +
+                ", addedTime=" + addedTime +
+                '}';
+    }
 }
