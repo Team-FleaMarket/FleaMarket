@@ -17,8 +17,10 @@
     padding: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+    background: #FFFFFF;
     /*margin-right: 10px;*/
     height: 70%;
+    font-size: 20px;
 }
 
 .manager .self_information {

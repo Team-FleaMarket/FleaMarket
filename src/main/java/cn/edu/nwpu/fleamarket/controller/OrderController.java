@@ -29,7 +29,6 @@ public class OrderController {
     private GoodsService goodsService;
 
     @GetMapping("/add")
-    @ResponseBody
     public String addOrder(HttpServletRequest request, @RequestParam("goodsId") String goodsId) {
         try {
             System.out.println(goodsId);
@@ -40,11 +39,10 @@ public class OrderController {
             System.out.println(e.getMessage());
             return e.getMessage();
         }
-        return "ok";
+        return "redirect:/views/managecenter";
     }
 
     @GetMapping("/sellerconfirm")
-    @ResponseBody
     public String sellerConfirmOrder(HttpServletRequest request, @RequestParam("id") String orderId) {
         try {
             Student student = (Student) request.getSession().getAttribute("student");
@@ -53,20 +51,18 @@ public class OrderController {
             return e.getMessage();
         }
 
-        return "ok";
+        return "redirect:/views/managecenter?status=4";
     }
 
     @GetMapping("/buyerconfirm")
-    @ResponseBody
     public String buyerConfirmOrder(HttpServletRequest request, @RequestParam("id") String orderId) {
         try {
             Student student = (Student) request.getSession().getAttribute("student");
-            System.out.println("lllllllllllllllllllllllllllllllllllllllll");
             orderService.buyerConfirm(Integer.valueOf(orderId), Integer.valueOf(student.getStudentNo()));
         } catch (BusinessException e) {
             e.getMessage();
         }
-        return "ok";
+        return "redirect:/views/managecenter?status=3";
     }
 
 
@@ -81,7 +77,6 @@ public class OrderController {
 //    }
 
     @GetMapping("/cancel")
-    @ResponseBody
     public String cancelOrder(HttpServletRequest request, @RequestParam("id") String orderId) {
         try {
             Orders orders = ordersDao.selectById(Integer.valueOf(orderId));
@@ -94,7 +89,7 @@ public class OrderController {
             System.out.println(e.getMessage());
             return e.getMessage();
         }
-        return "ok";
+        return "redirect:/views/managecenter";
     }
 
     @GetMapping("/check")
@@ -102,7 +97,6 @@ public class OrderController {
     public Boolean checkOrder(HttpServletRequest request,
                               @RequestParam("status") String status,
                               @RequestParam("id") String orderId) {
-        System.out.println("SSSSSSSSSSSSSSSSSS" + orderId);
         if (status.equals(OrderStatusEnum.IS_CANCELED.getDesc())) {
             return ordersDao.isCanceled(Integer.valueOf(orderId)) == 1;
         }

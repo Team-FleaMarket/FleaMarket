@@ -54,52 +54,31 @@
     <div class="container">
         <div class="">
             <div class="container">
-                <div class="footer-grids">
+                <div class="">
                     <!--banner-bottom-grid-left-->
                     <div class="row">
                         <div class="col-md-3 information " data-wow-delay=".5s">
                             <form>
                                 <div class="self_information">
-                                    <c:if test="${sessionScope.student.img!=0}">
-                                        <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg"
+                                    <c:if test="${sessionScope.student.imagePath!=null}">
+                                        <img src="${sessionScope.student.imagePath}"
                                              alt=" " class="avatar rounded-circle mx-auto d-block">
                                     </c:if>
-                                    <c:if test="${sessionScope.student.img==0}">
+                                    <c:if test="${sessionScope.student.imagePath==null}">
                                         <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg"
                                              alt=" " class="avatar rounded-circle mx-auto d-block">
-                                        <div class="avatar overlay rounded-circle">
-                                            <input type="file" accept="image/*" id="imageInput" style="display: none;">
-                                            <button class="avatar-button rounded-3" onclick="uploadImage()">上传图像
-                                            </button>
-                                            <script>
-                                                function uploadImage() {
-                                                    document.getElementById('imageInput').click();
-                                                }
-
-                                                document.getElementById('imageInput').addEventListener('change', function () {
-                                                    var selectedFile = this.files[0];
-                                                    if (selectedFile) {
-                                                        var formData = new FormData();
-                                                        formData.append('image', selectedFile);
-                                                        console.log('Selected file:', selectedFile);
-                                                    }
-                                                });
-                                            </script>
-                                        </div>
                                     </c:if>
                                 </div>
                                 <br>
-                                <h4>学号:${sessionScope.student.studentNo}</h4>
+                                <h5>学号:${sessionScope.student.studentNo}</h5>
                                 <br>
-                                <h4>昵称:${sessionScope.student.name}</h4>
+                                <h5>昵称:${sessionScope.student.name}</h5>
                                 <h2></h2>
                                 <br>
-                                <h4>邮箱:${sessionScope.student.email}</h4><h4></h4>
+                                <h5>微信:${sessionScope.student.wechat}</h5><h4></h4>
                                 <br>
-                                <h4>微信号:${sessionScope.student.wechat}</h4><h4></h4>
-                                <br>
-                                <h4>手机号:${sessionScope.student.phone}</h4><h4></h4>
+                                <h5>手机号:${sessionScope.student.phone}</h5><h4></h4>
                             </form>
                         </div>
                         <div class="col-md-9 " data-wow-delay=".6s">
