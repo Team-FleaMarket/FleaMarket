@@ -33,6 +33,12 @@ html, body {
     padding: 3em 0;
 }
 
+.footer-grid {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10%;
+}
+
 .footer-grid h3 {
     font-size: 2em;
     color: #fff;

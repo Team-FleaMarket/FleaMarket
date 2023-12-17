@@ -18,9 +18,8 @@ public class CartServiceImpl implements CartService{
     @Autowired
     private CartDao cartDao;
 
-
     @Override
-    public void addCartItem(int studentNo, int goodsId, int num) {
+    public void addCartItem(String studentNo, int goodsId, int num) {
         if (cartDao.getCartItemByStudentNoAndGoodsId(studentNo, goodsId)==null){
             cartDao.addCartItem(studentNo, goodsId);
         }else {
@@ -29,9 +28,15 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public List<Cart> getCartList(int studentNo) {
+    public List<Cart> getCartList(String studentNo) {
         return cartDao.getCartByStudentNo(studentNo);
     }
+
+    @Override
+    public Boolean checkIsInCart(String studentNo, int goodsId) {
+        return cartDao.getCartItemByStudentNoAndGoodsId(studentNo, goodsId)!=null;
+    }
+
 }
 
 

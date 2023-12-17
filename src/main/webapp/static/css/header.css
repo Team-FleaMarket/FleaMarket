@@ -41,7 +41,8 @@
 }
 .navbar .search-box {
     flex: 1;
-    position: relative;;
+    position: relative;
+
 }
 .navbar .search-box input{
     width: 100%;
@@ -50,7 +51,7 @@
     outline: nono;
     background-color: #f2f2f2;
     border-radius: 30px;
-    color: gray;
+    color: rgb(128, 128, 128);
     text-indent: 12px;
     font-size: 16px;
     padding-left: 5px;
@@ -99,7 +100,8 @@
 
 .navbar .checkout a {
     background: #eceff6;
-    border-radius: 50%
+    border-radius: 50%;
+    color: #1e1e27;
 }
 .navbar .checkout-items {
     display: flex;
@@ -120,14 +122,26 @@
 .navbar-user li {
     display: inline-block;
     text-align: center;
+    margin-top: 20px;
 }
-.navbar-user li a {
+.checkout li a {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     width: 40px;
+    height: 40px;
+    color: #1e1e27;
+    transition: color 0.3s ease;
+}
+.user li a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 80px;
     height: 40px;
     color: #1e1e27;
     transition: color 0.3s ease;
@@ -161,6 +175,10 @@
     color: #ffffff;
 }
 
+.fas{
+    width: 100px;
+    color: #1e1e27;
+}
 @media (min-width: 991px) {
     .dropdown:hover .dropdown-menu {
         display: flex;

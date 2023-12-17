@@ -21,6 +21,7 @@
                 <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
                 <el-menu-item index="3">商品审核</el-menu-item>
                 <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
+                <el-menu-item index="5" @click="to_admins">管理员</el-menu-item>
             </el-menu>
             <el-main>
                 <el-card class="box-card" style="margin-bottom: 20px;">
@@ -39,7 +40,11 @@
                     <el-table-column prop="id" label="id" width="180"></el-table-column>
                     <el-table-column prop="cate" label="商品类别" width="180"></el-table-column>
                     <el-table-column prop="goodsName" label="商品名称" width="180"></el-table-column>
-                    <el-table-column prop="imagePath" label="商品图片" width="180"></el-table-column>
+                    <el-table-column prop="imagePath" label="商品图片" width="180">
+                        <template slot-scope="scope">
+                            <a :href="(scope.row.imagePath.startsWith('http') ? '' : basePath) + scope.row.imagePath" target="_blank">打开图片</a>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="商品描述"><el-button type="text" @click="openDescription">详情</el-button></el-table-column>
                     <el-table-column prop="price" label="商品价格"></el-table-column>
                     <el-table-column
@@ -76,7 +81,8 @@
                     description: '',
                     cate: '',
                     price: 0.0,
-                    imagePath: ''
+                    imagePath: '',
+                    basePath: ''
                 },
                 goodsList: []
             };
@@ -119,6 +125,9 @@
             to_home: function () {
                 window.location.href = "home.html";
             },
+            to_admins: function () {
+                window.location.href = "admins.html";
+            },
             getNext() {
                 axios.get("/goods/next").then((res) => {
                     //清空this.goodsList
@@ -141,6 +150,13 @@
                     console.log(err);
                 });
             },
+            getPath() {
+              axios.get("/context").then((res)=>{
+                 this.basePath = res.data;
+              }).catch(err=>{
+                  console.log(err);
+              });
+            },
             openDescription() {
                 this.$alert(this.goods.description, '商品详情', {
                     confirmButtonText: '关闭',
@@ -149,6 +165,7 @@
         },
         created() {
             this.getNext();
+            this.getPath();
         },
     });
 </script>

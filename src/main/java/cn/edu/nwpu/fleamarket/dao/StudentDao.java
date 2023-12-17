@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @Author: Hanwen
- * @Date: 2018/4/5 下午3:08
+ * student mapper
  */
 
 public interface StudentDao {
@@ -42,7 +41,7 @@ public interface StudentDao {
      * @param student 更新的内容
      */
     @Update("UPDATE students set name = #{name}, password = #{password}, email = #{email}, " +
-            "phone = #{phone}, wechat = #{wechat} where id = #{id}")
+            "phone = #{phone}, wechat = #{wechat} where student_no=#{studentNo}")
     void update(Student student);
 
     /**
@@ -56,8 +55,8 @@ public interface StudentDao {
 
     /**
      * 按学号查找
-     * @param query
-     * @return
+     * @param query 查找信息
+     * @return 查找结果
      */
     @Select("SELECT * from students where student_no like #{query}")
     @ResultMap("studentResultMap")

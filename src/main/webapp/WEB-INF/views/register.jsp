@@ -67,9 +67,9 @@
                             </svg>
                         </i>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="userName" name="userName" placeholder=""
+                            <input type="text" class="form-control" id="name" name="name" placeholder=""
                                    required>
-                            <label for="userName">昵称</label>
+                            <label for="name">昵称</label>
                             <span class="required">*</span>
                         </div>
                     </div>
@@ -200,11 +200,11 @@
                             <span class="required">*</span>
                         </div>
                     </div>
-                    <%--登录按钮--%>
+                    <%--注册按钮--%>
                     <div class="input-field">
                         <input type="button" class="button" id="liveToastBtn" value="注册">
                     </div>
-                    <%--注册跳转--%>
+                    <%--登录跳转--%>
                     <div class="tologin">
                         <span>已有账号？请点击 <a href="${pageContext.request.contextPath}/login">登录</a></span>
                     </div>
@@ -224,27 +224,24 @@
                     </div>
                 </div>
                 <script type="module">
-                    import {registerAPI} from '/static/js/apis/student.js'
-
+                    import { registerAPI } from "/static/js/apis/student.js"
                     document.querySelector("#liveToastBtn").onclick = async () => {
-                        var studentNo = $("input[name=studentNo]").val()
-                        var name = $("input[name=name]").val()
-                        var phone = $("input[name=phone]").val()
-                        var wechat = $("input[name=wechat]").val()
-                        var email = $("input[name=email]").val()
-                        var password = $("input[name=password]").val()
-                        var message = ""
-
+                        const studentNo = $("input[name=studentNo]").val()
+                        const name = $("input[name=name]").val()
+                        const phone = $("input[name=phone]").val()
+                        const wechat = $("input[name=wechat]").val()
+                        const email = $("input[name=email]").val()
+                        const password = $("input[name=password]").val()
                         try {
-                            var response = await registerAPI({studentNo, name, phone, wechat, email, password})
-                            message = response.data
-                            document.getElementById("toast-body").innerText = message
+                            const message = await registerAPI({studentNo, name, phone, wechat, email, password})
+                            document.getElementById("toast-body").innerText = message.response.data
                             document.getElementById("toast-header").classList.remove("bg-danger")
                             document.getElementById("toast-header").classList.add("bg-success")
                             window.location.href = window.location.origin
                         } catch (error) {
-                            message = error.response.data
-                            document.getElementById("toast-body").innerText = message;
+                            console.log(error)
+                            const message = error.response.data
+                            document.getElementById("toast-body").innerText = message
                             document.getElementById("toast-header").classList.remove("bg-success")
                             document.getElementById("toast-header").classList.add("bg-danger")
                         }

@@ -19,6 +19,7 @@
         <log4j.version>2.22.0</log4j.version>
         <mybatis.generator.version>1.4.2</mybatis.generator.version>
         <jackson.version>2.16.0</jackson.version>
+        <junit.version>5.10.1</junit.version>
     </properties>
 
     <dependencies>
@@ -199,6 +200,21 @@
             <version>1.2.17</version>
         </dependency>
         <!-- log4j end -->
+
+        <!-- junit -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- junit end -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
