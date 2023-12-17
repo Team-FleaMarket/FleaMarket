@@ -180,6 +180,7 @@
                 goodsModal.querySelector(".goodsDegree").innerText = goodsItemList[index].goods.degree
                 goodsModal.querySelector(".goodsDescription").innerText = goodsItemList[index].goods.description
                 goodsModal.querySelector(".goodsPrice").innerText = goodsItemList[index].goods.price
+                goodsModal.querySelector(".goodsId").innerText = goodsItemList[index].goods.id
                 goodsModal.querySelector(".sellerImage").src = goodsItemList[index].student.imagePath
                 goodsModal.querySelector(".sellerName").innerText = goodsItemList[index].student.name
                 goodsModal.querySelector(".sellerDescription").innerText = goodsItemList[index].student.description

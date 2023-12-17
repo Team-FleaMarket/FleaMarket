@@ -41,7 +41,7 @@
                                 </button>
                             </div>
                             <div class="col-4">
-                                <button class="buy-btn btn btn-md btn-primary mt-2 fs-6" style="width: 100%;">
+                                <button class="buy-btn btn btn-md btn-primary mt-2 fs-6" style="width: 100%;" >
                                     下单!!!
                                 </button>
                             </div>
@@ -85,7 +85,7 @@
                                     <i class="fa-solid fa-phone"></i>
                                     <span class="sellerPhone"></span>
                                 </li>
-
+                                <span id="goodsId" style="display: none"></span>
                             </ul>
                         </div>
                     </div>
@@ -95,7 +95,8 @@
         </div>
     </div>
 </div>
-<script>
+<script type="module">
+    import {addAPI} from "/static/js/apis/goods.js"
     const goodsInformationButton = document.querySelector(".goods-information-button")
     const sellerInformationButton = document.querySelector(".seller-information-button")
     const goodsInformation = document.querySelector(".goods-information")
@@ -118,4 +119,12 @@
         goodsInformationButton.style.color = "rgb(100, 108, 154)";
         sellerInformationButton.style.color = "#000";
     });
+
+    document.querySelector(".buy-btn").addEventListener("click", async () => {
+        const goodsId = document.querySelector(".goodsId").textContent
+        const response = await addAPI(goodsId)
+        console.log("response: " + response)
+        console.log("response.data: " + response.data)
+
+    })
 </script>

@@ -38,14 +38,24 @@ img {
     filter: brightness(0.6);
     mask-image: linear-gradient(to bottom, rgba(227, 227, 227, 1) 50%, rgba(0, 0, 0, 0));
 }
-
+.category .carousel-control-next, .category .carousel-control-prev{
+    height: 20px;
+    transition: border-color 0.3s; /* 定义边框颜色变化的过渡效果为0.3秒 */
+    border: 2px solid transparent; /* 初始时边框为透明 */
+    border-radius: 20px;
+}
+.category .carousel-control-next:clicked  {
+    border-color: #000;
+}
+.category .carousel-control-prev:clicked  {
+    border-color: #000;
+}
 .category .categories {
     position: absolute;
     top: 200px;
     left: 0;
     padding-left: 20px;
     padding-right: 20px;
-
 }
 
 .goods .card {
