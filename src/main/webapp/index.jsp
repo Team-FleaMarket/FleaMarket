@@ -72,7 +72,7 @@
                         <div class="card-body">
                             <h4 class="card-title fw-bold">教材</h4>
                         </div>
-                        <img src="${pageContext.request.getContextPath()}/static/images/2.jpg" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.getContextPath()}/static/images/1.jpg" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <div class="col">
@@ -90,7 +90,7 @@
                             <h4 class="card-title fw-bold">艺术文学</h4>
 
                         </div>
-                        <img src="${pageContext.request.getContextPath()}/static/images/2.jpg" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.getContextPath()}/static/images/3.jpg" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <div class="col">
@@ -99,7 +99,7 @@
                             <h4 class="card-title fw-bold">运动</h4>
 
                         </div>
-                        <img src="${pageContext.request.getContextPath()}/static/images/2.jpg" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.getContextPath()}/static/images/4.jpg" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <div class="col">
@@ -108,7 +108,7 @@
                             <h4 class="card-title fw-bold">文具</h4>
 
                         </div>
-                        <img src="${pageContext.request.getContextPath()}/static/images/3.jpg" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.getContextPath()}/static/images/5.jpg" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <div class="col">
@@ -117,7 +117,7 @@
                             <h4 class="card-title fw-bold">生活</h4>
 
                         </div>
-                        <img src="${pageContext.request.getContextPath()}/static/images/4.jpg" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.getContextPath()}/static/images/6.jpg" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <div class="col">
@@ -126,7 +126,7 @@
                             <h4 class="card-title fw-bold">美妆</h4>
 
                         </div>
-                        <img src="${pageContext.request.getContextPath()}/static/images/5.jpg" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.getContextPath()}/static/images/7.jpg" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <div class="col">
@@ -134,7 +134,7 @@
                         <div class="card-body">
                             <h4 class="card-title fw-bold">电子产品</h4>
                         </div>
-                        <img src="${pageContext.request.getContextPath()}/static/images/6.jpg" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.getContextPath()}/static/images/8.jpg" class="card-img-top" alt="...">
                     </div>
                 </div>
             </div>

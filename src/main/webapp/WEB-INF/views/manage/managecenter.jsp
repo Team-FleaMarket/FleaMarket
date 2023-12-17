@@ -79,6 +79,8 @@
                                 <h5>微信:${sessionScope.student.wechat}</h5><h4></h4>
                                 <br>
                                 <h5>手机号:${sessionScope.student.phone}</h5><h4></h4>
+                                <br>
+<%--                                <a href=" /managecenter/modifyInfo">修改信息</a>--%>
                             </form>
                         </div>
                         <div class="col-md-9 " data-wow-delay=".6s">

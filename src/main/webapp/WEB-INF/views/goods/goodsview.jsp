@@ -38,52 +38,15 @@
     </div>
     <!-- // breadcrumbs -->
     <div class="container">
-        <%--<div class="categories row animated wow" data-wow-delay=".5s">
-            <div class="col-md-4 slideInUp">
-                <h3>商品分类</h3>
-                <ul class="cate">
-                    <li><a href="${pageContext.request.contextPath}/views/books">图书书籍</a>
-                        <span>(${bookList.size()+33})</span></li>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath}/views/books">教材</a> <span></span></li>
-                        <li><a href="${pageContext.request.contextPath}/views/tests">考试</a> <span></span></li>
-                        <li><a href="${pageContext.request.contextPath}/views/literature">文学</a> <span></span></li>
-                    </ul>
-                    <li><a href="${pageContext.request.contextPath}/views/sports">日用百货</a>
-                        <span>(${bookList.size()+36})</span></li>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath}/views/sports">运动类</a> <span></span></li>
-                        <li><a href="${pageContext.request.contextPath}/views/stationery">文具类</a> <span></span></li>
-                        <li><a href="${pageContext.request.contextPath}/views/life">生活类</a> <span></span></li>
-                    </ul>
-                    <li><a href="${pageContext.request.contextPath}/views/beautymakeup">娱乐</a>
-                        <span>(${bookList.size()+24})</span></li>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath}/views/beautymakeup">美妆</a> <span></span></li>
-                        <li><a href="${pageContext.request.contextPath}/views/electronicproducts">电子产品</a> <span></span>
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-            <div class="col-md-8">
-                <div class="slideInRight products-right-grids-position" data-wow-delay=".5s">
-                    <img src="${pageContext.request.contextPath}/static/images/tssj.jpg" class="img-fluid" alt=""/>
-                </div>
-                <div class="">
-                    <h4>${navigation}</h4>
-                    <p>${navigation}</p>
-                    &lt;%&ndash;<h4>${sessionScope.category}</h4>
-                    <p>GoodsWill:${sessionScope.parentCategory}.</p>&ndash;%&gt;
-                </div>
-            </div>
-        </div>--%>
+
         <p class="text-center display-3 mt-4 mb-4" style="letter-spacing: 10px">${category}</p>
         <hr>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
             <c:forEach var="goodsItem" items="${goodsItemList}">
+
                 <div class="col">
                     <div class="card">
-                        <img src="${goodsItem.goods.imagePath}" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.contextPath}/static/upload/file/${goodsItem.goods.imagePath}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">${goodsItem.goods.goodsName}</h6>
                             <p class="card-text">${goodsItem.goods.description}</p>
@@ -96,9 +59,11 @@
                             <c:if test="${sessionScope.student != null}">
                                 <button class="want-btn btn btn-warning">我想要...</button>
                             </c:if>
+                            <a class="want-btn btn btn-warning" href="${pageContext.request.contextPath}/order/add?goodsId=${goodsItem.goods.id}">下单</a>
                         </div>
                     </div>
                 </div>
+
             </c:forEach>
             <%--  <div class="item-categories">
                   <p>图书书籍</p>
@@ -174,7 +139,7 @@
         document.querySelectorAll(".card-img-top").forEach((img, index) => {
             img.addEventListener("click", (e) => {
                 const goodsModal = document.getElementById('goods-modal')
-                goodsModal.querySelector(".goodsImage").src = goodsItemList[index].goods.imagePath
+                goodsModal.querySelector(".goodsImage").src = "${pageContext.request.contextPath}/static/upload/file/"+goodsItemList[index].goods.imagePath
                 goodsModal.querySelector(".goodsName").innerText = goodsItemList[index].goods.goodsName
                 goodsModal.querySelector(".goodsAddedTime").innerText = goodsItemList[index].goods.addedTime
                 goodsModal.querySelector(".goodsDegree").innerText = goodsItemList[index].goods.degree

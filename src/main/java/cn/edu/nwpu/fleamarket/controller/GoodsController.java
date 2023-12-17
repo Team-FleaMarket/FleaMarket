@@ -56,6 +56,12 @@ public class GoodsController {
     private static final int PAGE_SIZE = 24;
 
 
+    /**
+     * 编辑商品
+     * @param request
+     * @param goods
+     * @return
+     * */
     @PostMapping("/edit")
     @ResponseBody
     public String editGoods(HttpServletRequest request,  Goods goods) {
@@ -64,6 +70,12 @@ public class GoodsController {
         return "ok";
     }
 
+    /**
+     * 下架商品
+     * @param request
+     * @param goodsId
+     * @return
+     * */
     @GetMapping("/delete")
     @ResponseBody
     public String offShelf(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
@@ -77,6 +89,13 @@ public class GoodsController {
     }
 
 
+    /**
+     * 添加商品
+     * @param request
+     * @param goods
+     * @param multipartFile
+     * @return
+     * */
     @RequestMapping("/insertGoods")
     public ModelAndView insertGoods(HttpServletRequest request, Goods goods,@RequestParam("files[]") MultipartFile multipartFile) throws Exception {
 
@@ -99,7 +118,7 @@ public class GoodsController {
         String suffix = type.substring(type.lastIndexOf("/") + 1);
         String fileName = id + "." + suffix;
         // 获取上传基路径
-        String path = request.getSession().getServletContext().getRealPath("src/main/webapp/static/upload/file/");
+        String path = request.getSession().getServletContext().getRealPath("/static/upload/file/");
 
         // 创建目标文件
         // 创建文件夹
@@ -121,6 +140,11 @@ public class GoodsController {
         return modelAndView;
     }
 
+    /**
+     * 修改商品售出状态
+     * @param request
+     * @return
+     * */
     @ResponseBody
     @RequestMapping("/changeGoodsStatus")
     public ModelAndView changeGoodsStatus(HttpServletRequest request) throws Exception {
@@ -161,7 +185,9 @@ public class GoodsController {
         }
     }
 
-    // 定期检查已分配商品是否已经被审核 如果发现1小时仍未被审核则重置
+    /**
+     * @desciption 定期检查已分配商品是否已经被审核 如果发现1小时仍未被审核则重置
+     * **/
     @Scheduled(fixedRate = 60000) // 每分钟检查一次
     public void checkGoods() {
         //获取所有未被审核且已分配的商品
@@ -179,6 +205,10 @@ public class GoodsController {
         goodsService.setUnAttributed(goods.getId());
     }
 
+    /**
+     * @description 审核商品
+     * @param review
+     * */
     @ResponseBody
     @PutMapping("/review")
     public String review(@RequestBody Review review) {
@@ -188,6 +218,10 @@ public class GoodsController {
         return "err";
     }
 
+    /**
+     * @description 根据商品种类分页查询
+     * @return
+     * */
     // 返回JSON
     @ResponseBody
     @RequestMapping("/category/{cate}/{page}")
@@ -230,6 +264,10 @@ public class GoodsController {
     }
 
 
+    /**
+     * @description 全局分页搜索
+     * @return
+     * */
     @GetMapping("/search")
     @ResponseBody
     public String search(HttpServletRequest request, @RequestParam("query") String query, @RequestParam("page") int page) {
