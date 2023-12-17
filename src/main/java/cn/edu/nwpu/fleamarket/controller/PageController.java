@@ -6,13 +6,12 @@ import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.CartService;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
+import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -80,7 +79,26 @@ public class PageController {
         modelAndView.addObject("pages", pagesNum);
         return modelAndView;
     }
-
+    @GetMapping("/search")
+    @ResponseBody
+    public ModelAndView search(HttpServletRequest request, @RequestParam("query") String query, @RequestParam("page") int page) {
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
+        List<Goods> goodsList = goodsService.selectByGoodsName(query, page, PAGE_SIZE);
+        for (Goods goods : goodsList) {
+            if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+                continue;
+            };
+            GoodsItem goodsItem = new GoodsItem();
+            goodsItem.setGoods(goods);
+            Student student = goodsService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItemList.add(goodsItem);
+        }
+        ModelAndView modelAndView = new ModelAndView("goods/goodsview");
+        return modelAndView;
+    }
     @RequestMapping("/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();

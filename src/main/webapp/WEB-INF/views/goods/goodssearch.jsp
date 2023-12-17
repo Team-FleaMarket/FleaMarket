@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item">商品分类</li>
-                <li class="breadcrumb-item">${mainCategory}</li>
+                <li class="breadcrumb-item">搜索</li>
             </ol>
         </div>
     </div>
@@ -191,9 +191,9 @@
                 new bootstrap.Toast(document.querySelector('.toast')).show();
 
                 // header 外面和伸缩边框里面的购物车都要更新
-               /* document.querySelectorAll('.checkout-items').forEach((checkoutItems) => {
-                    await addGoodsToCartAPI({goodsId, studentNo})
-                });*/
+                /* document.querySelectorAll('.checkout-items').forEach((checkoutItems) => {
+                     await addGoodsToCartAPI({goodsId, studentNo})
+                 });*/
             });
         })
         document.querySelectorAll(".redirect-btn").forEach((redirectBtn) => {

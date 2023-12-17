@@ -3,6 +3,7 @@ package cn.edu.nwpu.fleamarket.controller;
 import cn.edu.nwpu.fleamarket.pojo.Cart;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.CartService;
+import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
@@ -30,13 +31,13 @@ import java.util.Map;
 public class StudentController {
 
     @Autowired
-    private StudentService userService;
+    private StudentService studentService;
     @Autowired
     private CartService cartService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
-        Student databaseStudent = userService.loginStudent(student);
+        Student databaseStudent = studentService.loginStudent(student);
         List<Cart> cartList = cartService.getCartList(student.getStudentNo());
         if (databaseStudent == null) {
             return ResponseEntity.badRequest().body("用户名或密码错误！");
@@ -56,7 +57,7 @@ public class StudentController {
 
     @RequestMapping("/register")
     public ResponseEntity<?> register(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
-        Student databaseStudent = userService.registerStudent(student);
+        Student databaseStudent = studentService.registerStudent(student);
         List<Cart> cartList = cartService.getCartList(student.getStudentNo());
         if (databaseStudent != null) {
             return ResponseEntity.badRequest().body("该学号已经被注册！");
@@ -94,7 +95,7 @@ public class StudentController {
 
         Map<String, String> msg = new HashMap<String, String>();
         jsonObject.put("result","");
-        User user = userService.findUser(studentNo);
+        User user = studentService.findUser(studentNo);
         if(user == null){
             jsonObject.put("result","studentNoFalse");
             boolean res = isJson(jsonObject.toString());
@@ -162,7 +163,7 @@ public class StudentController {
         if(studentNo ==null || "".equals(studentNo)){
             modelAndView.setViewName("login");
         }else{
-            user = userService.findUser(studentNo);
+            user = studentService.findUser(studentNo);
             if(user==null){
                 request.getSession().setAttribute("active","home");
                 modelAndView.setViewName("index");
@@ -215,7 +216,7 @@ public class StudentController {
             }
         }
         user.setImagePath(responseStr);
-        userService.updateUser(user);
+        studentService.updateUser(user);
         modelAndView.setViewName("profile");
         return modelAndView;
     }
@@ -226,7 +227,7 @@ public class StudentController {
         ModelAndView modelAndView = new ModelAndView();
         String studentNo = request.getParameter("studentNo");
         User userSession = (User)request.getSession().getAttribute("user");
-        User user = userService.findUser(studentNo);
+        User user = studentService.findUser(studentNo);
         if(user==null || userSession ==null){
             modelAndView.setViewName("login");
             return modelAndView;
@@ -282,7 +283,7 @@ public class StudentController {
         if(change==0){
             return "forward:profile?studentNo="+user.getStudentNo();
         }else{
-            userService.updateUserInformation(uuser);
+            studentService.updateUserInformation(uuser);
         }
         return "forward:profile?studentNo="+user.getStudentNo();
     }
@@ -328,7 +329,7 @@ public class StudentController {
             jsonObject.put("result","notSame");
             return jsonObject.toString();
         }
-        User old = userService.findUser(studentNo);
+        User old = studentService.findUser(studentNo);
         if("".equals(studentNo)||studentNo==null||old==null){
             jsonObject.put("result","noStudent");
             return jsonObject.toString();
@@ -340,7 +341,7 @@ public class StudentController {
         User user =new User();
         user.setStudentNo(studentNo);
         user.setPassword(newpwd);
-        userService.updatePwd(user);
+        studentService.updatePwd(user);
         jsonObject.put("result","succ");
         return jsonObject.toString();
     }
@@ -372,7 +373,7 @@ public class StudentController {
         }
         student.setImg(1);
         //设为有自定义头像
-        userService.setImg(studentNo);
+        studentService.setImg(studentNo);
     }
 
     /**
@@ -382,7 +383,7 @@ public class StudentController {
     @ResponseBody
     @GetMapping("/count")
     public int count() {
-        return userService.countAll();
+        return studentService.countAll();
     }
 
     /**
@@ -396,7 +397,7 @@ public class StudentController {
         if(page <= 0) {
             return null;
         }
-        return userService.getStudentsByPage(page);
+        return studentService.getStudentsByPage(page);
     }
 
     /**
@@ -406,8 +407,9 @@ public class StudentController {
      */
     @ResponseBody
     @PutMapping
-    public String update(@RequestBody Student student) {
-        if(userService.update(student)) {
+    public String update(HttpServletRequest request, @RequestBody Student student) {
+        if(studentService.update(student)) {
+            request.getSession().setAttribute("student", studentService.getStudentByStudentNo(student.getStudentNo()));
             return "ok";
         }
         return "err";
@@ -421,7 +423,7 @@ public class StudentController {
     @GetMapping("/query/username")
     public List<Student> queryByUsername(@RequestParam("query") String query) {
         String trueQuery = "%" + query + "%";
-        return userService.queryByUserName(trueQuery);
+        return studentService.queryByUserName(trueQuery);
     }
 
     /**
@@ -432,7 +434,7 @@ public class StudentController {
     @GetMapping("/query/studentno")
     public List<Student> queryByStudentNo(@RequestParam("query") String query) {
         String trueQuery = "%" + query + "%";
-        return userService.queryByStudentNo(trueQuery);
+        return studentService.queryByStudentNo(trueQuery);
     }
 
     /**
@@ -442,7 +444,7 @@ public class StudentController {
     @ResponseBody
     @PutMapping("/reset/{id}")
     public String reset(@PathVariable("id") int id) {
-        if(userService.resetPw(id)) {
+        if(studentService.resetPw(id)) {
             return "ok";
         }
         return "err";
