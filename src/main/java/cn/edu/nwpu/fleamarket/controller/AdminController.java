@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 管理员controller
  */
@@ -63,4 +65,29 @@ public class AdminController {
         return "ok";
     }
 
+    @PostMapping("/save")
+    String save(@RequestBody Admin admin) {
+        if(adminService.addAdmin(admin)) {
+            return "ok";
+        }
+        return "exist";
+    }
+
+    @DeleteMapping
+    String delete(@RequestParam("username") String username) {
+        if(adminService.delete(username)) {
+            return "ok";
+        }
+        return "err";
+    }
+
+    @GetMapping("/all")
+    List<Admin> getAll() {
+        return adminService.getAll();
+    }
+
+    @GetMapping("/query")
+    List<Admin> queryByUsername(@RequestParam("query") String query) {
+        return adminService.queryByUsername("%" + query + "%");
+    }
 }
