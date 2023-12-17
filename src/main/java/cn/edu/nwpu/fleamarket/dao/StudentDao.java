@@ -41,7 +41,7 @@ public interface StudentDao {
      * @param student 更新的内容
      */
     @Update("UPDATE students set name = #{name}, password = #{password}, email = #{email}, " +
-            "phone = #{phone}, wechat = #{wechat} where id = #{id}")
+            "phone = #{phone}, wechat = #{wechat}, qq = #{qq}, department = #{department} where id = #{id}")
     void update(Student student);
 
     /**
