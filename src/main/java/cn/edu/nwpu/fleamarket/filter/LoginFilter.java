@@ -12,7 +12,7 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
-        System.out.println("login filter path: " + path);
+//        System.out.println("login filter path: " + path);
         if (path.startsWith("/login")) {
             chain.doFilter(request, response);
         } else if (path.equals("/")) {
@@ -23,7 +23,7 @@ public class LoginFilter implements Filter {
             chain.doFilter(request, response);
         } else if (path.startsWith("/student")){
             chain.doFilter(request, response);
-        } else if(path.startsWith("/admin")) {
+        } else if(path.startsWith("/admin/login")) {
             chain.doFilter(request, response);
         }
         else {
