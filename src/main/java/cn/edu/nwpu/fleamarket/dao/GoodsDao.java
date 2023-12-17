@@ -115,6 +115,14 @@ public interface GoodsDao {
 
     List<Goods> selectByGoodsName(@Param("query") String query, @Param("offset") int offset, @Param("pageSize") int pageSize);
 
+    /**
+     * 某种商品销售总额
+     * @param cate 种类
+     * @return 销售总额
+     */
+    @Select("SELECT COALESCE(SUM(price), 0) FROM goods WHERE cate = #{cate} AND goods_status = 1")
+    double getSales(@Param("cate") String cate);
+
     void logicDeleteGoods(@Param("goodsId") int goodsId);
 
     void editGoods(@Param("goods") Goods goods);

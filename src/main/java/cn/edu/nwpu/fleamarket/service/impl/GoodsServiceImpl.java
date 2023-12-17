@@ -20,10 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
- * @Author: Hanwen
- * @Date: 2018/6/7 下午4:36
- */
+
 @Service
 public class GoodsServiceImpl implements GoodsService {
 
@@ -216,7 +213,6 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> querySoldByBno(String query) {
         return goodsDao.querySoldByBno(query);
     }
-
     public int selectByStatusAndStudentNoAndGoodsNameTotalCnt(Integer status, String studentNo, String goodsName) {
         return goodsDao.selectByStatusAndStudentNoAndGoodsNameTotalCnt(status, studentNo, goodsName);
     }
@@ -473,6 +469,11 @@ public class GoodsServiceImpl implements GoodsService {
     public void editGoods(Goods goods) {
         goodsDao.editGoods(goods);
         goodsDao.setStatus(goods.getId(), ReviewStatusEnum.PENDING.getCode());
+    }
+
+    @Override
+    public double getSales(int cate) {
+        return goodsDao.getSales(String.valueOf(cate));
     }
 }
 

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计</title>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/admin/element/index.js"></script>
+    <script src="../js/admin/echarts.min.js"></script>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div id="app">
+    <div id="container">
+        <el-container>
+            <el-header>FleaMarket</el-header>
+            <el-main>
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                    <el-menu-item index="1" @click="to_home">主页</el-menu-item>
+                    <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
+                    <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
+                    <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
+                    <el-menu-item index="5" @click="to_admins">管理员</el-menu-item>
+                    <el-menu-item index="6">统计</el-menu-item>
+                </el-menu>
+
+                <div id="main" style="width: 650px;height:450px;margin: 0 auto;"></div>
+            </el-main>
+            <el-footer>Copyright © 2023.FleaMarket All rights reserved.</el-footer>
+
+        </el-container>
+
+    </div>
+
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                admins: [],
+                activeIndex: '6',
+                query: '',
+                sales: []
+            };
+        },
+        methods: {
+            to_user: to_user,
+            to_review: to_review,
+            to_record: to_record,
+            to_home: to_home,
+            to_admins: to_admins,
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            getSales() {
+              axios.get("/goods/charts/sales").then((res=>{
+                  this.sales = res.data;
+                  this.draw();
+              })).catch(err=>{
+                  console.log(err);
+              });
+            },
+            draw() {
+                var myChart = echarts.init(document.getElementById('main'));
+
+                var option = {
+                    title: {
+                        text: '销售统计'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data:['销售总额']
+                    },
+                    xAxis: {
+                        name: '商品种类',
+                        data: ["教材", "考试", "文学", "运动", "文具", "生活", "美妆", "电子产品"] // 商品种类数据
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '销售总额',
+                        type: 'bar',
+                        data: this.sales // 销售总额数据
+                    }]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        },
+        mounted() {
+            this.getSales();
+        },
+    });
+</script>
+</body>
+</html>

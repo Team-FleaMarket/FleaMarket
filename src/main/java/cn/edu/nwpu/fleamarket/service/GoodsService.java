@@ -90,4 +90,11 @@ public interface GoodsService {
     void offShelf(Integer goodsId, String studentNo);
 
     void editGoods(Goods goods);
+
+    /**
+     * 某种商品销售总额
+     * @param cate 种类
+     * @return 销售总额
+     */
+    double getSales(int cate);
 }
