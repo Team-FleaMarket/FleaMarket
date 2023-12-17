@@ -28,6 +28,11 @@ public class OrderController {
     @Autowired
     private GoodsService goodsService;
 
+    /**
+     * 添加订单
+     * @param request
+     * @param goodsId
+     * */
     @GetMapping("/add")
     public String addOrder(HttpServletRequest request, @RequestParam("goodsId") String goodsId) {
         try {
@@ -42,6 +47,11 @@ public class OrderController {
         return "redirect:/views/managecenter";
     }
 
+    /**
+     * 卖家确认发货
+     * @param request
+     * @param orderId
+     * */
     @GetMapping("/sellerconfirm")
     public String sellerConfirmOrder(HttpServletRequest request, @RequestParam("id") String orderId) {
         try {
@@ -54,6 +64,11 @@ public class OrderController {
         return "redirect:/views/managecenter?status=4";
     }
 
+    /**
+     * 买家确认收货
+     * @param request
+     * @param orderId
+     * */
     @GetMapping("/buyerconfirm")
     public String buyerConfirmOrder(HttpServletRequest request, @RequestParam("id") String orderId) {
         try {
@@ -76,6 +91,12 @@ public class OrderController {
 //        return "ok";
 //    }
 
+
+    /**
+     * 取消订单
+     * @param request
+     * @param orderId
+     * */
     @GetMapping("/cancel")
     public String cancelOrder(HttpServletRequest request, @RequestParam("id") String orderId) {
         try {

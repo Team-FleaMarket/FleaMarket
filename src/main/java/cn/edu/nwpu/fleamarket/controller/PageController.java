@@ -43,6 +43,9 @@ public class PageController {
         return categories;
     }
 
+    /**
+     * 首页
+     * */
     @ResponseBody
     @RequestMapping("/views/{cate}/{page}")
     public ModelAndView category(HttpServletRequest request,

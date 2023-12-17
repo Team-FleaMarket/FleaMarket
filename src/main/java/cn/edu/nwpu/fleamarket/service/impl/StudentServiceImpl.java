@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-/**
- * @Author: Hanwen
- * @Date: 2018/4/4 下午4:08
- */
+
 @Service
 public class StudentServiceImpl implements StudentService {
 

@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ *  Redisson配置类
+ * */
 @Configuration
 public class RedissonConfig {
 
@@ -19,6 +22,10 @@ public class RedissonConfig {
     @Value("${redis.database}")
     private int database;
 
+    /**
+     * @Description 创建RedissonClient对象
+     * @return RedissonClient
+     * */
     @Bean
     public RedissonClient redissonClient() {
         Config config = new Config();

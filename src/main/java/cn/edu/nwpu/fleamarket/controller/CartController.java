@@ -16,6 +16,12 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+    /**
+     * 添加购物车
+     * @param request
+     * @param cartItem
+     * @return
+     * */
     @PostMapping("/add")
     public String addCart(HttpServletRequest request,  @RequestBody CartItem cartItem) {
         cartService.addCartItem(cartItem.getStudentNo(), cartItem.getGoodsId(), cartItem.getNum());
@@ -24,6 +30,12 @@ public class CartController {
         return "ok";
     }
 
+    /**
+     * 获取购物车列表
+     * @param studentNo
+     * @return
+     *
+     * */
     @GetMapping("/{studentNo}")
     public String getCart(@PathVariable("studentNo") String studentNo) {
         List<Cart> carts = cartService.getCartList(studentNo);
