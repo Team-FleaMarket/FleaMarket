@@ -59,6 +59,7 @@
                             <c:if test="${sessionScope.student != null}">
                                 <button class="want-btn btn btn-warning">我想要...</button>
                             </c:if>
+                            <a class="want-btn btn btn-warning" href="${pageContext.request.contextPath}/order/add?goodsId=${goodsItem.goods.id}">下单</a>
                         </div>
                     </div>
                 </div>

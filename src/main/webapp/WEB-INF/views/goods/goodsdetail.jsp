@@ -34,19 +34,6 @@
                         <span class="fs-3" style="color: #ee340f">￥</span><span class="goodsPrice fs-3"
                                                                                 style="vertical-align: bottom"></span>
 
-                        <div class="row button-row">
-                            <div class="col-8">
-                                <button class="want-btn btn btn-md btn-warning mt-2 fs-6" style="width: 100%;">
-                                    添加到想要
-                                </button>
-                            </div>
-                            <div class="col-4">
-                                <button class="buy-btn btn btn-md btn-primary mt-2 fs-6" style="width: 100%;">
-                                    下单!!!
-                                </button>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 <!-- 卖家信息 -->
