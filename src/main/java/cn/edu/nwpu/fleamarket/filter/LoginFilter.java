@@ -13,6 +13,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
 //        System.out.println("login filter path: " + path);
+        //以下直接放行
         if (path.startsWith("/login")) {
             chain.doFilter(request, response);
         } else if (path.equals("/")) {
@@ -27,6 +28,7 @@ public class LoginFilter implements Filter {
             chain.doFilter(request, response);
         }
         else {
+            //需要鉴别是否是登录的用户或管理员
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             HttpSession session = httpRequest.getSession();
             Object o = session.getAttribute("student");
