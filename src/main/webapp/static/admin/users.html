@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>用户管理</title>
+    <script src="../js/navigation.js"></script>
     <script src="../js/admin/vue.js"></script>
     <script src="../js/admin/axios.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
     <script src="../js/admin/element/index.js"></script>
     <link rel="stylesheet" href="admin.css">
@@ -22,6 +22,7 @@
                 <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
                 <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
                 <el-menu-item index="5" @click="to_admins">管理员</el-menu-item>
+                <el-menu-item index="6" @click="to_statistics">统计</el-menu-item>
             </el-menu>
 
             <h3 style="margin: 20px 0; color: #34495e; font-size: 24px; background-color: #ecf0f1; padding: 10px; border-radius: 5px;">用户列表</h3>
@@ -240,18 +241,11 @@
                     console.log(err);
                 })
             },
-            to_review: function () {
-                window.location.href = "review.html";
-            },
-            to_home: function () {
-                window.location.href = "home.html";
-            },
-            to_record: function () {
-                window.location.href = "record.html";
-            },
-            to_admins: function () {
-                window.location.href = "admins.html";
-            },
+            to_review: to_review,
+            to_home: to_home,
+            to_record: to_record,
+            to_admins: to_admins,
+            to_statistics: to_statistics,
         },
         created() {
             this.getPagenum();

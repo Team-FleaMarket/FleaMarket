@@ -74,4 +74,11 @@ public interface GoodsService {
     Student getStudentByStudentNo(String studentNo);
 
     List<Goods> selectByGoodsName(String query, int page, int pageSize);
+
+    /**
+     * 某种商品销售总额
+     * @param cate 种类
+     * @return 销售总额
+     */
+    double getSales(int cate);
 }
