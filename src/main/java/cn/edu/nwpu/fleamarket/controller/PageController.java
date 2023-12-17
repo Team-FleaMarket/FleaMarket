@@ -129,7 +129,7 @@ public class PageController {
     @RequestMapping("/views/managecenter")
     public ModelAndView managecenter(HttpServletRequest request )throws Exception{
         String str_option = request.getParameter("status");
-        if ( str_option == null || str_option.equals("")){
+        if (str_option == null|| str_option.equals("")  ){
             str_option = "0";
         }
         ManageCenterStatusEnum option = ManageCenterStatusEnum.getByCode(
@@ -145,7 +145,6 @@ public class PageController {
         boolean isSearching = false;
         Student student = (Student) request.getSession().getAttribute("student");
         String goodsName = request.getParameter("searchInput");
-
         if (goodsName != null) {
             isSearching = true;
         }
@@ -163,8 +162,6 @@ public class PageController {
             }
         }
 
-
-        List<Goods> goodsList = null;
         OrderInformationPageResult orderInformationPageResult = new OrderInformationPageResult();
         System.out.println("option: " + option);
         if(option.equals(ManageCenterStatusEnum.NOT_REVIEWED))
@@ -185,24 +182,14 @@ public class PageController {
             for (OrderInformation orderInformation : orderInformationPageResult.getOrderInformationList()) {
                 System.out.println(orderInformation.toString());
         }
-        System.out.println("Total pages: " + totalPage + "\n");
+        System.out.println("Total pages: " + orderInformationPageResult.getTotalPage() + "\n");
         modelAndView.addObject("status", option.getCode().toString());
 
 
         modelAndView.addObject("orderInformationPageResult", orderInformationPageResult);
-
-
-        if(isSearching)
-        {
-            modelAndView.addObject("goodsList", searchList);
-        }
-        else {
-            modelAndView.addObject("goodsList", goodsList);
-        }
-
         modelAndView.addObject("currentPage", currentPage);
-        modelAndView.addObject("totalPage", totalPage);
-        modelAndView.addObject("totalCnt",  totalCnt);
+        modelAndView.addObject("totalPage", orderInformationPageResult.getTotalPage());
+        modelAndView.addObject("totalCnt",  orderInformationPageResult.getTotalCount());
         modelAndView.addObject("searchText",goodsName);
         modelAndView.setViewName("manage/managecenter");
         return modelAndView;

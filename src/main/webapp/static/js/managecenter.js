@@ -64,7 +64,7 @@ document.getElementById('editSubmitButton').onclick = function () {
 
     // 发送 AJAX 请求
     $.ajax({
-        url: '/order/submitEdition',  // 替换为实际的后端接口
+        url: '/goods/edit',  // 替换为实际的后端接口
         method: 'POST',
         data: goodsData,
         success: function (response) {
@@ -81,19 +81,20 @@ document.getElementById('editSubmitButton').onclick = function () {
 const sellerConfirmModal = document.getElementById('sellerConfirmModal')
 sellerConfirmModal.addEventListener('show.bs.modal', async event => {
     const button = event.relatedTarget
-    const goodsId = button.getAttribute('data-bs-whatever')
+    const orderId = button.getAttribute('data-bs-whatever')
     // Send an asynchronous request to the server
-    const response = await fetch(`/order/check?status=buyercancled&id=${goodsId}`);
+
+    const response = await fetch(`/order/check?status=buyercancled&id=${orderId}`);
 
     // Assuming the server returns JSON, parse the response
     const result = await response.json();
-
+    console.log(result);
     if (result === 'true') {
         alert('买家已取消订单，无法确认出售', 'danger')
         event.preventDefault();
     } else {
-        const modalUrl = deleteModal.querySelector('a')
-        modalUrl.href = "/order/sellerconfirm?id=" + goodsId
+        const modalUrl = sellerConfirmModal.querySelector('a')
+        modalUrl.href = "/order/sellerconfirm?id=" + orderId;
     }
 })
 const sellerConfirmButton = sellerConfirmModal.querySelector('a')
@@ -104,21 +105,21 @@ sellerConfirmButton.onclick = function () {
 const buyerConfirmModal = document.getElementById('buyerConfirmModal');
 buyerConfirmModal.addEventListener('show.bs.modal', async event => {
     const button = event.relatedTarget;
-    const goodsId = button.getAttribute('data-bs-whatever');
-    const cancelResponse = await fetch(`/order/check?status=buyercancled&id=${goodsId}`);
+    const orderId = button.getAttribute('data-bs-whatever');
+    const cancelResponse = await fetch(`/order/check?status=buyercancled&id=${orderId}`);
     const cancelResult = await cancelResponse.json();
     if (cancelResult === 'true') {
         alert('卖家已取消交易，无法确认购买', 'danger')
         event.preventDefault();
     } else {
-        const confirmResponse = await fetch(`/order/check?status=sellerconfirmed&id=${goodsId}`);
+        const confirmResponse = await fetch(`/order/check?status=sellerconfirmed&id=${orderId}`);
         const confirmResult = confirmResponse.json()
         if (confirmResult === 'false') {
             alert('请等待或联系卖家确认出售', 'danger')
             event.preventDefault();
         } else {
             const modalUrl = buyerConfirmModal.querySelector('a');
-            modalUrl.href = "/order/buyerconfirm?id=" + goodsId;
+            modalUrl.href = "/order/buyerconfirm?id=" + orderId;
         }
     }
 });
@@ -130,35 +131,35 @@ buyerConfirmButton.onclick = function () {
 const cancelModal = document.getElementById('cancelModal');
 cancelModal.addEventListener('show.bs.modal', event => {
     const button = event.relatedTarget;
-    const goodsId = button.getAttribute('data-bs-whatever');
+    const orderId = button.getAttribute('data-bs-whatever');
     const modalUrl = cancelModal.querySelector('a');
-    modalUrl.href = "/order/cancel?id=" + goodsId;
+    modalUrl.href = "/order/cancel?id=" + orderId;
 });
 const cancelConfirmButton = cancelModal.querySelector('a');
 cancelConfirmButton.onclick = function () {
     alert('取消成功', 'success');
 };
-// 卖家删除订单模态框
-const sellerDeleteModal = document.getElementById('sellerDeleteModal');
-sellerDeleteModal.addEventListener('show.bs.modal', event => {
-    const button = event.relatedTarget;
-    const goodsId = button.getAttribute('data-bs-whatever');
-    const modalUrl = sellerDeleteModal.querySelector('a');
-    modalUrl.href = "/order/sellerdelete?id=" + goodsId;
-});
-sellerDeleteButton = sellerDeleteModal.querySelector('a');
-sellerDeleteButton.onclick = function () {
-    alert('删除成功', 'success');
-};
-// 买家删除订单模态框
-const buyerDeleteModal = document.getElementById('buyerDeleteModal');
-buyerDeleteModal.addEventListener('show.bs.modal', event => {
-    const button = event.relatedTarget;
-    const goodsId = button.getAttribute('data-bs-whatever');
-    const modalUrl = buyerDeleteModal.querySelector('a');
-    modalUrl.href = "/order/buyerdelete?id=" + goodsId;
-});
-buyerDeleteButton = buyerDeleteModal.querySelector('a');
-buyerDeleteButton.onclick = function () {
-    alert('删除成功', 'success');
-};
+// // 卖家删除订单模态框
+// const sellerDeleteModal = document.getElementById('sellerDeleteModal');
+// sellerDeleteModal.addEventListener('show.bs.modal', event => {
+//     const button = event.relatedTarget;
+//     const goodsId = button.getAttribute('data-bs-whatever');
+//     const modalUrl = sellerDeleteModal.querySelector('a');
+//     modalUrl.href = "/order/sellerdelete?id=" + goodsId;
+// });
+// sellerDeleteButton = sellerDeleteModal.querySelector('a');
+// sellerDeleteButton.onclick = function () {
+//     alert('删除成功', 'success');
+// };
+// // 买家删除订单模态框
+// const buyerDeleteModal = document.getElementById('buyerDeleteModal');
+// buyerDeleteModal.addEventListener('show.bs.modal', event => {
+//     const button = event.relatedTarget;
+//     const goodsId = button.getAttribute('data-bs-whatever');
+//     const modalUrl = buyerDeleteModal.querySelector('a');
+//     modalUrl.href = "/order/buyerdelete?id=" + goodsId;
+// });
+// buyerDeleteButton = buyerDeleteModal.querySelector('a');
+// buyerDeleteButton.onclick = function () {
+//     alert('删除成功', 'success');
+// };

@@ -73,7 +73,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean update(Student student) {
+    public boolean updateStudent(Student student) {
         studentDao.update(student);
         return true;
     }

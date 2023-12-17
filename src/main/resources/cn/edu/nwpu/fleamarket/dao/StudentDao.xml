@@ -33,7 +33,9 @@
     <update id="updateWechat" parameterType="cn.edu.nwpu.fleamarket.pojo.Student">
         UPDATE students SET wechat = #{wechat} WHERE student_no = #{studentNo};
     </update>
-
+    <update id="updateStudent" parameterType="cn.edu.nwpu.fleamarket.pojo.Student">
+        UPDATE students set name = #{name}, password = #{password}, email = #{email}, phone = #{phone}, wechat = #{wechat} where student_no=#{studentNo};
+    </update>
     <!-- SELECT -->
     <select id="selectStudentByStudentNo" parameterType="string" resultMap="StudentResultMap">
         SELECT * FROM students WHERE student_no=#{studentNo}

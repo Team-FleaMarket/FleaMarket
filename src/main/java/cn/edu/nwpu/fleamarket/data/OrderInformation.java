@@ -15,6 +15,11 @@ public class OrderInformation {
 
     private Student buyer;
 
+    /**
+     * 卖家确认
+     * 1表示未确认
+     * 0表示已确认
+     */
     private Integer sellerConfirm;
 
     private Integer buyerConfirm;

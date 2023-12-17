@@ -57,7 +57,7 @@ public class GoodsController {
 
     @PostMapping("/edit")
     @ResponseBody
-    public String editGoods(HttpServletRequest request, @RequestBody Goods goods) {
+    public String editGoods(HttpServletRequest request,  Goods goods) {
         System.out.println(goods);
         goodsService.editGoods(goods);
         return "ok";

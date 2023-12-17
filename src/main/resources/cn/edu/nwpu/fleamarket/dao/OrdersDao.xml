@@ -82,7 +82,7 @@
     <select id="getByBuyerId" resultMap="BaseResultMap">
         select *
         from orders
-        where buyer_id = #{buyerId}
+        where buyer_id = #{buyerId} and is_cancel = 0
     </select>
     <select id="selectByGoodsId" resultMap="BaseResultMap">
         select *

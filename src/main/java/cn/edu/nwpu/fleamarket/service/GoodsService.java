@@ -9,10 +9,7 @@ import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @Author: Hanwen
- * @Date: 2018/6/7 下午4:34
- */
+
 public interface GoodsService {
 
     List<Goods> selectAllGoods();

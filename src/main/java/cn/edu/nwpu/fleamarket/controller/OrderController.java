@@ -42,13 +42,15 @@ public class OrderController {
 
     @GetMapping("/sellerconfirm")
     @ResponseBody
-    public String sellerConfirmOrder(HttpServletRequest request, @RequestParam("id") Integer orderId) {
+    public String sellerConfirmOrder(HttpServletRequest request, @RequestParam("id") String orderId) {
         try {
             Student student = (Student) request.getSession().getAttribute("student");
-            orderService.sellerConfirm(orderId, Integer.valueOf(student.getStudentNo()));
+            orderService.sellerConfirm(Integer.valueOf(orderId), Integer.valueOf(student.getStudentNo()));
+            System.out.println("ssssssssssssssss"+orderId+Integer.valueOf(student.getStudentNo()));
         }catch (BusinessException e) {
             return e.getMessage();
         }
+
         return "ok";
     }
 
@@ -96,15 +98,16 @@ public class OrderController {
     @ResponseBody
     public Boolean checkOrder(HttpServletRequest request,
                              @RequestParam("status") String status,
-                             @RequestParam("id") Integer orderId) {
+                             @RequestParam("id") String orderId) {
+        System.out.println("SSSSSSSSSSSSSSSSSS"+orderId);
         if (status.equals(OrderStatusEnum.IS_CANCELED.getDesc())){
-            return ordersDao.isCanceled(orderId)==1;
+            return ordersDao.isCanceled(Integer.valueOf(orderId))==1;
         }
         if (status.equals(OrderStatusEnum.BUYER_CONFIRM.getDesc())){
-            return ordersDao.isBuyerConfirmd(orderId)==1;
+            return ordersDao.isBuyerConfirmd(Integer.valueOf(orderId))==1;
         }
         if (status.equals(OrderStatusEnum.SELLER_CONFIRM.getDesc())){
-            return ordersDao.isSellerConfirmed(orderId)==1;
+            return ordersDao.isSellerConfirmed(Integer.valueOf(orderId))==1;
         }
         return false;
     }
