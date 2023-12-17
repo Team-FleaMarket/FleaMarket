@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看管理员</title>
+    <script src="../js/admin/vue.js"></script>
+    <script src="../js/admin/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="../js/admin/element/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="container">
+        <el-container>
+            <el-header>FleaMarket</el-header>
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" @click="to_home">主页</el-menu-item>
+                <el-menu-item index="2" @click="to_user">用户管理</el-menu-item>
+                <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
+                <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
+                <el-menu-item index="5">管理员</el-menu-item>
+            </el-menu>
+
+            <h3 style="margin: 20px 0; color: #34495e; font-size: 24px; background-color: #ecf0f1; padding: 10px; border-radius: 5px;">管理员列表</h3>
+            <div style="display: flex; justify-content: center;">
+<!--                <el-select v-model="selected" placeholder="请选择">-->
+<!--                    <el-option label="用户名" value="userName"></el-option>-->
+<!--                    <el-option label="学号" value="studentNo"></el-option>-->
+<!--                </el-select>-->
+                <el-input
+                        placeholder="根据用户名查找"
+                        v-model="query"
+                        clearable
+                        style="width: 300px;">
+                    <template slot="append">
+                        <el-button icon="el-icon-search" circle @click="search"></el-button>
+                    </template>
+                </el-input>
+            </div>
+            <el-table :data="admins" style="width: 100%">
+                <el-table-column prop="id" label="id" width="380"></el-table-column>
+                <el-table-column prop="username" label="用户名" width="380"></el-table-column>
+<!--                <el-table-column-->
+<!--                        fixed="right"-->
+<!--                        label="操作"-->
+<!--                        width="120">-->
+<!--                    <template slot-scope="scope">-->
+
+<!--                        <el-button-->
+<!--                                type="primary"-->
+<!--                                size="mini"-->
+<!--                                @click="showInfo(scope.row.id)">修改-->
+<!--                        </el-button>-->
+<!--                    </template>-->
+<!--                </el-table-column>-->
+            </el-table>
+
+            <el-footer>Copyright © 2023.FleaMarket All rights reserved.</el-footer>
+        </el-container>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                admins: [],
+                activeIndex: '5',
+                query: ''
+            };
+        },
+        methods: {
+            search() {
+              axios.get("/admin/query?query="+this.query).then((res=>{
+                  this.admins = res.data;
+              })).catch(err=>{
+                  console.log(err);
+              })
+            },
+            get_all() {
+              axios.get("/admin/all").then((res=>{
+                 this.admins = res.data;
+              })).catch(err=>{
+                  console.log(err);
+              });
+            },
+            to_user: function () {
+                window.location.href = "users.html";
+            },
+            to_review: function () {
+                window.location.href = "review.html";
+            },
+            to_record: function () {
+                window.location.href = "record.html";
+            },
+            to_home: function () {
+                window.location.href = "home.html";
+            },
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        },
+        created() {
+            this.get_all();
+        },
+    });
+</script>
+
+</body>
+</html>

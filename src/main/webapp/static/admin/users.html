@@ -21,7 +21,7 @@
                 <el-menu-item index="2">用户管理</el-menu-item>
                 <el-menu-item index="3" @click="to_review">商品审核</el-menu-item>
                 <el-menu-item index="4" @click="to_record">交易记录</el-menu-item>
-                <!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
+                <el-menu-item index="5" @click="to_admins">管理员</el-menu-item>
             </el-menu>
 
             <h3 style="margin: 20px 0; color: #34495e; font-size: 24px; background-color: #ecf0f1; padding: 10px; border-radius: 5px;">用户列表</h3>
@@ -41,21 +41,26 @@
                 </el-input>
             </div>
             <el-table :data="users" style="width: 100%">
-                <el-table-column prop="id" label="id" width="180"></el-table-column>
-                <el-table-column prop="studentNo" label="学号" width="180"></el-table-column>
-                <el-table-column prop="name" label="用户名" width="180"></el-table-column>
-                <el-table-column prop="phone" label="手机号"></el-table-column>
+                <el-table-column prop="id" label="id" width="240"></el-table-column>
+                <el-table-column prop="studentNo" label="学号" width="240"></el-table-column>
+                <el-table-column prop="name" label="用户名" width="240"></el-table-column>
+                <el-table-column prop="phone" label="手机号" width="240"></el-table-column>
                 <el-table-column
                         fixed="right"
                         label="操作"
-                        width="120">
+                        width="200">
                     <template slot-scope="scope">
 
                         <el-button
                                 type="primary"
                                 size="mini"
-                                @click="showInfo(scope.row.id)">修改
+                                @click="showInfo(scope.row.id)">修改信息
                         </el-button>
+                        <template>
+                            <el-popconfirm title="确认重置密码？" @confirm="resetPw(scope.row.id)">
+                                <el-button slot="reference" type="danger" size="mini">重置密码</el-button>
+                            </el-popconfirm>
+                        </template>
                     </template>
                 </el-table-column>
             </el-table>
@@ -86,9 +91,6 @@
                     <el-form-item label="用户名">
                         <el-input v-model="tempUser.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="密码">
-                        <el-input type="password" v-model="tempUser.password"></el-input>
-                    </el-form-item>
                     <el-form-item label="邮箱">
                         <el-input v-model="tempUser.email"></el-input>
                     </el-form-item>
@@ -117,7 +119,6 @@
                 user: {
                     id: 0,
                     name: '',
-                    password: '',
                     studentNo: '',
                     email: '',
                     phone: '',
@@ -128,7 +129,6 @@
                 tempUser: {
                     id: 0,
                     name: '',
-                    password: '',
                     studentNo: '',
                     email: '',
                     phone: '',
@@ -138,6 +138,7 @@
                 total: 0, //总用户数
                 currentPage: 1,
                 dialogVisible: false,
+                confirmVisible: false,
                 selected: 'userName',
                 query: '',
                 placeholderMap: {
@@ -168,6 +169,20 @@
                 axios.get(url).then((res)=>{
                     this.users = res.data;
                 }).catch(err=>{
+                   console.log(err);
+                });
+            },
+            resetPw(id) {
+                axios.put("/student/reset/" + id).then((res=>{
+                    if(res.data === "ok") {
+                        this.$message({
+                            message: '重置密码成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message.error('重置失败');
+                    }
+                })).catch(err=>{
                    console.log(err);
                 });
             },
@@ -233,6 +248,9 @@
             },
             to_record: function () {
                 window.location.href = "record.html";
+            },
+            to_admins: function () {
+                window.location.href = "admins.html";
             },
         },
         created() {
