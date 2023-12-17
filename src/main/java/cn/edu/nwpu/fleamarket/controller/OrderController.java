@@ -30,10 +30,10 @@ public class OrderController {
 
     @GetMapping("/add")
     @ResponseBody
-    public String addOrder(HttpServletRequest request, @RequestParam("goodsId") Integer goodsId) {
+    public String addOrder(HttpServletRequest request, @RequestParam("goodsId") String goodsId) {
         try {
             System.out.println(goodsId);
-            Goods goods = goodsService.checkIsReviewedAndNotSold(goodsId);
+            Goods goods = goodsService.checkIsReviewedAndNotSold(Integer.valueOf(goodsId));
             Student student = (Student) request.getSession().getAttribute("student");
             orderService.addOrder(goods, student.getStudentNo());
         } catch (BusinessException e) {
@@ -58,12 +58,13 @@ public class OrderController {
 
     @GetMapping("/buyerconfirm")
     @ResponseBody
-    public String buyerConfirmOrder(HttpServletRequest request, @RequestParam("id") Integer orderId) {
+    public String buyerConfirmOrder(HttpServletRequest request, @RequestParam("id") String orderId) {
         try {
             Student student = (Student) request.getSession().getAttribute("student");
-            orderService.buyerConfirm(orderId, Integer.valueOf(student.getStudentNo()));
+            System.out.println("lllllllllllllllllllllllllllllllllllllllll");
+            orderService.buyerConfirm(Integer.valueOf(orderId), Integer.valueOf(student.getStudentNo()));
         } catch (BusinessException e) {
-            return e.getMessage();
+            e.getMessage();
         }
         return "ok";
     }
@@ -81,14 +82,14 @@ public class OrderController {
 
     @GetMapping("/cancel")
     @ResponseBody
-    public String cancelOrder(HttpServletRequest request, @RequestParam("id") Integer orderId) {
+    public String cancelOrder(HttpServletRequest request, @RequestParam("id") String orderId) {
         try {
-            Orders orders = ordersDao.selectById(orderId);
+            Orders orders = ordersDao.selectById(Integer.valueOf(orderId));
             Goods goods = goodsService.selectById(orders.getGoodsId());
             //Goods goods = goodsService.checkIsReviewedAndNotSold(orders.getGoodsId());
             orderService.checkForCancel(goods.getId());
             Student student = (Student) request.getSession().getAttribute("student");
-            orderService.cancelOrder(orderId, Integer.valueOf(student.getStudentNo()));
+            orderService.cancelOrder(Integer.valueOf(orderId), Integer.valueOf(student.getStudentNo()));
         } catch (BusinessException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
