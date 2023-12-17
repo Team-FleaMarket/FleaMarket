@@ -89,6 +89,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student getStudentByStudentNo(String studentNo) {
+        studentDao.selectStudentByStudentNo(studentNo);
+        return null;
+    }
+
+    @Override
     public void setImg(String studentNo) {
         studentDao.setImg(studentNo);
     }
@@ -102,6 +108,8 @@ public class StudentServiceImpl implements StudentService {
         studentDao.resetPw(id);
         return true;
     }
+
+
 }
 
 

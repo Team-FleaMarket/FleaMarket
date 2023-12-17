@@ -25,6 +25,7 @@ public interface StudentService {
     boolean updateStudent(Student student);
     List<Student> queryByUserName(String query);
     List<Student> queryByStudentNo(String query);
+    Student getStudentByStudentNo(String studentNo);
 
     /**
      * 设为有自定义头像

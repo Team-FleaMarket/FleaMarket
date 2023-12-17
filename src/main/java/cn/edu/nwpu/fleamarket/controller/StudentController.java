@@ -238,8 +238,9 @@ public class StudentController {
      */
     @ResponseBody
     @PutMapping
-    public String updateStudent(@RequestBody Student student) {
+    public String updateStudent(HttpServletRequest request, @RequestBody Student student) {
         if(userService.updateStudent(student)) {
+            request.getSession().setAttribute("student", userService.getStudentByStudentNo(student.getStudentNo()));
             return "ok";
         }
         return "err";
