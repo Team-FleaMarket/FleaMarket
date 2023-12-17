@@ -4,6 +4,7 @@ import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Cart;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.CartService;
+import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
@@ -32,13 +33,13 @@ import java.util.UUID;
 public class StudentController {
 
     @Autowired
-    private StudentService userService;
+    private StudentService studentService;
     @Autowired
     private CartService cartService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
-        Student databaseStudent = userService.loginStudent(student);
+        Student databaseStudent = studentService.loginStudent(student);
         List<Cart> cartList = cartService.getCartList(student.getStudentNo());
         if (databaseStudent == null) {
             return ResponseEntity.badRequest().body("用户名或密码错误！");
@@ -91,7 +92,7 @@ public class StudentController {
 
     @RequestMapping("/register")
     public ResponseEntity<?> register(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
-        Student databaseStudent = userService.registerStudent(student);
+        Student databaseStudent = studentService.registerStudent(student);
         List<Cart> cartList = cartService.getCartList(student.getStudentNo());
         if (databaseStudent != null) {
             return ResponseEntity.badRequest().body("该学号已经被注册！");
@@ -129,7 +130,7 @@ public class StudentController {
 
         Map<String, String> msg = new HashMap<String, String>();
         jsonObject.put("result","");
-        User user = userService.findUser(studentNo);
+        User user = studentService.findUser(studentNo);
         if(user == null){
             jsonObject.put("result","studentNoFalse");
             boolean res = isJson(jsonObject.toString());
@@ -179,6 +180,209 @@ public class StudentController {
         return modelAndView;
     }
 
+/*
+
+  */
+/*  @RequestMapping("/profile")
+    public ModelAndView profile(HttpServletRequest request) throws Exception{
+        ModelAndView modelAndView = new ModelAndView();
+        String studentNo = request.getParameter("studentNo");
+        User Iuser = (User)request.getSession().getAttribute("user");
+        if(Iuser == null||(Iuser!=null &&!Iuser.getStudentNo().equals(studentNo))){
+            request.getSession().setAttribute("Flag","2");
+        }else{
+            request.getSession().setAttribute("Flag","1");
+        }
+        request.getSession().setAttribute("active","profile");
+        User user = null;
+        if(studentNo ==null || "".equals(studentNo)){
+            modelAndView.setViewName("login");
+        }else{
+            user = studentService.findUser(studentNo);
+            if(user==null){
+                request.getSession().setAttribute("active","home");
+                modelAndView.setViewName("index");
+            }else{
+                modelAndView.setViewName("profile");
+                modelAndView.addObject("user",user);
+            }
+        }
+        return modelAndView;
+    }*//*
+
+
+    @RequestMapping("uploadImagePage")
+    public ModelAndView uploadImagePage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("uploadIamge");
+        return modelAndView;
+    }
+
+    @RequestMapping("uploadImage")
+    public ModelAndView uploadImage(MultipartFile uploadFile,HttpServletRequest request)throws Exception{
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        ModelAndView modelAndView = new ModelAndView();
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        String responseStr ="";
+        Map<String,MultipartFile> fileMap =  multipartRequest.getFileMap();
+        // 获取上传文件存放的 目录 , 无则创建
+        String configPath = request.getSession().getServletContext().getRealPath("/static/upload/images/");
+        //创建文件夹
+        File file = new File(configPath);
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        String fileName = null;
+        for(Map.Entry<String,MultipartFile> entity :fileMap.entrySet()){
+            // 上传文件名
+            MultipartFile mf = entity.getValue();
+            fileName = mf.getOriginalFilename();
+            String fileExt = fileName.substring(fileName.lastIndexOf(".")+1).toLowerCase();
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+            String newFileName = df.format(new Date())+"_"+new Random().nextInt(1000)+"."+fileExt;
+            responseStr = "/static/upload/images/"+newFileName;
+            File uploadFile2 = new File(configPath+"/"+newFileName);
+            try{
+                FileCopyUtils.copy(mf.getBytes(),uploadFile2);
+            }catch (Exception e){
+                responseStr = "上传失败";
+                e.printStackTrace();
+            }
+        }
+        user.setImagePath(responseStr);
+        studentService.updateUser(user);
+        modelAndView.setViewName("profile");
+        return modelAndView;
+    }
+
+
+    @RequestMapping("updateProfilePage")
+    public ModelAndView updageProfilePage(HttpServletRequest request)throws Exception{
+        ModelAndView modelAndView = new ModelAndView();
+        String studentNo = request.getParameter("studentNo");
+        User userSession = (User)request.getSession().getAttribute("user");
+        User user = studentService.findUser(studentNo);
+        if(user==null || userSession ==null){
+            modelAndView.setViewName("login");
+            return modelAndView;
+        }
+        if(studentNo !=null && user!=null && !studentNo.equals(userSession.getStudentNo())){
+            modelAndView.setViewName("profile");
+            return modelAndView;
+        }else{
+            modelAndView.addObject("user",user);
+            modelAndView.setViewName("updateProfile");
+        }
+        return modelAndView;
+    }
+
+
+    @RequestMapping("updateProfile")
+    public String updateProfile(HttpServletRequest request)throws Exception{
+        ModelAndView modelAndView = new ModelAndView();
+        User user = (User)request.getSession().getAttribute("user");
+        User uuser = new User();
+        uuser.setStudentNo(user.getStudentNo());
+        String position = request.getParameter("position");
+        String education = request.getParameter("education");
+        String email = request.getParameter("email");
+        String grade = request.getParameter("grade");
+        String introduce = request.getParameter("introduce");
+        String skills = request.getParameter("skills");
+        int change = 0;
+        if(!position.equals(user.getPosition())){
+            uuser.setPosition(position);
+            change++;
+        }
+        if(!education.equals(user.getEducation())){
+            uuser.setEducation(education);
+            change++;
+        }
+        if(!email.equals(user.getEmail())){
+            uuser.setEmail(email);
+            change++;
+        }
+        if(!grade.equals(user.getGrade())){
+            uuser.equals(grade);
+            change++;
+        }
+        if(!introduce.equals(user.getIntroduce())){
+            uuser.equals(introduce);
+            change++;
+        }
+        if(!skills.equals(user.getSkills())){
+            uuser.setSkills(skills);
+            change++;
+        }
+        if(change==0){
+            return "forward:profile?studentNo="+user.getStudentNo();
+        }else{
+            studentService.updateUserInformation(uuser);
+        }
+        return "forward:profile?studentNo="+user.getStudentNo();
+    }
+
+
+
+   */
+
+
+
+/*
+    @RequestMapping("passwordSet")
+    public ModelAndView passwordSet(HttpServletRequest request){
+        ModelAndView modelAndView= new ModelAndView();
+        User userSession = (User)request.getSession().getAttribute("user");
+        if(userSession == null){
+            modelAndView.setViewName("login");
+            return modelAndView;
+        }else{
+            modelAndView.setViewName("setpassword");
+        }
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping("setPassword")
+    public String setPassword(HttpServletRequest request)throws Exception{
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result","");
+        String studentNo = request.getParameter("studentNo");
+        String newpwd = request.getParameter("newpwd");
+        String renewpwd = request.getParameter("renewpwd");
+        String originpwd = request.getParameter("originpwd");
+        if(newpwd==null||"".equals(newpwd)){
+            jsonObject.put("result","blank");
+            return jsonObject.toString();
+        }
+        if(renewpwd==null||"".equals(renewpwd)){
+            jsonObject.put("result","blank");
+            return jsonObject.toString();
+        }
+        if(!newpwd.equals(renewpwd)){
+            jsonObject.put("result","notSame");
+            return jsonObject.toString();
+        }
+        User old = studentService.findUser(studentNo);
+        if("".equals(studentNo)||studentNo==null||old==null){
+            jsonObject.put("result","noStudent");
+            return jsonObject.toString();
+        }
+        if(!originpwd.equals(old.getPassword())){
+            jsonObject.put("result","notpwd");
+            return jsonObject.toString();
+        }
+        User user =new User();
+        user.setStudentNo(studentNo);
+        user.setPassword(newpwd);
+        studentService.updatePwd(user);
+        jsonObject.put("result","succ");
+        return jsonObject.toString();
+    }
+
+*/
+
     /**
      * 接收用户头像
      * @param image 头像图片数据
@@ -204,7 +408,7 @@ public class StudentController {
         }
         student.setImg(1);
         //设为有自定义头像
-        userService.setImg(studentNo);
+        studentService.setImg(studentNo);
     }
 
     /**
@@ -214,7 +418,7 @@ public class StudentController {
     @ResponseBody
     @GetMapping("/count")
     public int count() {
-        return userService.countAll();
+        return studentService.countAll();
     }
 
     /**
@@ -228,7 +432,7 @@ public class StudentController {
         if(page <= 0) {
             return null;
         }
-        return userService.getStudentsByPage(page);
+        return studentService.getStudentsByPage(page);
     }
 
     /**
@@ -238,8 +442,10 @@ public class StudentController {
      */
     @ResponseBody
     @PutMapping
-    public String updateStudent(@RequestBody Student student) {
-        if(userService.updateStudent(student)) {
+
+    public String update(HttpServletRequest request, @RequestBody Student student) {
+        if(studentService.update(student)) {
+            request.getSession().setAttribute("student", studentService.getStudentByStudentNo(student.getStudentNo()));
             return "ok";
         }
         return "err";
@@ -253,7 +459,7 @@ public class StudentController {
     @GetMapping("/query/username")
     public List<Student> queryByUsername(@RequestParam("query") String query) {
         String trueQuery = "%" + query + "%";
-        return userService.queryByUserName(trueQuery);
+        return studentService.queryByUserName(trueQuery);
     }
 
     /**
@@ -264,7 +470,7 @@ public class StudentController {
     @GetMapping("/query/studentno")
     public List<Student> queryByStudentNo(@RequestParam("query") String query) {
         String trueQuery = "%" + query + "%";
-        return userService.queryByStudentNo(trueQuery);
+        return studentService.queryByStudentNo(trueQuery);
     }
 
     /**
@@ -274,7 +480,7 @@ public class StudentController {
     @ResponseBody
     @PutMapping("/reset/{id}")
     public String reset(@PathVariable("id") int id) {
-        if(userService.resetPw(id)) {
+        if(studentService.resetPw(id)) {
             return "ok";
         }
         return "err";
