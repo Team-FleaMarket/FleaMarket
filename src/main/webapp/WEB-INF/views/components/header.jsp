@@ -111,7 +111,7 @@
         <div class="search-box">
             <form action="">
                 <input type="text" name="search" placeholder="搜索" aria-label="Search">
-                <button type="submit"><i class="fa fa-search"></i></button>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
         <!-- 顶部内容 同时在侧边栏 end-->
@@ -120,20 +120,20 @@
         </c:if>
         <c:if test="${sessionScope.student != null}">
             <ul class="navbar-user">
-                <li>
-                    <a href="${pageContext.request.contextPath}/">
-                        <i class="fas fa-user-check"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/logout">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                <li class="image-li">
+                    <a href="${pageContext.request.contextPath}/managecenter">
+                        <img class="header-student-image" src="${sessionScope.student.imagePath}">
                     </a>
                 </li>
                 <li class="checkout">
                     <a href="">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         <span id="checkout-items-out" class="checkout-items">${sessionScope.cartList.size()}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/logout">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
                     </a>
                 </li>
             </ul>
