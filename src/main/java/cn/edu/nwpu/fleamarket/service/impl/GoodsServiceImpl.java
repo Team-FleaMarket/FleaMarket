@@ -216,6 +216,11 @@ public class GoodsServiceImpl implements GoodsService {
         System.out.println("query: " + query + "page: " + page + "pageSize: " + pageSize);
         return goodsDao.selectByGoodsName(query, (page - 1) * pageSize, pageSize);
     }
+
+    @Override
+    public double getSales(int cate) {
+        return goodsDao.getSales(String.valueOf(cate));
+    }
 }
 
 
