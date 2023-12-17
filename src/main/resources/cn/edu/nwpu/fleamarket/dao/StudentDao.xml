@@ -8,10 +8,15 @@
         <result column="student_no" jdbcType="VARCHAR" property="studentNo"></result>
         <result column="name" jdbcType="VARCHAR" property="name" ></result>
         <result column="password" jdbcType="VARCHAR" property="password" ></result>
+        <result column="qq" jdbcType="VARCHAR" property="qq" ></result>
+        <result column="wechat" jdbcType="VARCHAR" property="wechat" ></result>
         <result column="email" jdbcType="VARCHAR" property="email" ></result>
         <result column="phone" jdbcType="VARCHAR" property="phone" ></result>
-        <result column="wechat" jdbcType="VARCHAR" property="wechat" ></result>
         <result column="img" jdbcType="INTEGER" property="img" ></result>
+        <result column="image_path" jdbcType="VARCHAR" property="imagePath" ></result>
+        <result column="description" jdbcType="VARCHAR" property="description" ></result>
+        <result column="department" jdbcType="VARCHAR" property="department" ></result>
+
     </resultMap>
 
     <!-- ADD -->

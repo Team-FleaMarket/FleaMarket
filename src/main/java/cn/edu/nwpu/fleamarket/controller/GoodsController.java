@@ -195,12 +195,12 @@ public class GoodsController {
                            @PathVariable("cate") int cate,
                            @PathVariable("page") int pageNum) {
         List<GoodsItem> goodsItemList = new ArrayList<>();
-        Student loginStudent = (Student) request.getSession().getAttribute("student");
+        // Student loginStudent = (Student) request.getSession().getAttribute("student");
         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
         for (Goods goods : goodsList) {
-            if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+           /* if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
                 continue;
-            };
+            };*/
             GoodsItem goodsItem = new GoodsItem();
             goodsItem.setGoods(goods);
             System.out.println("goods.studentNo "+goods.getStudentNo());

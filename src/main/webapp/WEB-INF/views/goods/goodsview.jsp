@@ -80,22 +80,22 @@
         <p class="text-center display-3 mt-4 mb-4" style="letter-spacing: 10px">${category}</p>
         <hr>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-            <c:forEach var="goods" items="${goodsItemList}">
+            <c:forEach var="goodsItem" items="${goodsItemList}">
                 <div class="col">
                     <div class="card">
-                        <img src="${goods.imagePath}" class="card-img-top" alt="...">
+                        <img src="${goodsItem.goods.imagePath}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h6 class="card-title">${goods.goodsName}</h6>
-                            <p class="card-text">${goods.description}</p>
+                            <h6 class="card-title">${goodsItem.goods.goodsName}</h6>
+                            <p class="card-text">${goodsItem.goods.description}</p>
                         </div>
                         <div class="d-flex justify-content-around mb-3">
-                            <h5>${goods.price}</h5>
+                            <h5>￥</h5><h5>${goodsItem.goods.price}</h5>
                             <c:if test="${sessionScope.student == null}">
                                 <button class="redirect-btn btn btn-warning">我想要...</button>
                             </c:if>
                             <c:if test="${sessionScope.student != null}">
                                 <button class="want-btn btn btn-warning">我想要...</button>
-                            </c:if>>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -135,11 +135,10 @@
     <!-- // pagination -->
     <!-- modal -->
     <div class="modal fade" id="goods-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog" style="max-width: 930px; padding: 20px">
             <div class="modal-content">
-                <div class="modal-body">
-                    <%--                 <img src="${pageContext.request.getContextPath()}/static/images/goods.jpg" class="modal-img" alt="goods">--%>
-                    <%@include file="./goodsdetail.jsp" %>
+                <div class="modal-body" style="overflow: auto;max-height: 95vh; padding: 0px;">
+                    <%@ include file="./goodsdetail.jsp" %>
                 </div>
             </div>
         </div>
@@ -175,20 +174,16 @@
         document.querySelectorAll(".card-img-top").forEach((img, index) => {
             img.addEventListener("click", (e) => {
                 const goodsModal = document.getElementById('goods-modal')
-                console.log("goodsgoodsItemListList[index].goods.goodsName: " + goodsItemList[index].goods.goodsName)
-                console.log("goodsgoodsItemListList[index].goods.addedTime: " + goodsItemList[index].goods.addedTime)
-                console.log("goodsgoodsItemListList[index].goods.degree: " + goodsItemList[index].goods.degree)
-                console.log("goodsgoodsItemListList[index].goods.description: " + goodsItemList[index].goods.description)
-                console.log("goodsgoodsItemListList[index].goods.price: " + goodsItemList[index].goods.price)
-                console.log("goodsgoodsItemListList[index].goods.name: " + goodsItemList[index].goods.name)
-                console.log("goodsgoodsItemListList[index].goods.studentNo: " + goodsItemList[index].goods.studentNo)
+                goodsModal.querySelector(".goodsImage").src = goodsItemList[index].goods.imagePath
                 goodsModal.querySelector(".goodsName").innerText = goodsItemList[index].goods.goodsName
                 goodsModal.querySelector(".goodsAddedTime").innerText = goodsItemList[index].goods.addedTime
                 goodsModal.querySelector(".goodsDegree").innerText = goodsItemList[index].goods.degree
                 goodsModal.querySelector(".goodsDescription").innerText = goodsItemList[index].goods.description
                 goodsModal.querySelector(".goodsPrice").innerText = goodsItemList[index].goods.price
+                goodsModal.querySelector(".sellerImage").src = goodsItemList[index].student.imagePath
                 goodsModal.querySelector(".sellerName").innerText = goodsItemList[index].student.name
-                goodsModal.querySelector(".sellerStudentNo").innerText = goodsItemList[index].student.studentNo
+                goodsModal.querySelector(".sellerDescription").innerText = goodsItemList[index].student.description
+                goodsModal.querySelector(".sellerDepartment").innerText = goodsItemList[index].student.department
                 if (goodsItemList[index].student.hasOwnProperty("phone")) {
                     goodsModal.querySelector(".sellerPhone").innerText = goodsItemList[index].student.phone
                 }
@@ -250,9 +245,6 @@
     <!-- // modal -->
 </section>
 <!-- // goods -->
-<!-- Modal -->
-
-<!-- // Modal -->
 <!-- footer -->
 <%@include file="../components/footer.jsp" %>
 <!-- //footer -->

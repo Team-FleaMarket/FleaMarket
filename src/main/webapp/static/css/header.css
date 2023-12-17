@@ -42,7 +42,6 @@
 .navbar .search-box {
     flex: 1;
     position: relative;
-
 }
 .navbar .search-box input{
     width: 100%;
@@ -51,7 +50,7 @@
     outline: nono;
     background-color: #f2f2f2;
     border-radius: 30px;
-    color: rgb(128, 128, 128);
+    color: gray;
     text-indent: 12px;
     font-size: 16px;
     padding-left: 5px;
@@ -100,8 +99,7 @@
 
 .navbar .checkout a {
     background: #eceff6;
-    border-radius: 50%;
-    color: #1e1e27;
+    border-radius: 50%
 }
 .navbar .checkout-items {
     display: flex;
@@ -119,29 +117,23 @@
     color: #ffffff;
 }
 
+.navbar-user {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 如果需要垂直居中的话 */
+}
 .navbar-user li {
     display: inline-block;
     text-align: center;
-    margin-top: 20px;
 }
-.checkout li a {
+.navbar-user li a {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     width: 40px;
-    height: 40px;
-    color: #1e1e27;
-    transition: color 0.3s ease;
-}
-.user li a {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 80px;
     height: 40px;
     color: #1e1e27;
     transition: color 0.3s ease;
@@ -174,11 +166,17 @@
     font-size: 12px;
     color: #ffffff;
 }
-
-.fas{
-    width: 100px;
-    color: #1e1e27;
+.navbar-user .header-student-image {
+        width: 50px;
+        border-radius: 50%;
+        aspect-ratio: 1; /* 设置宽高比为5:6 */
+        object-fit: cover; /* 保持原始比例，填充整个容器 */
 }
+.navbar-user .image-li {
+    margin: 0 20px 0 15px;
+}
+
+
 @media (min-width: 991px) {
     .dropdown:hover .dropdown-menu {
         display: flex;
