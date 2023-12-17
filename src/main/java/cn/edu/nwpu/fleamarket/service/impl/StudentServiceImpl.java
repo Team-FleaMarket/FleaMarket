@@ -92,6 +92,16 @@ public class StudentServiceImpl implements StudentService {
     public void setImg(String studentNo) {
         studentDao.setImg(studentNo);
     }
+
+    @Override
+    public boolean resetPw(int id) {
+        String studentNo = studentDao.getStudentNoById(id);
+        if(studentNo == null) {
+            return false;
+        }
+        studentDao.resetPw(id);
+        return true;
+    }
 }
 
 

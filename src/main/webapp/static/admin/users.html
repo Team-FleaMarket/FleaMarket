@@ -48,7 +48,7 @@
                 <el-table-column
                         fixed="right"
                         label="操作"
-                        width="120">
+                        width="180">
                     <template slot-scope="scope">
 
                         <el-button
@@ -56,6 +56,11 @@
                                 size="mini"
                                 @click="showInfo(scope.row.id)">修改
                         </el-button>
+                        <template>
+                            <el-popconfirm title="确认重置密码？" @confirm="resetPw(scope.row.id)">
+                                <el-button slot="reference" type="danger" size="mini">重置密码</el-button>
+                            </el-popconfirm>
+                        </template>
                     </template>
                 </el-table-column>
             </el-table>
@@ -86,9 +91,6 @@
                     <el-form-item label="用户名">
                         <el-input v-model="tempUser.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="密码">
-                        <el-input type="password" v-model="tempUser.password"></el-input>
-                    </el-form-item>
                     <el-form-item label="邮箱">
                         <el-input v-model="tempUser.email"></el-input>
                     </el-form-item>
@@ -117,7 +119,6 @@
                 user: {
                     id: 0,
                     name: '',
-                    password: '',
                     studentNo: '',
                     email: '',
                     phone: '',
@@ -128,7 +129,6 @@
                 tempUser: {
                     id: 0,
                     name: '',
-                    password: '',
                     studentNo: '',
                     email: '',
                     phone: '',
@@ -138,6 +138,7 @@
                 total: 0, //总用户数
                 currentPage: 1,
                 dialogVisible: false,
+                confirmVisible: false,
                 selected: 'userName',
                 query: '',
                 placeholderMap: {
@@ -168,6 +169,20 @@
                 axios.get(url).then((res)=>{
                     this.users = res.data;
                 }).catch(err=>{
+                   console.log(err);
+                });
+            },
+            resetPw(id) {
+                axios.put("/student/reset/" + id).then((res=>{
+                    if(res.data === "ok") {
+                        this.$message({
+                            message: '重置密码成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message.error('重置失败');
+                    }
+                })).catch(err=>{
                    console.log(err);
                 });
             },
