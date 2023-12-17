@@ -46,12 +46,6 @@ img {
 .goods .card h5, h6 {
     color: #dd6161;
 }
-#goods-modal .modal-dialog {
-    max-width: 70vw; /* 设置最大宽度为100% */
-}
-#goods-modal .modal-content {
-    max-height: 70vh;
-}
-.modal {
-    overflow-y: hidden;
+.modal-dialog {
+    max-width: none;
 }
