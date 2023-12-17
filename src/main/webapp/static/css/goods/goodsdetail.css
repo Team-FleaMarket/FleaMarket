@@ -1,59 +1,141 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
-.goodsdatil{
+body {
     font-family: 'Poppins', sans-serif;
     background: #ececec;
 }
 
 /*------------ Login container ------------*/
 
-.goodsdetail .box-area{
+.box-area {
     width: 930px;
 }
 
-/*------------ Right box ------------*/
+/*------------ Left box ------------*/
+.left-box {
+    background: url('data:image/jpeg;base64,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');
+    background-size: 100%;
+    background-position: center;
+    padding: 0px;
+}
+.frosted__glass {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(20px);
+}
+/*------------ Right Box Goods------------*/
 
-.goodsdetail .right-box{
-    padding: 40px 30px 40px 40px;
+.tips {
+    width: 70%;
+    height: 10%;
+    margin: 70px 0px 0px 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 垂直居中 */
+    font-size: 20px;
+}
+
+.tips span {
+    margin: 0 7px 0 7px;
+    cursor: pointer;
+    padding-bottom: 5px;
+    transition: 0.1s;
+    color: rgb(100, 108, 154);
+}
+
+.tips span:hover {
+    border-bottom: 4px solid rgb(249, 177, 122);
+    color: #fff;
+}
+
+.tips .goods-information-button {
+    border-bottom: 4px solid rgb(249, 177, 122);
+    color: #000;
+}
+.goodsName {
+    margin-bottom: 15px;
+}
+.goods-information {
+    padding: 50px;
+}
+.seller-information {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 垂直居中 */
+}
+
+.goodsDescription {
+    border: none;
+    outline: none; /* 这会移除文本框的轮廓线 */
+}
+.button-row div{
+    padding: 5px;
+}
+
+/*------------ Right Box Seller------------*/
+.seller-img {
+    margin: 20px;
+    width: 25%;
+    border-radius: 50%;
+    aspect-ratio: 1; /* 设置宽高比为5:6 */
+    object-fit: cover; /* 保持原始比例，填充整个容器 */
+}
+.seller-basic-information {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 垂直居中 */
+}
+.seller-basic-description {
+    flex-direction: column;
 }
 
 /*------------ Custom Placeholder ------------*/
 
-.goodsdetail ::placeholder{
+::placeholder {
     font-size: 16px;
 }
 
-.goodsdetail .rounded-4{
+.rounded-4 {
     border-radius: 20px;
 }
-.goodsdetail .rounded-5{
+
+.rounded-5 {
     border-radius: 30px;
 }
-.goodsdetail textarea{
-    font-family: inherit;
-    font-size: 12px; /* 设置字体大小 */
-    /* 去除边框 */
-    border: none;
-    resize: none;
-    /* 去除选中后的边框 */
-    outline:none;
-    height: 250px; /* 设置高度 */
-}
+
 
 /*------------ For small screens------------*/
 
-@media only screen and (max-width: 991){
+@media only screen and (max-width: 768px) {
 
-    .goodsdetail .box-area{
+    .box-area {
         margin: 0 10px;
 
-     }
-     .goodsdetail .left-box{
+    }
+
+    .left-box {
         height: 300px;
         overflow: hidden;
-     }
-     .goodsdetail .right-box{
-        padding: 20px;
-     }
+    }
+
+    .right-box {
+        padding: 0 10px 20px 10px;
+    }
+
+    .tips {
+        margin-top: 20px;
+    }
+    .goodsName {
+        margin-bottom: 5px;
+    }
+    .goods-information {
+        padding: 30px 10px 0 10px;
+    }
 
 }

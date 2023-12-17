@@ -39,11 +39,8 @@
                      <p>Join the community of developers <i>- ludiflex</i></p>
                  </div>--%>
             </div>
-
             <div class="col-md-6 right">
-
                 <div class="input-box">
-
                     <header class="zoomIn">登录</header>
                     <p class="zoomIn">Login to your account...</p>
                     <div class="input-field">
