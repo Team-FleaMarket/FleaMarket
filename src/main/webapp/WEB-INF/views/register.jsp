@@ -200,11 +200,11 @@
                             <span class="required">*</span>
                         </div>
                     </div>
-                    <%--登录按钮--%>
+                    <%--注册按钮--%>
                     <div class="input-field">
                         <input type="button" class="button" id="liveToastBtn" value="注册">
                     </div>
-                    <%--注册跳转--%>
+                    <%--登录跳转--%>
                     <div class="tologin">
                         <span>已有账号？请点击 <a href="${pageContext.request.contextPath}/login">登录</a></span>
                     </div>

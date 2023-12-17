@@ -13,15 +13,17 @@ public interface OrdersService {
 
     void addOrder(Goods goods, String studentNo);
 
-    void sellerConfirm(Integer goodsId, Integer sellerNo);
+    void sellerConfirm(Integer orderId, Integer sellerNo);
 
-    void buyerConfirm(Integer goodsId, Integer buyerNo);
+    void buyerConfirm(Integer orderId, Integer buyerNo);
 
-    void deleteOrder(Integer goodsId, Integer studentNo);
+    void deleteOrder(Integer orderId, Integer studentNo);
 
-    void buyerCancel(Integer goodsId, Integer buyerNo);
+    void buyerCancel(Integer orderId, Integer buyerNo);
 
     void sellerCancel(Integer goodsId, Integer sellerNo);
 
     void checkForCancel(Integer goodsId);
+
+    void cancelOrder(Integer orderId, Integer studentNo);
 }

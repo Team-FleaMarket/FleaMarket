@@ -5,6 +5,7 @@ import cn.edu.nwpu.fleamarket.dao.OrdersDao;
 import cn.edu.nwpu.fleamarket.enums.GoodsStatusEnum;
 import cn.edu.nwpu.fleamarket.exception.BusinessException;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
+import cn.edu.nwpu.fleamarket.pojo.Orders;
 import cn.edu.nwpu.fleamarket.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,34 +32,36 @@ public class OrdersServiceImpl implements OrdersService{
     }
 
     @Override
-    public void sellerConfirm(Integer goodsId, Integer sellerNo) {
-        System.out.println("sellerconfirm goodsId: " + goodsId + " sellerNo: " + sellerNo);
-        ordersDao.sellerConfirm(goodsId, sellerNo);
+    public void sellerConfirm(Integer orderId, Integer sellerNo) {
+        System.out.println("sellerconfirm goodsId: " + orderId + " sellerNo: " + sellerNo);
+        ordersDao.sellerConfirm(orderId, sellerNo);
     }
 
     @Override
-    public void buyerConfirm(Integer goodsId, Integer buyerNo) {
-        if(ordersDao.isSellerConfirmed(goodsId) == 0){
+    public void buyerConfirm(Integer orderId, Integer buyerNo) {
+        if(ordersDao.isSellerConfirmed(orderId) == 0){
             throw new BusinessException("卖家未确认");
         }
-        ordersDao.buyerConfirm(goodsId, buyerNo);
-        goodsDao.setGoodsStatus(goodsId, GoodsStatusEnum.SOLD.getCode());
+        ordersDao.buyerConfirm(orderId, buyerNo);
+        Orders orders = ordersDao.selectById(orderId);
+        Goods goods = goodsDao.selectById(orders.getGoodsId());
+        goodsDao.setGoodsStatus(goods.getId(), GoodsStatusEnum.SOLD.getCode());
     }
 
     @Override
-    public void deleteOrder(Integer goodsId, Integer id) {
-        ordersDao.deleteOrder(goodsId, id);
+    public void deleteOrder(Integer orderId, Integer id) {
+        ordersDao.deleteOrder(orderId, id);
     }
 
     @Override
-    public void buyerCancel(Integer goodsId, Integer buyerNo) {
-        System.out.println("buyerCancel goodsId: " + goodsId + " buyerNo: " + buyerNo);
-
-        if (ordersDao.isSellerCanceled(goodsId) == 1) {
-            ordersDao.setBuyerCancel(goodsId);
-            goodsDao.setGoodsStatus(goodsId, GoodsStatusEnum.NOT_SOLD.getCode());
+    public void buyerCancel(Integer orderId, Integer buyerNo) {
+        System.out.println("buyerCancel goodsId: " + orderId + " buyerNo: " + buyerNo);
+        Goods goods = goodsDao.selectById(orderId);
+        if (ordersDao.isSellerCanceled(orderId) == 1) {
+            ordersDao.setBuyerCancel(orderId);
+            goodsDao.setGoodsStatus(goods.getId(), GoodsStatusEnum.NOT_SOLD.getCode());
         }else{
-            ordersDao.setBuyerCancel(goodsId);
+            ordersDao.setBuyerCancel(orderId);
         }
     }
 
@@ -85,6 +88,13 @@ public class OrdersServiceImpl implements OrdersService{
         if(goods.getGoodsStatus()==GoodsStatusEnum.NOT_SOLD.getCode()){
             throw new BusinessException("商品未售出，不能取消订单");
         }
+    }
+
+    @Override
+    public void cancelOrder(Integer orderId, Integer studentNo) {
+        Goods goods = goodsDao.selectById(ordersDao.selectById(orderId).getGoodsId());
+        ordersDao.logicCancelOrder(orderId);
+        goodsDao.setGoodsStatus(goods.getId(), GoodsStatusEnum.NOT_SOLD.getCode());
     }
 
 }

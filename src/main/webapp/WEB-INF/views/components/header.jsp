@@ -46,7 +46,7 @@
                             <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/login">个人中心</a>
                         </c:if>
                         <c:if test="${sessionScope.student != null}">
-                            <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/managecenter">个人中心</a>
+                            <a class="nav-link mx-lg-2" href="${pageContext.request.contextPath}/views/managecenter">个人中心</a>
                         </c:if>
 
                     </li>
@@ -91,18 +91,24 @@
                         navlinks.forEach((link) => {
                             link.classList.remove('active'); // 移除所有a标签的active状态
                         });
-                        switch (pathArray[1]) {
-                            case 'views':
-                                navlinks[2].classList.add('active');
-                                break;
-                            case 'login':
-                            case 'register':
-                            case 'managecenter':
-                                navlinks[1].classList.add('active');
-                                break;
-                            default:
-                                navlinks[0].classList.add('active');
+                        if(pathArray.length>=2&&pathArray[2]==='managecenter')
+                        {
+                            navlinks[1].classList.add('active');
+                        }else{
+                            switch (pathArray[1]) {
+                                case 'views':
+                                    navlinks[2].classList.add('active');
+                                    break;
+                                case 'login':
+                                case 'register':
+                                case 'views/managecenter':
+                                    navlinks[1].classList.add('active');
+                                    break;
+                                default:
+                                    navlinks[0].classList.add('active');
+                            }
                         }
+
                     }
                     window.onload = changeNavlinkActiveState; // 页面加载时调用
                 </script>
@@ -121,7 +127,7 @@
         <c:if test="${sessionScope.student != null}">
             <ul class="navbar-user">
                 <li class="image-li">
-                    <a href="${pageContext.request.contextPath}/managecenter">
+                    <a href="${pageContext.request.contextPath}/views/managecenter">
                         <img class="header-student-image" src="${sessionScope.student.imagePath}">
                     </a>
                 </li>

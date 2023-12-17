@@ -14,6 +14,8 @@
 <head>
     <title>管理中心</title>
     <%@ include file="../components/htmlhead.jsp" %>
+    <link href="${pageContext.request.contextPath}/static/css/goods/goodsdetail.css" rel="stylesheet"
+          type="text/css" media="all"/>
     <script language="JavaScript">
         // $(document).ready(function() {
         //     //绑定下拉框change事件，当下来框改变时调用 SelectChange()方法
@@ -40,6 +42,7 @@
 
         }
     </script>
+    <script src="${pageContext.request.contextPath}/static/js/managecenter.js" defer></script>
 
     <!-- //animation-effect -->
 </head>
@@ -51,348 +54,229 @@
     <div class="container">
         <div class="">
             <div class="container">
-                <div class="footer-grids">
+                <div class="">
                     <!--banner-bottom-grid-left-->
                     <div class="row">
                         <div class="col-md-3 information " data-wow-delay=".5s">
                             <form>
                                 <div class="self_information">
-                                    <c:if test="${sessionScope.student.img!=0}">
-                                        <img src="${pageContext.request.contextPath}/static/images/avatar/${sessionScope.student.studentNo}.jpg"
+                                    <c:if test="${sessionScope.student.imagePath!=null}">
+                                        <img src="${sessionScope.student.imagePath}"
                                              alt=" " class="avatar rounded-circle mx-auto d-block">
                                     </c:if>
-                                    <c:if test="${sessionScope.student.img==0}">
+                                    <c:if test="${sessionScope.student.imagePath==null}">
                                         <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
                                         <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg"
                                              alt=" " class="avatar rounded-circle mx-auto d-block">
-                                        <div class="avatar overlay rounded-circle">
-                                            <input type="file" accept="image/*" id="imageInput" style="display: none;">
-                                            <button class="avatar-button rounded-3" onclick="uploadImage()">上传图像
-                                            </button>
-                                            <script>
-                                                function uploadImage() {
-                                                    document.getElementById('imageInput').click();
-                                                }
-
-                                                document.getElementById('imageInput').addEventListener('change', function () {
-                                                    var selectedFile = this.files[0];
-                                                    if (selectedFile) {
-                                                        var formData = new FormData();
-                                                        formData.append('image', selectedFile);
-                                                        console.log('Selected file:', selectedFile);
-                                                    }
-                                                });
-                                            </script>
-                                        </div>
                                     </c:if>
                                 </div>
                                 <br>
-                                <h4>学号:${sessionScope.student.studentNo}</h4>
+                                <h5>学号:${sessionScope.student.studentNo}</h5>
                                 <br>
-                                <h4>昵称:${sessionScope.student.name}</h4>
+                                <h5>昵称:${sessionScope.student.name}</h5>
                                 <h2></h2>
                                 <br>
-                                <h4>邮箱:${sessionScope.student.email}</h4><h4></h4>
+                                <h5>微信:${sessionScope.student.wechat}</h5><h4></h4>
                                 <br>
-                                <h4>微信号:${sessionScope.student.wechat}</h4><h4></h4>
-                                <br>
-                                <h4>手机号:${sessionScope.student.phone}</h4><h4></h4>
-                                <br>
-                                <h4>
-                                    <a href="${pageContext.request.getContextPath()} /managecenter/modifyInfo">修改信息</a>
-                                </h4><h4></h4>
-
+                                <h5>手机号:${sessionScope.student.phone}</h5><h4></h4>
                             </form>
                         </div>
                         <div class="col-md-9 " data-wow-delay=".6s">
                             <div class="goods">
                                 <div class="">
                                     <div class="status">
-                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=0">待审核</a>
+                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=0">待审核</a>
                                         |
-                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=1">待出售</a>
+                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=-1">审核未通过</a>
+                                        ||
+                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=1">待出售</a>
                                         |
-                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=2">已出售</a>
+                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=4">出售中</a>
                                         |
-                                        <a href="${pageContext.request.getContextPath()}/views/managecenter?status=3">我的购买</a>
+                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=2">已出售</a>
+                                        ||
+                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=3">我的订单</a>
                                         |
-                                        <a href="/views/insert">添加商品</a> <span></span>
+                                        <a href="${pageContext.request.contextPath}/views/insert">添加商品</a> <span></span>
                                     </div>
                                     <br>
                                     <div class="row">
                                         <div class="col-md-4 status-single">
                                             <c:if test="${status == 0}"><h4>待审核: ${totalCnt} 件商品</h4></c:if>
+                                            <c:if test="${status == -1}"><h4>审核未通过: ${totalCnt} 件商品</h4></c:if>
                                             <c:if test="${status == 1}"><h4>待出售: ${totalCnt} 件商品</h4></c:if>
+                                            <c:if test="${status == 4}"><h4>出售中: ${totalCnt} 件商品</h4></c:if>
                                             <c:if test="${status == 2}"><h4>已出售: ${totalCnt} 件商品</h4></c:if>
-                                            <c:if test="${status == 3}"><h4>我的购买: ${totalCnt} 件商品</h4></c:if>
+                                            <c:if test="${status == 3}"><h4>我的订单: ${totalCnt} 件商品</h4></c:if>
                                         </div>
                                         <div class="col-md-8">
-                                            <div class="search-container">
-                                                <input type="text" id="searchInput" placeholder="搜索商品">
-                                                <button class="search-button rounded-5" onclick="search()">搜索</button>
-                                            </div>
+                                            <form action="${pageContext.request.contextPath}/views/managecenter"
+                                                  method="get">
+                                                <c:if test="${searchText!=null}">
+                                                    <input type="text" id="searchInput" name="searchInput"
+                                                           placeholder="${searchText}">
+                                                </c:if>
+                                                <c:if test="${searchText==null}">
+                                                    <input type="text" id="searchInput" name="searchInput"
+                                                           placeholder="搜索商品">
+                                                </c:if>
+                                                <input type="hidden" name="status" value="${status}">
+                                                <input class="search-button" type="submit" value="搜索">
+                                            </form>
+
                                         </div>
                                     </div>
                                     <br>
-                                    <c:if test="${status == 0}">
+
+                                    <c:forEach items="${orderInformationPageResult.orderInformationList}"
+                                               var="orderInformation" varStatus="vs">
+                                        <c:set var="goods" value="${orderInformation.goods}"/>
+                                        <c:set var="buyer" value="${orderInformation.buyer}"/>
+                                        <c:set var="seller" value="${orderInformation.seller}"/>
                                         <div class="student-goods  ">
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="student-goods-image">
-                                                        <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg"
+                                                        <img src="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
                                                              alt=" " class="img-rounded" width="125px" height="125px"/>
                                                     </div>
                                                     <br>
-                                                    <h4><a class="item_add"
-                                                           href="${pageContext.request.getContextPath()}/views/single?goodsId=1">>>更多</a>
-                                                    </h4>
+                                                        <%--                                                    <h4><a class="item_add" href="${pageContext.request.}/views/single?goodsId=${orderInformation.goods.id}">>>更多</a></h4>--%>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <h3>于2023年5月3299购入的电脑</h3>
-                                                    <p>电子产品</p>
-                                                    <h3 class="money ">￥ 2899</h3>
-                                                    <h4 class="date">2023年12月</h4>
-                                                    <button type="button" class="btn btn-outline-dark pull-right">删除
-                                                    </button>
-                                                    <button type="button" class="btn btn-outline-dark pull-right"
-                                                            onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
-                                                        编辑
-                                                    </button>
-                                                    <button type="button" class="btn btn-outline-dark pull-right">降价
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                            <div class="student-goods  ">
-                                                <div class="row">
-                                                    <div class="col-md-md-3">
-                                                        <div class="student-goods-image">
-                                                            <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg"
-                                                                 alt=" " class="img-rounded" width="125px"
-                                                                 height="125px"/>
-                                                        </div>
-                                                        <br>
-                                                        <h4><a class="item_add"
-                                                               href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="col-md-md-9">
-                                                        <h3>${goods.goodsName}</h3>
-                                                        <mytag:cate category="${goods.cate}"></mytag:cate>
-                                                        <h3 class="money ">${goods.price}</h3>
-                                                        <h4 class="date">${goods.description}</h4>
-                                                        <button type="button" class="btn btn-outline-dark pull-right">
-                                                            删除
+                                                    <h3>${orderInformation.goods.goodsName}</h3>
+                                                    <mytag:cate category="${orderInformation.goods.cate}"/>
+                                                    <h3 class="money ">￥ ${orderInformation.goods.price}</h3>
+                                                    <h4 class="date">${orderInformation.goods.degree}新</h4>
+                                                        <%--审核未通过--%>
+                                                    <c:if test="${status==-1}">
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                                data-bs-whatever="${orderInformation.goods.id}">删除
                                                         </button>
-                                                        <button type="button" class="btn btn-outline-dark pull-right">
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#editModal"
+                                                                data-bs-whatever="${orderInformation.goods.id}"
+                                                                name="${orderInformation.goods.goodsName}"
+                                                                description="${orderInformation.goods.description}"
+                                                                price="${orderInformation.goods.price}"
+                                                                degree="${orderInformation.goods.degree}"
+                                                                cate="${orderInformation.goods.cate}">编辑
+                                                        </button>
+                                                    </c:if>
+                                                        <%--待审核--%>
+                                                    <c:if test="${status == 0&&orderInformation.goods.status==0}">
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                                data-bs-whatever="${orderInformation.goods.id}">下架
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#editModal"
+                                                                data-bs-whatever="${orderInformation.goods.id}"
+                                                                name="${orderInformation.goods.goodsName}"
+                                                                description="${orderInformation.goods.description}"
+                                                                price="${orderInformation.goods.price}"
+                                                                degree="${orderInformation.goods.degree}"
+                                                                cate="${orderInformation.goods.cate}">编辑
+                                                        </button>
+                                                    </c:if>
+                                                        <%--待出售--%>
+                                                    <c:if test="${status == 1&&orderInformation.goods.status==1}">
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                                data-bs-whatever="${orderInformation.goods.id}">下架
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#editModal"
+                                                                data-bs-whatever="${orderInformation.goods.id}"
+                                                                name="${orderInformation.goods.goodsName}"
+                                                                description="${orderInformation.goods.description}"
+                                                                price="${orderInformation.goods.price}"
+                                                                degree="${orderInformation.goods.degree}"
+                                                                cate="${orderInformation.goods.cate}">
                                                             编辑
                                                         </button>
-                                                        <button type="button" class="btn btn-outline-dark pull-right">
-                                                            降价
+                                                    </c:if>
+                                                        <%--出售中--%>
+                                                    <c:if test="${status == 4}">
+                                                        <c:set var="type" value="seller"/>
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#cancelModal"
+                                                                data-bs-whatever="${orderInformation.orderId}">拒绝交易
                                                         </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <%--                                            </c:if>--%>
-                                        </c:forEach>
-                                        <mytag:pagination status="${status}" currentPage="${currentPage}"
-                                                          totalPage="${totalPage}"/>
-                                    </c:if>
-                                    <c:if test="${status == 1}">
-                                        <div class="student-goods  ">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="student-goods-image">
-                                                        <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg"
-                                                             alt=" " class="img-rounded" width="125px" height="125px"/>
-                                                    </div>
-                                                    <br>
-                                                    <h4><a class="item_add"
-                                                           href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a>
-                                                    </h4>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <h3>于2023年5月3299购入的电脑</h3>
-                                                    <p>电子产品</p>
-                                                    <h3 class="money ">￥ 2899</h3>
-                                                    <h4 class="date">2023年12月</h4>
-                                                    <button type="button" class="btn btn-outline-dark pull-right">删除
-                                                    </button>
-                                                    <button type="button" class="btn btn-outline-dark pull-right">编辑
-                                                    </button>
-                                                    <button type="button" class="btn btn-outline-dark pull-right">降价
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                            <%--                                            <c:if test="${goods.status == 1&&goods.goodsStatus==0}">--%>
-                                            <div class="student-goods  ">
-                                                <div class="row">
-                                                    <div class="col-md-md-3">
-                                                        <div class="student-goods-image">
-                                                            <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg"
-                                                                 alt=" " class="img-rounded" width="125px"
-                                                                 height="125px"/>
-                                                        </div>
-                                                        <br>
-                                                        <h4><a class="item_add"
-                                                               href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="col-md-md-9">
-                                                        <h3>${goods.goodsName}</h3>
-                                                        <mytag:cate category="${goods.cate}"></mytag:cate>
-                                                        <h3 class="money ">${goods.price}</h3>
-                                                        <h4 class="date">${goods.description}</h4>
-                                                        <button type="button" class="btn btn-outline-dark pull-right">
-                                                            删除
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-dark pull-right">
-                                                            编辑
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-dark pull-right">
-                                                            降价
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <%--                                            </c:if>--%>
-                                        </c:forEach>
-                                        <mytag:pagination status="${status}" currentPage="${currentPage}"
-                                                          totalPage="${totalPage}"/>
-                                    </c:if>
-                                    <c:if test="${status == 2}">
-                                        <div class="student-goods  ">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="student-goods-image">
-                                                        <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg"
-                                                             alt=" " class="img-rounded" width="125px" height="125px"/>
-                                                    </div>
-                                                    <br>
-                                                    <h4><a class="item_add"
-                                                           href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a>
-                                                    </h4>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <h3>于2023年5月3299购入的电脑</h3>
-                                                    <p>电子产品</p>
-                                                    <h3 class="money ">￥ 2899</h3>
-                                                    <h4 class="date">2023年12月</h4>
-                                                    <button type="button" class="btn btn-outline-dark pull-right">删除
-                                                    </button>
-                                                    <button type="button" class="btn btn-outline-dark pull-right">编辑
-                                                    </button>
-                                                    <button type="button" class="btn btn-outline-dark pull-right">降价
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                            <c:if test="${goods.goodsStatus == 1}">
-                                                <div class="student-goods  ">
-                                                    <div class="row">
-                                                        <div class="col-md-md-3">
-                                                            <div class="student-goods-image">
-                                                                <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg"
-                                                                     alt=" " class="img-rounded" width="125px"
-                                                                     height="125px"/>
-                                                            </div>
-                                                            <br>
-                                                            <h4><a class="item_add"
-                                                                   href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a>
-                                                            </h4>
-                                                        </div>
-                                                        <div class="col-md-md-9">
-                                                            <h3>${goods.goodsName}</h3>
-                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
-                                                            <h3 class="money ">${goods.price}</h3>
-                                                            <h4 class="date">${goods.description}</h4>
+                                                        <c:if test="${orderInformation.sellerConfirm==0}">
                                                             <button type="button"
-                                                                    class="btn btn-outline-dark pull-right">删除
+                                                                    class="btn btn-outline-dark pull-right"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#sellerConfirmModal"
+                                                                    data-bs-whatever="${orderInformation.orderId}">确认出售
                                                             </button>
-                                                            <button type="button"
-                                                                    class="btn btn-outline-dark pull-right">编辑
-                                                            </button>
-                                                            <button type="button"
-                                                                    class="btn btn-outline-dark pull-right">降价
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </c:if>
-                                        </c:forEach>
-                                        <mytag:pagination status="${status}" currentPage="${currentPage}"
-                                                          totalPage="${totalPage}"/>
-                                    </c:if>
-                                    <c:if test="${status == 3}">
-                                        <div class="student-goods  row">
-                                            <div class="student-goods  ">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="student-goods-image">
-                                                            <img src="${pageContext.request.getContextPath()}/static/images/dz11.jpg"
-                                                                 alt=" " class="img-rounded" width="125px"
-                                                                 height="125px"/>
-                                                        </div>
-                                                        <br>
-                                                        <h4><a class="item_add"
-                                                               href="${pageContext.request.getContextPath()}/views/single?goodsId=1">>>更多</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <h3>于2023年5月3299购入的电脑</h3>
-                                                        <p>电子产品</p>
-                                                        <h3 class="money ">￥ 2899</h3>
-                                                        <h4 class="date">2023年12月</h4>
-                                                        <button type="button" class="btn btn-outline-dark pull-right">
-                                                            删除
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <c:forEach items="${goodsList}" var="goods" varStatus="vs">
-                                            <c:if test="${goods.status == 3}">
-                                                <div class="student-goods  ">
-                                                    <div class="row">
-                                                        <div class="col-md-md-3">
-                                                            <div class="student-goods-image">
-                                                                <img src="${pageContext.request.getContextPath()}/static/upload/file/${goods.imagePath}.jpg"
-                                                                     alt=" " class="img-rounded" width="125px"
-                                                                     height="125px"/>
-                                                            </div>
-                                                            <br>
-                                                            <h4><a class="item_add"
-                                                                   href="${pageContext.request.getContextPath()}/views/single?goodsId=${goods.id}">>>更多</a>
-                                                            </h4>
-                                                        </div>
-                                                        <div class="col-md-md-9">
-                                                            <h3>${goods.goodsName}</h3>
-                                                            <mytag:cate category="${goods.cate}"></mytag:cate>
-                                                            <h3 class="money ">${goods.price}</h3>
-                                                            <h4 class="date">${goods.description}</h4>
-                                                            <button type="button"
-                                                                    class="btn btn-outline-dark pull-right">删除
-                                                            </button>
-                                                            <button type="button"
-                                                                    class="btn btn-outline-dark pull-right">编辑
-                                                            </button>
-                                                            <button type="button"
-                                                                    class="btn btn-outline-dark pull-right">降价
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </c:if>
+                                                        </c:if>
 
-                                        </c:forEach>
-                                        <mytag:pagination status="${status}" currentPage="${currentPage}"
-                                                          totalPage="${totalPage}"/>
-                                    </c:if>
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#orderModal"
+                                                                img-path="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
+                                                                name="${orderInformation.goods.goodsName}"
+                                                                description="${orderInformation.goods.description}"
+                                                                price="${orderInformation.goods.price}"
+                                                                degree="${orderInformation.goods.degree}"
+                                                                cate="${orderInformation.goods.cate}"
+                                                                user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone}">
+                                                            查看订单
+                                                        </button>
+                                                    </c:if>
+                                                        <%--已出售--%>
+                                                    <c:if test="${status == 2}">
+                                                        <c:set var="type" value="seller"/>
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#orderModal"
+                                                                data-bs-whatever="${orderInformation.goods.id}"
+                                                                img-path="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
+                                                                name="${orderInformation.goods.goodsName}"
+                                                                description="${orderInformation.goods.description}"
+                                                                price="${orderInformation.goods.price}"
+                                                                degree="${orderInformation.goods.degree}"
+                                                                cate="${orderInformation.goods.cate}"
+                                                                user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone}">
+                                                            查看订单
+                                                        </button>
+                                                    </c:if>
+                                                        <%--我的订单--%>
+                                                    <c:if test="${status == 3}">
+                                                        <c:if test="${orderInformation.goods.goodsStatus==2}">
+                                                            <c:set var="type" value="buyer"/>
+                                                            <button type="button"
+                                                                    class="btn btn-outline-dark pull-right "
+                                                                    data-bs-toggle="modal" data-bs-target="#cancelModal"
+                                                                    data-bs-whatever="${orderInformation.orderId}">取消订单
+                                                            </button>
+                                                            <button type="button"
+                                                                    class="btn btn-outline-dark pull-right"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#buyerConfirmModal"
+                                                                    data-bs-whatever="${orderInformation.orderId}"
+                                                                    status="${status}">确认收货
+                                                            </button>
+                                                        </c:if>
+                                                        <button type="button" class="btn btn-outline-dark pull-right"
+                                                                data-bs-toggle="modal" data-bs-target="#orderModal"
+                                                                img-path="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
+                                                                name="${orderInformation.goods.goodsName}"
+                                                                description="${orderInformation.goods.description}"
+                                                                price="${orderInformation.goods.price}"
+                                                                degree="${orderInformation.goods.degree}"
+                                                                cate="${orderInformation.goods.cate}"
+                                                                user-information="${seller.studentNo},${seller.name},${seller.wechat},${seller.email},${seller.phone}">
+                                                            查看订单
+                                                        </button>
+                                                    </c:if>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                    <mytag:pagination status="${status}" currentPage="${currentPage}"
+                                                      totalPage="${totalPage}" goodsName="${searchText}"/>
+
                                 </div>
                             </div>
                         </div>
@@ -406,11 +290,214 @@
     </div>
     <div class="clearfix"></div>
 </div>
-</div>
 <!-- //banner-bottom -->
 
 <!-- footer -->
+<%--编辑商品信息模态框--%>
+<div class="modal fade" id="editModal" tabindex="-1"
+     aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editModalLabel">修改商品信息</h1>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="goodsName"
+                               class="col-form-label">商品名称:</label>
+                        <input type="text" class="form-control"
+                               id="goodsName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price"
+                               class="col-form-label">商品价格:</label>
+                        <input type="text" class="form-control"
+                               id="price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description"
+                               class="col-form-label">商品描述:</label>
+                        <textarea class="form-control"
+                                  id="description" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="degree"
+                               class="col-form-label">新旧程度:</label>
+                        <select class="form-control"
+                                id="degree" required>
+                            <option value="10">全新</option>
+                            <option value="9.9">九九新</option>
+                            <option value="9.5">九五新</option>
+                            <option value="9">九成新</option>
+                            <option value="8">八成新</option>
+                            <option value="7">八成新以下</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cate"
+                               class="col-form-label">商品分类:</label>
+                        <select class="form-select" id="cate" required>
+                            <option value="1">教材</option>
+                            <option value="2">考试</option>
+                            <option value="3">文学</option>
+                            <option value="4">运动类</option>
+                            <option value="5">文具类</option>
+                            <option value="6">生活类</option>
+                            <option value="7">美妆</option>
+                            <option value="8">电子产品</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="editSubmitButton" type="button"
+                        class="btn btn-primary">保存更改
+                </button>
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--编辑商品信息模态框end--%>
+
+<%--下架模态框--%>
+<div class="modal fade" id="deleteModal" tabindex="-1"
+     aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">
+                    下架商品</h1>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>请确认是否下架该商品。</p>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-primary">下架</a>
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--下架模态框end--%>
+
+<%--卖家确认出售模态框--%>
+<div class="modal fade" id="sellerConfirmModal" tabindex="-1"
+     aria-labelledby="sellerConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="sellerConfirmModalLabel">
+                    确认出售</h1>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>请确认是否出售该商品。</p>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-primary">出售</a>
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--卖家确认模态框end--%>
+
+<%-- 买家确认购买模态框 --%>
+<div class="modal fade" id="buyerConfirmModal" tabindex="-1"
+     aria-labelledby="buyerConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="buyerConfirmModalLabel">
+                    确认收获</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>请确认是否收货。</p>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-primary">确认收货</a>
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-- 卖家拒绝交易/买家取消订单模态框 --%>
+<div class="modal fade" id="cancelModal" tabindex="-1"
+     aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="cancelModalLabel">
+                    <c:if test="${type=='seller'}">
+                        拒绝交易
+                    </c:if>
+                    <c:if test="${type=='buyer'}">
+                        取消订单
+                    </c:if></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <c:if test="${type=='seller'}">
+                        请确认是否拒绝交易。
+                    </c:if>
+                    <c:if test="${type=='buyer'}">
+                        请确认是否取消订单。
+                    </c:if>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-primary">
+                    <c:if test="${type=='seller'}">
+                        拒绝
+                    </c:if>
+                    <c:if test="${type=='buyer'}">
+                        取消
+                    </c:if>
+                </a>
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--查看订单信息模态框--%>
+<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <%--                 <img src="${pageContext.request.getContextPath()}/static/images/goods.jpg" class="modal-img" alt="goods">--%>
+                <%@include file="orderDetail.jsp" %>
+            </div>
+        </div>
+    </div>
+</div>
+<%--消息提示框--%>
+<div id="alert-box"></div>
+<!-- footer -->
 <%@ include file="../components/footer.jsp" %>
+<!-- //footer -->
 
 <!-- //footer -->
 </body>

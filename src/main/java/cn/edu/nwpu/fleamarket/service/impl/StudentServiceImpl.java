@@ -73,7 +73,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean update(Student student) {
+    public boolean updateStudent(Student student) {
         studentDao.update(student);
         return true;
     }
@@ -86,6 +86,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> queryByStudentNo(String query) {
         return studentDao.queryByStudentNo(query);
+    }
+
+    @Override
+    public Student getStudentByStudentNo(String studentNo) {
+        studentDao.selectStudentByStudentNo(studentNo);
+        return null;
     }
 
     @Override
@@ -102,6 +108,8 @@ public class StudentServiceImpl implements StudentService {
         studentDao.resetPw(id);
         return true;
     }
+
+
 }
 
 
