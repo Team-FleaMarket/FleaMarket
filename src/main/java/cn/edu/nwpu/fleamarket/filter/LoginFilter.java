@@ -12,7 +12,8 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
-        System.out.println("login filter path: " + path);
+//        System.out.println("login filter path: " + path);
+        //以下直接放行
         if (path.startsWith("/login")) {
             chain.doFilter(request, response);
         } else if (path.equals("/")) {
@@ -23,10 +24,11 @@ public class LoginFilter implements Filter {
             chain.doFilter(request, response);
         } else if (path.startsWith("/student")){
             chain.doFilter(request, response);
-        } else if(path.startsWith("/admin")) {
+        } else if(path.startsWith("/admin/login")) {
             chain.doFilter(request, response);
         }
         else {
+            //需要鉴别是否是登录的用户或管理员
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             HttpSession session = httpRequest.getSession();
             Object o = session.getAttribute("student");
