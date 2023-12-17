@@ -84,7 +84,7 @@
     </select>
 
     <select id="getGoodsByCategoryPages" resultMap="BaseResultMap">
-        SELECT * FROM goods WHERE cate=#{cate} AND is_delete=0 AND status = 1 ORDER BY id DESC LIMIT #{offset},#{pageSize}
+        SELECT * FROM goods WHERE cate=#{cate} AND is_delete=0 AND status = 1 AND goods_status=0 ORDER BY id DESC LIMIT #{offset},#{pageSize}
     </select>
     <select id="selectByStatusAndStudentNoTotalCnt" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM goods WHERE student_no=#{studentNo} AND status=#{status} AND is_delete=0

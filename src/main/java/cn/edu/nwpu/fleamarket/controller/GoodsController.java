@@ -99,7 +99,7 @@ public class GoodsController {
         String suffix = type.substring(type.lastIndexOf("/") + 1);
         String fileName = id + "." + suffix;
         // 获取上传基路径
-        String path = request.getSession().getServletContext().getRealPath("src/main/webapp/static/upload/file/");
+        String path = request.getSession().getServletContext().getRealPath("/static/upload/file/");
 
         // 创建目标文件
         // 创建文件夹
