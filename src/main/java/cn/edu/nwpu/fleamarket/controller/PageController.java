@@ -1,11 +1,11 @@
 package cn.edu.nwpu.fleamarket.controller;
 
+import cn.edu.nwpu.fleamarket.data.GoodsItem;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
+import cn.edu.nwpu.fleamarket.service.CartService;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
-import com.alibaba.fastjson2.JSON;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,8 @@ public class PageController {
     private GoodsService goodsService;
     @Autowired
     private StudentService userService;
-
+    @Autowired
+    private CartService cartService;
     private static final int PAGE_SIZE = 24;
     private static Map<String, List<String>> CATEGORIES = new LinkedHashMap<String, List<String>>();
     static {
@@ -44,9 +45,18 @@ public class PageController {
     public ModelAndView category(HttpServletRequest request,
                                  @PathVariable("cate") int cate,
                                  @PathVariable("page") int pageNum) {
-        // 从数据库中获取 goodsList
+        List<GoodsItem> goodsItemList = new ArrayList<>();
         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
-        int pagesNum = goodsService.selectCountByCateList(Arrays.asList(cate)) / PAGE_SIZE + 1; // 当有 2 页商品时，得到的 pagesNum 是 1
+        for (Goods goods : goodsList) {
+            GoodsItem goodsItem = new GoodsItem();
+            goodsItem.setGoods(goods);
+            Student student = goodsService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItemList.add(goodsItem);
+        }
+        int count = goodsService.selectCountByCateList(Arrays.asList(cate));
+        int pagesNum =  count / PAGE_SIZE + 1;
         // 根据 cate 获取对应中文
         String[] category = new String[2];
         int remainingCate = cate;
@@ -64,7 +74,7 @@ public class PageController {
         ModelAndView modelAndView = new ModelAndView("goods/goodsview");
         modelAndView.addObject("mainCategory", category[0]);
         modelAndView.addObject("category", category[1]);
-        modelAndView.addObject("goodsList", goodsList);
+        modelAndView.addObject("goodsItemList", goodsItemList);
         modelAndView.addObject("cate", cate);
         modelAndView.addObject("page", pageNum);
         modelAndView.addObject("pages", pagesNum);
