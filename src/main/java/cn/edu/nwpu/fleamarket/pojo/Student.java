@@ -15,6 +15,9 @@ public class Student implements Serializable {
     private String studentNo;
     private String name;
     private String password;
+    private String description;
+    private String qq;
+    private String department;
     private Date birthday;
     private String sex;
     private String address;

@@ -8,11 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!----------------------- Main Container -------------------------->
-
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <!----------------------- Login Container -------------------------->
 
-    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+    <div class="row p-3 bg-white box-area">
         <!--------------------------- Left Box ----------------------------->
 
         <div class="col-md-6  d-flex justify-content-center align-items-center flex-column left-box">
@@ -20,9 +19,7 @@
                 <img src="" class="goodsImage">
             </div>
         </div>
-
         <!-------------------- ------ Right Box ---------------------------->
-
         <div class="col-md-6 right-box">
             <div class="row align-items-center justify-content-center">
                 <div class="tips">
@@ -62,35 +59,42 @@
                 <!-- 卖家信息 -->
                 <div class="seller-information" style="display: none;">
                     <div class="seller-basic-information">
-                        <img class="seller-img" src="./static/images/category/1.jpg" alt="">
+                        <img src="" class="sellerImage">
                         <div class="seller-basic-description">
-                            <h3 class="sellerName"></h3>
-                            <textarea class="sellerStudentNo fs-6 mt-3" rows="2"
+                            <h5 class="sellerName"></h5>
+                            <p class="sellerDepartment"></p>
+                            <textarea class="sellerDescription fs-6" rows="2"
                                       style="width: 100%" disabled>
                         </textarea>
                         </div>
                     </div>
+                    <div class="contact">
+                        <div class="card" style="width:100%;">
+                            <div class="card-header">
+                                联系方式
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="fa-brands fa-weixin"></i>
+                                    <span class="sellerWechat"></span>
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fa-brands fa-qq"></i>
+                                    <span class="sellerQq"></span>
 
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header">
-                            联系方式
+                                </li>
+                                <li class="list-group-item ">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <span class="sellerEmail"></span>
+
+                                </li>
+                                <li class="list-group-item ">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span class="sellerPhone"></span>
+                                </li>
+
+                            </ul>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item sellerWechat">
-                                <i class="fa fa-weixin" aria-hidden="true"></i>
-                            </li>
-                            <li class="list-group-item sellerQq">
-                                <i class="fa fa-qq" aria-hidden="true"></i>
-
-                            </li>
-                            <li class="list-group-item sellerEmail">
-                                <i class="fa fa-email" aria-hidden="true"></i>
-                            </li>
-                            <li class="list-group-item sellerPhone">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                            </li>
-
-                        </ul>
                     </div>
 
                 </div>
