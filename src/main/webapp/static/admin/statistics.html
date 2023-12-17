@@ -59,6 +59,7 @@
             getSales() {
               axios.get("/goods/charts/sales").then((res=>{
                   this.sales = res.data;
+                  this.sales = this.sales.map(value => Number(value.toFixed(2)));
                   this.draw();
               })).catch(err=>{
                   console.log(err);
