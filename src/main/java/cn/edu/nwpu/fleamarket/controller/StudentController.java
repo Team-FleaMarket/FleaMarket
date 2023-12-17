@@ -266,4 +266,17 @@ public class StudentController {
         String trueQuery = "%" + query + "%";
         return userService.queryByStudentNo(trueQuery);
     }
+
+    /**
+     * 根据id重置密码
+     * @return 重置结果 成功返回'ok' id不存在返回'err'
+     */
+    @ResponseBody
+    @PutMapping("/reset/{id}")
+    public String reset(@PathVariable("id") int id) {
+        if(userService.resetPw(id)) {
+            return "ok";
+        }
+        return "err";
+    }
 }

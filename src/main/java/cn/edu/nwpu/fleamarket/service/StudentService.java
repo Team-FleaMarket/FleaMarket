@@ -30,6 +30,8 @@ public interface StudentService {
      * 设为有自定义头像
      */
     void setImg(String studentNo);
+
+    boolean resetPw(int id);
 }
 
 

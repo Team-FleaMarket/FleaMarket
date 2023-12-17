@@ -64,6 +64,16 @@ public interface StudentDao {
 
     @Update("UPDATE students set img = 1 where student_no = #{studentNo}")
     void setImg(String studentNo);
+
+    /**
+     * 重置密码
+     * @param id 待重置学生id
+     */
+    @Update("UPDATE students set password = 'fleamarket' WHERE id = #{id}")
+    void resetPw(int id);
+
+    @Select("SELECT student_no FROM students WHERE id = #{id}")
+    String getStudentNoById(int id);
 }
 
 
