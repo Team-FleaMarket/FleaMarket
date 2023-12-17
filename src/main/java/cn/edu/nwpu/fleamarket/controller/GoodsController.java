@@ -283,6 +283,7 @@ public class GoodsController {
             goodsItem.setStudent(student);
             goodsItemList.add(goodsItem);
         }
+
         return JSON.toJSONString(goodsItemList);
     }
 
