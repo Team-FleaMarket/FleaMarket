@@ -16,6 +16,7 @@ public interface GoodsService {
     Integer selectCountByCateList(List<Integer> cateList);
     List<Goods> selectByStatus(int status);
     List<Goods> selectByStudentNo(String studentNo);
+
     List<OrderInformation> selectByStatusAndStudentNo(int status, String studentNo, int currentPage, int pageSize);
 
     Goods selectById(int id);

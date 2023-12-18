@@ -20,6 +20,7 @@ function hideURLbar() {
 <!-- 引用的 cdn： jquery bootstrap simplecart animate wow jquery-ui-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
 <script src="https://cdn.bootcdn.net/ajax/libs/simplecartjs/3.0.5/simplecart.min.js"></script>

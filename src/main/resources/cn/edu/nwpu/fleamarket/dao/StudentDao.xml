@@ -46,7 +46,9 @@
         SELECT * FROM students WHERE student_no=#{studentNo}
     </select>
 
-
+    <update id="updateStudent" parameterType="cn.edu.nwpu.fleamarket.pojo.Student">
+        UPDATE students set name = #{name}, password = #{password}, email = #{email}, phone = #{phone}, wechat = #{wechat} where student_no=#{studentNo};
+    </update>
 
     <!--<insert id="addStudent" parameterType="cn.shnu.ssm.pojo.User" >
         INSERT INTO user (`studentNo`,`name`,`grade`,`password`,`isfinish`, `sex`) VALUES (#{studentNo}, #{name}, #{grade}, #{password},#{isFinish},#{sex});

@@ -38,7 +38,6 @@
     </div>
     <!-- // breadcrumbs -->
     <div class="container">
-
         <p class="text-center display-3 mt-4 mb-4" style="letter-spacing: 10px">${category}</p>
         <hr>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">

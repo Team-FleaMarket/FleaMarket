@@ -3,6 +3,7 @@ package cn.edu.nwpu.fleamarket.service.impl;
 import cn.edu.nwpu.fleamarket.dao.StudentDao;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.StudentService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -106,7 +107,10 @@ public class StudentServiceImpl implements StudentService {
         return true;
     }
 
-
+    @Override
+    public Student getStudentByStudentNo(String studentNo) {
+        return studentDao.selectStudentByStudentNo(studentNo);
+    }
 }
 
 

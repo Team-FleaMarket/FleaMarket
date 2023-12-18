@@ -1,6 +1,7 @@
 package cn.edu.nwpu.fleamarket.service;
 
 import cn.edu.nwpu.fleamarket.pojo.Student;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
@@ -22,7 +23,6 @@ public interface StudentService {
     List<Student> queryByUserName(String query);
     List<Student> queryByStudentNo(String query);
     Student getStudentByStudentNo(String studentNo);
-
     /**
      * 设为有自定义头像
      */
