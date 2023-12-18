@@ -13,7 +13,7 @@ import java.util.List;
 public interface GoodsService {
 
     List<Goods> selectAllGoods();
-    int selectCountByCateList(List<Integer> cateList);
+    Integer selectCountByCateList(List<Integer> cateList);
     List<Goods> selectByStatus(int status);
     List<Goods> selectByStudentNo(String studentNo);
     List<OrderInformation> selectByStatusAndStudentNo(int status, String studentNo, int currentPage, int pageSize);

@@ -14,7 +14,7 @@ import java.util.List;
 public interface GoodsDao {
 
     List<Goods> selectAllGoods();
-    int selectCountByCateList(List<Integer> cateList);
+    Integer selectCountByCateList(List<Integer> cateList);
     List<Goods> selectByStatus(int status);
     List<Goods> selectByStudentNo(String studentNo);
     Goods selectById(int id);

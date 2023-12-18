@@ -128,7 +128,7 @@
             <ul class="navbar-user">
                 <li class="image-li">
                     <a href="${pageContext.request.contextPath}/views/managecenter">
-                        <img class="header-student-image" src="${sessionScope.student.imagePath}">
+                        <img class="header-student-image" src="${sessionScope.student.imagePath}" alt="student image">
                     </a>
                 </li>
                 <li class="checkout">

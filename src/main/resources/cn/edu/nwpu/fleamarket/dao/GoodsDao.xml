@@ -52,7 +52,7 @@
     </update>
 
     <!-- SELECT -->
-    <select id="selectCountByCateList" parameterType="java.util.List" resultType="int" >
+    <select id="selectCountByCateList" parameterType="java.util.List" resultType="Integer" >
         SELECT SUM(CASE WHEN cate IN
         <foreach item="index" collection="list" open="(" separator="," close=")">
             #{index}

@@ -79,7 +79,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title fw-bold">考试</h4>
-
                         </div>
                         <img src="${pageContext.request.getContextPath()}/static/images/2.jpg" class="card-img-top" alt="...">
                     </div>

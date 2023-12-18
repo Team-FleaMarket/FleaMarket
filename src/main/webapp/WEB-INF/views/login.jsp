@@ -15,22 +15,23 @@
 <%--header--%>
 <%@include file="components/header.jsp" %>
 <%--header--%>
-<!-- breadcrumbs -->
-<div class="breadcrumbs">
-    <div class="container">
-        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-            <li class="breadcrumb-item">
-                    <a href="${pageContext.request.getContextPath()}/"><span class="glyphicon glyphicon-home"
-                                                                                        aria-hidden="true">
-                    </span>主页</a>
-            </li>
-            <li class="breadcrumb-item active">登陆页面</li>
-        </ol>
-    </div>
-</div>
-<!-- //breadcrumbs -->
+
 <%--login--%>
 <div class="login">
+    <!-- breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li class="breadcrumb-item">
+                    <a href="${pageContext.request.getContextPath()}/" class="disabled"><span class="glyphicon glyphicon-home"
+                                                                             aria-hidden="true">
+                    </span>主页</a>
+                </li>
+                <li class="breadcrumb-item active">登陆页面</li>
+            </ol>
+        </div>
+    </div>
+    <!-- //breadcrumbs -->
     <div class="container main">
         <div class="row animated wow" data-wow-delay=".5s" ->
             <div class="col-md-6 side-image zoomIn">

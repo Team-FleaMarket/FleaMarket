@@ -14,7 +14,7 @@
         </div>
         <!-------------------- ------ Right Box ---------------------------->
         <div class="col-md-6 right-box">
-            <div class="row align-items-center justify-content-center">
+            <div class="row align-items-center justify-content-center right-content">
                 <div class="tips">
                     <span class="goods-information-button">商品详情</span>
                     <span class="seller-information-button">卖家信息</span>
@@ -51,10 +51,10 @@
                 <div class="seller-information" style="display: none;">
                     <div class="seller-basic-information">
                         <img src="" class="sellerImage">
-                        <div class="seller-basic-description">
-                            <h5 class="sellerName"></h5>
-                            <p class="sellerDepartment"></p>
-                            <textarea class="sellerDescription fs-6" rows="2"
+                        <div class="seller-basic-description ">
+                            <h5 class="sellerName "></h5>
+                            <p class="sellerDepartment mt-2"></p>
+                            <textarea class="sellerDescription fs-6 mt-1" rows="2"
                                       style="width: 100%" disabled>
                         </textarea>
                         </div>
@@ -83,7 +83,7 @@
                                     <i class="fa-solid fa-phone"></i>
                                     <span class="sellerPhone"></span>
                                 </li>
-                                <span id="goodsId" style="display: none"></span>
+                                <span id="goodsId" class="goodsId" style="display: none"></span>
                             </ul>
                         </div>
                     </div>

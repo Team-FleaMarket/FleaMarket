@@ -41,8 +41,12 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsDao.selectAllGoods();
     }
 
-    public int selectCountByCateList(List<Integer> cateList) {
-        return goodsDao.selectCountByCateList(cateList);
+    public Integer selectCountByCateList(List<Integer> cateList) {
+        Integer count = goodsDao.selectCountByCateList(cateList);
+        if (count == null) {
+            return 0;
+        }
+        return count;
     }
 
     public List<Goods> selectByStatus(int status) {
