@@ -26,3 +26,12 @@ export const getCartAPI = (studentNo) => {
         method: 'GET'
     });
 };
+
+export const addAPI = (goodsId) => {
+    return request({
+        url: `/order/add`,
+        params: {
+            goodsId
+        }
+    });
+};

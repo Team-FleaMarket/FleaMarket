@@ -82,3 +82,4 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>

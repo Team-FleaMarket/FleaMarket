@@ -10,7 +10,7 @@
 
         <div class="col-md-6  d-flex justify-content-center align-items-center flex-column left-box">
             <div class="frosted__glass">
-                <img src="" class="goodsImage">
+                <img src="" class="goodsImage" width="150px" height="150px">
             </div>
         </div>
 

@@ -5,7 +5,10 @@
 }
 
 .login {
-    background: #ececec;
+    background-color: #f9f6f2;
+    padding: 10px 30px 30px 30px;
+    margin: 10px;
+    border-radius: 20px;
 }
 
 .main {

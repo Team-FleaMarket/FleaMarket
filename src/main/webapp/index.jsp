@@ -21,8 +21,7 @@
 <!-- // header -->
 <section class="background min-vh-100">
     <!-- categories -->
-
-    <div class="category container mt-4">
+    <div id="category" class="category container mt-4">
         <!-- carousel -->
         <div id="NPUcarousel" class="carousel slide">
             <div class="carousel-inner">
@@ -53,11 +52,11 @@
                          alt="university">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#NPUcarousel" data-bs-slide="prev">
+            <button class="carousel-control-prev btn" type="button" data-bs-target="#NPUcarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#NPUcarousel" data-bs-slide="next">
+            <button class="carousel-control-next btn" type="button" data-bs-target="#NPUcarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -65,7 +64,7 @@
         <!-- carousel end -->
 
         <!-- categories -->
-        <div class="categories">
+        <div id="categories" class="categories">
             <!-- goods type -->
             <div class="goods row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
                 <div class="col">
@@ -80,7 +79,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title fw-bold">考试</h4>
-
                         </div>
                         <img src="${pageContext.request.getContextPath()}/static/images/2.jpg" class="card-img-top" alt="...">
                     </div>
@@ -147,26 +145,21 @@
                         window.location.href = window.location.origin + "/views/" + cate + "/" + 1
                     }
                 })
-              /*  import {getGoodsAPI} from '/static/js/apis/goods'
-                document.querySelectorAll(".card").forEach((card, index) => {
-                    card.onclick = async () => {
-                        try {
-                            var response = await getGoodsAPI({cate: index.toString(), page:0});
-                            window.location.href = window.location.origin
-                        } catch (e) {
-                            console.log(e)
-                        }
+                // 获取动态变化的div和需要设置高度的div
+                let dynamicDiv = document.getElementById('categories');
+                let targetDiv = document.getElementById('category');
+                const observer = new ResizeObserver(() => {
+                    targetDiv.style.height = (dynamicDiv.clientHeight + 220) + 'px'
 
-                    }
-                });*/
+                });
+                observer.observe(dynamicDiv);
             </script>
             <!-- goods type end-->
-
-            <!-- footer -->
-            <%@include file="/WEB-INF/views/components/footer.jsp" %>
         </div>
         <!-- categories end -->
     </div>
 </section>
+<!-- footer -->
+<%@include file="/WEB-INF/views/components/footer.jsp" %>
 </body>
 </html>

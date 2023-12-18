@@ -14,7 +14,7 @@
         </div>
         <!-------------------- ------ Right Box ---------------------------->
         <div class="col-md-6 right-box">
-            <div class="row align-items-center justify-content-center">
+            <div class="row align-items-center justify-content-center right-content">
                 <div class="tips">
                     <span class="goods-information-button">商品详情</span>
                     <span class="seller-information-button">卖家信息</span>
@@ -33,7 +33,6 @@
                     <div class="end mt-3">
                         <span class="fs-3" style="color: #ee340f">￥</span><span class="goodsPrice fs-3"
                                                                                 style="vertical-align: bottom"></span>
-
                         <div class="row button-row">
                             <div class="col-8">
                                 <button class="want-btn btn btn-md btn-warning mt-2 fs-6" style="width: 100%;">
@@ -41,22 +40,21 @@
                                 </button>
                             </div>
                             <div class="col-4">
-                                <button class="buy-btn btn btn-md btn-primary mt-2 fs-6" style="width: 100%;">
+                                <button class="buy-btn btn btn-md btn-primary mt-2 fs-6" style="width: 100%;" >
                                     下单!!!
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <!-- 卖家信息 -->
                 <div class="seller-information" style="display: none;">
                     <div class="seller-basic-information">
                         <img src="" class="sellerImage">
-                        <div class="seller-basic-description">
-                            <h5 class="sellerName"></h5>
-                            <p class="sellerDepartment"></p>
-                            <textarea class="sellerDescription fs-6" rows="2"
+                        <div class="seller-basic-description ">
+                            <h5 class="sellerName "></h5>
+                            <p class="sellerDepartment mt-2"></p>
+                            <textarea class="sellerDescription fs-6 mt-1" rows="2"
                                       style="width: 100%" disabled>
                         </textarea>
                         </div>
@@ -85,7 +83,7 @@
                                     <i class="fa-solid fa-phone"></i>
                                     <span class="sellerPhone"></span>
                                 </li>
-
+                                <span id="goodsId" class="goodsId" style="display: none"></span>
                             </ul>
                         </div>
                     </div>
@@ -95,7 +93,8 @@
         </div>
     </div>
 </div>
-<script>
+<script type="module">
+    import {addAPI} from "/static/js/apis/goods.js"
     const goodsInformationButton = document.querySelector(".goods-information-button")
     const sellerInformationButton = document.querySelector(".seller-information-button")
     const goodsInformation = document.querySelector(".goods-information")
@@ -118,4 +117,12 @@
         goodsInformationButton.style.color = "rgb(100, 108, 154)";
         sellerInformationButton.style.color = "#000";
     });
+
+    document.querySelector(".buy-btn").addEventListener("click", async () => {
+        const goodsId = document.querySelector(".goodsId").textContent
+        const response = await addAPI(goodsId)
+        console.log("response: " + response)
+        console.log("response.data: " + response.data)
+
+    })
 </script>
