@@ -49,35 +49,42 @@
                 <!-- 卖家信息 -->
                 <div class="seller-information" style="display: none;">
                     <div class="seller-basic-information">
-                        <img class="seller-img" src="./static/images/category/1.jpg" alt="">
+                        <img class="student-img" src="" alt="">
                         <div class="seller-basic-description">
                             <h3 class="userName"></h3>
-                            <textarea class="studentNo fs-6 mt-3" rows="2"
-                                      style="width: 100%" disabled>
-                        </textarea>
+                            <p class="studentNo fs-6 mt-3" rows="2"
+                               style="width: 100%" disabled>
+                            </p>
                         </div>
                     </div>
 
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header">
-                            联系方式
+                    <div class="contact">
+                        <div class="card" style="width:100%;">
+                            <div class="card-header">
+                                联系方式
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="fa-brands fa-weixin"></i>
+                                    <span class="sellerWechat"></span>
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fa-brands fa-qq"></i>
+                                    <span class="sellerQq"></span>
+
+                                </li>
+                                <li class="list-group-item ">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <span class="sellerEmail"></span>
+
+                                </li>
+                                <li class="list-group-item ">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span class="sellerPhone"></span>
+                                </li>
+
+                            </ul>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item wechat">
-                                <i class="fa fa-weixin" aria-hidden="true"></i>
-                            </li>
-                            <li class="list-group-item qq">
-                                <i class="fa fa-qq" aria-hidden="true"></i>
-
-                            </li>
-                            <li class="list-group-item email">
-                                <i class="fa fa-email" aria-hidden="true"></i>
-                            </li>
-                            <li class="list-group-item phone">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                            </li>
-
-                        </ul>
                     </div>
 
                 </div>

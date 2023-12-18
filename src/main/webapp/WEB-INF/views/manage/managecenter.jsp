@@ -79,6 +79,8 @@
                                 <h5>微信:${sessionScope.student.wechat}</h5><h4></h4>
                                 <br>
                                 <h5>手机号:${sessionScope.student.phone}</h5><h4></h4>
+                                <br>
+                                <%--                                <a href=" /managecenter/modifyInfo">修改信息</a>--%>
                             </form>
                         </div>
                         <div class="col-md-9 " data-wow-delay=".6s">
@@ -221,7 +223,7 @@
                                                                 price="${orderInformation.goods.price}"
                                                                 degree="${orderInformation.goods.degree}"
                                                                 cate="${orderInformation.goods.cate}"
-                                                                user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone}">
+                                                                user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${pageContext.request.contextPath}/static/upload/file/${buyer.imagePath}">
                                                             查看订单
                                                         </button>
                                                     </c:if>
@@ -237,7 +239,7 @@
                                                                 price="${orderInformation.goods.price}"
                                                                 degree="${orderInformation.goods.degree}"
                                                                 cate="${orderInformation.goods.cate}"
-                                                                user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone}">
+                                                                user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${pageContext.request.contextPath}/static/upload/file/${buyer.imagePath}">
                                                             查看订单
                                                         </button>
                                                     </c:if>
@@ -254,8 +256,8 @@
                                                                     class="btn btn-outline-dark pull-right"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#buyerConfirmModal"
-                                                                    data-bs-whatever="${orderInformation.orderId}"
-                                                                    status="${status}">确认收货
+                                                                    data-bs-whatever="${orderInformation.orderId}">
+                                                                确认收货
                                                             </button>
                                                         </c:if>
                                                         <button type="button" class="btn btn-outline-dark pull-right"
@@ -266,7 +268,7 @@
                                                                 price="${orderInformation.goods.price}"
                                                                 degree="${orderInformation.goods.degree}"
                                                                 cate="${orderInformation.goods.cate}"
-                                                                user-information="${seller.studentNo},${seller.name},${seller.wechat},${seller.email},${seller.phone}">
+                                                                user-information="${seller.studentNo},${seller.name},${seller.wechat},${seller.email},${seller.phone},${pageContext.request.contextPath}/static/upload/file/${seller.imagePath}">
                                                             查看订单
                                                         </button>
                                                     </c:if>
@@ -484,10 +486,9 @@
 
 <%--查看订单信息模态框--%>
 <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog" style="max-width: 930px; padding: 20px">
         <div class="modal-content">
-            <div class="modal-body">
-                <%--                 <img src="${pageContext.request.getContextPath()}/static/images/goods.jpg" class="modal-img" alt="goods">--%>
+            <div class="modal-body" style="overflow: auto;max-height: 95vh; padding: 0px;">
                 <%@include file="orderDetail.jsp" %>
             </div>
         </div>

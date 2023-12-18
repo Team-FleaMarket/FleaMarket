@@ -115,36 +115,38 @@
         const panelRight = document.getElementById('panelRight');
         // 清空右侧内容
         panelRight.innerHTML = '';
-        // 创建个人信息修改表单
-        const personalInfoForm = document.createElement('form');
-        personalInfoForm.id = 'personalInfoForm';
-        personalInfoForm.className = 'm-auto p-4 bg-light rounded';
-
         // 添加学号信息（不可编辑）
-        const studentIdInputGroup = createNonEditableInput('学号', 'studentId', '123456');
+        const studentIdInputGroup = createNonEditableInput('学号', 'studentId', ${sessionScope.student.studentNo});
         personalInfoForm.appendChild(studentIdInputGroup);
 
         // 添加姓名输入框及修改按钮
-        const nameInputGroup = createEditableInputWithIcon('姓名', 'firstName', '张三', 'bi-pencil');
+        const nameValue = ${sessionScope.student.name} ? ${sessionScope.student.name} : 'zhangsan';
+        const nameInputGroup = createEditableInputWithIcon('姓名', 'studentName', nameValue, 'bi-pencil');
         personalInfoForm.appendChild(nameInputGroup);
 
-        // 添加年龄输入框及修改按钮
-        const ageInputGroup = createEditableInputWithIcon('年龄', 'age', '25', 'bi-pencil');
-        personalInfoForm.appendChild(ageInputGroup);
+        // 添加微信输入框及修改按钮
+        const wechatValue = ${sessionScope.student.wechat} ? ${sessionScope.student.wechat} : '111';
+        const wechatInputGroup = createEditableInputWithIcon('微信', 'studentWechat', wechatValue, 'bi-pencil');
+        personalInfoForm.appendChild(wechatInputGroup);
 
-        // 添加学院输入框及修改按钮
-        const collegeInputGroup = createEditableInputWithIcon('学院', 'college', '软件学院', 'bi-pencil');
-        personalInfoForm.appendChild(collegeInputGroup);
+        // 添加QQ输入框及修改按钮
+        const qqValue = '${sessionScope.student.qq}' ? '${sessionScope.student.qq}' : '111';
+        const qqInputGroup = createEditableInputWithIcon('QQ', 'studentQQ', qqValue, 'bi-pencil');
+        personalInfoForm.appendChild(qqInputGroup);
 
-        // 添加班级输入框及修改按钮
-        const classInputGroup = createEditableInputWithIcon('班级', 'class', '140121xx', 'bi-pencil');
-        personalInfoForm.appendChild(classInputGroup);
+        // 添加邮箱输入框及修改按钮
+        const emailValue = '${sessionScope.student.email}' ? '${sessionScope.student.email}' : '111@qq.com';
+        const emailInputGroup = createEditableInputWithIcon('email', 'studentEmail', emailValue, 'bi-pencil');
+        personalInfoForm.appendChild(emailInputGroup);
 
         // 添加电话输入框及修改按钮
-        const phoneInputGroup = createEditableInputWithIcon('电话', 'phone', '1234567890', 'bi-pencil');
+        const phoneValue = ${sessionScope.student.phone} ? ${sessionScope.student.phone} : '123';
+        const phoneInputGroup = createEditableInputWithIcon('电话', 'phone', phoneValue, 'bi-pencil');
         personalInfoForm.appendChild(phoneInputGroup);
 
-        // 添加提交按钮
+
+
+            // 添加提交按钮
         const submitBtn = document.createElement('button');
         submitBtn.type = 'submit';
         submitBtn.className = 'btn btn-primary mt-3';

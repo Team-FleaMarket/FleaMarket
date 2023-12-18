@@ -7,6 +7,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+/**
+ * 登录过滤器
+ * 当用户未登录时，拦截所有请求，跳转到登录页面
+ * */
 public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

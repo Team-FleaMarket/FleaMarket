@@ -22,25 +22,33 @@
                 <table class="insert-table" style="border-collapse:separate; border-spacing:20px;">
                     <tr>
                         <td class="fw-bold">商品名称</td>
-                        <td class="td-input"><input class="custom-input" type="text" name="goodsName" id="goodsName"></td>
+                        <td class="td-input"><input class="form-control" type="text" name="goodsName" id="goodsName" required></td>
                     </tr>
                     <tr>
                         <td class="fw-bold">商品价格</td>
-                        <td class="td-input"><input class="custom-input" type="text" name="price" id="price"></td>
+                        <td class="td-input"><input class="form-control" type="text" name="price" id="price" required></td>
                     </tr>
                     <tr>
                         <td class="fw-bold">商品概述</td>
-                        <td class="td-input"><input  class="custom-input" type="text" name="description" id="description"></td>
+                        <td class="td-input"><textarea  class="form-control" type="text" name="description" id="description" required></textarea></td>
                     </tr>
                     <tr>
                         <td class="fw-bold">新旧程度</td>
-                        <td class="td-input"><input class="custom-input"  type="text" name="degree" id="degree"></td>
+                        <td class="td-input"><select class="form-control"  type="text" name="degree" id="degree" required>
+                            <option value="10">全新</option>
+                            <option value="9.9">九九新</option>
+                            <option value="9.5">九五新</option>
+                            <option value="9">九成新</option>
+                            <option value="8">八成新</option>
+                            <option value="7">八成新以下</option>
+                        </select>
+                        </td>
                     </tr>
                     <tr>
 
                         <td class="fw-bold">商品分类</td>
                         <td class="td-input">
-                            <select  id="cate" name="cate" >
+                            <select  id="cate" name="cate" required>
                                 <option value="1">教材</option>
                                 <option value="2">考试</option>
                                 <option value="3">文学</option>
@@ -58,7 +66,7 @@
 
                 </table>
                 <td class="" colspan="2">
-                    <input class=" btn btn-primary" type="submit" value="提     交">
+                    <input class=" btn btn-primary" type="submit" value="提  交">
                 </td>
             </form>
         </div>
