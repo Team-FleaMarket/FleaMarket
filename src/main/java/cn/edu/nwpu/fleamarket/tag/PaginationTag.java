@@ -4,6 +4,10 @@ import jakarta.servlet.jsp.JspWriter;
 import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
+/**
+ * 分页标签
+ *
+ * */
 public class PaginationTag extends SimpleTagSupport {
 
     private String status;

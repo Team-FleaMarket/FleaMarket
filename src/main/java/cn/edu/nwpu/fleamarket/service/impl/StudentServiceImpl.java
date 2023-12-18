@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-/**
- * @Author: Hanwen
- * @Date: 2018/4/4 下午4:08
- */
+
 @Service
 public class StudentServiceImpl implements StudentService {
 
@@ -90,6 +87,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student getStudentByStudentNo(String studentNo) {
+        studentDao.selectStudentByStudentNo(studentNo);
+        return null;
+    }
+
+    @Override
     public void setImg(String studentNo) {
         studentDao.setImg(studentNo);
     }
@@ -103,6 +106,7 @@ public class StudentServiceImpl implements StudentService {
         studentDao.resetPw(id);
         return true;
     }
+
 
     @Override
     public Student getStudentByStudentNo(String studentNo) {

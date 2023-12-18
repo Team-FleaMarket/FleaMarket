@@ -150,25 +150,40 @@
         const panelRight = document.getElementById('panelRight');
         // 清空右侧内容
         panelRight.innerHTML = '';
+<<<<<<< HEAD
         // 创建个人信息修改表单
         const personalInfoForm = document.createElement('form');
         personalInfoForm.id = 'personalInfoForm';
         personalInfoForm.className = 'm-auto p-4 bg-light rounded';
+=======
+>>>>>>> 008e3d979d4bdb8c8616efb8a0236c523adea5c9
         // 添加学号信息（不可编辑）
         const studentIdInputGroup = createNonEditableInput('学号', 'studentId', ${sessionScope.student.studentNo});
         personalInfoForm.appendChild(studentIdInputGroup);
 
         // 添加姓名输入框及修改按钮
+<<<<<<< HEAD
         const nameValue = '${sessionScope.student.name}' ? '${sessionScope.student.name}' : 'zhangsan';
+=======
+        const nameValue = ${sessionScope.student.name} ? ${sessionScope.student.name} : 'zhangsan';
+>>>>>>> 008e3d979d4bdb8c8616efb8a0236c523adea5c9
         const nameInputGroup = createEditableInputWithIcon('姓名', 'studentName', nameValue, 'bi-pencil');
         personalInfoForm.appendChild(nameInputGroup);
 
         // 添加微信输入框及修改按钮
+<<<<<<< HEAD
         const wechatValue = '${sessionScope.student.wechat}' ? '${sessionScope.student.wechat}' : '111';
         const wechatInputGroup = createEditableInputWithIcon('微信', 'studentWechat', wechatValue, 'bi-pencil');
         personalInfoForm.appendChild(wechatInputGroup);
 
         // 添加学院输入框及修改按钮
+=======
+        const wechatValue = ${sessionScope.student.wechat} ? ${sessionScope.student.wechat} : '111';
+        const wechatInputGroup = createEditableInputWithIcon('微信', 'studentWechat', wechatValue, 'bi-pencil');
+        personalInfoForm.appendChild(wechatInputGroup);
+
+        // 添加QQ输入框及修改按钮
+>>>>>>> 008e3d979d4bdb8c8616efb8a0236c523adea5c9
         const qqValue = '${sessionScope.student.qq}' ? '${sessionScope.student.qq}' : '111';
         const qqInputGroup = createEditableInputWithIcon('QQ', 'studentQQ', qqValue, 'bi-pencil');
         personalInfoForm.appendChild(qqInputGroup);
@@ -183,7 +198,9 @@
         const phoneInputGroup = createEditableInputWithIcon('电话', 'phone', phoneValue, 'bi-pencil');
         personalInfoForm.appendChild(phoneInputGroup);
 
-        // 添加提交按钮
+
+
+            // 添加提交按钮
         const submitBtn = document.createElement('button');
         submitBtn.type = 'submit';
         submitBtn.className = 'btn btn-primary mt-3';

@@ -36,6 +36,7 @@ public class PageController {
     static {
         CATEGORIES = initCATEGORIES(); // 调用init函数初始化静态变量
     }
+
     private static Map<String, List<String>> initCATEGORIES() {
         Map<String, List<String>> categories = new LinkedHashMap<String, List<String>>();
         categories.put("图书书籍", List.of("教材", "考试", "艺术文学"));
@@ -44,25 +45,31 @@ public class PageController {
         return categories;
     }
 
-
-
-    /*   @RequestMapping("")
-       public ModelAndView home(HttpServletRequest request)throws Exception{
-           System.out.println(1231312);
-           ModelAndView modelAndView = new ModelAndView();
-           List<Goods> goodsList = goodsService.selectByStatusAndGoodsStatus();
-           List<Goods> bookList = new ArrayList<Goods>();
-           List<Goods> storeList = new ArrayList<Goods>();
-           List<Goods> amazeList = new ArrayList<Goods>();
-
+    /**
+     * 首页
+     * */
     @ResponseBody
     @RequestMapping("/views/{cate}/{page}")
     public ModelAndView category(HttpServletRequest request,
                                  @PathVariable("cate") int cate,
                                  @PathVariable("page") int pageNum) {
         // 从数据库中获取 goodsList
-        List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        // Student loginStudent = (Student) request.getSession().getAttribute("student");
         int pagesNum = goodsService.selectCountByCateList(Arrays.asList(cate)) / PAGE_SIZE + 1; // 当有 2 页商品时，得到的 pagesNum 是 1
+        List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+        for (Goods goods : goodsList) {
+           /* if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+                continue;
+            };*/
+            GoodsItem goodsItem = new GoodsItem();
+            goodsItem.setGoods(goods);
+            System.out.println("goods.studentNo "+goods.getStudentNo());
+            Student student = goodsService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItemList.add(goodsItem);
+        }
         // 根据 cate 获取对应中文
         String[] category = new String[2];
         int remainingCate = cate;
@@ -80,30 +87,10 @@ public class PageController {
         ModelAndView modelAndView = new ModelAndView("goods/goodsview");
         modelAndView.addObject("mainCategory", category[0]);
         modelAndView.addObject("category", category[1]);
-        modelAndView.addObject("goodsList", goodsList);
+        modelAndView.addObject("goodsItemList", goodsItemList);
         modelAndView.addObject("cate", cate);
         modelAndView.addObject("page", pageNum);
         modelAndView.addObject("pages", pagesNum);
-        return modelAndView;
-    }
-           ByCate(goodsList, bookList, storeList, amazeList);
-
-           modelAndView.addObject("bookList", bookList);
-           modelAndView.addObject("storeList", storeList);
-           modelAndView.addObject("amazeList", amazeList);
-           modelAndView.setViewName("home");
-           return modelAndView;
-       }*/
-    @ResponseBody
-    @RequestMapping("/views/{cate}/{page}")
-    public ModelAndView category(HttpServletRequest request,
-                                 @PathVariable("cate") int cate,
-                                 @PathVariable("page") int pageNum) {
-        List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
-        ModelAndView modelAndView = new ModelAndView("goods/goodsview");
-        modelAndView.addObject("goodsList", goodsList);
-        modelAndView.addObject("cate", cate);
-        modelAndView.addObject("page", pageNum);
         return modelAndView;
     }
 
@@ -163,7 +150,6 @@ public class PageController {
             System.out.println(attributeNames.nextElement());
         }
         ModelAndView modelAndView = new ModelAndView();
-
         int totalCnt = 0;
         int currentPage;
         boolean isSearching = false;
@@ -185,7 +171,6 @@ public class PageController {
                 currentPage=0;
             }
         }
-
         OrderInformationPageResult orderInformationPageResult = new OrderInformationPageResult();
         System.out.println("option: " + option);
         if(option.equals(ManageCenterStatusEnum.NOT_REVIEWED))
@@ -208,8 +193,6 @@ public class PageController {
         }
         System.out.println("Total pages: " + orderInformationPageResult.getTotalPage() + "\n");
         modelAndView.addObject("status", option.getCode().toString());
-
-
         modelAndView.addObject("orderInformationPageResult", orderInformationPageResult);
         modelAndView.addObject("currentPage", currentPage);
         modelAndView.addObject("totalPage", orderInformationPageResult.getTotalPage());
@@ -218,8 +201,6 @@ public class PageController {
         modelAndView.setViewName("manage/managecenter");
         return modelAndView;
     }
-
-
     private void ByCate(List<Goods> goodsList, List<Goods> bookList, List<Goods> storeList, List<Goods> amazeList) {
         for (Goods goods : goodsList) {
             if ("1".equals(goods.getCate())) {
@@ -233,171 +214,28 @@ public class PageController {
             }
         }
     }
-
-
     @RequestMapping("/checkout")
     public ModelAndView checkout(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("checkout");
         return modelAndView;
     }
-
-
     @RequestMapping("/views/insert")
     public ModelAndView insert(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manage/insert");
         return modelAndView;
     }
-
     @RequestMapping("/managecenter/modifyInfo")
     public ModelAndView modifyinfo(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manage/modifyInfo");
         return modelAndView;
     }
-
     @RequestMapping("/products")
     public ModelAndView products(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("goods/products");
         return modelAndView;
     }
-
-    @RequestMapping("/views/tests")
-    public ModelAndView tests(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "考试");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goods/goodsview");
-        return modelAndView;
-    }
-
-    @RequestMapping("/views/literature")
-    public ModelAndView literature(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "文学");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goods/goodsview");
-        return modelAndView;
-    }
-
-    @RequestMapping("/views/stationery")
-    public ModelAndView stationery(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "文具");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goods/goodsview");
-        return modelAndView;
-    }
-
-    @RequestMapping("/views/life")
-    public ModelAndView life(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "生活");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goods/goodsview");
-        return modelAndView;
-    }
-
-    @RequestMapping("/views/sports")
-    public ModelAndView sports(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "运动");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goods/goodsview");
-        return modelAndView;
-    }
-
-    @RequestMapping("/views/beautymakeup")
-    public ModelAndView beautymakeup(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "美妆");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goods/goodsview");
-        return modelAndView;
-    }
-
-    @RequestMapping("/views/electronicproducts")
-    public ModelAndView electronicproducts(HttpServletRequest request) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("navigation", "电子产品");
-        List<Goods> goodsList = goodsService.selectAllGoods();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-        ByCate(goodsList, bookList, storeList, amazeList);
-        modelAndView.addObject("bookCount", goodsService.selectCountByCateList(Arrays.asList(1, 2, 3)));
-        modelAndView.addObject("storeCount", goodsService.selectCountByCateList(Arrays.asList(4, 5, 6)));
-        modelAndView.addObject("amazeCount", goodsService.selectCountByCateList(Arrays.asList(7, 8, 9)));
-        modelAndView.setViewName("goods/goodsview");
-        return modelAndView;
-    }
-
-/*    @RequestMapping("/single")
-    public ModelAndView single(HttpServletRequest request)throws Exception{
-        ModelAndView modelAndView = new ModelAndView();
-        String goodsId = request.getParameter("goodsId");
-        Goods goods = goodsService.selectById(Integer.valueOf(goodsId));
-        User user = userService.findUser(goods.getStudentNo());
-
-        List<Goods> goodsList = goodsService.selectByStatusAndGoodsStatus();
-        List<Goods> bookList = new ArrayList<Goods>();
-        List<Goods> storeList = new ArrayList<Goods>();
-        List<Goods> amazeList = new ArrayList<Goods>();
-
-        ByCate(goodsList, bookList, storeList, amazeList);
-
-        modelAndView.addObject("bookList", bookList);
-        modelAndView.addObject("storeList", storeList);
-        modelAndView.addObject("amazeList", amazeList);
-
-        modelAndView.addObject("user", student);
-        modelAndView.addObject("goods", goods);
-        modelAndView.setViewName("single");
-        return modelAndView;
-    }*/
-
 }

@@ -5,10 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
-/**
- * @Author: Hanwen
- * @Date: 2018/4/4 下午3:08
- */
 public interface StudentService {
     // 注册
     Student registerStudent(Student student);

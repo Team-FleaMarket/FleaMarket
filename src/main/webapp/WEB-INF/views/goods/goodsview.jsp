@@ -42,9 +42,10 @@
         <hr>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
             <c:forEach var="goodsItem" items="${goodsItemList}">
+
                 <div class="col">
                     <div class="card">
-                        <img src="${goodsItem.goods.imagePath}" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.contextPath}/static/upload/file/${goodsItem.goods.imagePath}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">${goodsItem.goods.goodsName}</h6>
                             <p class="card-text">${goodsItem.goods.description}</p>
@@ -60,6 +61,7 @@
                         </div>
                     </div>
                 </div>
+
             </c:forEach>
             <%--  <div class="item-categories">
                   <p>图书书籍</p>
@@ -135,7 +137,7 @@
         document.querySelectorAll(".card-img-top").forEach((img, index) => {
             img.addEventListener("click", (e) => {
                 const goodsModal = document.getElementById('goods-modal')
-                goodsModal.querySelector(".goodsImage").src = goodsItemList[index].goods.imagePath
+                goodsModal.querySelector(".goodsImage").src = "${pageContext.request.contextPath}/static/upload/file/"+goodsItemList[index].goods.imagePath
                 goodsModal.querySelector(".goodsName").innerText = goodsItemList[index].goods.goodsName
                 goodsModal.querySelector(".goodsAddedTime").innerText = goodsItemList[index].goods.addedTime
                 goodsModal.querySelector(".goodsDegree").innerText = goodsItemList[index].goods.degree
