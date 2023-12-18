@@ -4,7 +4,6 @@ import cn.edu.nwpu.fleamarket.data.OrderInformation;
 import cn.edu.nwpu.fleamarket.data.OrderInformationPageResult;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
 
 import java.util.Date;
 import java.util.List;
@@ -13,19 +12,18 @@ import java.util.List;
 public interface GoodsService {
 
     List<Goods> selectAllGoods();
+
     int selectCountByCateList(List<Integer> cateList);
-    List<Goods> selectByStatus(int status);
-    List<Goods> selectByStudentNo(String studentNo);
+
     List<OrderInformation> selectByStatusAndStudentNo(int status, String studentNo, int currentPage, int pageSize);
+
     Goods selectById(int id);
 
     void insertGoods(Goods goods);
+
     void deleteGoods(int id);
+
     void updateGoods(Goods goods);
-
-    void updateGoodsStatus(Goods goods);
-
-    List<Goods> selectByStatusAndGoodsStatus();
 
     //下一个待审核
     Goods getNextToBeReviewed();
@@ -40,6 +38,7 @@ public interface GoodsService {
     List<Goods> getAllAttributedGoodsNotReviewed();
 
     boolean review(int id, int status);
+
     List<OrderInformation> selectByGoodsStatusAndStudentNo(int goodsStatus, String studentNo, int currentPage, int pageSize);
 
     List<Goods> getGoodsByCategory(int cate, int pageNum, int pageSize);
@@ -61,6 +60,7 @@ public interface GoodsService {
     List<Goods> querySoldBySno(String query);
 
     List<Goods> querySoldByBno(String query);
+
     int selectByStatusAndStudentNoAndGoodsNameTotalCnt(Integer status, String studentNo, String goodsName);
 
     List<OrderInformation> selectByStatusAndStudentNoAndGoodsName(Integer integer, String studentNo, String goodsName, int currentPage, int pageSize);
@@ -75,7 +75,7 @@ public interface GoodsService {
 
     List<Goods> selectByGoodsName(String query, int page, int pageSize);
 
-    OrderInformationPageResult getNotReviewed(boolean isSearching, String goodsName, String studentNo,int currentPage);
+    OrderInformationPageResult getNotReviewed(boolean isSearching, String goodsName, String studentNo, int currentPage);
 
     OrderInformationPageResult getNotSold(boolean isSearching, String goodsName, String studentNo, int currentPage);
 
@@ -93,6 +93,7 @@ public interface GoodsService {
 
     /**
      * 某种商品销售总额
+     *
      * @param cate 种类
      * @return 销售总额
      */
