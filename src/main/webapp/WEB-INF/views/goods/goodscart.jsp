@@ -132,6 +132,14 @@
                 if (goodsItemList[index].student.hasOwnProperty("qq")) {
                     goodsModal.querySelector(".sellerQq").innerText = goodsItemList[index].student.qq
                 }
+
+                if (img.closest('.card').querySelector('.buy-btn').disabled == true) {
+                    goodsModal.querySelector(".buy-btn").innerText = "已下单！";
+                    goodsModal.querySelector(".buy-btn").disabled = true;
+                } else if (goodsItemList[index].goods.status === 0){
+                    goodsModal.querySelector(".buy-btn").disabled = false;
+                }
+
                 const myModal = new bootstrap.Modal(goodsModal)
                 myModal.show()
             })
@@ -149,6 +157,25 @@
         });
         console.log("cookiesArray: " + cookiesArray)
         console.log("studentNo: " + studentNo)
+
+        document.querySelector(".modal .buy-btn").addEventListener("click", async () => {
+            const goodsId = document.querySelector(".goodsId").textContent
+            try {
+                const response = await buyGoodsAPI(goodsId)
+                document.getElementById("toast-body").innerText = "下单成功！！！"
+                document.getElementById("toast-header").classList.remove("bg-danger")
+                document.getElementById("toast-header").classList.add("bg-primary")
+                wantBtn.disabled = true
+                wantBtn.innerText = "已添加！"
+            } catch (error) {
+                document.getElementById("toast-body").innerText = "未知原因，下单失败！"
+                document.getElementById("toast-header").classList.remove("bg-primary")
+                document.getElementById("toast-header").classList.add("bg-danger")
+            }
+            new bootstrap.Toast(document.querySelector('.toast')).show();
+        })
+
+
     </script>
     <!-- // modal -->
 </section>

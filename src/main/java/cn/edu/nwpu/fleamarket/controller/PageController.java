@@ -72,6 +72,7 @@ public class PageController {
             student.setPassword(null);
             goodsItem.setStudent(student);
             goodsItemList.add(goodsItem);
+            System.out.println(goods.toString());
         }
         // 根据 cate 获取对应中文
         String[] category = new String[2];
