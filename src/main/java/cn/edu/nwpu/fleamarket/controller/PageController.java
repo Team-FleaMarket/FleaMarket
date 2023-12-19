@@ -195,6 +195,7 @@ public class PageController {
         ModelAndView modelAndView = new ModelAndView("goods/goodsview");
         return modelAndView;
     }
+
     @RequestMapping("/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();

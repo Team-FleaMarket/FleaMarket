@@ -101,10 +101,20 @@ public class StudentServiceImpl implements StudentService {
         return true;
     }
 
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+>>>>>>> dev
     @Override
     public Student getStudentByStudentNo(String studentNo) {
         return studentDao.selectStudentByStudentNo(studentNo);
     }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 008e3d979d4bdb8c8616efb8a0236c523adea5c9
+>>>>>>> dev
 }
 
 

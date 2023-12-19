@@ -23,6 +23,13 @@ public interface StudentService {
     List<Student> queryByUserName(String query);
     List<Student> queryByStudentNo(String query);
     Student getStudentByStudentNo(String studentNo);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 008e3d979d4bdb8c8616efb8a0236c523adea5c9
+>>>>>>> dev
     /**
      * 设为有自定义头像
      */
