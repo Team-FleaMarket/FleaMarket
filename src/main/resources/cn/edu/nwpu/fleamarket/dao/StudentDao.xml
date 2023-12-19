@@ -47,7 +47,6 @@
     </select>
 
 
-
     <!--<insert id="addStudent" parameterType="cn.shnu.ssm.pojo.User" >
         INSERT INTO user (`studentNo`,`name`,`grade`,`password`,`isfinish`, `sex`) VALUES (#{studentNo}, #{name}, #{grade}, #{password},#{isFinish},#{sex});
     </insert>

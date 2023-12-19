@@ -4,7 +4,7 @@ img {
 .goods {
     background-color: #f9f6f2;
     padding: 10px 30px 30px 30px;
-    margin: 20px;
+    margin: 10px;
     border-radius: 20px;
 }
 .goods .card {
@@ -34,6 +34,7 @@ img {
 .d-flex.justify-content-around {
     align-items: center;
 }
+
 .goods .card .btn {
     border-radius: 50px;
     width: 80px;

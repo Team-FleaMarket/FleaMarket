@@ -20,8 +20,8 @@ function hideURLbar() {
 <!-- 引用的 cdn： jquery bootstrap simplecart animate wow jquery-ui-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
 <script src="https://cdn.bootcdn.net/ajax/libs/simplecartjs/3.0.5/simplecart.min.js"></script>
 <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -38,9 +38,9 @@ function hideURLbar() {
       rel='stylesheet' type='text/css'>
 <!-- // for bootstrap working -->
 <!-- 自己写的 css -->
-<link href="${pageContext.request.getContextPath()}/static/css/header.css" rel="stylesheet" type="text/css"
+<link href="${pageContext.request.getContextPath()}/static/css/components/header.css" rel="stylesheet" type="text/css"
       media="all"/>
-<link href="${pageContext.request.getContextPath()}/static/css/footer.css" rel="stylesheet" type="text/css"
+<link href="${pageContext.request.getContextPath()}/static/css/components/footer.css" rel="stylesheet" type="text/css"
       media="all"/>
 <link href="${pageContext.request.getContextPath()}/static/css/managercenter.css" rel="stylesheet" type="text/css"
       media="all"/>

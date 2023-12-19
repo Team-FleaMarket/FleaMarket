@@ -4,18 +4,19 @@ import cn.edu.nwpu.fleamarket.data.GoodsItem;
 import cn.edu.nwpu.fleamarket.data.OrderInformation;
 import cn.edu.nwpu.fleamarket.data.OrderInformationPageResult;
 import cn.edu.nwpu.fleamarket.enums.ManageCenterStatusEnum;
+import cn.edu.nwpu.fleamarket.pojo.Cart;
 import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.pojo.Student;
+import cn.edu.nwpu.fleamarket.service.CartService;
 import cn.edu.nwpu.fleamarket.service.GoodsService;
 import cn.edu.nwpu.fleamarket.service.StudentService;
 import jakarta.persistence.criteria.Order;
+import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -27,7 +28,9 @@ public class PageController {
     @Autowired
     private GoodsService goodsService;
     @Autowired
-    private StudentService userService;
+    private StudentService studentService;
+    @Autowired
+    private CartService cartService;
     private static final int PAGE_SIZE = 24;
     private static final int MANAGE_PAGE_SIZE = 5;
     private static Map<String, List<String>> CATEGORIES = new LinkedHashMap<String, List<String>>();
@@ -53,20 +56,23 @@ public class PageController {
                                  @PathVariable("page") int pageNum) {
         // 从数据库中获取 goodsList
         List<GoodsItem> goodsItemList = new ArrayList<>();
-        // Student loginStudent = (Student) request.getSession().getAttribute("student");
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
         int pagesNum = goodsService.selectCountByCateList(Arrays.asList(cate)) / PAGE_SIZE + 1; // 当有 2 页商品时，得到的 pagesNum 是 1
         List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, PAGE_SIZE);
+        // 返回的 itemList 里面包含 goods 和 student，并且 goods 标识是否已在购物车
         for (Goods goods : goodsList) {
-           /* if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
-                continue;
-            };*/
             GoodsItem goodsItem = new GoodsItem();
+            if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+                goodsItem.setInCart(true);
+            } else {
+                goodsItem.setInCart(false);
+            }
             goodsItem.setGoods(goods);
-            System.out.println("goods.studentNo "+goods.getStudentNo());
             Student student = goodsService.getStudentByStudentNo(goods.getStudentNo());
             student.setPassword(null);
             goodsItem.setStudent(student);
             goodsItemList.add(goodsItem);
+            System.out.println(goods.toString());
         }
         // 根据 cate 获取对应中文
         String[] category = new String[2];
@@ -89,6 +95,104 @@ public class PageController {
         modelAndView.addObject("cate", cate);
         modelAndView.addObject("page", pageNum);
         modelAndView.addObject("pages", pagesNum);
+        return modelAndView;
+    }
+
+   /* @ResponseBody
+    @RequestMapping("/views/{cate}/{page}")*/
+    public ModelAndView categoryWithoutGoodsInCart(HttpServletRequest request,
+                                 @PathVariable("cate") int cate,
+                                 @PathVariable("page") int pageNum) {
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
+        // cartList
+        List<Cart> cartList = cartService.getCartList(loginStudent.getStudentNo());
+        int cartListSize = cartList.size();
+        // goodsList and goodsItemList
+        int selectedPageSize = PAGE_SIZE + cartListSize; // 每页要查询的数量为 固定数量 + 购物车数量，然后去除购物车中的物品
+        List<Goods> goodsList = goodsService.getGoodsByCategory(cate, pageNum, selectedPageSize);
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        // 返回的 itemList 里面包含 goods 和 student，并且 goods 标识是否已在购物车
+        for (Goods goods : goodsList) {
+            for (Cart cart : cartList) {
+                if (cart.getGoodsId() == goods.getId()) {
+                    // TODO
+                }
+            }
+            if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+                continue;
+            }
+            GoodsItem goodsItem = new GoodsItem();
+            goodsItem.setGoods(goods);
+            Student student = studentService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItemList.add(goodsItem);
+        }
+        // 根据 cate 获取对应中文
+        String[] category = new String[2];
+        int remainingCate = cate;
+        for (Map.Entry<String, List<String>> entry : CATEGORIES.entrySet()) {
+            List<String> valueList = entry.getValue();
+            if (remainingCate <= valueList.size()) {
+                category[0] = entry.getKey();
+                category[1] = valueList.get(remainingCate - 1);
+                break;
+            } else {
+                remainingCate -= valueList.size();
+            }
+        }
+        int pagesNum = goodsService.selectCountByCateList(Arrays.asList(cate)) / PAGE_SIZE + 1; // 当有 2 页商品时，得到的 pagesNum 是 1
+        // 返回 modelAndView
+        ModelAndView modelAndView = new ModelAndView("goods/goodsview");
+        modelAndView.addObject("mainCategory", category[0]);
+        modelAndView.addObject("category", category[1]);
+        modelAndView.addObject("goodsItemList", goodsItemList);
+        modelAndView.addObject("cate", cate);
+        modelAndView.addObject("page", pageNum);
+        modelAndView.addObject("pages", pagesNum);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping("/views/cart")
+    public ModelAndView cart(HttpServletRequest request) {
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        List<Cart> cartList = cartService.getCartList(loginStudent.getStudentNo());
+        for (Cart cart : cartList) {
+            GoodsItem goodsItem = new GoodsItem();
+            Goods goods = goodsService.selectById(cart.getGoodsId());
+            goodsItem.setGoods(goods);
+            Student student = studentService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItem.setInCart(true);
+            goodsItemList.add(goodsItem);
+        }
+        // 返回 modelAndView
+        ModelAndView modelAndView = new ModelAndView("goods/goodscart");
+        modelAndView.addObject("goodsItemList", goodsItemList);
+        return modelAndView;
+    }
+
+    @GetMapping("/search")
+    @ResponseBody
+    public ModelAndView search(HttpServletRequest request, @RequestParam("query") String query, @RequestParam("page") int page) {
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
+        List<Goods> goodsList = goodsService.selectByGoodsName(query, page, PAGE_SIZE);
+        for (Goods goods : goodsList) {
+            if (cartService.checkIsInCart(loginStudent.getStudentNo(), goods.getId())){
+                continue;
+            };
+            GoodsItem goodsItem = new GoodsItem();
+            goodsItem.setGoods(goods);
+            Student student = goodsService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItemList.add(goodsItem);
+        }
+        ModelAndView modelAndView = new ModelAndView("goods/goodsview");
         return modelAndView;
     }
 

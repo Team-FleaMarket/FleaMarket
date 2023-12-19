@@ -2,6 +2,7 @@ package cn.edu.nwpu.fleamarket.service.impl;
 
 import cn.edu.nwpu.fleamarket.dao.CartDao;
 import cn.edu.nwpu.fleamarket.pojo.Cart;
+import cn.edu.nwpu.fleamarket.pojo.Goods;
 import cn.edu.nwpu.fleamarket.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public void addCartItem(String studentNo, int goodsId, int num) {
+        System.out.println(num);
         if (cartDao.getCartItemByStudentNoAndGoodsId(studentNo, goodsId)==null){
             cartDao.addCartItem(studentNo, goodsId);
         }else {

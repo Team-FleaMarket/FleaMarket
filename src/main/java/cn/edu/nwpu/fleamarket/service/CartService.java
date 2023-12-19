@@ -1,6 +1,7 @@
 package cn.edu.nwpu.fleamarket.service;
 
 import cn.edu.nwpu.fleamarket.pojo.Cart;
+import cn.edu.nwpu.fleamarket.pojo.Goods;
 
 import java.util.List;
 

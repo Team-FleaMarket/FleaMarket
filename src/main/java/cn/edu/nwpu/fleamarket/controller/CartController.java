@@ -1,13 +1,19 @@
 package cn.edu.nwpu.fleamarket.controller;
 
 import cn.edu.nwpu.fleamarket.data.CartItem;
+import cn.edu.nwpu.fleamarket.data.GoodsItem;
 import cn.edu.nwpu.fleamarket.pojo.Cart;
+import cn.edu.nwpu.fleamarket.pojo.Goods;
+import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.CartService;
+import cn.edu.nwpu.fleamarket.service.GoodsService;
+import cn.edu.nwpu.fleamarket.service.StudentService;
 import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,17 +21,21 @@ import java.util.List;
 public class CartController {
     @Autowired
     private CartService cartService;
-
+    @Autowired
+    private GoodsService goodsService;
+    @Autowired
+    private StudentService studentService;
     /**
      * 添加购物车
      * @param request
-     * @param cartItem
+     * @param goodsId
      * @return
      * */
     @PostMapping("/add")
-    public String addCart(HttpServletRequest request,  @RequestBody CartItem cartItem) {
-        cartService.addCartItem(cartItem.getStudentNo(), cartItem.getGoodsId(), cartItem.getNum());
-        List<Cart> cartList = cartService.getCartList(cartItem.getStudentNo());
+    public String addCart(HttpServletRequest request,  @RequestParam("goodsId") String goodsId) {
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
+        cartService.addCartItem(loginStudent.getStudentNo(), Integer.parseInt(goodsId), 0);
+        List<Cart> cartList = cartService.getCartList(loginStudent.getStudentNo());
         request.getSession().setAttribute("cartList", cartList);
         return "ok";
     }
@@ -36,9 +46,21 @@ public class CartController {
      * @return
      *
      * */
-    @GetMapping("/{studentNo}")
-    public String getCart(@PathVariable("studentNo") String studentNo) {
-        List<Cart> carts = cartService.getCartList(studentNo);
-        return JSON.toJSONString(carts);
+    @GetMapping("")
+    public String getCart(HttpServletRequest request) {
+        Student loginStudent = (Student) request.getSession().getAttribute("student");
+        List<GoodsItem> goodsItemList = new ArrayList<>();
+        List<Cart> cartList = cartService.getCartList(loginStudent.getStudentNo());
+        for (Cart cart : cartList) {
+            GoodsItem goodsItem = new GoodsItem();
+            Goods goods = goodsService.selectById(cart.getGoodsId());
+            goodsItem.setGoods(goods);
+            Student student = studentService.getStudentByStudentNo(goods.getStudentNo());
+            student.setPassword(null);
+            goodsItem.setStudent(student);
+            goodsItem.setInCart(true);
+            goodsItemList.add(goodsItem);
+        }
+        return JSON.toJSONString(goodsItemList);
     }
 }

@@ -38,7 +38,6 @@
     </div>
     <!-- // breadcrumbs -->
     <div class="container">
-
         <p class="text-center display-3 mt-4 mb-4" style="letter-spacing: 10px">${category}</p>
         <hr>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
@@ -51,15 +50,22 @@
                             <h6 class="card-title">${goodsItem.goods.goodsName}</h6>
                             <p class="card-text">${goodsItem.goods.description}</p>
                         </div>
-                        <div class="d-flex justify-content-around mb-3">
-                            <h5>￥</h5><h5>${goodsItem.goods.price}</h5>
-                            <c:if test="${sessionScope.student == null}">
-                                <button class="redirect-btn btn btn-warning">我想要...</button>
-                            </c:if>
-                            <c:if test="${sessionScope.student != null}">
-                                <button class="want-btn btn btn-warning">我想要...</button>
-                            </c:if>
+                        <div class="d-flex justify-content-between mb-3 px-3">
+                            <div class="card-price d-flex justify-content-start">
+                                <h5>￥</h5><h5>${goodsItem.goods.price}</h5>
+                            </div>
+                            <div class="card-button d-flex justify-content-end px-2">
+                                <c:if test="${false eq goodsItem.inCart}">
+                                    <button class="want-btn btn btn-warning">我想要...</button>
+                                </c:if>
+                                <c:if test="${true eq goodsItem.inCart}">
+                                    <button class="want-btn btn btn-warning disabled " disabled>已添加！</button>
+                                </c:if>
+                            </div>
                         </div>
+
+
+
                     </div>
                 </div>
 
@@ -106,6 +112,19 @@
                 </div>
             </div>
         </div>
+        <%-- 登录成功或失败消息提示 --%>
+        <div class="position-fixed bottom-0 end-0 p-3 col-xl-2" style="z-index: 5;">
+            <div id="modal-toast" class="toast hide" data-bs-animation="false" role="alert" aria-live="assertive"
+                 aria-atomic="true">
+                <div class="toast-header text-black" id="modal-toast-header">
+                    <strong class="me-auto">消息提示</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="modal-toast-body">
+                    消息内容...
+                </div>
+            </div>
+        </div>
     </div>
     <%-- 登录成功或失败消息提示 --%>
     <div class="position-fixed bottom-0 end-0 p-3 col-xl-2" style="z-index: 5;">
@@ -121,7 +140,7 @@
         </div>
     </div>
     <script type="module">
-        import {getCartAPI, addGoodsToCartAPI, getGoodsAPI} from "/static/js/apis/goods.js"
+        import {addGoodsToCartAPI, getGoodsAPI} from "/static/js/apis/goods.js"
         // 用 js 获取商品和用户信息
         let goodsItemList;
         window.onload = async () => {
@@ -131,7 +150,6 @@
             const page = segments[segments.length - 1]; // 获取最后一个参数
             const response = await getGoodsAPI(cate, page)
             goodsItemList = response.data
-            console.log("--------------------------------:" + JSON.stringify(goodsItemList))
         }
 
         // 商品详情
@@ -144,6 +162,7 @@
                 goodsModal.querySelector(".goodsDegree").innerText = goodsItemList[index].goods.degree
                 goodsModal.querySelector(".goodsDescription").innerText = goodsItemList[index].goods.description
                 goodsModal.querySelector(".goodsPrice").innerText = goodsItemList[index].goods.price
+                goodsModal.querySelector(".goodsId").innerText = goodsItemList[index].goods.id
                 goodsModal.querySelector(".sellerImage").src = goodsItemList[index].student.imagePath
                 goodsModal.querySelector(".sellerName").innerText = goodsItemList[index].student.name
                 goodsModal.querySelector(".sellerDescription").innerText = goodsItemList[index].student.description
@@ -160,6 +179,24 @@
                 if (goodsItemList[index].student.hasOwnProperty("qq")) {
                     goodsModal.querySelector(".sellerQq").innerText = goodsItemList[index].student.qq
                 }
+                // 找到对应的card
+                const button = img.closest('.card').querySelector('.want-btn');
+                if (button.disabled === true) {
+                    goodsModal.querySelector(".want-btn").disabled = true;
+                    goodsModal.querySelector(".want-btn").innerText = "已添加到想要！";
+                } else {
+                    goodsModal.querySelector(".want-btn").disabled = false;
+                }
+
+                if (goodsItemList[index].goods.status === 2) {
+                    goodsModal.querySelector(".buy-btn").innerText = "已下单！";
+                    goodsModal.querySelector(".buy-btn").disabled = true;
+                } else if (goodsItemList[index].goods.status === 0){
+                    goodsModal.querySelector(".buy-btn").disabled = false;
+                }
+
+
+
                 const myModal = new bootstrap.Modal(goodsModal)
                 myModal.show()
             })
@@ -180,18 +217,23 @@
         // 点击想要，添加到购物车，header 中显示的购物车商品数量
         document.querySelectorAll('.card .want-btn').forEach((wantBtn, index) => {
             wantBtn.addEventListener('click', async () => {
-                const response = await addGoodsToCartAPI({goodsId: goodsItemList[index].goods.id, studentNo: studentNo})
+                const response = await addGoodsToCartAPI(goodsItemList[index].goods.id)
                 console.log(typeof response.data)
-                if (response.data === "ok") {
-                    document.getElementById("toast-body").innerText = "商品已成功添加至想要列表！"
+                if (response.data ==="ok") {
+                    document.getElementById("toast-body").innerText = "添加想要列表成功！"
                     document.getElementById("toast-header").classList.remove("bg-danger")
-                    document.getElementById("toast-header").classList.add("bg-success")
-                } else {
+                    document.getElementById("toast-header").classList.add("bg-warning")
+                    document.querySelectorAll(".checkout-items").forEach((checkoutItems) => {
+                        checkoutItems.innerText = parseInt(document.querySelector(".checkout-items").textContent) + 1
+                    })
+                    wantBtn.disabled = true
+                    wantBtn.innerText = "已添加！"
+                } else  {
                     document.getElementById("toast-body").innerText = "未知原因，添加失败！"
-                    document.getElementById("toast-header").classList.remove("bg-success")
+                    document.getElementById("toast-header").classList.remove("bg-warning")
                     document.getElementById("toast-header").classList.add("bg-danger")
                 }
-                new bootstrap.Toast(document.querySelector('.toast')).show();
+                new bootstrap.Toast(document.getElementById('liveToast')).show();
 
                 // header 外面和伸缩边框里面的购物车都要更新
                /* document.querySelectorAll('.checkout-items').forEach((checkoutItems) => {
@@ -199,12 +241,6 @@
                 });*/
             });
         })
-        document.querySelectorAll(".redirect-btn").forEach((redirectBtn) => {
-            redirectBtn.addEventListener("click", () => {
-                const myModal = new bootstrap.Modal(document.getElementById('goods-modal'))
-                window.location.href = window.location.origin + "/login";
-            })
-        });
     </script>
     <!-- // modal -->
 </section>

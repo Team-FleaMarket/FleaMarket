@@ -11,6 +11,10 @@ CREATE TABLE students
     name       VARCHAR(30),
     wechat     VARCHAR(30),
     img        INTEGER DEFAULT 0, -- 是否有头像
+    image_path VARCHAR(100),
+    department VARCHAR(20),
+    qq VARCHAR(15),
+    description VARCHAR(100),
     PRIMARY KEY (id)
 ) CHARACTER SET utf8mb4;
 

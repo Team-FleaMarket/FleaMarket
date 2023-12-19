@@ -74,7 +74,7 @@ body {
     align-items: center; /* 垂直居中 */
 }
 
-.goodsDescription {
+textarea {
     border: none;
     outline: none; /* 这会移除文本框的轮廓线 */
 }
@@ -84,7 +84,12 @@ body {
 }
 
 /*------------ Right Box Seller------------*/
-.sellerImage .student-img {
+
+.right-content {
+    height: 100%;
+}
+
+.sellerImage {
     margin: 20px;
     width: 80px;
     border-radius: 50%;

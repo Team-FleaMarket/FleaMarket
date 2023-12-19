@@ -3,6 +3,7 @@ package cn.edu.nwpu.fleamarket.service.impl;
 import cn.edu.nwpu.fleamarket.dao.StudentDao;
 import cn.edu.nwpu.fleamarket.pojo.Student;
 import cn.edu.nwpu.fleamarket.service.StudentService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,12 +87,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getStudentByStudentNo(String studentNo) {
-        studentDao.selectStudentByStudentNo(studentNo);
-        return null;
-    }
-
-    @Override
     public void setImg(String studentNo) {
         studentDao.setImg(studentNo);
     }
@@ -106,7 +101,20 @@ public class StudentServiceImpl implements StudentService {
         return true;
     }
 
+<<<<<<< HEAD
+=======
 
+<<<<<<< HEAD
+>>>>>>> dev
+    @Override
+    public Student getStudentByStudentNo(String studentNo) {
+        return studentDao.selectStudentByStudentNo(studentNo);
+    }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 008e3d979d4bdb8c8616efb8a0236c523adea5c9
+>>>>>>> dev
 }
 
 
