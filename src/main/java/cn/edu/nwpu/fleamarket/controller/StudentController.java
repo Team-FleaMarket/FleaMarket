@@ -442,16 +442,10 @@ public class StudentController {
      */
     @ResponseBody
     @PutMapping
-<<<<<<< HEAD
-    public String updateStudent(HttpServletRequest request, @RequestBody Student student) {
-        if(userService.updateStudent(student)) {
-            request.getSession().setAttribute("student", userService.getStudentByStudentNo(student.getStudentNo()));
-=======
 
     public String update(HttpServletRequest request, @RequestBody Student student) {
         if(studentService.updateStudent(student)) {
             request.getSession().setAttribute("student", studentService.getStudentByStudentNo(student.getStudentNo()));
->>>>>>> dev
             return "ok";
         }
         return "err";

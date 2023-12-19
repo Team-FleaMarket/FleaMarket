@@ -34,14 +34,9 @@
                         <span class="fs-3" style="color: #ee340f">￥</span><span class="goodsPrice fs-3"
                                                                                 style="vertical-align: bottom"></span>
                         <div class="row button-row">
-                            <div class="col-8">
-                                <button class="want-btn btn btn-md btn-warning mt-2 fs-6" style="width: 100%;">
-                                    添加到想要
-                                </button>
-                            </div>
-                            <div class="col-4">
+                            <div class="col-12">
                                 <button class="buy-btn btn btn-md btn-primary mt-2 fs-6" style="width: 100%;" >
-                                    下单!!!
+                                    去下单!!!
                                 </button>
                             </div>
                         </div>
@@ -94,7 +89,7 @@
     </div>
 </div>
 <script type="module">
-    import {addGoodsToCartAPI, buyGoodsAPI} from "/static/js/apis/goods.js"
+    import {buyGoodsAPI} from "/static/js/apis/goods.js"
     const goodsInformationButton = document.querySelector(".goods-information-button")
     const sellerInformationButton = document.querySelector(".seller-information-button")
     const goodsInformation = document.querySelector(".goods-information")
@@ -118,56 +113,20 @@
         sellerInformationButton.style.color = "#000";
     });
 
-    const modalWantButton =  document.querySelector(".modal .want-btn")
-    modalWantButton.addEventListener("click", async () => {
-        const goodsId = document.querySelector(".goodsId").textContent
-        try {
-            const response = await addGoodsToCartAPI(goodsId)
-            document.getElementById("modal-toast-body").innerText = "添加想要列表成功！"
-            document.getElementById("modal-toast-header").classList.remove("bg-danger")
-            document.getElementById("modal-toast-header").classList.remove("bg-primary")
-            document.getElementById("modal-toast-header").classList.add("bg-warning")
-            document.querySelectorAll(".checkout-items").forEach((checkoutItems) => {
-                checkoutItems.innerText = parseInt(document.querySelector(".checkout-items").textContent) + 1
-            })
-            modalWantButton.disabled = true
-            modalWantButton.innerText = "已添加！"
-        } catch (error) {
-            document.getElementById("modal-toast-body").innerText = "未知原因，下单失败！"
-            document.getElementById("modal-toast-header").classList.remove("bg-warning")
-            document.getElementById("modal-toast-header").classList.remove("bg-primary")
-            document.getElementById("modal-toast-header").classList.add("bg-danger")
-        }
-        new bootstrap.Toast(document.getElementById('modal-toast')).show();
-    })
-
-    const modalBuyButton =  document.querySelector(".modal .buy-btn")
-    modalBuyButton.addEventListener("click", async () => {
+    document.querySelector(".modal .buy-btn").addEventListener("click", async () => {
         const goodsId = document.querySelector(".goodsId").textContent
         try {
             const response = await buyGoodsAPI(goodsId)
-            document.getElementById("modal-toast-body").innerText = "下单成功！！！"
-            document.getElementById("modal-toast-header").classList.remove("bg-danger")
-            document.getElementById("modal-toast-header").classList.remove("bg-warning")
-            document.getElementById("modal-toast-header").classList.add("bg-primary")
-            // TODO: 下单后将 goodsItemList 中相应物品的 status 设置为 2
-            goodsItemList.forEach((goodsItem, index) => {
-                // 检查条件，如果当前元素是3，就退出循环
-                if (goodsItem.goods.id === goodsId) {
-                    goodsItem.goods.status = 2
-                    return; // 这里的 return 将结束当前迭代
-                }
-                // 在这里可以执行其他操作
-            });
-            modalBuyButton.disabled = true
-            modalBuyButton.innerText = "已下单！"
+            document.getElementById("toast-body").innerText = "下单成功！！！"
+            document.getElementById("toast-header").classList.remove("bg-danger")
+            document.getElementById("toast-header").classList.add("bg-primary")
+            wantBtn.disabled = true
+            wantBtn.innerText = "已添加！"
         } catch (error) {
-            document.getElementById("modal-toast-body").innerText = "未知原因，下单失败！"
-            document.getElementById("modal-toast-header").classList.remove("bg-primary")
-            document.getElementById("modal-toast-header").classList.remove("bg-warning")
-            document.getElementById("modal-toast-header").classList.add("bg-danger")
+            document.getElementById("toast-body").innerText = "未知原因，下单失败！"
+            document.getElementById("toast-header").classList.remove("bg-primary")
+            document.getElementById("toast-header").classList.add("bg-danger")
         }
-        new bootstrap.Toast(document.getElementById('modal-toast')).show();
-
+        new bootstrap.Toast(document.querySelector('.toast')).show();
     })
 </script>

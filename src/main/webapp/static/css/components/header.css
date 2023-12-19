@@ -169,7 +169,7 @@
 .navbar-user .header-student-image {
         width: 50px;
         border-radius: 50%;
-        aspect-ratio: 1; /* 设置宽高比为5:6 */
+        aspect-ratio: 1;
         object-fit: cover; /* 保持原始比例，填充整个容器 */
 }
 .navbar-user .image-li {

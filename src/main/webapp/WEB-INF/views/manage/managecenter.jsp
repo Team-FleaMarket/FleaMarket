@@ -50,11 +50,8 @@
 <body>
 <%@ include file="../components/header.jsp" %>
 
-<div class="manager">
+<div class="manager min-vh-100 ">
     <div class="container">
-        <div class="">
-            <div class="container">
-                <div class="">
                     <!--banner-bottom-grid-left-->
                     <div class="row">
                         <div class="col-md-3 information " data-wow-delay=".5s">
@@ -283,14 +280,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
 
-                <div class="clearfix"></div>
-            </div>
-        </div>
     </div>
-    <div class="clearfix"></div>
 </div>
 <!-- //banner-bottom -->
 

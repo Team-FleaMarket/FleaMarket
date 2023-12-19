@@ -19,6 +19,10 @@ public class Goods {
     private String goodsName;
     private String description;
     private double price;
+    /*
+        审核状态
+            0待审核 1已审核
+     */
     private int status;
     /*
         商品分类
@@ -33,6 +37,10 @@ public class Goods {
      */
     private String cate;
     private String imagePath;
+    /*
+       商品状态
+           0待出售 1已出售 2交易中
+    */
     private int goodsStatus;
     private String degree;
     private int attributed; //商品是否已被分配给管理员

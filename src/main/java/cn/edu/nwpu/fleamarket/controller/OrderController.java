@@ -36,7 +36,6 @@ public class OrderController {
     @GetMapping("/add")
     public String addOrder(HttpServletRequest request, @RequestParam("goodsId") String goodsId) {
         try {
-            System.out.println(goodsId);
             Goods goods = goodsService.checkIsReviewedAndNotSold(Integer.valueOf(goodsId));
             Student student = (Student) request.getSession().getAttribute("student");
             orderService.addOrder(goods, student.getStudentNo());

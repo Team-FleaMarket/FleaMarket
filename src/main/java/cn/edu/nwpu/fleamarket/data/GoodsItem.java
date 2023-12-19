@@ -10,4 +10,6 @@ public class GoodsItem {
 
     private Student student;
 
+    private Boolean inCart;
+
 }

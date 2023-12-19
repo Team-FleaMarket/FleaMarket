@@ -31,14 +31,13 @@
                         主页
                     </a>
                 </li>
-                <li class="breadcrumb-item">商品分类</li>
-                <li class="breadcrumb-item">${mainCategory}</li>
+                <li class="breadcrumb-item">想要列表</li>
             </ol>
         </div>
     </div>
     <!-- // breadcrumbs -->
     <div class="container">
-        <p class="text-center display-3 mt-4 mb-4" style="letter-spacing: 10px">${category}</p>
+        <p class="text-center display-1 mt-4 mb-4" style="letter-spacing: 7px">我的想要列表</p>
         <hr>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
             <c:forEach var="goodsItem" items="${goodsItemList}">
@@ -55,20 +54,11 @@
                                 <h5>￥</h5><h5>${goodsItem.goods.price}</h5>
                             </div>
                             <div class="card-button d-flex justify-content-end px-2">
-                                <c:if test="${false eq goodsItem.inCart}">
-                                    <button class="want-btn btn btn-warning">我想要...</button>
-                                </c:if>
-                                <c:if test="${true eq goodsItem.inCart}">
-                                    <button class="want-btn btn btn-warning disabled " disabled>已添加！</button>
-                                </c:if>
+                                    <button class="want-btn btn btn-primary">去下单！</button>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
-
             </c:forEach>
             <%--  <div class="item-categories">
                   <p>图书书籍</p>
@@ -77,51 +67,12 @@
           </div>--%>
         </div>
     </div>
-    <!-- pagination -->
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <!-- 判断是否禁用上一页 -->
-            <li class="page-item<c:if test='${page == 1}'> disabled</c:if>">
-                <a class="page-link" href="${pageContext.request.contextPath}/views/${cate}/${page - 1}"
-                   aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <!-- 输出所有页数 -->
-            <c:forEach var="pageNumber" begin="1" end="${pages}">
-                <li class="page-item"><a class="page-link"
-                                         href="${pageContext.request.contextPath}/views/${cate}/${pageNumber}">${pageNumber}</a>
-                </li>
-            </c:forEach>
-            <!-- 判断是否禁用下一页 -->
-            <li class="page-item<c:if test='${page == pages}'> disabled</c:if>">
-                <a class="page-link" href="${pageContext.request.contextPath}/views/${cate}/${page + 1}"
-                   aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <!-- // pagination -->
     <!-- modal -->
     <div class="modal fade" id="goods-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="max-width: 930px; padding: 20px">
             <div class="modal-content">
                 <div class="modal-body" style="overflow: auto;max-height: 95vh; padding: 0px;">
-                    <%@ include file="./goodsdetail.jsp" %>
-                </div>
-            </div>
-        </div>
-        <%-- 登录成功或失败消息提示 --%>
-        <div class="position-fixed bottom-0 end-0 p-3 col-xl-2" style="z-index: 5;">
-            <div id="modal-toast" class="toast hide" data-bs-animation="false" role="alert" aria-live="assertive"
-                 aria-atomic="true">
-                <div class="toast-header text-black" id="modal-toast-header">
-                    <strong class="me-auto">消息提示</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body" id="modal-toast-body">
-                    消息内容...
+                    <%@ include file="./goodscartdetail.jsp" %>
                 </div>
             </div>
         </div>
@@ -140,22 +91,24 @@
         </div>
     </div>
     <script type="module">
-        import {addGoodsToCartAPI, getGoodsAPI} from "/static/js/apis/goods.js"
+        import {getCartAPI, addGoodsToCartAPI, getGoodsAPI} from "/static/js/apis/goods.js"
         // 用 js 获取商品和用户信息
         let goodsItemList;
         window.onload = async () => {
-            const currentUrl = window.location.href;
-            const segments = currentUrl.split('/'); // 将 URL 按照 '/' 分割成数组
-            const cate = segments[segments.length - 2]; // 获取倒数第二个参数
-            const page = segments[segments.length - 1]; // 获取最后一个参数
-            const response = await getGoodsAPI(cate, page)
+            const response = await getCartAPI()
             goodsItemList = response.data
+            console.log("--------------------------------:" + JSON.stringify(goodsItemList))
         }
 
         // 商品详情
         document.querySelectorAll(".card-img-top").forEach((img, index) => {
             img.addEventListener("click", (e) => {
                 const goodsModal = document.getElementById('goods-modal')
+                console.log("index:", index);
+                console.log("goodsItemList:", JSON.stringify(goodsItemList));
+                console.log("goodsItemList[index]:", goodsItemList[index]);
+                console.log("goodsItemList[index].goods:", goodsItemList[index].goods);
+
                 goodsModal.querySelector(".goodsImage").src = "${pageContext.request.contextPath}/static/upload/file/"+goodsItemList[index].goods.imagePath
                 goodsModal.querySelector(".goodsName").innerText = goodsItemList[index].goods.goodsName
                 goodsModal.querySelector(".goodsAddedTime").innerText = goodsItemList[index].goods.addedTime
@@ -179,24 +132,6 @@
                 if (goodsItemList[index].student.hasOwnProperty("qq")) {
                     goodsModal.querySelector(".sellerQq").innerText = goodsItemList[index].student.qq
                 }
-                // 找到对应的card
-                const button = img.closest('.card').querySelector('.want-btn');
-                if (button.disabled === true) {
-                    goodsModal.querySelector(".want-btn").disabled = true;
-                    goodsModal.querySelector(".want-btn").innerText = "已添加到想要！";
-                } else {
-                    goodsModal.querySelector(".want-btn").disabled = false;
-                }
-
-                if (goodsItemList[index].goods.status === 2) {
-                    goodsModal.querySelector(".buy-btn").innerText = "已下单！";
-                    goodsModal.querySelector(".buy-btn").disabled = true;
-                } else if (goodsItemList[index].goods.status === 0){
-                    goodsModal.querySelector(".buy-btn").disabled = false;
-                }
-
-
-
                 const myModal = new bootstrap.Modal(goodsModal)
                 myModal.show()
             })
@@ -214,33 +149,6 @@
         });
         console.log("cookiesArray: " + cookiesArray)
         console.log("studentNo: " + studentNo)
-        // 点击想要，添加到购物车，header 中显示的购物车商品数量
-        document.querySelectorAll('.card .want-btn').forEach((wantBtn, index) => {
-            wantBtn.addEventListener('click', async () => {
-                const response = await addGoodsToCartAPI(goodsItemList[index].goods.id)
-                console.log(typeof response.data)
-                if (response.data ==="ok") {
-                    document.getElementById("toast-body").innerText = "添加想要列表成功！"
-                    document.getElementById("toast-header").classList.remove("bg-danger")
-                    document.getElementById("toast-header").classList.add("bg-warning")
-                    document.querySelectorAll(".checkout-items").forEach((checkoutItems) => {
-                        checkoutItems.innerText = parseInt(document.querySelector(".checkout-items").textContent) + 1
-                    })
-                    wantBtn.disabled = true
-                    wantBtn.innerText = "已添加！"
-                } else  {
-                    document.getElementById("toast-body").innerText = "未知原因，添加失败！"
-                    document.getElementById("toast-header").classList.remove("bg-warning")
-                    document.getElementById("toast-header").classList.add("bg-danger")
-                }
-                new bootstrap.Toast(document.getElementById('liveToast')).show();
-
-                // header 外面和伸缩边框里面的购物车都要更新
-               /* document.querySelectorAll('.checkout-items').forEach((checkoutItems) => {
-                    await addGoodsToCartAPI({goodsId, studentNo})
-                });*/
-            });
-        })
     </script>
     <!-- // modal -->
 </section>

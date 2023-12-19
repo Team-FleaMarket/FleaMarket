@@ -18,21 +18,6 @@
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel">跳蚤市场</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 <!-- 登录后显示头像和购物车 -->
-                <c:if test="${sessionScope.student != null}">
-                    <ul class="navbar-user">
-                        <li>
-                            <a href="${pageContext.request.contextPath}/">
-                                <i class="fas fa-user-check"></i>
-                            </a>
-                        </li>
-                        <li class="checkout">
-                            <a href="">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span id="checkout-items-in" class="checkout-items">${sessionScope.cartList.size()}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </c:if>
                 <!-- 登录后显示头像和购物车 end -->
             </div>
             <div class="offcanvas-body">
@@ -132,10 +117,10 @@
                     </a>
                 </li>
                 <li class="checkout">
-                    <a href="">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                        <span id="checkout-items-out" class="checkout-items">${sessionScope.cartList.size()}</span>
-                    </a>
+                        <a href="${pageContext.request.contextPath}/views/cart">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="checkout-items">${sessionScope.cartList.size()}</span>
+                        </a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/logout">
