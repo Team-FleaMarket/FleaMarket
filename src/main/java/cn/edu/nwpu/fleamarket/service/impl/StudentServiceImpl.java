@@ -108,10 +108,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
+<<<<<<< HEAD
     @Override
     public Student getStudentByStudentNo(String studentNo) {
         return studentDao.selectStudentByStudentNo(studentNo);
     }
+=======
+>>>>>>> 008e3d979d4bdb8c8616efb8a0236c523adea5c9
 }
 
 
