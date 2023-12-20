@@ -1,12 +1,27 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+.background-header-body {
+    display: flex;
+    flex-direction: column;
+}
 
 .register {
-    background: #ececec;
+    flex: 1;
+    background-color: #f9f6f2;
+    padding: 10px 30px 30px 30px;
+    margin: 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 50px;
     display: flex;
     justify-content: center;
@@ -175,9 +190,10 @@ img {
 
 .required {
     position: absolute;
-    left: 292px;
+    left: 295px;
     bottom: 5px;
     color: red;
+    display: none;
 }
 
 .contact-start span {
@@ -200,7 +216,7 @@ img {
     border: none;
     outline: none;
     height: 35px;
-    background: #667c9d;
+    background: #a8b3ba;
     color: #fff;
     border-radius: 8px;
     transition: .4s;
@@ -228,6 +244,30 @@ span a {
 span a:hover {
     text-decoration: underline;
 }
+
+.options-p {
+    margin-bottom: 10px !important;
+}
+
+.options-p a {
+    color: #999;
+    text-decoration: none;
+}
+.options-p a:hover {
+    text-decoration: underline;
+}
+
+.triangle-down {
+    display: none;
+}
+.expanded .triangle-up {
+    display: inline-block;
+}
+.expanded .triangle-down {
+    display: none;
+}
+
+
 
 @media only screen and (max-width: 992px) {
 

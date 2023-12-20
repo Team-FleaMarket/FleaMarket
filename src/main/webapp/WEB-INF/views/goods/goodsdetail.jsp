@@ -65,24 +65,23 @@
                                 联系方式
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <i class="fa-brands fa-weixin"></i>
-                                    <span class="sellerWechat"></span>
-                                </li>
-                                <li class="list-group-item">
-                                    <i class="fa-brands fa-qq"></i>
-                                    <span class="sellerQq"></span>
-
-                                </li>
-                                <li class="list-group-item ">
-                                    <i class="fa-solid fa-envelope"></i>
-                                    <span class="sellerEmail"></span>
-
-                                </li>
-                                <li class="list-group-item ">
+                                <li class="list-group-item li-phone">
                                     <i class="fa-solid fa-phone"></i>
-                                    <span class="sellerPhone"></span>
+                                    <span class="sellerPhone ml-1"></span>
                                 </li>
+                                <li class="list-group-item li-wechat">
+                                    <i class="fa-brands fa-weixin"></i>
+                                    <span class="sellerWechat ml-1"></span>
+                                </li>
+                                <li class="list-group-item  li-qq">
+                                    <i class="fa-brands fa-qq"></i>
+                                    <span class="sellerQq ml-1"></span>
+                                </li>
+                                <li class="list-group-item li-email">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <span class="sellerEmail ml-1"></span>
+                                </li>
+
                                 <span id="goodsId" class="goodsId" style="display: none"></span>
                             </ul>
                         </div>
