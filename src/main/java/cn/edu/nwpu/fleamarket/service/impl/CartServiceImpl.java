@@ -16,9 +16,19 @@ import java.util.List;
 */
 @Service
 public class CartServiceImpl implements CartService{
+    /**
+     * 购物车
+     */
     @Autowired
     private CartDao cartDao;
 
+    /**
+     * 添加购物车项目
+     *
+     * @param studentNo 学生编号
+     * @param goodsId   商品编号
+     * @param num       数字
+     */
     @Override
     public void addCartItem(String studentNo, int goodsId, int num) {
         System.out.println(num);
@@ -29,11 +39,24 @@ public class CartServiceImpl implements CartService{
         }
     }
 
+    /**
+     * 获取购物车列表
+     *
+     * @param studentNo 学生编号
+     * @return {@link List}<{@link Cart}>
+     */
     @Override
     public List<Cart> getCartList(String studentNo) {
         return cartDao.getCartByStudentNo(studentNo);
     }
 
+    /**
+     * 检测是否在购物车中
+     *
+     * @param studentNo 学生编号
+     * @param goodsId   商品编号
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean checkIsInCart(String studentNo, int goodsId) {
         return cartDao.getCartItemByStudentNoAndGoodsId(studentNo, goodsId)!=null;

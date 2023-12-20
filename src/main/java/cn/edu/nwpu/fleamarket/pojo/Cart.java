@@ -4,28 +4,28 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 
+ * 购物车
  * @TableName cart
  */
 @Data
 public class Cart implements Serializable {
     /**
-     * 
+     * 编号
      */
     private Integer id;
 
     /**
-     * 
+     * 学生编号
      */
     private String studentNo;
 
     /**
-     * 
+     * 商品id
      */
     private Integer goodsId;
 
     /**
-     * 
+     * 总数
      */
     private Integer num;
 
