@@ -20,8 +20,9 @@ public class StudentServiceImpl implements StudentService {
         Student dataBaseStudent = studentDao.selectStudentByStudentNo(student.getStudentNo());
         // 若学号已被注册
         if (dataBaseStudent != null) {
-            return dataBaseStudent;
+            return new Student();
         }
+        // 未被注册
         studentDao.addStudent(student);
         return null;
     }
@@ -101,20 +102,10 @@ public class StudentServiceImpl implements StudentService {
         return true;
     }
 
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
->>>>>>> dev
     @Override
     public Student getStudentByStudentNo(String studentNo) {
         return studentDao.selectStudentByStudentNo(studentNo);
     }
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 008e3d979d4bdb8c8616efb8a0236c523adea5c9
->>>>>>> dev
 }
 
 
