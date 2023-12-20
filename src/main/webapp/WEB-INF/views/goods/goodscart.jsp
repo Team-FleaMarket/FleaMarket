@@ -120,19 +120,28 @@
                 goodsModal.querySelector(".sellerName").innerText = goodsItemList[index].student.name
                 goodsModal.querySelector(".sellerDescription").innerText = goodsItemList[index].student.description
                 goodsModal.querySelector(".sellerDepartment").innerText = goodsItemList[index].student.department
-                if (goodsItemList[index].student.hasOwnProperty("phone")) {
-                    goodsModal.querySelector(".sellerPhone").innerText = goodsItemList[index].student.phone
-                }
-                if (goodsItemList[index].student.hasOwnProperty("wechat")) {
+                goodsModal.querySelector(".sellerPhone").innerText = goodsItemList[index].student.phone
+                // seller 是否有微信
+                if (goodsItemList[index].student.wechat === null || goodsItemList[index].student.wechat === "") {
+                    document.querySelector(".li-wechat").style.display = "none"
+                } else {
+                    document.querySelector(".li-wechat").style.display = "block"
                     goodsModal.querySelector(".sellerWechat").innerText = goodsItemList[index].student.wechat
                 }
-                if (goodsItemList[index].student.hasOwnProperty("email")) {
-                    goodsModal.querySelector(".sellerEmail").innerText = goodsItemList[index].student.email
-                }
-                if (goodsItemList[index].student.hasOwnProperty("qq")) {
+                // seller 是否有 QQ
+                if (goodsItemList[index].student.qq === null || goodsItemList[index].student.qq === "") {
+                    document.querySelector(".li-qq").style.display = "none"
+                } else {
+                    document.querySelector(".li-qq").style.display = "block"
                     goodsModal.querySelector(".sellerQq").innerText = goodsItemList[index].student.qq
                 }
-
+                // seller 是否有邮箱
+                if (goodsItemList[index].student.email === null || goodsItemList[index].student.email === "") {
+                    document.querySelector(".li-email").style.display = "none"
+                } else {
+                    document.querySelector(".li-email").style.display = "block"
+                    goodsModal.querySelector(".sellerEmail").innerText = goodsItemList[index].student.email
+                }
                 if (img.closest('.card').querySelector('.buy-btn').disabled == true) {
                     goodsModal.querySelector(".buy-btn").innerText = "已下单！";
                     goodsModal.querySelector(".buy-btn").disabled = true;
