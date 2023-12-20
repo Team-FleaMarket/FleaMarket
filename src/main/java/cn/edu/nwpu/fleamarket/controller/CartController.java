@@ -16,13 +16,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 购物车控制器
+ *
+ * @author lsy
+ * @date 2023/12/15
+ */
 @RestController
 @RequestMapping("/cart")
 public class CartController {
+    /**
+     * 购物车服务
+     */
     @Autowired
     private CartService cartService;
+    /**
+     * 商品服务
+     */
     @Autowired
     private GoodsService goodsService;
+    /**
+     * 学生服务
+     */
     @Autowired
     private StudentService studentService;
     /**
@@ -42,7 +57,6 @@ public class CartController {
 
     /**
      * 获取购物车列表
-     * @param studentNo
      * @return
      *
      * */

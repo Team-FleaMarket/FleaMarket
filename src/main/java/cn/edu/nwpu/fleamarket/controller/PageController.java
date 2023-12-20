@@ -21,23 +21,52 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
+/**
+ * 页面控制器
+ *
+ * @author lsy
+ * @date 2023/12/15
+ */
 @Controller
 @RequestMapping("")
 public class PageController {
 
+    /**
+     * 商品服务
+     */
     @Autowired
     private GoodsService goodsService;
+    /**
+     * 学生服务
+     */
     @Autowired
     private StudentService studentService;
+    /**
+     * 购物车服务
+     */
     @Autowired
     private CartService cartService;
+    /**
+     * 主页面商品数量
+     */
     private static final int PAGE_SIZE = 24;
+    /**
+     * 个人中心商品数量
+     */
     private static final int MANAGE_PAGE_SIZE = 5;
+    /**
+     * 类别
+     */
     private static Map<String, List<String>> CATEGORIES = new LinkedHashMap<String, List<String>>();
     static {
         CATEGORIES = initCATEGORIES(); // 调用init函数初始化静态变量
     }
 
+    /**
+     * 初始化类别
+     *
+     * @return {@link Map}<{@link String}, {@link List}<{@link String}>>
+     */
     private static Map<String, List<String>> initCATEGORIES() {
         Map<String, List<String>> categories = new LinkedHashMap<String, List<String>>();
         categories.put("图书书籍", List.of("教材", "考试", "艺术文学"));
@@ -48,7 +77,12 @@ public class PageController {
 
     /**
      * 首页
-     * */
+     *
+     * @param request 请求
+     * @param cate    凯特
+     * @param pageNum 页码
+     * @return {@link ModelAndView}
+     */
     @ResponseBody
     @RequestMapping("/views/{cate}/{page}")
     public ModelAndView category(HttpServletRequest request,
@@ -98,7 +132,14 @@ public class PageController {
         return modelAndView;
     }
 
-   /* @ResponseBody
+    /**
+     * 购物车
+     *
+     * @param request 请求
+     * @param cate    商品类别
+     * @param pageNum 页码
+     * @return {@link ModelAndView}
+     *//* @ResponseBody
     @RequestMapping("/views/{cate}/{page}")*/
     public ModelAndView categoryWithoutGoodsInCart(HttpServletRequest request,
                                  @PathVariable("cate") int cate,
@@ -153,6 +194,12 @@ public class PageController {
         return modelAndView;
     }
 
+    /**
+     * 购物车
+     *
+     * @param request 请求
+     * @return {@link ModelAndView}
+     */
     @ResponseBody
     @RequestMapping("/views/cart")
     public ModelAndView cart(HttpServletRequest request) {
@@ -175,6 +222,14 @@ public class PageController {
         return modelAndView;
     }
 
+    /**
+     * 搜索
+     *
+     * @param request 请求
+     * @param query   查询
+     * @param page    页
+     * @return {@link ModelAndView}
+     */
     @GetMapping("/search")
     @ResponseBody
     public ModelAndView search(HttpServletRequest request, @RequestParam("query") String query, @RequestParam("page") int page) {
@@ -196,6 +251,11 @@ public class PageController {
         return modelAndView;
     }
 
+    /**
+     * 登录
+     *
+     * @return {@link ModelAndView}
+     */
     @RequestMapping("/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
@@ -203,6 +263,13 @@ public class PageController {
         return modelAndView;
     }
 
+    /**
+     * 注册
+     *
+     * @param request 请求
+     * @return {@link ModelAndView}
+     * @throws Exception
+     */
     @RequestMapping("/register")
     public ModelAndView register(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
@@ -210,6 +277,13 @@ public class PageController {
         return modelAndView;
     }
 
+    /**
+     * 注销
+     *
+     * @param request 请求
+     * @return {@link ModelAndView}
+     * @throws Exception
+     */
     @RequestMapping("/logout")
     public ModelAndView logout(HttpServletRequest request) throws Exception {
         request.getSession().removeAttribute("student");
@@ -218,6 +292,13 @@ public class PageController {
         return modelAndView;
     }
 
+    /**
+     * 管理中心
+     *
+     * @param request 请求
+     * @return {@link ModelAndView}
+     * @throws Exception
+     */
     @RequestMapping("/views/managecenter")
     public ModelAndView managecenter(HttpServletRequest request )throws Exception{
         String str_option = request.getParameter("status");
@@ -282,6 +363,15 @@ public class PageController {
         modelAndView.setViewName("manage/managecenter");
         return modelAndView;
     }
+
+    /**
+     * 通过商品类别查询
+     *
+     * @param goodsList 货物清单
+     * @param bookList  书单
+     * @param storeList 列表
+     * @param amazeList 列表
+     */
     private void ByCate(List<Goods> goodsList, List<Goods> bookList, List<Goods> storeList, List<Goods> amazeList) {
         for (Goods goods : goodsList) {
             if ("1".equals(goods.getCate())) {
@@ -295,24 +385,56 @@ public class PageController {
             }
         }
     }
+
+    /**
+     * 检查
+     *
+     * @param request 请求
+     * @return {@link ModelAndView}
+     * @throws Exception
+     */
     @RequestMapping("/checkout")
     public ModelAndView checkout(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("checkout");
         return modelAndView;
     }
+
+    /**
+     * 插入
+     *
+     * @param request 请求
+     * @return {@link ModelAndView}
+     * @throws Exception 例外
+     */
     @RequestMapping("/views/insert")
     public ModelAndView insert(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manage/insert");
         return modelAndView;
     }
+
+    /**
+     * 修改信息
+     *
+     * @param request 请求
+     * @return {@link ModelAndView}
+     * @throws Exception 例外
+     */
     @RequestMapping("/managecenter/modifyInfo")
     public ModelAndView modifyinfo(HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("manage/modifyInfo");
         return modelAndView;
     }
+
+    /**
+     * 商品
+     *
+     * @param request 请求
+     * @return {@link ModelAndView}
+     * @throws Exception 例外
+     */
     @RequestMapping("/products")
     public ModelAndView products(HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();

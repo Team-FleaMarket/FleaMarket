@@ -6,10 +6,12 @@ import cn.edu.nwpu.fleamarket.pojo.Goods;
 import java.util.List;
 
 /**
-* @author xh254
-* @description 针对表【cart】的数据库操作Service
-* @createDate 2023-12-15 16:21:25
-*/
+ * 购物车服务
+ *
+ * @author xh254
+ * @description 针对表【cart】的数据库操作Service
+ * @createDate 2023-12-15 16:21:25
+ */
 public interface CartService {
 
     /**

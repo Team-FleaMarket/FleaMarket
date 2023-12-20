@@ -9,32 +9,6 @@
     <%@ include file="../components/htmlhead.jsp" %>
     <link href="${pageContext.request.contextPath}/static/css/goods/goodsdetail.css" rel="stylesheet"
           type="text/css" media="all"/>
-    <script language="JavaScript">
-        // $(document).ready(function() {
-        //     //绑定下拉框change事件，当下来框改变时调用 SelectChange()方法
-        //     $("#checkGoodsStatus").change(function() { SelectChange(); });
-        // })
-
-        function SelectChange(selectId) {
-            //获取下拉框选中项的value属性值
-            var selectValue = $("#" + selectId).val();
-
-            var twoText = selectValue.split(".");
-            var status = twoText[0];
-            var goodsId = twoText[1];
-            $.ajax({
-                type: "post",
-                contentType: "application/string",
-                dataType: "json",
-                async: false,
-                url: "/goodswill/goods/changeGoodsStatus?status=" + status + "&goodsId=" + goodsId,
-                success: function (data) {
-                    datas = data;
-                },
-            });
-
-        }
-    </script>
     <script src="${pageContext.request.contextPath}/static/js/managecenter.js" defer></script>
 
     <!-- //animation-effect -->
@@ -45,7 +19,6 @@
 
 <div class="manager min-vh-100 ">
     <div class="container">
-        <!--banner-bottom-grid-left-->
         <div class="row">
             <div class="col-md-3 information " data-wow-delay=".5s">
                 <form>
@@ -289,10 +262,8 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-<!-- //banner-bottom -->
 
 <!-- footer -->
 <%--编辑商品信息模态框--%>
@@ -424,7 +395,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="buyerConfirmModalLabel">
-                    确认收货</h1>
+                    确认收获</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
