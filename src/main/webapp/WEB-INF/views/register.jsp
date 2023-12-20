@@ -145,8 +145,8 @@
                                     </svg>
                                 </i>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="QQ" name="QQ" placeholder="">
-                                    <label for="QQ">QQ</label>
+                                    <input type="text" class="form-control" id="qq" name="qq" placeholder="">
+                                    <label for="qq">QQ</label>
                                 </div>
                             </div>
                             <%--邮箱--%>
@@ -228,24 +228,110 @@
                     document.querySelector("#liveToastBtn").onclick = async () => {
                         const studentNo = $("input[name=studentNo]").val()
                         const name = $("input[name=name]").val()
+                        const department = $("input[name=department]").val()
                         const phone = $("input[name=phone]").val()
                         const wechat = $("input[name=wechat]").val()
+                        const qq = $("input[name=qq]").val()
                         const email = $("input[name=email]").val()
+                        console.log("email: " + email)
                         const password = $("input[name=password]").val()
+                        const repassword = $("input[name=repassword]").val()
+                        if (!isInputLegal(studentNo, name, department, phone, wechat, qq, email, password, repassword)) {
+                            return;
+                        }
                         try {
-                            const message = await registerAPI({studentNo, name, phone, wechat, email, password})
-                            document.getElementById("toast-body").innerText = message.response.data
+                            const message = await registerAPI({studentNo, name, department, phone, wechat, qq, email, password})
+                            document.getElementById("toast-body").innerText = message.data
                             document.getElementById("toast-header").classList.remove("bg-danger")
                             document.getElementById("toast-header").classList.add("bg-success")
                             window.location.href = window.location.origin
                         } catch (error) {
-                            console.log(error)
-                            const message = error.response.data
-                            document.getElementById("toast-body").innerText = message
+                            document.getElementById("toast-body").innerText = error.response.data
                             document.getElementById("toast-header").classList.remove("bg-success")
                             document.getElementById("toast-header").classList.add("bg-danger")
                         }
                         new bootstrap.Toast(document.querySelector('.toast')).show();
+                    }
+
+                    const isInputLegal = (studentNo, name, department, phone, wechat, qq, email, password, repassword) => {
+                        //判断用户名
+                        if(studentNo === null || studentNo === ""){
+                            $("input[name=studentNo]").focus();
+                            layer.tips('学号不能为空！', '#studentNo', {
+                                tips: [2, '#FF3030'],
+                                time: 2000
+                            });
+                            return false;
+                        }
+                        if(name === null || name === ""){
+                            $("input[name=name]").focus();
+                            layer.tips('昵称不能为空！', '#name', {
+                                tips: [2, '#FF3030'],
+                                time: 2000
+                            });
+                            return false;
+                        }
+
+                        if(department === null || department === ""){
+                            $("input[name=department]").focus();
+                            layer.tips('学院不能为空！', '#department', {
+                                tips: [2, '#FF3030'],
+                                time: 2000
+                            });
+                            return false;
+                        }
+                        if(phone === null || phone === ""){
+                            $("input[name=phone]").focus();
+                            layer.tips('手机号不能为空！', '#phone', {
+                                tips: [2, '#FF3030'],
+                                time: 2000
+                            });
+                            return false;
+                        }
+                        if(wechat === null || wechat === ""){
+                            $("input[name=wechat]").focus();
+                            layer.tips('微信不能为空！', '#wechat', {
+                                tips: [2, '#FF3030'],
+                                time: 2000
+                            });
+                            return false;
+                        }
+                        if(qq === null || qq === ""){
+                            $("input[name=qq]").focus();
+                            layer.tips('QQ 不能为空！', '#qq', {
+                                tips: [2, '#FF3030'],
+                                time: 2000
+                            });
+                            return false;
+                        }
+
+                        if(email === null || email === ""){
+                            $("input[name=email]").focus();
+                            layer.tips('邮箱不能为空！', '#email', {
+                                tips: [2, '#FF3030'],
+                                time: 2000
+                            });
+                            return false;
+                        }
+
+                        if(password === null || password === ""){
+                            $("input[name=password]").focus();
+                            layer.tips('密码不能为空！', '#password', {
+                                tips: [2, '#FF3030'],
+                                time: 2000
+                            });
+                            return false;
+                        }
+
+                        if(repassword === null || repassword === ""){
+                            $("input[name=repassword]").focus();
+                            layer.tips('确认不能为空！', '#repassword', {
+                                tips: [2, '#FF3030'],
+                                time: 2000
+                            });
+                            return false;
+                        }
+                        return true;
                     }
                 </script>
                 <%-- 注册失败消息提示 end--%>
