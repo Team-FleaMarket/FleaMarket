@@ -1,4 +1,6 @@
 target/
+META-INF/
+
 .mvn/
 mvnw
 mvnw.cmd
