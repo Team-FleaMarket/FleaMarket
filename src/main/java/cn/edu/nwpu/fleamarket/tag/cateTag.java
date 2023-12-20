@@ -4,13 +4,34 @@ import jakarta.servlet.jsp.JspWriter;
 import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
+/**
+ * cate 标签
+ * 根据cate的数值返回对应的类别
+ *
+ * @author lsy
+ * @date 2023/12/15
+ */
 public class cateTag extends SimpleTagSupport {
+    /**
+     * 类别
+     */
     private String category;
 
+    /**
+     * 设置类别
+     *
+     * @param category 类别
+     */
     public void setCategory(String category) {
         this.category = category;
     }
 
+    /**
+     * 标签
+     *
+     * @throws JspException JSP 异常
+     * @throws IOException  ioexception
+     */
     @Override
     public void doTag() throws JspException, IOException {
         if (category != null) {

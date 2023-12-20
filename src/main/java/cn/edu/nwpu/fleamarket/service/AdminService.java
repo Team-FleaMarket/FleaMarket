@@ -40,8 +40,13 @@ public interface AdminService {
      * @param username 待删管理员用户名
      */
     boolean delete(String username);
-
+    /**
+     * 获取所有管理员
+     */
     List<Admin> getAll();
-
+    /**
+     * 查询管理员
+     * @param query 查询语句
+     */
     List<Admin> queryByUsername(String query);
 }

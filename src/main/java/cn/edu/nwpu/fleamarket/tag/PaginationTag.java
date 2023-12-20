@@ -7,22 +7,54 @@ import java.io.IOException;
 /**
  * 分页标签
  *
- * */
+ * @author lsy
+ * @date 2023/12/15
+ */
 public class PaginationTag extends SimpleTagSupport {
 
+    /**
+     * 当前状态
+     * 0 待审核
+     * 1 带出售
+     * -1审核未通过
+     */
     private String status;
+    /**
+     * 当前页面
+     */
     private int currentPage;
+    /**
+     * 总页数
+     */
     private int totalPage;
+    /**
+     * 商品名称
+     */
     private String goodsName;
 
+    /**
+     * 设置状态
+     *
+     * @param status 地位
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     * 设置当前页面
+     *
+     * @param currentPage 当前页面
+     */
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
     }
 
+    /**
+     * 设置总页数
+     *
+     * @param totalPage 总页数
+     */
     public void setTotalPage(int totalPage) {
         if(totalPage==0)
         {
@@ -31,10 +63,21 @@ public class PaginationTag extends SimpleTagSupport {
         this.totalPage = totalPage;
     }
 
+    /**
+     * 设置商品名称
+     *
+     * @param goodsName 商品名称
+     */
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
     }
 
+    /**
+     * 标签
+     *
+     * @throws JspException JSP 异常
+     * @throws IOException  ioexception
+     */
     @Override
     public void doTag() throws JspException, IOException {
 

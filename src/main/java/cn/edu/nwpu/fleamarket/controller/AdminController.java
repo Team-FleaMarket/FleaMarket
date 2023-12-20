@@ -10,14 +10,23 @@ import java.util.List;
 
 /**
  * 管理员controller
+ *
+ * @author lsy
+ * @date 2023/12/15
  */
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
 
+    /**
+     * 管理服务
+     */
     @Autowired
     private AdminService adminService;
 
+    /**
+     * session
+     */
     @Autowired
     HttpSession session;
 

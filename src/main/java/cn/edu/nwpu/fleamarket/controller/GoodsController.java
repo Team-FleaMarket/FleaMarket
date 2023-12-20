@@ -40,19 +40,36 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+/**
+ * 商品控制类
+ *
+ * @author lsy
+ * @date 2023/12/15
+ */
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
 
+    /**
+     * 商品服务
+     */
     @Autowired
     private GoodsService goodsService;
 
+    /**
+     * Redisson 客户端
+     */
     @Autowired
     private RedissonClient redissonClient;
 
+    /**
+     * 购物车服务
+     */
     @Autowired
     private CartService cartService;
-
+    /**
+     * 页面商品数量
+     */
     private static final int PAGE_SIZE = 24;
 
 
@@ -78,14 +95,16 @@ public class GoodsController {
      * */
     @GetMapping("/delete")
     @ResponseBody
-    public String offShelf(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
+    public ModelAndView offShelf(HttpServletRequest request, @RequestParam("id") Integer goodsId) {
         try {
             Student student = (Student) request.getSession().getAttribute("student");
             goodsService.offShelf(goodsId, student.getStudentNo());
         }catch (BusinessException e) {
-            return e.getMessage();
+            e.getMessage();
         }
-        return "ok";
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/views/managecenter");
+        return modelAndView;
     }
 
 
@@ -102,30 +121,15 @@ public class GoodsController {
         System.out.println("goodsName "+goods.getGoodsName());
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("multipartFile.getName() "+multipartFile.getName());
-        String name = multipartFile.getName();            // 文件名
-        String type = multipartFile.getContentType();    // 文件类型
-//        InputStream in = multipartFile.getInputStream(); // 上传文件流
-
-        /* *  四、文件名重名
-         *  对于不同用户readme.txt文件，不希望覆盖！
-         *  后台处理： 给用户添加一个唯一标记!
-         **/
-
-
-        // a. 随机生成一个唯一标记
+        String name = multipartFile.getName();
+        String type = multipartFile.getContentType();
         String id = UUID.randomUUID().toString();
-        // b. 与文件后锥名拼接
         String suffix = type.substring(type.lastIndexOf("/") + 1);
         String fileName = id + "." + suffix;
-        // 获取上传基路径
         String path = request.getSession().getServletContext().getRealPath("/static/upload/file/");
-
-        // 创建目标文件
-        // 创建文件夹
         File directory = new File(path);
         if (directory.exists() || directory.mkdirs()) {
             File file = new File(path, fileName);
-            // 工具类，文件上传
             System.out.println(path);
             multipartFile.transferTo(file);
         }
@@ -247,14 +251,18 @@ public class GoodsController {
         return JSON.toJSONString(goodsItemList);
     }
 
-    //已售商品总数
+    /**
+     *已售商品总数
+     * */
     @ResponseBody
     @GetMapping("/sold/number")
     public int getSoldNum() {
         return goodsService.getSoldTotalCnt();
     }
 
-
+    /**
+     *根据页查找商品
+     * */
     @ResponseBody
     @GetMapping("/sold/{page}")
     public List<Goods> getSoldGoodsByPage(@PathVariable("page") int page) {
