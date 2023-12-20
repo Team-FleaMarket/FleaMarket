@@ -1,6 +1,6 @@
 # FleaMarket 跳蚤市场
 
-![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show1.jpg)
+![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show1.png)
 ![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show2.jpg)
 ![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show3.jpg)
 ![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show4.jpg)
