@@ -5,7 +5,7 @@
 ![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show4.jpg)
 ![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show1.png)
 
-Powered by Spring6 and Bootstrap 5.
+Powered by Spring6, fucking JSP and Bootstrap 5.
 
 ## 配置与运行
 
