@@ -175,13 +175,15 @@ orderModal.addEventListener('show.bs.modal', async event => {
     const price = button.getAttribute("price")
     const cate = button.getAttribute("cate")
     const studentInformation = button.getAttribute("user-information")
+    console.log(studentInformation)
     const studentInformationArray = studentInformation.split(',')
     const studentNo = studentInformationArray[0]
     const userName = studentInformationArray[1]
     const wechat = studentInformationArray[2]
-    const email = studentInformationArray[4]
-    const phone = studentInformationArray[5]
-    const studentImgPath = studentInformationArray[6]
+    const email = studentInformationArray[3]
+    const phone = studentInformationArray[4]
+    const studentImgPath = studentInformationArray[5]
+    const qq = studentInformationArray[6]
     orderModal.querySelector('.goodsImage').src = imgPath
     orderModal.querySelector('.goodsName').innerText = goodsName
     orderModal.querySelector('.goodsDescription').innerText = description
@@ -192,12 +194,15 @@ orderModal.addEventListener('show.bs.modal', async event => {
     orderModal.querySelector('.studentNo').innerText = studentNo
     orderModal.querySelector(".student-img").src = studentImgPath
     if (wechat != null) {
-        orderModal.querySelector('.wechat i').innerText = wechat
+        orderModal.querySelector('.wechat').innerText = wechat
     }
     if (email != null) {
-        orderModal.querySelector('.email i').innerText = email
+        orderModal.querySelector('.email').innerText = email
     }
     if (phone != null) {
-        orderModal.querySelector('.phone i').innerText = phone
+        orderModal.querySelector('.phone').innerText = phone
+    }
+    if (qq != null) {
+        orderModal.querySelector('.QQ').innerText = qq
     }
 });
