@@ -92,17 +92,20 @@ public class StudentController {
 
     @RequestMapping("/register")
     public ResponseEntity<?> register(HttpServletRequest request, HttpServletResponse response, @RequestBody Student student) throws Exception{
-        Student databaseStudent = studentService.registerStudent(student);
-        List<Cart> cartList = cartService.getCartList(student.getStudentNo());
-        if (databaseStudent != null) {
+        student.setImagePath("https://img.zcool.cn/community/01f4865b2625d3a8012034f70e2a54.jpg@1280w_1l_2o_100sh.jpg");
+        student.setDescription("这位同学什么都没留下...");
+        // 若已注册
+        if (studentService.registerStudent(student) != null) {
             return ResponseEntity.badRequest().body("该学号已经被注册！");
         }
+        // 若未注册
         // 存储 session
-        request.getSession().setAttribute("student", databaseStudent);
+        List<Cart> cartList = cartService.getCartList(student.getStudentNo());
+        request.getSession().setAttribute("student", student);
         request.getSession().setAttribute("cartList", cartList);
         // 存储 nameCookie
-        Cookie nameCookie = new Cookie("studentName", databaseStudent.getName());
-        Cookie studentNoCookie = new Cookie("studentNo", databaseStudent.getStudentNo());
+        Cookie nameCookie = new Cookie("studentName", student.getName());
+        Cookie studentNoCookie = new Cookie("studentNo", student.getStudentNo());
         nameCookie.setPath("/"); // 设置路径为根路径
         studentNoCookie.setPath("/"); // 设置路径为根路径
         response.addCookie(nameCookie);

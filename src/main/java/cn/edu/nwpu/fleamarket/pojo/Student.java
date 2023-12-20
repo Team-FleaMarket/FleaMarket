@@ -1,8 +1,6 @@
 package cn.edu.nwpu.fleamarket.pojo;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +8,8 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student implements Serializable {
     private Integer id;
     private String studentNo;
