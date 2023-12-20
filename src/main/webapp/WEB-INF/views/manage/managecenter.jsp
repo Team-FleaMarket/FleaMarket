@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: root
-  Date: 2018/5/21
-  Time: 14:08
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="/WEB-INF/tld/MyTag.tld" prefix="mytag" %>
@@ -52,234 +45,238 @@
 
 <div class="manager min-vh-100 ">
     <div class="container">
-                    <!--banner-bottom-grid-left-->
-                    <div class="row">
-                        <div class="col-md-3 information " data-wow-delay=".5s">
-                            <form>
-                                <div class="self_information">
-                                    <c:if test="${sessionScope.student.imagePath!=null}">
-                                        <img src="${sessionScope.student.imagePath}"
-                                             alt=" " class="avatar rounded-circle mx-auto d-block">
-                                    </c:if>
-                                    <c:if test="${sessionScope.student.imagePath==null}">
-                                        <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
-                                        <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg"
-                                             alt=" " class="avatar rounded-circle mx-auto d-block">
-                                    </c:if>
-                                </div>
-                                <br>
-                                <h5>学号:${sessionScope.student.studentNo}</h5>
-                                <br>
-                                <h5>昵称:${sessionScope.student.name}</h5>
-                                <h2></h2>
-                                <br>
-                                <h5>微信:${sessionScope.student.wechat}</h5><h4></h4>
-                                <br>
-                                <h5>手机号:${sessionScope.student.phone}</h5><h4></h4>
-                                <br>
-                                <%--                                <a href=" /managecenter/modifyInfo">修改信息</a>--%>
-                            </form>
+        <!--banner-bottom-grid-left-->
+        <div class="row">
+            <div class="col-md-3 information " data-wow-delay=".5s">
+                <form>
+                    <div class="self_information">
+                        <c:if test="${sessionScope.student.imagePath!=null}">
+                            <img src="${sessionScope.student.imagePath}"
+                                 alt=" " class="avatar rounded-circle mx-auto d-block">
+                        </c:if>
+                        <c:if test="${sessionScope.student.imagePath==null}">
+                            <%--                                        <button type="button" class="avatar-button border-0 rounded-circle" > <img src="/static/images/avatar/nwpu.jpg" class="avatar rounded-circle mx-auto d-block" /></button>--%>
+                            <img src="${pageContext.request.contextPath}/static/images/avatar/nwpu.jpg"
+                                 alt=" " class="avatar rounded-circle mx-auto d-block">
+                        </c:if>
+                    </div>
+                    <br>
+                    <h5>学号:${sessionScope.student.studentNo}</h5>
+                    <br>
+                    <h5>昵称:${sessionScope.student.name}</h5>
+                    <h2></h2>
+                    <br>
+                    <h5>微信:${sessionScope.student.wechat}</h5><h4></h4>
+                    <br>
+                    <h5>手机号:${sessionScope.student.phone}</h5><h4></h4>
+                    <br>
+                    <h5>QQ:${sessionScope.student.qq}</h5><h4></h4>
+                    <br>
+                    <h5>邮箱:<br>${sessionScope.student.email}</h5><h4></h4>
+                    <br>
+                    <%--                                <a href=" /managecenter/modifyInfo">修改信息</a>--%>
+                </form>
+            </div>
+            <div class="col-md-9 " data-wow-delay=".6s">
+                <div class="goods">
+                    <div class="">
+                        <div class="status">
+                            <a href="${pageContext.request.contextPath}/views/managecenter?status=0">待审核</a>
+                            |
+                            <a href="${pageContext.request.contextPath}/views/managecenter?status=-1">审核未通过</a>
+                            ||
+                            <a href="${pageContext.request.contextPath}/views/managecenter?status=1">待出售</a>
+                            |
+                            <a href="${pageContext.request.contextPath}/views/managecenter?status=4">出售中</a>
+                            |
+                            <a href="${pageContext.request.contextPath}/views/managecenter?status=2">已出售</a>
+                            ||
+                            <a href="${pageContext.request.contextPath}/views/managecenter?status=3">我的订单</a>
+                            |
+                            <a href="${pageContext.request.contextPath}/views/insert">添加商品</a> <span></span>
                         </div>
-                        <div class="col-md-9 " data-wow-delay=".6s">
-                            <div class="goods">
-                                <div class="">
-                                    <div class="status">
-                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=0">待审核</a>
-                                        |
-                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=-1">审核未通过</a>
-                                        ||
-                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=1">待出售</a>
-                                        |
-                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=4">出售中</a>
-                                        |
-                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=2">已出售</a>
-                                        ||
-                                        <a href="${pageContext.request.contextPath}/views/managecenter?status=3">我的订单</a>
-                                        |
-                                        <a href="${pageContext.request.contextPath}/views/insert">添加商品</a> <span></span>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-md-4 status-single">
-                                            <c:if test="${status == 0}"><h4>待审核: ${totalCnt} 件商品</h4></c:if>
-                                            <c:if test="${status == -1}"><h4>审核未通过: ${totalCnt} 件商品</h4></c:if>
-                                            <c:if test="${status == 1}"><h4>待出售: ${totalCnt} 件商品</h4></c:if>
-                                            <c:if test="${status == 4}"><h4>出售中: ${totalCnt} 件商品</h4></c:if>
-                                            <c:if test="${status == 2}"><h4>已出售: ${totalCnt} 件商品</h4></c:if>
-                                            <c:if test="${status == 3}"><h4>我的订单: ${totalCnt} 件商品</h4></c:if>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <form action="${pageContext.request.contextPath}/views/managecenter"
-                                                  method="get">
-                                                <c:if test="${searchText!=null}">
-                                                    <input type="text" id="searchInput" name="searchInput"
-                                                           placeholder="${searchText}">
-                                                </c:if>
-                                                <c:if test="${searchText==null}">
-                                                    <input type="text" id="searchInput" name="searchInput"
-                                                           placeholder="搜索商品">
-                                                </c:if>
-                                                <input type="hidden" name="status" value="${status}">
-                                                <input class="search-button" type="submit" value="搜索">
-                                            </form>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4 status-single">
+                                <c:if test="${status == 0}"><h4>待审核: ${totalCnt} 件商品</h4></c:if>
+                                <c:if test="${status == -1}"><h4>审核未通过: ${totalCnt} 件商品</h4></c:if>
+                                <c:if test="${status == 1}"><h4>待出售: ${totalCnt} 件商品</h4></c:if>
+                                <c:if test="${status == 4}"><h4>出售中: ${totalCnt} 件商品</h4></c:if>
+                                <c:if test="${status == 2}"><h4>已出售: ${totalCnt} 件商品</h4></c:if>
+                                <c:if test="${status == 3}"><h4>我的订单: ${totalCnt} 件商品</h4></c:if>
+                            </div>
+                            <div class="col-md-8">
+                                <form action="${pageContext.request.contextPath}/views/managecenter"
+                                      method="get">
+                                    <c:if test="${searchText!=null}">
+                                        <input type="text" id="searchInput" name="searchInput"
+                                               placeholder="${searchText}">
+                                    </c:if>
+                                    <c:if test="${searchText==null}">
+                                        <input type="text" id="searchInput" name="searchInput"
+                                               placeholder="搜索商品">
+                                    </c:if>
+                                    <input type="hidden" name="status" value="${status}">
+                                    <input class="search-button" type="submit" value="搜索">
+                                </form>
 
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    <c:forEach items="${orderInformationPageResult.orderInformationList}"
-                                               var="orderInformation" varStatus="vs">
-                                        <c:set var="goods" value="${orderInformation.goods}"/>
-                                        <c:set var="buyer" value="${orderInformation.buyer}"/>
-                                        <c:set var="seller" value="${orderInformation.seller}"/>
-                                        <div class="student-goods  ">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="student-goods-image">
-                                                        <img src="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
-                                                             alt=" " class="img-rounded" width="125px" height="125px"/>
-                                                    </div>
-                                                    <br>
-                                                        <%--                                                    <h4><a class="item_add" href="${pageContext.request.}/views/single?goodsId=${orderInformation.goods.id}">>>更多</a></h4>--%>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <h3>${orderInformation.goods.goodsName}</h3>
-                                                    <mytag:cate category="${orderInformation.goods.cate}"/>
-                                                    <h3 class="money ">￥ ${orderInformation.goods.price}</h3>
-                                                    <h4 class="date">${orderInformation.goods.degree}新</h4>
-                                                        <%--审核未通过--%>
-                                                    <c:if test="${status==-1}">
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                                                data-bs-whatever="${orderInformation.goods.id}">删除
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#editModal"
-                                                                data-bs-whatever="${orderInformation.goods.id}"
-                                                                name="${orderInformation.goods.goodsName}"
-                                                                description="${orderInformation.goods.description}"
-                                                                price="${orderInformation.goods.price}"
-                                                                degree="${orderInformation.goods.degree}"
-                                                                cate="${orderInformation.goods.cate}">编辑
-                                                        </button>
-                                                    </c:if>
-                                                        <%--待审核--%>
-                                                    <c:if test="${status == 0&&orderInformation.goods.status==0}">
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                                                data-bs-whatever="${orderInformation.goods.id}">下架
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#editModal"
-                                                                data-bs-whatever="${orderInformation.goods.id}"
-                                                                name="${orderInformation.goods.goodsName}"
-                                                                description="${orderInformation.goods.description}"
-                                                                price="${orderInformation.goods.price}"
-                                                                degree="${orderInformation.goods.degree}"
-                                                                cate="${orderInformation.goods.cate}">编辑
-                                                        </button>
-                                                    </c:if>
-                                                        <%--待出售--%>
-                                                    <c:if test="${status == 1&&orderInformation.goods.status==1}">
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                                                data-bs-whatever="${orderInformation.goods.id}">下架
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#editModal"
-                                                                data-bs-whatever="${orderInformation.goods.id}"
-                                                                name="${orderInformation.goods.goodsName}"
-                                                                description="${orderInformation.goods.description}"
-                                                                price="${orderInformation.goods.price}"
-                                                                degree="${orderInformation.goods.degree}"
-                                                                cate="${orderInformation.goods.cate}">
-                                                            编辑
-                                                        </button>
-                                                    </c:if>
-                                                        <%--出售中--%>
-                                                    <c:if test="${status == 4}">
-                                                        <c:set var="type" value="seller"/>
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#cancelModal"
-                                                                data-bs-whatever="${orderInformation.orderId}">拒绝交易
-                                                        </button>
-                                                        <c:if test="${orderInformation.sellerConfirm==0}">
-                                                            <button type="button"
-                                                                    class="btn btn-outline-dark pull-right"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#sellerConfirmModal"
-                                                                    data-bs-whatever="${orderInformation.orderId}">确认出售
-                                                            </button>
-                                                        </c:if>
-
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#orderModal"
-                                                                img-path="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
-                                                                name="${orderInformation.goods.goodsName}"
-                                                                description="${orderInformation.goods.description}"
-                                                                price="${orderInformation.goods.price}"
-                                                                degree="${orderInformation.goods.degree}"
-                                                                cate="${orderInformation.goods.cate}"
-                                                                user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${pageContext.request.contextPath}/static/upload/file/${buyer.imagePath}">
-                                                            查看订单
-                                                        </button>
-                                                    </c:if>
-                                                        <%--已出售--%>
-                                                    <c:if test="${status == 2}">
-                                                        <c:set var="type" value="seller"/>
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#orderModal"
-                                                                data-bs-whatever="${orderInformation.goods.id}"
-                                                                img-path="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
-                                                                name="${orderInformation.goods.goodsName}"
-                                                                description="${orderInformation.goods.description}"
-                                                                price="${orderInformation.goods.price}"
-                                                                degree="${orderInformation.goods.degree}"
-                                                                cate="${orderInformation.goods.cate}"
-                                                                user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${pageContext.request.contextPath}/static/upload/file/${buyer.imagePath}">
-                                                            查看订单
-                                                        </button>
-                                                    </c:if>
-                                                        <%--我的订单--%>
-                                                    <c:if test="${status == 3}">
-                                                        <c:if test="${orderInformation.goods.goodsStatus==2}">
-                                                            <c:set var="type" value="buyer"/>
-                                                            <button type="button"
-                                                                    class="btn btn-outline-dark pull-right "
-                                                                    data-bs-toggle="modal" data-bs-target="#cancelModal"
-                                                                    data-bs-whatever="${orderInformation.orderId}">取消订单
-                                                            </button>
-                                                            <button type="button"
-                                                                    class="btn btn-outline-dark pull-right"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#buyerConfirmModal"
-                                                                    data-bs-whatever="${orderInformation.orderId}">
-                                                                确认收货
-                                                            </button>
-                                                        </c:if>
-                                                        <button type="button" class="btn btn-outline-dark pull-right"
-                                                                data-bs-toggle="modal" data-bs-target="#orderModal"
-                                                                img-path="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
-                                                                name="${orderInformation.goods.goodsName}"
-                                                                description="${orderInformation.goods.description}"
-                                                                price="${orderInformation.goods.price}"
-                                                                degree="${orderInformation.goods.degree}"
-                                                                cate="${orderInformation.goods.cate}"
-                                                                user-information="${seller.studentNo},${seller.name},${seller.wechat},${seller.email},${seller.phone},${pageContext.request.contextPath}/static/upload/file/${seller.imagePath}">
-                                                            查看订单
-                                                        </button>
-                                                    </c:if>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-                                    <mytag:pagination status="${status}" currentPage="${currentPage}"
-                                                      totalPage="${totalPage}" goodsName="${searchText}"/>
-
-                                </div>
                             </div>
                         </div>
+                        <br>
+
+                        <c:forEach items="${orderInformationPageResult.orderInformationList}"
+                                   var="orderInformation" varStatus="vs">
+                            <c:set var="goods" value="${orderInformation.goods}"/>
+                            <c:set var="buyer" value="${orderInformation.buyer}"/>
+                            <c:set var="seller" value="${orderInformation.seller}"/>
+                            <div class="student-goods  ">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="student-goods-image">
+                                            <img src="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
+                                                 alt=" " class="img-rounded" width="125px" height="125px"/>
+                                        </div>
+                                        <br>
+                                            <%--                                                    <h4><a class="item_add" href="${pageContext.request.}/views/single?goodsId=${orderInformation.goods.id}">>>更多</a></h4>--%>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h3>${orderInformation.goods.goodsName}</h3>
+                                        <mytag:cate category="${orderInformation.goods.cate}"/>
+                                        <h3 class="money ">￥ ${orderInformation.goods.price}</h3>
+                                        <h4 class="date">${orderInformation.goods.degree}新</h4>
+                                            <%--审核未通过--%>
+                                        <c:if test="${status==-1}">
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                    data-bs-whatever="${orderInformation.goods.id}">删除
+                                            </button>
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#editModal"
+                                                    data-bs-whatever="${orderInformation.goods.id}"
+                                                    name="${orderInformation.goods.goodsName}"
+                                                    description="${orderInformation.goods.description}"
+                                                    price="${orderInformation.goods.price}"
+                                                    degree="${orderInformation.goods.degree}"
+                                                    cate="${orderInformation.goods.cate}">编辑
+                                            </button>
+                                        </c:if>
+                                            <%--待审核--%>
+                                        <c:if test="${status == 0&&orderInformation.goods.status==0}">
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                    data-bs-whatever="${orderInformation.goods.id}">下架
+                                            </button>
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#editModal"
+                                                    data-bs-whatever="${orderInformation.goods.id}"
+                                                    name="${orderInformation.goods.goodsName}"
+                                                    description="${orderInformation.goods.description}"
+                                                    price="${orderInformation.goods.price}"
+                                                    degree="${orderInformation.goods.degree}"
+                                                    cate="${orderInformation.goods.cate}">编辑
+                                            </button>
+                                        </c:if>
+                                            <%--待出售--%>
+                                        <c:if test="${status == 1&&orderInformation.goods.status==1}">
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                    data-bs-whatever="${orderInformation.goods.id}">下架
+                                            </button>
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#editModal"
+                                                    data-bs-whatever="${orderInformation.goods.id}"
+                                                    name="${orderInformation.goods.goodsName}"
+                                                    description="${orderInformation.goods.description}"
+                                                    price="${orderInformation.goods.price}"
+                                                    degree="${orderInformation.goods.degree}"
+                                                    cate="${orderInformation.goods.cate}">
+                                                编辑
+                                            </button>
+                                        </c:if>
+                                            <%--出售中--%>
+                                        <c:if test="${status == 4}">
+                                            <c:set var="type" value="seller"/>
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#cancelModal"
+                                                    data-bs-whatever="${orderInformation.orderId}">拒绝交易
+                                            </button>
+                                            <c:if test="${orderInformation.sellerConfirm==0}">
+                                                <button type="button"
+                                                        class="btn btn-outline-dark pull-right"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#sellerConfirmModal"
+                                                        data-bs-whatever="${orderInformation.orderId}">确认出售
+                                                </button>
+                                            </c:if>
+
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#orderModal"
+                                                    img-path="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
+                                                    name="${orderInformation.goods.goodsName}"
+                                                    description="${orderInformation.goods.description}"
+                                                    price="${orderInformation.goods.price}"
+                                                    degree="${orderInformation.goods.degree}"
+                                                    cate="${orderInformation.goods.cate}"
+                                                    user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${pageContext.request.contextPath}/static/upload/file/${buyer.imagePath},${buyer.qq}">
+                                                查看订单
+                                            </button>
+                                        </c:if>
+                                            <%--已出售--%>
+                                        <c:if test="${status == 2}">
+                                            <c:set var="type" value="seller"/>
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#orderModal"
+                                                    data-bs-whatever="${orderInformation.goods.id}"
+                                                    img-path="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
+                                                    name="${orderInformation.goods.goodsName}"
+                                                    description="${orderInformation.goods.description}"
+                                                    price="${orderInformation.goods.price}"
+                                                    degree="${orderInformation.goods.degree}"
+                                                    cate="${orderInformation.goods.cate}"
+                                                    user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${pageContext.request.contextPath}/static/upload/file/${buyer.imagePath},${buyer.qq}">
+                                                查看订单
+                                            </button>
+                                        </c:if>
+                                            <%--我的订单--%>
+                                        <c:if test="${status == 3}">
+                                            <c:set var="type" value="buyer"/>
+                                            <c:if test="${orderInformation.goods.goodsStatus==2}">
+                                                <button type="button"
+                                                        class="btn btn-outline-dark pull-right "
+                                                        data-bs-toggle="modal" data-bs-target="#cancelModal"
+                                                        data-bs-whatever="${orderInformation.orderId}">取消订单
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-outline-dark pull-right"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#buyerConfirmModal"
+                                                        data-bs-whatever="${orderInformation.orderId}">
+                                                    确认收货
+                                                </button>
+                                            </c:if>
+                                            <button type="button" class="btn btn-outline-dark pull-right"
+                                                    data-bs-toggle="modal" data-bs-target="#orderModal"
+                                                    img-path="${pageContext.request.contextPath}/static/upload/file/${orderInformation.goods.imagePath}"
+                                                    name="${orderInformation.goods.goodsName}"
+                                                    description="${orderInformation.goods.description}"
+                                                    price="${orderInformation.goods.price}"
+                                                    degree="${orderInformation.goods.degree}"
+                                                    cate="${orderInformation.goods.cate}"
+                                                    user-information="${seller.studentNo},${seller.name},${seller.wechat},${seller.email},${seller.phone},${pageContext.request.contextPath}/static/upload/file/${seller.imagePath},${seller.qq}">
+                                                查看订单
+                                            </button>
+                                        </c:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <mytag:pagination status="${status}" currentPage="${currentPage}"
+                                          totalPage="${totalPage}" goodsName="${searchText}"/>
+
                     </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
@@ -415,7 +412,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="buyerConfirmModalLabel">
-                    确认收获</h1>
+                    确认收货</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>

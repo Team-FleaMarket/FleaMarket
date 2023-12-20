@@ -24,9 +24,9 @@
                         <c:if test="${type=='buyer'}">
                             卖家信息
                         </c:if>
-                         <c:if test="${type=='seller'}">
-                             买家信息
-                         </c:if>
+                        <c:if test="${type=='seller'}">
+                            买家信息
+                        </c:if>
                     </span>
                 </div>
                 <!-- 商品详情 -->
@@ -66,21 +66,21 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <i class="fa-brands fa-weixin"></i>
-                                    <span class="sellerWechat"></span>
+                                    <span class="wechat"></span>
                                 </li>
                                 <li class="list-group-item">
                                     <i class="fa-brands fa-qq"></i>
-                                    <span class="sellerQq"></span>
+                                    <span class="QQ"></span>
 
                                 </li>
                                 <li class="list-group-item ">
                                     <i class="fa-solid fa-envelope"></i>
-                                    <span class="sellerEmail"></span>
+                                    <span class="email"></span>
 
                                 </li>
                                 <li class="list-group-item ">
                                     <i class="fa-solid fa-phone"></i>
-                                    <span class="sellerPhone"></span>
+                                    <span class="phone"></span>
                                 </li>
 
                             </ul>
