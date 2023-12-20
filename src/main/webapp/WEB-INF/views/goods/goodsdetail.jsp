@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!----------------------- Main Container -------------------------->
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
+<div class="container d-flex justify-content-center align-items-center">
     <!----------------------- Login Container -------------------------->
 
     <div class="row p-3 bg-white box-area">
@@ -94,6 +94,7 @@
 </div>
 <script type="module">
     import {addGoodsToCartAPI, buyGoodsAPI} from "/static/js/apis/goods.js"
+    import {useGoodsStore} from "/static/js/stores/goods-store.js"
     const goodsInformationButton = document.querySelector(".goods-information-button")
     const sellerInformationButton = document.querySelector(".seller-information-button")
     const goodsInformation = document.querySelector(".goods-information")
@@ -150,8 +151,9 @@
             document.getElementById("modal-toast-header").classList.remove("bg-warning")
             document.getElementById("modal-toast-header").classList.add("bg-primary")
             // TODO: 下单后将 goodsItemList 中相应物品的 status 设置为 2
+            const goodsStore = useGoodsStore()
+            const goodsItemList = goodsStore.getGoodsItemList()
             goodsItemList.forEach((goodsItem, index) => {
-                // 检查条件，如果当前元素是3，就退出循环
                 if (goodsItem.goods.id === goodsId) {
                     goodsItem.goods.status = 2
                     return; // 这里的 return 将结束当前迭代
@@ -161,6 +163,7 @@
             modalBuyButton.disabled = true
             modalBuyButton.innerText = "已下单！"
         } catch (error) {
+            console.log(error);
             document.getElementById("modal-toast-body").innerText = "未知原因，下单失败！"
             document.getElementById("modal-toast-header").classList.remove("bg-primary")
             document.getElementById("modal-toast-header").classList.remove("bg-warning")

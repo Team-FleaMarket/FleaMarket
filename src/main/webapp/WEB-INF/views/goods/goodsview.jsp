@@ -105,9 +105,9 @@
     <!-- // pagination -->
     <!-- modal -->
     <div class="modal fade" id="goods-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-width: 930px; padding: 20px">
+        <div class="modal-dialog" style="max-width: 930px; margin-top: 15vh; margin-bottom: 15vh; height: 70vh; overflow: auto;">
             <div class="modal-content">
-                <div class="modal-body" style="overflow: auto;max-height: 95vh; padding: 0px;">
+                <div class="modal-body">
                     <%@ include file="./goodsdetail.jsp" %>
                 </div>
             </div>
@@ -141,6 +141,8 @@
     </div>
     <script type="module">
         import {addGoodsToCartAPI, getGoodsAPI} from "/static/js/apis/goods.js"
+        import {useGoodsStore} from "/static/js/stores/goods-store.js"
+
         // 用 js 获取商品和用户信息
         let goodsItemList;
         window.onload = async () => {
@@ -150,6 +152,8 @@
             const page = segments[segments.length - 1]; // 获取最后一个参数
             const response = await getGoodsAPI(cate, page)
             goodsItemList = response.data
+            const goodsStore = useGoodsStore()
+            goodsStore.setGoodsItemList(goodsItemList)
         }
 
         // 商品详情
@@ -201,16 +205,12 @@
                 } else {
                     goodsModal.querySelector(".want-btn").disabled = false;
                 }
-
                 if (goodsItemList[index].goods.status === 2) {
                     goodsModal.querySelector(".buy-btn").innerText = "已下单！";
                     goodsModal.querySelector(".buy-btn").disabled = true;
                 } else if (goodsItemList[index].goods.status === 0){
                     goodsModal.querySelector(".buy-btn").disabled = false;
                 }
-
-
-
                 const myModal = new bootstrap.Modal(goodsModal)
                 myModal.show()
             })
