@@ -89,7 +89,7 @@ textarea {
     height: 100%;
 }
 
-.sellerImage {
+.sellerImage, .student-img {
     margin: 20px;
     width: 80px;
     border-radius: 50%;

@@ -66,14 +66,26 @@
                     <h5>昵称:${sessionScope.student.name}</h5>
                     <h2></h2>
                     <br>
-                    <h5>微信:${sessionScope.student.wechat}</h5><h4></h4>
-                    <br>
-                    <h5>手机号:${sessionScope.student.phone}</h5><h4></h4>
-                    <br>
-                    <h5>QQ:${sessionScope.student.qq}</h5><h4></h4>
-                    <br>
-                    <h5>邮箱:<br>${sessionScope.student.email}</h5><h4></h4>
-                    <br>
+                    <c:if test="${sessionScope.student.wechat!=null}">
+                        <h5>微信:${sessionScope.student.wechat}</h5>
+                        <h4></h4>
+                        <br>
+                    </c:if>
+                    <c:if test="${sessionScope.student.phone!=null}">
+                        <h5>手机号:${sessionScope.student.phone}</h5>
+                        <h4></h4>
+                        <br>
+                    </c:if>
+                    <c:if test="${sessionScope.student.qq!=null}">
+                        <h5>QQ:${sessionScope.student.qq}</h5>
+                        <h4></h4>
+                        <br>
+                    </c:if>
+                    <c:if test="${sessionScope.student.email!=null}">
+                        <h5>邮箱:<br>${sessionScope.student.email}</h5><h4></h4>
+                        <h4></h4>
+                        <br>
+                    </c:if>
                     <%--                                <a href=" /managecenter/modifyInfo">修改信息</a>--%>
                 </form>
             </div>
@@ -217,7 +229,7 @@
                                                     price="${orderInformation.goods.price}"
                                                     degree="${orderInformation.goods.degree}"
                                                     cate="${orderInformation.goods.cate}"
-                                                    user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${pageContext.request.contextPath}/static/upload/file/${buyer.imagePath},${buyer.qq}">
+                                                    user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${buyer.imagePath},${buyer.qq}">
                                                 查看订单
                                             </button>
                                         </c:if>
@@ -233,7 +245,7 @@
                                                     price="${orderInformation.goods.price}"
                                                     degree="${orderInformation.goods.degree}"
                                                     cate="${orderInformation.goods.cate}"
-                                                    user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${pageContext.request.contextPath}/static/upload/file/${buyer.imagePath},${buyer.qq}">
+                                                    user-information="${buyer.studentNo},${buyer.name},${buyer.wechat},${buyer.email},${buyer.phone},${buyer.imagePath},${buyer.qq}">
                                                 查看订单
                                             </button>
                                         </c:if>
@@ -262,7 +274,7 @@
                                                     price="${orderInformation.goods.price}"
                                                     degree="${orderInformation.goods.degree}"
                                                     cate="${orderInformation.goods.cate}"
-                                                    user-information="${seller.studentNo},${seller.name},${seller.wechat},${seller.email},${seller.phone},${pageContext.request.contextPath}/static/upload/file/${seller.imagePath},${seller.qq}">
+                                                    user-information="${seller.studentNo},${seller.name},${seller.wechat},${seller.email},${seller.phone},${seller.imagePath},${seller.qq}">
                                                 查看订单
                                             </button>
                                         </c:if>
