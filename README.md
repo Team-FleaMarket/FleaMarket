@@ -1,5 +1,10 @@
 # FleaMarket 跳蚤市场
 
+![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show1.jpg)
+![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show2.jpg)
+![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show3.jpg)
+![Image text](https://media.githubusercontent.com/media/Team-FleaMarket/FleaMarket/main/src/main/webapp/static/images/show4.jpg)
+
 ## 配置与运行
 
 #### 配置要求与配置方法：
@@ -17,5 +22,5 @@
 
 #### 运行项目
 1. 引入 pom.xml 文件中的项目依赖
-2. 在 Edit Configuration 中添加 Tomcat，然后在 Deployment 中添加 Artifact
+2. 在 Edit Configuration 中添加 Tomcat，然后在 Deployment 中添加 Artifact，将 Application context 设为空
 3. 点击运行按钮
